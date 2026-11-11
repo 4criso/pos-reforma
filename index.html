@@ -10386,6 +10386,24 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
    "prioridade": "media",
    "fonte": "LC 214/2025, arts. 181, 182, 223, 231 e 233 (Câmara e normas.leg.br); LC 227/2026; Machado Meyer",
    "depende": "Seção 2, linhas de base, arranjos e exportação, e a seção 3"
+  },
+  {
+   "id": "aula-perfil-construcao-imobiliario#atencao",
+   "tema": "Regime de bens imóveis: partes sem conferência (redutor de ajuste, locação, transição de obras e patrimônio de afetação)",
+   "estado": "Foram lidos o art. 251, o art. 259 (redutor social), o art. 261 (50% e 70%), o art. 270 e a existência da Seção V (incorporação e parcelamento). Não foram lidos por inteiro: o redutor de ajuste, o momento do fato gerador da locação, as regras de transição de obras e contratos em curso e o tratamento do regime especial das incorporadoras (patrimônio de afetação). A regulamentação do Comitê Gestor não foi consultada. A atualização do redutor social pelo IPCA vem de fonte secundária.",
+   "data": "10/11/2026",
+   "prioridade": "media",
+   "fonte": "LC 214/2025, arts. 251 a 270 (Legisweb, Radar da Reforma Tributária); LC 227/2026",
+   "depende": "Seção 2 (redutor de ajuste e locação) e a seção 3"
+  },
+  {
+   "id": "aula-perfil-energia-combustiveis-mineracao#atencao",
+   "tema": "Alíquotas por unidade de medida dos combustíveis (art. 174) e valores de 2027",
+   "estado": "O art. 174 manda fixar alíquotas uniformes, específicas por unidade de medida e diferenciadas por produto, reajustadas no ano anterior ao de sua vigência. Em 10/11/2026 não localizei os valores por litro de cada combustível para 2027. Os números da aula são hipóteses. O rol completo dos combustíveis do art. 172 (12 incisos) foi lido só em parte no texto da lei, e o restante vem de fonte secundária.",
+   "data": "10/11/2026",
+   "prioridade": "alta",
+   "fonte": "LC 214/2025, arts. 172 a 180 (Ministério da Fazenda, Legisweb, Conteúdo Jurídico); LC 227/2026",
+   "depende": "Seção 3, bloco dos valores das alíquotas, e o caso dos combustíveis"
   }
  ],
  "changelog": [
@@ -10549,6 +10567,20 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
    "secao": "",
    "mudanca": "Quinto perfil setorial, no módulo Bônus: regime específico de serviços financeiros, base como margem, alíquotas de 10,85% (2027 e 2028) a 12,50% (2033), importação, arranjos de pagamento e seguros, com caso numérico e ficha para o SIS.",
    "motivo": "Plano dos Perfis setoriais (quarto da ordem, depois da antecipação do 12º)."
+  },
+  {
+   "data": "10/11/2026",
+   "aula": "Perfil Setorial: Construção e Imobiliário (nova aula)",
+   "secao": "",
+   "mudanca": "Sexto perfil setorial, no módulo Bônus: regime específico de bens imóveis (arts. 251 a 270), reduções de 50% e 70%, redutores, momento do pagamento na incorporação, apuração por obra, dois casos numéricos e ficha para o SIS.",
+   "motivo": "Plano dos Perfis setoriais (quinto da ordem)."
+  },
+  {
+   "data": "10/11/2026",
+   "aula": "Perfil Setorial: Energia, Combustíveis e Mineração (nova aula)",
+   "secao": "",
+   "mudanca": "Sétimo perfil setorial, no módulo Bônus: regime monofásico de combustíveis, energia elétrica no fornecimento, Imposto Seletivo na extração de bens minerais, dois casos numéricos e ficha para o SIS.",
+   "motivo": "Plano dos Perfis setoriais (sexto da ordem)."
   }
  ]
 }
@@ -15492,6 +15524,721 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
 ]
 </script>
 
+<!-- ============ AULA: aula-perfil-construcao-imobiliario ============ -->
+<template id="tpl-aula-perfil-construcao-imobiliario" data-title="Perfil Setorial: Construção e Imobiliário" data-modulo="Módulo Bônus" data-unidade="Perfis Setoriais">
+<div class="topbar">
+  <a href="#hub"><span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Hub de Estudos</a>
+  <span class="crumb">Módulo Bônus — Perfis Setoriais</span>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="pill-row">
+      <span class="pill">🏗️ Perfil setorial</span>
+      <span class="pill">Construção e imobiliário</span>
+      <span class="pill">Leitura ~15 min</span>
+    </div>
+    <h1>Perfil Setorial: Construção e Imobiliário</h1>
+    <p>As operações com bens imóveis têm um regime específico (arts. 251 a 270 da LC 214/2025): redução de 50% nas alíquotas de alienação, incorporação e construção civil, 70% na locação, <b>redutores</b> de base na venda de imóvel residencial novo e de lote, apuração por obra e regras próprias de momento do pagamento. O cliente e o tipo de operação definem a carga.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="toc">
+    <h4>Neste perfil</h4>
+    <div class="toc-row">
+      <a href="#setor"><span class="n">1</span> O setor e a reforma</a>
+      <a href="#regimes"><span class="n">2</span> Regime aplicável</a>
+      <a href="#atencao"><span class="n">3</span> Pontos de atenção</a>
+      <a href="#tempo"><span class="n">4</span> Linha do tempo do setor</a>
+      <a href="#ficha"><span class="n">5</span> Ficha do perfil para o SIS</a>
+      <a href="#quiz"><span class="n">🎯</span> Teste seus conhecimentos</a>
+    </div>
+  </div>
+
+  <section id="setor">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">apartment</span></div>
+      <div><h2>1. O Setor e a Reforma</h2><div class="sub">Quatro grupos, um regime próprio</div></div>
+    </div>
+    <p class="lead">O Capítulo V do Título V da lei trata as operações com bens imóveis em regime específico. A tendência é que o efeito dependa de quanto da receita vem de alienação, locação ou obra, e de quanto a empresa compra de insumos que geram crédito (veja a <a href="#aula-cenario-3-quem-sente-mais" style="color:var(--lav3);font-weight:700;">Aula 3 da Unidade II</a>):</p>
+    <table class="data">
+      <tr><th>Grupo</th><th>O que a lei prevê</th></tr>
+      <tr><td>Incorporadoras e loteadoras</td><td>Alienação de unidades e de lotes, com redução de 50%, redutor de ajuste e redutor social, e IBS e CBS devidos em cada pagamento recebido (arts. 259, 261 e seguintes)</td></tr>
+      <tr><td>Construtoras e empreiteiras</td><td>Construção civil no regime específico, com redução de 50% e apuração por empreendimento, vinculada a um CNPJ ou CPF específico (arts. 261 e 270)</td></tr>
+      <tr><td>Locadores e administradores de imóveis</td><td>Locação, cessão onerosa e arrendamento com redução de 70%. Administração e intermediação também no regime do capítulo</td></tr>
+      <tr><td>Pessoas físicas com imóveis</td><td>Só se sujeitam ao regime quando a quantidade e o valor das operações caracterizam atividade econômica, nos limites do art. 251 (veja a <a href="#aula-cenario-3-quem-sente-mais/fato-gerador" style="color:var(--lav3);font-weight:700;">Aula 3 da Unidade II</a>)</td></tr>
+    </table>
+    <div class="highlight lav">
+      <span class="material-symbols-outlined">info</span>
+      <div>Os materiais de construção e os serviços contratados pela obra seguem as regras gerais da compra, com crédito conforme a <a href="#aula-nao-cumulatividade" style="color:var(--lav3);font-weight:700;">aula de não cumulatividade</a>. Tributos fora do consumo estão no <a href="#aula-mapa-dos-tributos" style="color:var(--lav3);font-weight:700;">mapa dos tributos</a>.</div>
+    </div>
+  </section>
+
+  <section id="regimes">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">gavel</span></div>
+      <div><h2>2. Regime Aplicável</h2><div class="sub">O que a LC 214/2025 diz para cada situação</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Situação</th><th>Regra</th><th>Base legal</th></tr>
+      <tr><td>Quem se sujeita ao regime</td><td>As operações com bens imóveis realizadas por contribuintes que apuram IBS e CBS no regime regular. Pessoas físicas são consideradas contribuintes só nos limites de quantidade e valor da lei, e o art. 251, §8º, na redação da LC 227/2026, trata da caracterização de atividade econômica</td><td>Art. 251</td></tr>
+      <tr><td>Alienação, construção civil, incorporação, intermediação e administração</td><td>Redução de 50% das alíquotas de IBS e CBS</td><td>Art. 261, caput</td></tr>
+      <tr><td>Locação, cessão onerosa e arrendamento</td><td>Redução de 70% das alíquotas</td><td>Art. 261, parágrafo único</td></tr>
+      <tr><td>Redutor social</td><td>Na alienação de imóvel residencial novo ou de lote residencial por contribuinte do regime regular, dedução da base de R$ 100.000 por imóvel residencial novo e de R$ 30.000 por lote, até o limite da base, depois da dedução do redutor de ajuste. Valores atualizados pelo IPCA (por fonte secundária)</td><td>Art. 259</td></tr>
+      <tr><td>Redutor de ajuste</td><td>Vinculado ao imóvel, é usado exclusivamente para reduzir a base das operações de alienação do próprio bem realizadas por contribuinte do regime regular</td><td>Regras do capítulo (arts. 251 a 270)</td></tr>
+      <tr><td>Incorporação imobiliária e parcelamento do solo</td><td>O IBS e a CBS incidentes na alienação das unidades são devidos em cada pagamento</td><td>Seção V do capítulo</td></tr>
+      <tr><td>Apuração da obra</td><td>É feita por empreendimento de construção civil, vinculada a um CNPJ ou CPF específico, inclusive incorporação e parcelamento do solo, com cada obra como centro de custo distinto. A obra recebe identificação cadastral</td><td>Art. 270</td></tr>
+    </table>
+    <div class="highlight">
+      <span class="material-symbols-outlined">calculate</span>
+      <div><b>Alíquota efetiva:</b> alíquota de referência × (1 − redução). Com uma alíquota hipotética de 25%, a alienação e a construção ficam em 12,5% (redução de 50%) e a locação em 7,5% (redução de 70%). Veja a conta e o efeito sobre o crédito na <a href="#aula5-aliquotas/pratica" style="color:var(--lav3);font-weight:700;">aula 5</a>.</div>
+    </div>
+  </section>
+
+  <section id="atencao">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">warning</span></div>
+      <div><h2>3. Pontos de Atenção</h2><div class="sub">Onde o setor tende a ter dúvidas e perdas</div></div>
+    </div>
+    <ul class="checklist">
+      <li><span class="material-symbols-outlined">price_check</span><div><b>Saída reduzida, entrada cheia:</b> a obra vende com alíquota reduzida em 50%, mas compra insumos e serviços com a alíquota padrão. Quem compra muito material pode acumular saldo credor (veja a <a href="#aula-lc-ressarcimento-creditos" style="color:var(--lav3);font-weight:700;">aula do item III</a>).</div></li>
+      <li><span class="material-symbols-outlined">tag</span><div><b>Cadastro e contabilidade por obra:</b> cada empreendimento é um centro de custo, com CNPJ ou CPF específico. O ERP precisa apurar créditos e débitos por obra, e não só por empresa.</div></li>
+      <li><span class="material-symbols-outlined">event_available</span><div><b>Momento do imposto:</b> na incorporação e no parcelamento, o imposto é devido em cada pagamento. O fluxo de caixa do empreendimento passa a seguir os recebimentos (veja a <a href="#aula-cenario-2-ambiente-competitivo" style="color:var(--lav3);font-weight:700;">Aula 2 da Unidade II</a>).</div></li>
+      <li><span class="material-symbols-outlined">compare_arrows</span><div><b>Redutores:</b> o redutor social só vale para imóvel residencial novo e lote residencial vendidos por contribuinte do regime regular, e depois do redutor de ajuste. O controle por unidade é parte do trabalho do contador.</div></li>
+      <li><span class="material-symbols-outlined">real_estate_agent</span><div><b>Pessoa física com imóveis:</b> o limite entre patrimônio e atividade econômica define quem entra no regime. Quem ultrapassa os limites do art. 251 passa a ser contribuinte.</div></li>
+    </ul>
+    <div class="highlight red" id="pn-37" data-painel="aula-perfil-construcao-imobiliario#atencao">
+      <span class="material-symbols-outlined">flag</span>
+      <div><b>Partes do regime sem conferência:</b> o redutor de ajuste em detalhe, o momento do fato gerador da locação, as regras de transição de obras e contratos em curso e o tratamento do regime especial das incorporadoras (patrimônio de afetação) não foram lidos por inteiro. O estado fica no painel.</div>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">home</span> Caso da incorporadora (hipotético): venda de um apartamento novo</h4>
+      <p>Uma incorporadora vende um apartamento residencial novo por R$ 600.000. Para simplificar, o redutor de ajuste é zero. Alíquota padrão hipotética de 25%, reduzida em 50%, o que dá 12,5%:</p>
+      <div class="case-mini"><span class="label">Base de cálculo: R$ 600.000 − R$ 100.000 de redutor social</span><span class="val">R$ 500.000</span></div>
+      <div class="case-mini"><span class="label">IBS e CBS: 12,5% de R$ 500.000</span><span class="val">R$ 62.500</span></div>
+      <div class="case-mini total"><span class="label">Sem o redutor social seria 12,5% de R$ 600.000 = R$ 75.000. O redutor economiza R$ 100.000 × 12,5%</span><span class="val">R$ 12.500</span></div>
+      <p>Na locação do mesmo tipo de imóvel, com redução de 70%, um aluguel mensal de R$ 5.000 teria alíquota efetiva de 7,5% (25% × 0,30) e imposto de R$ 375 por mês. Os números são hipóteses, e o redutor de ajuste, quando existe, reduz ainda mais a base.</p>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">construction</span> Caso da empreiteira (hipotético): crédito contra débito</h4>
+      <p>Uma empreiteira fecha uma obra de R$ 1.000.000 e paga IBS e CBS com alíquota efetiva de 12,5% (25% reduzida em 50%), o que dá R$ 125.000 de débito. Os insumos e serviços contratados têm alíquota padrão de 25% e geram crédito (hipótese: fornecedores no regime regular):</p>
+      <div class="case-mini"><span class="label">Cenário A: compras de R$ 300.000, crédito de R$ 75.000. Recolhimento: R$ 125.000 − R$ 75.000</span><span class="val">R$ 50.000</span></div>
+      <div class="case-mini total"><span class="label">Cenário B: compras de R$ 600.000, crédito de R$ 150.000. Saldo: R$ 125.000 − R$ 150.000</span><span class="val">Saldo credor de R$ 25.000</span></div>
+      <p>Com muito insumo, a redução na saída vira saldo credor, que pode ser compensado ou ressarcido nos termos da lei.</p>
+    </div>
+  </section>
+
+  <section id="tempo">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">timeline</span></div>
+      <div><h2>4. Linha do Tempo do Setor</h2><div class="sub">O que muda de 2026 a 2033</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Ano</th><th>O que muda para o setor</th></tr>
+      <tr><td>2026</td><td>Teste, com CBS a 0,9% e IBS a 0,1% destacados nos documentos fiscais, com dispensa de recolhimento para quem cumpre as obrigações. ISS, ICMS, PIS e COFINS seguem</td></tr>
+      <tr><td>2027</td><td>PIS e COFINS saem e a CBS passa a valer plena, com a redução de 50% ou de 70% do regime de bens imóveis. O ISS e o ICMS seguem</td></tr>
+      <tr><td>2029 a 2032</td><td>ISS e ICMS caem a 90%, 80%, 70% e 60% e o IBS sobe. Os benefícios de ISS e de ICMS do setor reduzem na mesma rampa (<a href="#aula-preco-na-transicao" style="color:var(--lav3);font-weight:700;">preço na transição</a>)</td></tr>
+      <tr><td>2033</td><td>ISS e ICMS extintos e IBS pleno. As reduções de 50% e 70% aplicam-se sobre a alíquota de referência</td></tr>
+    </table>
+  </section>
+
+  <section id="ficha">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">assignment</span></div>
+      <div><h2>5. Ficha do Perfil para o SIS</h2><div class="sub">Os parâmetros do setor, num quadro padronizado</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Campo</th><th>Valor</th></tr>
+      <tr><td>Setor</td><td>Construção e imobiliário</td></tr>
+      <tr><td>Regime aplicável</td><td>Regime específico de bens imóveis (arts. 251 a 270), para contribuintes do regime regular</td></tr>
+      <tr><td>Redução de alíquota</td><td>50% para alienação, construção civil, incorporação, administração e intermediação; 70% para locação, cessão onerosa e arrendamento (art. 261)</td></tr>
+      <tr><td>Particularidades de crédito</td><td>Saída reduzida e entrada com alíquota padrão, com possível saldo credor; apuração por obra</td></tr>
+      <tr><td>Redutores</td><td>Redutor de ajuste (vinculado ao imóvel) e redutor social de R$ 100.000 por imóvel residencial novo e R$ 30.000 por lote (art. 259)</td></tr>
+      <tr><td>Benefícios em extinção</td><td>Benefícios de ISS e ICMS do setor, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso</td></tr>
+      <tr><td>Documentos e obrigações do setor</td><td>Identificação cadastral da obra; apuração por empreendimento com CNPJ ou CPF; documento fiscal com campos de IBS e CBS</td></tr>
+      <tr><td>Pontos de atenção</td><td>Saldo credor na obra; cadastro e contabilidade por obra; momento do pagamento na incorporação; controle dos redutores; limites da pessoa física</td></tr>
+      <tr><td>Itens do painel</td><td>Partes do regime de bens imóveis sem conferência</td></tr>
+    </table>
+  </section>
+
+  <section id="quiz">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">quiz</span></div>
+      <div><h2>🎯 Teste Seus Conhecimentos</h2><div class="sub">10 perguntas sorteadas de um banco maior — aprovação com 70% de acerto</div></div>
+    </div>
+    <div class="quiz-box" id="quizBox"></div>
+  </section>
+
+  <div class="refs">
+    <h3><span class="material-symbols-outlined" style="color:var(--lav2);">menu_book</span> Base legal e referências</h3>
+    <ul>
+      <li>Lei Complementar nº 214/2025: Capítulo V do Título V, arts. 251 a 270 (bens imóveis), em especial o art. 251 (contribuintes e regime), o art. 259 (redutor social), o art. 261 (reduções de 50% e de 70%) e o art. 270 (apuração por obra).</li>
+      <li>Lei Complementar nº 227/2026 (nova redação do art. 251, §8º). Resolução CGIBS nº 6/2026 e Decreto nº 12.955/2026.</li>
+    </ul>
+    <p>Aulas relacionadas: <a href="#aula-cenario-3-quem-sente-mais" style="color:var(--lav3);font-weight:700;">Aula 3 da Unidade II</a>, <a href="#aula5-aliquotas" style="color:var(--lav3);font-weight:700;">alíquotas e reduções</a>, <a href="#aula-lc-ressarcimento-creditos" style="color:var(--lav3);font-weight:700;">ressarcimento</a> e <a href="#aula-perfil-saude" style="color:var(--lav3);font-weight:700;">perfil de saúde</a>.</p>
+  </div>
+
+</div>
+</template>
+<script type="application/json" id="quiz-aula-perfil-construcao-imobiliario">
+[
+ {
+  "q": "Quem se sujeita ao regime específico de bens imóveis (art. 251)?",
+  "options": [
+   "Somente as empresas optantes do Simples Nacional que realizem obras de construção civil",
+   "Todas as pessoas físicas que sejam proprietárias de algum imóvel, qualquer que seja o seu uso",
+   "Os contribuintes que apuram o IBS e a CBS no regime regular, nas operações com bens imóveis",
+   "Apenas as incorporadoras com patrimônio de afetação, e nenhuma outra empresa do setor"
+  ],
+  "correct": 2,
+  "section": "setor",
+  "sectionLabel": "1. O setor e a reforma",
+  "rationale": "O art. 251 vincula o regime às operações de contribuintes do regime regular."
+ },
+ {
+  "q": "Qual é a redução de alíquota para alienação, construção civil e incorporação (art. 261, caput)?",
+  "options": [
+   "50% das alíquotas de IBS e CBS",
+   "70% das alíquotas, como ocorre na locação, na cessão onerosa e no arrendamento de imóveis",
+   "60% das alíquotas, como nos serviços de saúde e de educação, nos medicamentos e nos insumos",
+   "100% das alíquotas, com alíquota zero para toda operação de venda de imóvel residencial"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O caput do art. 261 reduz em 50% as alíquotas das operações do capítulo."
+ },
+ {
+  "q": "E para locação, cessão onerosa e arrendamento de bens imóveis (art. 261, parágrafo único)?",
+  "options": [
+   "Redução de 50% das alíquotas, igual à da alienação e à da construção civil",
+   "Redução de 70% das alíquotas",
+   "Alíquota padrão, sem nenhuma redução, por ser receita de natureza financeira",
+   "Redução de 30% das alíquotas, igual à das profissões intelectuais fiscalizadas"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "A locação tem redução maior, de 70%."
+ },
+ {
+  "q": "Qual é o redutor social na alienação de imóvel residencial novo e de lote residencial (art. 259)?",
+  "options": [
+   "R$ 100.000 por imóvel residencial novo e R$ 30.000 por lote, deduzidos da base depois do redutor de ajuste",
+   "R$ 30.000 por imóvel residencial novo e R$ 100.000 por lote residencial, na mesma ordem",
+   "R$ 600 por mês por imóvel, qualquer que seja o tipo de operação realizada com o imóvel",
+   "R$ 100.000 por imóvel e por lote, sem relação com o redutor de ajuste do próprio imóvel"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O redutor social vale para imóvel residencial novo e lote, até o limite da base."
+ },
+ {
+  "q": "O que o redutor de ajuste faz?",
+  "options": [
+   "Atualiza o valor do imóvel pelo IPCA, para fins de cálculo da depreciação do bem",
+   "Reduz a base de cálculo das operações de alienação do próprio bem imóvel, por contribuinte do regime regular",
+   "Substitui o redutor social em todas as vendas, sempre que o valor do imóvel for menor",
+   "Reduz a alíquota de IBS e CBS de todos os imóveis da empresa, qualquer que seja a operação"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O redutor de ajuste é vinculado ao imóvel e serve só para as operações de alienação do próprio bem."
+ },
+ {
+  "q": "Quando são devidos o IBS e a CBS na alienação de unidades em incorporação imobiliária e parcelamento do solo?",
+  "options": [
+   "Somente no registro do memorial de incorporação, antes do início das vendas das unidades",
+   "Somente ao fim da obra, com a entrega das chaves ao adquirente da unidade imobiliária",
+   "Em cada pagamento recebido pela alienação das unidades",
+   "Somente no ato da escritura, sobre o valor total do preço pactuado entre as partes"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "Na incorporação e no parcelamento, o imposto é devido em cada pagamento."
+ },
+ {
+  "q": "Como é feita a apuração do imposto na construção civil (art. 270)?",
+  "options": [
+   "De forma consolidada, para toda a empresa, sem distinguir as obras que ela executa",
+   "Por contrato, com apuração anual ao final de cada obra, sem identificação cadastral",
+   "Por empreendimento, vinculada a um CNPJ ou CPF específico, com cada obra como centro de custo distinto",
+   "Somente por município, de acordo com o local em que cada obra é realizada pela empresa"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 270 exige apuração por obra, com identificação cadastral."
+ },
+ {
+  "q": "No caso da incorporadora (apartamento de R$ 600.000, redutor social de R$ 100.000, alíquota efetiva de 12,5%), qual é o IBS e a CBS?",
+  "options": [
+   "R$ 150.000, que é 25% de R$ 600.000, sem a redução de 50% do regime de bens imóveis",
+   "R$ 12.500, que é 12,5% do valor do redutor social, e não da base de cálculo da venda",
+   "R$ 75.000, que é 12,5% de R$ 600.000, sem a dedução do redutor social",
+   "R$ 62.500, que é 12,5% de R$ 500.000"
+  ],
+  "correct": 3,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "A base é R$ 600.000 − R$ 100.000 = R$ 500.000. 12,5% de R$ 500.000 são R$ 62.500."
+ },
+ {
+  "q": "Quanto o redutor social economiza de imposto nesse exemplo?",
+  "options": [
+   "R$ 62.500, que é o valor do imposto devido sobre a base já reduzida pelo redutor",
+   "R$ 12.500, que é 12,5% de R$ 100.000",
+   "R$ 25.000, que é 25% do valor do redutor social, pela alíquota padrão hipotética",
+   "R$ 100.000, que é o valor integral do redutor social deduzido da base da operação"
+  ],
+  "correct": 1,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "O redutor reduz a base em R$ 100.000, e o imposto, em 12,5% desse valor."
+ },
+ {
+  "q": "Qual é a alíquota efetiva e o imposto de um aluguel mensal de R$ 5.000, com alíquota padrão hipotética de 25% e redução de 70%?",
+  "options": [
+   "17,5%, ou R$ 875 por mês, que é a alíquota efetiva de uma redução de 30% sobre a padrão",
+   "12,5%, ou R$ 625 por mês, que é a alíquota efetiva da venda do imóvel pelo mesmo contribuinte",
+   "7,5%, ou R$ 375 por mês",
+   "25%, ou R$ 1.250 por mês, porque o aluguel não recebe nenhuma redução de alíquota"
+  ],
+  "correct": 2,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "25% × (1 − 0,70) = 7,5%. 7,5% de R$ 5.000 são R$ 375."
+ },
+ {
+  "q": "No caso da empreiteira (obra de R$ 1.000.000, alíquota efetiva de 12,5% e compras de R$ 300.000 a 25%), quanto ela recolhe?",
+  "options": [
+   "R$ 50.000: débito de R$ 125.000 menos crédito de R$ 75.000",
+   "R$ 125.000, porque as compras de insumos da obra não geram crédito de IBS nem de CBS",
+   "R$ 200.000, porque o crédito das compras se soma ao débito da obra no mesmo período",
+   "R$ 75.000, que é o valor do crédito sobre as compras, e não o recolhimento líquido"
+  ],
+  "correct": 0,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "O débito é 12,5% de R$ 1.000.000 (R$ 125.000). O crédito é 25% de R$ 300.000 (R$ 75.000)."
+ },
+ {
+  "q": "Com compras de R$ 600.000 a 25% na mesma obra, qual é o resultado?",
+  "options": [
+   "Recolhimento de R$ 125.000, porque o excesso de crédito é perdido ao fim da obra",
+   "Saldo credor de R$ 25.000, porque o crédito de R$ 150.000 supera o débito de R$ 125.000",
+   "Saldo credor de R$ 150.000, porque o débito de R$ 125.000 não entra na apuração da obra",
+   "Recolhimento de R$ 25.000, porque o crédito de R$ 150.000 não pode ultrapassar o débito"
+  ],
+  "correct": 1,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "Crédito de R$ 150.000 menos débito de R$ 125.000 deixa saldo credor de R$ 25.000, a compensar ou ressarcir."
+ },
+ {
+  "q": "Por que uma construtora pode acumular saldo credor mesmo recolhendo o imposto?",
+  "options": [
+   "Porque o redutor social se converte em crédito de IBS e CBS, usado em obras futuras",
+   "Porque o regime de bens imóveis proíbe o crédito das compras de materiais de construção",
+   "Porque o ISS da obra é compensado com o crédito de IBS e CBS na mesma apuração",
+   "Porque vende com alíquota reduzida em 50% e compra insumos com a alíquota padrão, com crédito integral"
+  ],
+  "correct": 3,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "A saída é reduzida e a entrada tem alíquota cheia, o que pode gerar saldo credor."
+ },
+ {
+  "q": "O que muda para o setor em 2027, segundo a linha do tempo do perfil?",
+  "options": [
+   "A redução de 50% passa a 70% para todas as operações do capítulo, e não só para a locação",
+   "ISS e ICMS são extintos e o IBS passa a valer integralmente em todas as obras do País",
+   "O regime de bens imóveis é extinto, e as obras voltam a pagar a alíquota padrão da CBS",
+   "PIS e COFINS saem e a CBS plena entra, com a redução de 50% ou de 70% do regime de bens imóveis"
+  ],
+  "correct": 3,
+  "section": "tempo",
+  "sectionLabel": "4. Linha do tempo",
+  "rationale": "Em 2027 saem PIS e COFINS e entra a CBS plena. ISS e ICMS só caem a partir de 2029."
+ },
+ {
+  "q": "Para que serve a ficha do perfil para o SIS?",
+  "options": [
+   "Padronizar os parâmetros do setor (regime, reduções, crédito, benefícios e obrigações) para alimentar o perfil de empresa da ferramenta",
+   "Registrar o resultado fiscal de cada empresa do setor, ano a ano, para fins de fiscalização",
+   "Calcular automaticamente o imposto devido por cada empresa, sem necessidade de revisão do contador",
+   "Substituir a leitura da lei complementar, que deixa de ser necessária para quem usa o SIS"
+  ],
+  "correct": 0,
+  "section": "ficha",
+  "sectionLabel": "5. Ficha para o SIS",
+  "rationale": "A ficha organiza os parâmetros do setor, e o contador continua revisando cada caso."
+ }
+]
+</script>
+
+<!-- ============ AULA: aula-perfil-energia-combustiveis-mineracao ============ -->
+<template id="tpl-aula-perfil-energia-combustiveis-mineracao" data-title="Perfil Setorial: Energia, Combustíveis e Mineração" data-modulo="Módulo Bônus" data-unidade="Perfis Setoriais">
+<div class="topbar">
+  <a href="#hub"><span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Hub de Estudos</a>
+  <span class="crumb">Módulo Bônus — Perfis Setoriais</span>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="pill-row">
+      <span class="pill">⚡ Perfil setorial</span>
+      <span class="pill">Energia, combustíveis e mineração</span>
+      <span class="pill">Leitura ~15 min</span>
+    </div>
+    <h1>Perfil Setorial: Energia, Combustíveis e Mineração</h1>
+    <p>Três setores, três lógicas: os combustíveis têm regime <b>monofásico com alíquota por unidade de medida</b> (o imposto incide uma única vez, e a revenda não gera crédito), a energia elétrica é recolhida <b>no fornecimento</b>, e a mineração é alcançada pelo <b>Imposto Seletivo na extração</b>, com teto de 0,25%.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="toc">
+    <h4>Neste perfil</h4>
+    <div class="toc-row">
+      <a href="#setor"><span class="n">1</span> O setor e a reforma</a>
+      <a href="#regimes"><span class="n">2</span> Regime aplicável</a>
+      <a href="#atencao"><span class="n">3</span> Pontos de atenção</a>
+      <a href="#tempo"><span class="n">4</span> Linha do tempo do setor</a>
+      <a href="#ficha"><span class="n">5</span> Ficha do perfil para o SIS</a>
+      <a href="#quiz"><span class="n">🎯</span> Teste seus conhecimentos</a>
+    </div>
+  </div>
+
+  <section id="setor">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">oil_barrel</span></div>
+      <div><h2>1. O Setor e a Reforma</h2><div class="sub">Quem recolhe, onde e com que base</div></div>
+    </div>
+    <p class="lead">Nestes setores, o <b>ponto da cadeia em que o imposto é recolhido</b> importa mais do que a alíquota. A tendência é que o efeito dependa de a empresa estar no início da cadeia (produtor e importador), na revenda ou no consumo (veja a <a href="#aula-cenario-3-quem-sente-mais" style="color:var(--lav3);font-weight:700;">Aula 3 da Unidade II</a>):</p>
+    <table class="data">
+      <tr><th>Grupo</th><th>O que a lei prevê</th></tr>
+      <tr><td>Produtores e importadores de combustíveis</td><td>O IBS e a CBS incidem uma única vez sobre as operações com os combustíveis do art. 172, inclusive as iniciadas no exterior, com alíquota por unidade de medida</td></tr>
+      <tr><td>Distribuidores e postos de revenda</td><td>Não se apropriam de créditos nas aquisições destinadas à distribuição, comercialização ou revenda (art. 180)</td></tr>
+      <tr><td>Geração, transmissão, distribuição e consumo de energia elétrica</td><td>Recolhimento no fornecimento para consumo ou para contribuinte fora do regime regular (art. 28, §1º, redação da LC 227/2026)</td></tr>
+      <tr><td>Mineradoras e petrolíferas na extração</td><td>Imposto Seletivo sobre a extração, com teto de 0,25% para bens minerais extraídos (art. 422, §2º). O IBS e a CBS seguem a regra geral, e a exportação é imune</td></tr>
+    </table>
+    <div class="highlight lav">
+      <span class="material-symbols-outlined">info</span>
+      <div>O Imposto Seletivo está na <a href="#aula9-imposto-seletivo" style="color:var(--lav3);font-weight:700;">aula 9</a>, e o regime de transporte e de plataformas que consomem combustível está no <a href="#aula-perfil-logistica-ecommerce" style="color:var(--lav3);font-weight:700;">perfil de logística</a>.</div>
+    </div>
+  </section>
+
+  <section id="regimes">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">gavel</span></div>
+      <div><h2>2. Regime Aplicável</h2><div class="sub">O que a LC 214/2025 diz, com a redação da LC 227/2026</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Situação</th><th>Regra</th><th>Base legal</th></tr>
+      <tr><td>Incidência dos combustíveis</td><td>O IBS e a CBS incidem <b>uma única vez</b> sobre as operações, ainda que iniciadas no exterior, com os combustíveis listados, qualquer que seja a finalidade: gasolina, etanol anidro combustível, óleo diesel, biodiesel (B100), GLP (inclusive o derivado de gás natural) e os demais do rol, como querosene de aviação e etanol hidratado (por fonte secundária)</td><td>Art. 172</td></tr>
+      <tr><td>Alíquotas</td><td>Uniformes em todo o território nacional, específicas por unidade de medida e diferenciadas por produto. São reajustadas no ano anterior ao de sua vigência, com a anterioridade para a majoração</td><td>Arts. 173 e 174</td></tr>
+      <tr><td>Biocombustíveis</td><td>Alíquota inferior à dos combustíveis fósseis, na forma da Constituição (art. 225, §1º, VIII). Vale o mesmo para o hidrogênio de baixa emissão de carbono (por fonte secundária)</td><td>Art. 175</td></tr>
+      <tr><td>Crédito na aquisição de combustíveis</td><td>É vedada a apropriação de créditos nas aquisições de combustíveis sujeitos à incidência única quando destinadas à distribuição, à comercialização ou à revenda. Nas demais hipóteses, o contribuinte do regime regular pode apropriar o crédito</td><td>Art. 180 e §1º</td></tr>
+      <tr><td>Energia elétrica</td><td>O recolhimento do IBS e da CBS nas operações com energia elétrica (importação, geração, comercialização, distribuição e transmissão) ocorre somente no fornecimento para consumo ou para contribuinte não sujeito ao regime regular. A energia injetada na rede pela própria unidade consumidora é excluída da base</td><td>Art. 28, §§1º e 3º</td></tr>
+      <tr><td>Consumidor residencial de energia</td><td>No cashback, o fornecimento domiciliar de energia elétrica tem devolução de 100% da CBS e de 20% do IBS (veja a <a href="#aula-lc-cashback" style="color:var(--lav3);font-weight:700;">aula do item VIII</a>)</td><td>Regras do cashback</td></tr>
+      <tr><td>Imposto Seletivo na mineração</td><td>Incide na extração de bem mineral, independentemente da destinação. As alíquotas respeitam o máximo de 0,25% nas operações com bens minerais extraídos. Não incide sobre as operações com energia elétrica e telecomunicações</td><td>Arts. 413 e 422, §2º</td></tr>
+      <tr><td>Exportação de bens minerais e petróleo</td><td>O IBS e a CBS são imunes na exportação, com créditos mantidos. O IS na extração, porém, é cobrado independentemente da destinação</td><td>Constituição, art. 153, §6º; arts. 413 e 422</td></tr>
+    </table>
+    <div class="highlight">
+      <span class="material-symbols-outlined">percent</span>
+      <div>Não se aplicam aos combustíveis os percentuais de redução de 30%, 60% e 100% dos regimes diferenciados: a carga vem dos valores específicos por unidade de medida (art. 174).</div>
+    </div>
+  </section>
+
+  <section id="atencao">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">warning</span></div>
+      <div><h2>3. Pontos de Atenção</h2><div class="sub">Onde o setor tende a ter dúvidas e perdas</div></div>
+    </div>
+    <ul class="checklist">
+      <li><span class="material-symbols-outlined">local_gas_station</span><div><b>Revenda sem crédito:</b> o posto e o distribuidor compram o combustível com o imposto já recolhido na origem, sem direito a crédito (art. 180), e vendem sem destacar IBS e CBS de novo. O sistema precisa tratar o item como monofásico, com o CST e o cClassTrib próprios (a consulta do SIS ajuda).</div></li>
+      <li><span class="material-symbols-outlined">factory</span><div><b>Quem consome o combustível na atividade:</b> o contribuinte do regime regular pode apropriar crédito nas hipóteses não alcançadas pela vedação, por exemplo no combustível usado como insumo. A transportadora, a indústria e o agronegócio devem separar o combustível comprado para uso do comprado para revenda.</div></li>
+      <li><span class="material-symbols-outlined">bolt</span><div><b>Energia elétrica:</b> o recolhimento no fornecimento muda quem paga e quando. A energia injetada por geração distribuída sai da base. Para quem compra no mercado livre ou de forma multilateral, o tratamento depende de quem é o responsável pelo recolhimento.</div></li>
+      <li><span class="material-symbols-outlined">landscape</span><div><b>Mineração:</b> o IS incide na extração, independentemente de o minério ser exportado, com teto de 0,25%. A alíquota efetiva depende de lei ordinária, e o IS é custo da extração.</div></li>
+      <li><span class="material-symbols-outlined">savings</span><div><b>Exportadoras:</b> a exportação é imune ao IBS e à CBS, e o saldo credor das compras acumula. O caminho para o caixa está na <a href="#aula-lc-ressarcimento-creditos" style="color:var(--lav3);font-weight:700;">aula do item III</a>.</div></li>
+    </ul>
+    <div class="highlight red" id="pn-38" data-painel="aula-perfil-energia-combustiveis-mineracao#atencao">
+      <span class="material-symbols-outlined">flag</span>
+      <div><b>Valores das alíquotas ad rem sem confirmação:</b> a lei manda fixar alíquotas por unidade de medida e reajustá-las no ano anterior ao de sua vigência. Não localizei os valores por litro de cada combustível para 2027. Os números da aula são hipóteses, e o estado fica no painel.</div>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">oil_barrel</span> Caso dos combustíveis (hipotético): ad rem contra ad valorem</h4>
+      <p>Uma distribuidora movimenta 1.000.000 de litros de um combustível. Hipótese: alíquota específica de R$ 1,00 por litro, contra uma alíquota ad valorem de 25% sobre o preço de R$ 5,00 ou de R$ 7,00 o litro.</p>
+      <div class="case-mini"><span class="label">Ad rem: R$ 1,00 por litro, qualquer que seja o preço</span><span class="val">R$ 1.000.000</span></div>
+      <div class="case-mini"><span class="label">Ad valorem de 25%, com o litro a R$ 5,00: R$ 1,25 por litro</span><span class="val">R$ 1.250.000</span></div>
+      <div class="case-mini total"><span class="label">Ad valorem de 25%, com o litro a R$ 7,00: R$ 1,75 por litro</span><span class="val">R$ 1.750.000</span></div>
+      <p>No regime por unidade de medida, a carga não acompanha o preço, e o imposto não aumenta quando o preço do combustível sobe. Os valores são hipóteses, e a alíquota real é fixada na forma do art. 174.</p>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">terrain</span> Caso da mineração (hipotético): o teto do Imposto Seletivo</h4>
+      <p>Uma mineradora extrai minério avaliado em R$ 100.000.000 por ano e exporta toda a produção. O IBS e a CBS não incidem sobre a exportação, mas o IS incide na extração. No teto legal, o IS seria de 0,25% da base:</p>
+      <div class="case-mini total"><span class="label">0,25% de R$ 100.000.000, como valor máximo</span><span class="val">R$ 250.000</span></div>
+      <p>A alíquota efetiva depende de lei ordinária. Para 2027, a MP 1.399/2026 fixou alíquota zero para bens minerais extraídos, e o estado dela está no painel da aula do Imposto Seletivo.</p>
+    </div>
+  </section>
+
+  <section id="tempo">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">timeline</span></div>
+      <div><h2>4. Linha do Tempo do Setor</h2><div class="sub">O que muda de 2026 a 2033</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Ano</th><th>O que muda para o setor</th></tr>
+      <tr><td>2026</td><td>Teste, com CBS a 0,9% e IBS a 0,1% destacados nos documentos fiscais, com dispensa de recolhimento para quem cumpre as obrigações. PIS, COFINS e ICMS seguem</td></tr>
+      <tr><td>2027</td><td>PIS e COFINS, inclusive o regime monofásico, saem, e a CBS passa a valer. O Imposto Seletivo entra em vigor, e a alíquota de bens minerais para 2027 foi fixada em zero pela MP 1.399/2026, que ainda depende de conversão</td></tr>
+      <tr><td>2029 a 2032</td><td>ICMS cai a 90%, 80%, 70% e 60% e o IBS sobe. Os benefícios de ICMS do setor reduzem na mesma rampa (<a href="#aula-preco-na-transicao" style="color:var(--lav3);font-weight:700;">preço na transição</a>)</td></tr>
+      <tr><td>2033</td><td>ICMS extinto e IBS pleno. Os combustíveis seguem com incidência única, por unidade de medida</td></tr>
+    </table>
+  </section>
+
+  <section id="ficha">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">assignment</span></div>
+      <div><h2>5. Ficha do Perfil para o SIS</h2><div class="sub">Os parâmetros do setor, num quadro padronizado</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Campo</th><th>Valor</th></tr>
+      <tr><td>Setor</td><td>Energia, combustíveis e mineração</td></tr>
+      <tr><td>Regime aplicável</td><td>Regime específico monofásico de combustíveis (arts. 172 a 180); energia elétrica com recolhimento no fornecimento (art. 28); Imposto Seletivo na extração de bens minerais (arts. 413 e 422)</td></tr>
+      <tr><td>Redução de alíquota</td><td>Não há percentual de redução nos combustíveis. Alíquotas por unidade de medida, com biocombustíveis em alíquota inferior à dos fósseis. IS de minerais com teto de 0,25%</td></tr>
+      <tr><td>Particularidades de crédito</td><td>Vedação de crédito na aquisição de combustível para distribuição, comercialização ou revenda; crédito nas demais hipóteses; saldo credor de exportadoras</td></tr>
+      <tr><td>Benefícios em extinção</td><td>Benefícios de ICMS do setor, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso. Monofásicos de PIS e COFINS saem em 2027</td></tr>
+      <tr><td>Documentos e obrigações do setor</td><td>CST e cClassTrib de monofasia; documentos fiscais com campos de IBS e CBS; controle de combustível para uso e para revenda</td></tr>
+      <tr><td>Pontos de atenção</td><td>Revenda sem crédito; uso do combustível como insumo; recolhimento da energia no fornecimento; IS na extração; saldo credor na exportação</td></tr>
+      <tr><td>Itens do painel</td><td>Valores das alíquotas por unidade de medida dos combustíveis</td></tr>
+    </table>
+  </section>
+
+  <section id="quiz">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">quiz</span></div>
+      <div><h2>🎯 Teste Seus Conhecimentos</h2><div class="sub">10 perguntas sorteadas de um banco maior — aprovação com 70% de acerto</div></div>
+    </div>
+    <div class="quiz-box" id="quizBox"></div>
+  </section>
+
+  <div class="refs">
+    <h3><span class="material-symbols-outlined" style="color:var(--lav2);">menu_book</span> Base legal e referências</h3>
+    <ul>
+      <li>Lei Complementar nº 214/2025: arts. 172 a 180 (combustíveis), art. 28 (energia elétrica, com a redação da LC 227/2026), art. 413 (não incidência do Imposto Seletivo) e art. 422, §2º (teto de 0,25% para bens minerais extraídos).</li>
+      <li>Constituição Federal, art. 153, §6º (Imposto Seletivo) e art. 225, §1º, VIII (biocombustíveis). Lei Complementar nº 227/2026. Medida Provisória nº 1.399/2026 (alíquotas transitórias do Imposto Seletivo em 2027).</li>
+    </ul>
+    <p>Aulas relacionadas: <a href="#aula9-imposto-seletivo" style="color:var(--lav3);font-weight:700;">Imposto Seletivo</a>, <a href="#aula-lc-cashback" style="color:var(--lav3);font-weight:700;">cashback</a>, <a href="#aula-lc-ressarcimento-creditos" style="color:var(--lav3);font-weight:700;">ressarcimento</a> e <a href="#aula-perfil-logistica-ecommerce" style="color:var(--lav3);font-weight:700;">perfil de logística</a>.</p>
+  </div>
+
+</div>
+</template>
+<script type="application/json" id="quiz-aula-perfil-energia-combustiveis-mineracao">
+[
+ {
+  "q": "Em que ponto da cadeia o imposto pesa mais nos combustíveis, pelo regime do art. 172?",
+  "options": [
+   "Somente na extração do petróleo, e nunca na refinaria, na distribuição ou na revenda",
+   "Somente na revenda ao consumidor final, no posto, sobre o valor total do litro vendido, e o produtor e o distribuidor não recolhem nada em nenhuma das etapas anteriores da cadeia",
+   "Em todas as etapas da cadeia, como no regime regular, com direito a crédito pleno a cada venda",
+   "Em um único ponto, na operação com o combustível, ainda que iniciada no exterior, sem nova incidência nas etapas seguintes"
+  ],
+  "correct": 3,
+  "section": "setor",
+  "sectionLabel": "1. O setor e a reforma",
+  "rationale": "O art. 172 manda incidir IBS e CBS uma única vez sobre as operações com os combustíveis listados."
+ },
+ {
+  "q": "Como são as alíquotas dos combustíveis, segundo o art. 174?",
+  "options": [
+   "Percentuais sobre o preço, definidos por cada Estado e por cada Município de destino do combustível, e por cada Município de destino do combustível, conforme a legislação local de cada ente",
+   "Alíquotas reduzidas em 60%, como nos medicamentos, em todos os combustíveis de uso veicular",
+   "Uniformes em todo o território nacional, específicas por unidade de medida e diferenciadas por produto",
+   "Uma alíquota única, igual para todos os combustíveis, fixada em percentual do valor da operação"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 174 fixa alíquotas ad rem, uniformes no País e diferenciadas por produto."
+ },
+ {
+  "q": "O que significa tributar por unidade de medida (ad rem)?",
+  "options": [
+   "Cobrar um percentual sobre o preço de venda, que varia conforme o preço do combustível",
+   "Cobrar o valor integral do imposto de cada etapa da cadeia, sem direito a crédito algum",
+   "Cobrar um valor fixo por litro, metro cúbico ou quilograma, e não um percentual sobre o preço",
+   "Cobrar o imposto uma vez por ano, sobre o volume total movimentado pela distribuidora"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "Ad rem é valor por unidade, independentemente do preço."
+ },
+ {
+  "q": "Como os biocombustíveis são tratados em relação aos combustíveis fósseis?",
+  "options": [
+   "Com alíquota inferior, na forma do art. 225, §1º, VIII da Constituição",
+   "Com a mesma alíquota dos combustíveis fósseis, para evitar distorções de concorrência",
+   "Fora do regime específico, com a mesma alíquota padrão dos demais bens e serviços",
+   "Com alíquota superior, porque o biocombustível é produto de origem agrícola e industrial"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "A Constituição manda dar tratamento diferenciado, e a lei prevê alíquota inferior (por fonte secundária, art. 175)."
+ },
+ {
+  "q": "Qual é a regra de crédito na aquisição de combustíveis sujeitos à incidência única (art. 180)?",
+  "options": [
+   "É permitido o crédito integral em toda aquisição, inclusive a destinada à revenda",
+   "É permitido o crédito apenas pelo posto de revenda, e vedado ao consumidor industrial",
+   "É vedado o crédito em qualquer aquisição de combustível, inclusive o usado como insumo, mesmo quando o combustível é consumido na própria atividade, como insumo da produção",
+   "É vedado o crédito quando a aquisição se destina à distribuição, comercialização ou revenda, e permitido nas demais hipóteses"
+  ],
+  "correct": 3,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 180 veda o crédito na distribuição, comercialização e revenda, e o §1º libera as demais hipóteses."
+ },
+ {
+  "q": "Quando o IBS e a CBS sobre energia elétrica são recolhidos, segundo o art. 28, §1º (redação da LC 227/2026)?",
+  "options": [
+   "Somente na importação de energia, e nunca nas operações realizadas dentro do País",
+   "Somente no fornecimento para consumo ou para contribuinte não sujeito ao regime regular",
+   "Somente na geração, pelo produtor de energia, e nunca na distribuição ao consumidor",
+   "Em cada etapa de geração, transmissão e distribuição, com crédito integral a cada elo"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O recolhimento se concentra no fornecimento para consumo ou para quem não é do regime regular."
+ },
+ {
+  "q": "Qual é o teto das alíquotas do Imposto Seletivo nas operações com bens minerais extraídos (art. 422, §2º)?",
+  "options": [
+   "1%, que é o máximo previsto na Constituição para a extração de qualquer bem mineral",
+   "10%, igual ao das bebidas alcoólicas e dos demais produtos nocivos sujeitos ao imposto",
+   "0,25%",
+   "2,5%, aplicável apenas às operações destinadas ao mercado externo de bens minerais"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "A LC 214, com a redação da LC 227/2026, limita a 0,25%, abaixo do teto constitucional de 1%."
+ },
+ {
+  "q": "O Imposto Seletivo incide sobre as operações com energia elétrica (art. 413)?",
+  "options": [
+   "Sim, no fornecimento a consumidores industriais, com alíquota fixada por lei ordinária",
+   "Não: o art. 413 afasta a incidência sobre operações com energia elétrica e com telecomunicações",
+   "Sim, na geração de energia a partir de fontes não renováveis, com alíquota de 0,25%",
+   "Sim, em todas as operações com energia, que são bens prejudiciais ao meio ambiente"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 413, II, trata a energia elétrica e as telecomunicações como não incidência do IS."
+ },
+ {
+  "q": "No caso dos combustíveis, qual é o imposto sobre 1.000.000 de litros com alíquota ad rem hipotética de R$ 1,00 por litro?",
+  "options": [
+   "R$ 1.000.000, qualquer que seja o preço do litro",
+   "R$ 250.000, que é 25% do valor de R$ 1,00 por litro, multiplicado pelo volume",
+   "R$ 1.250.000, porque o imposto acompanha o preço de R$ 5,00 do litro vendido",
+   "R$ 1.750.000, porque o imposto acompanha o preço de R$ 7,00 do litro vendido"
+  ],
+  "correct": 0,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "1.000.000 de litros × R$ 1,00 = R$ 1.000.000. O valor não depende do preço."
+ },
+ {
+  "q": "No mesmo caso, com ad valorem de 25%, quanto o imposto chega a ser com o litro a R$ 7,00?",
+  "options": [
+   "R$ 1.250.000, porque o preço do litro não altera o imposto no regime ad valorem",
+   "R$ 1.000.000, porque o regime monofásico fixa o imposto por litro em R$ 1,00",
+   "R$ 1.750.000, que é 25% de R$ 7,00 por litro, vezes 1.000.000 de litros",
+   "R$ 2.500.000, porque a alíquota de 25% incide sobre o preço mais o imposto"
+  ],
+  "correct": 2,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "25% de R$ 7,00 são R$ 1,75 por litro, o que dá R$ 1.750.000."
+ },
+ {
+  "q": "Por que o posto de revenda precisa tratar o combustível como item monofásico?",
+  "options": [
+   "Porque o imposto já foi recolhido na origem, o posto não tem crédito na compra para revenda e não destaca IBS e CBS de novo",
+   "Porque o posto deve recolher o imposto em dobro, na compra e na venda do combustível, uma vez na compra do combustível e outra vez na revenda ao consumidor final do litro",
+   "Porque o posto de revenda é dispensado de emitir documento fiscal nas vendas de combustível",
+   "Porque o posto recolhe a CBS e o produtor recolhe o IBS, em partes iguais, na mesma operação"
+  ],
+  "correct": 0,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "O art. 180 veda o crédito na compra para revenda, e o imposto é de incidência única."
+ },
+ {
+  "q": "O que a mineradora que exporta toda a produção deve considerar em relação aos tributos?",
+  "options": [
+   "O IBS e a CBS incidem sobre a exportação, com alíquota de 0,25%, e o IS não se aplica",
+   "O Imposto Seletivo incide só sobre o minério vendido no mercado interno, e nunca sobre o exportado, e nunca sobre o exportado, porque a exportação é imune a todos os tributos federais",
+   "Nenhum tributo incide sobre a extração do minério exportado, porque a exportação é imune a todos",
+   "O IBS e a CBS não incidem na exportação, mas o Imposto Seletivo incide na extração, independentemente da destinação"
+  ],
+  "correct": 3,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "A imunidade da exportação alcança o IBS e a CBS, e o IS na extração é cobrado independentemente do destino."
+ },
+ {
+  "q": "No caso da mineração (extração de R$ 100.000.000), quanto seria o IS no teto legal de 0,25%?",
+  "options": [
+   "R$ 25.000, que é 0,025% da extração, pela alíquota mínima prevista na lei complementar",
+   "R$ 250.000, como valor máximo, dependendo a alíquota efetiva de lei ordinária",
+   "R$ 2.500.000, que é 2,5% da extração, pela alíquota máxima do Imposto Seletivo",
+   "R$ 1.000.000, que é 1% da extração, pelo teto previsto na Constituição para o IS"
+  ],
+  "correct": 1,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "0,25% de R$ 100.000.000 são R$ 250.000."
+ },
+ {
+  "q": "O que acontece com os monofásicos de PIS e COFINS em 2027, segundo a linha do tempo do perfil?",
+  "options": [
+   "Permanecem até 2033, junto com a rampa do ICMS e a entrada gradual do IBS",
+   "Saem junto com PIS e COFINS, e a CBS passa a valer",
+   "São convertidos em IBS monofásico, com a mesma alíquota, a partir de 1º de janeiro de 2027",
+   "Passam a ser cobrados pelos Estados, em substituição ao ICMS monofásico dos combustíveis"
+  ],
+  "correct": 1,
+  "section": "tempo",
+  "sectionLabel": "4. Linha do tempo",
+  "rationale": "PIS e COFINS, inclusive o regime monofásico, saem em 2027."
+ },
+ {
+  "q": "Para que serve a ficha do perfil para o SIS?",
+  "options": [
+   "Padronizar os parâmetros do setor (regime, reduções, crédito, benefícios e obrigações) para alimentar o perfil de empresa da ferramenta",
+   "Registrar o resultado fiscal de cada empresa do setor, ano a ano, para fins de fiscalização",
+   "Substituir a leitura da lei complementar, que deixa de ser necessária para quem usa o SIS, e o SIS passa a ser a única fonte de consulta da empresa",
+   "Calcular automaticamente o imposto devido por cada empresa, sem necessidade de revisão do contador"
+  ],
+  "correct": 0,
+  "section": "ficha",
+  "sectionLabel": "5. Ficha para o SIS",
+  "rationale": "A ficha organiza os parâmetros do setor, e o contador continua revisando cada caso."
+ }
+]
+</script>
+
 <script>
 /* ===== Motor de busca (client-side, sem servidor) ===== */
 const SEARCH_ENTRIES = [];   // preenchido por buildSearchEntries() a partir das aulas do próprio arquivo
@@ -15771,7 +16518,9 @@ const modules = [
       {title:'Perfil Setorial: Saúde', desc:'Redução de 60% nos serviços do Anexo III e nos medicamentos, alíquota zero em medicamentos por destinação terapêutica (nova redação do art. 146 pela LC 227/2026) e em dispositivos do Anexo XII, regime específico dos planos de saúde, caso numérico de clínica, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-saude.html'},
       {title:'Perfil Setorial: Logística, Transporte e E-commerce', desc:'Tributação por destino (local da entrega e alíquota por Estado e Município), frete na base de cálculo, transportador autônomo não contribuinte, regimes do transporte de passageiros, responsabilidade de plataformas e marketplaces, remessas internacionais, casos numéricos, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-logistica-ecommerce.html'},
       {title:'Perfil Setorial: Software e Serviços Digitais', desc:'Licenciamento e SaaS como fornecimentos tributados (fim da disputa entre mercadoria e serviço), local da operação no domicílio principal do adquirente (a matriz do cliente), alíquota por destino, importação intragrupo, exportação, plataformas digitais, caso numérico B2B contra B2C, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-software-servicos-digitais.html'},
-      {title:'Perfil Setorial: Serviços Financeiros e Meios de Pagamento', desc:'Regime específico de serviços financeiros (arts. 181 e 182), base de cálculo como margem, alíquotas somadas de IBS e CBS de 10,85% em 2027 a 12,50% em 2033 (art. 233), importação, arranjos de pagamento e seguros, caso numérico, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-servicos-financeiros.html'}
+      {title:'Perfil Setorial: Serviços Financeiros e Meios de Pagamento', desc:'Regime específico de serviços financeiros (arts. 181 e 182), base de cálculo como margem, alíquotas somadas de IBS e CBS de 10,85% em 2027 a 12,50% em 2033 (art. 233), importação, arranjos de pagamento e seguros, caso numérico, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-servicos-financeiros.html'},
+      {title:'Perfil Setorial: Construção e Imobiliário', desc:'Regime específico de bens imóveis (arts. 251 a 270): redução de 50% em alienação, construção e incorporação e de 70% na locação, redutor social e de ajuste, momento do pagamento na incorporação, apuração por obra, casos numéricos de incorporadora e empreiteira, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-construcao-imobiliario.html'},
+      {title:'Perfil Setorial: Energia, Combustíveis e Mineração', desc:'Regime monofásico de combustíveis com alíquota por unidade de medida (arts. 172 a 180), vedação de crédito na revenda, recolhimento da energia elétrica no fornecimento (art. 28), Imposto Seletivo na extração de bens minerais com teto de 0,25% (art. 422), casos numéricos, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-energia-combustiveis-mineracao.html'}
     ]},
     {t:'Precificação e Cenários na Reforma Tributária', d:'Precificação e cenários na reforma.', h:'4h', materials:[
       {title:'Preço na Transição: ICMS e ISS por Dentro, IBS e CBS por Fora', desc:'As regras de base da convivência (2026 a 2032), a rampa do ADCT, a conta do preço passo a passo com as duas leituras da base do ICMS e do ISS, o ponto em aberto sobre IBS e CBS na base do ICMS e do ISS e o que muda no ERP, nos contratos e na margem.', href:'1-Modulo/Bonus/aula-preco-na-transicao.html'}
