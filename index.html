@@ -10404,6 +10404,24 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
    "prioridade": "alta",
    "fonte": "LC 214/2025, arts. 172 a 180 (Ministério da Fazenda, Legisweb, Conteúdo Jurídico); LC 227/2026",
    "depende": "Seção 3, bloco dos valores das alíquotas, e o caso dos combustíveis"
+  },
+  {
+   "id": "aula-perfil-servicos-profissionais-contabilidade#atencao",
+   "tema": "Redução de 30% do art. 127: partes sem conferência",
+   "estado": "Foram lidos o caput do art. 127, os incisos I a VIII, o §1º (I e as alíneas a e e do II), o §2º e o §3º, no texto do Planalto e de transcrições. Não foram lidos por inteiro: as alíneas b, c e d do §1º, II, o inciso X (referido no §3º) e os incisos IX a XVIII. Por fonte secundária: que a LC 227/2026 não alterou o art. 127 e que a sociedade não pode ter pessoa jurídica como sócia. Não foi tratado o destino do ISS fixo das sociedades uniprofissionais na transição.",
+   "data": "10/11/2026",
+   "prioridade": "baixa",
+   "fonte": "LC 214/2025, art. 127 (Planalto, modeloinicial); Marchesan; Barbieri Advogados",
+   "depende": "Seção 2, linhas de lista e de sociedade, e o ponto de atenção da estrutura da sociedade"
+  },
+  {
+   "id": "aula-perfil-comercio-varejo#atencao",
+   "tema": "Listas por NCM dos Anexos I, VII, VIII e XV (cesta básica, alimentos, higiene e hortifrúti)",
+   "estado": "A alíquota de cada alimento e produto de higiene depende da classificação nos anexos da LC 214/2025. Foram lidos o art. 125 e o art. 128 no texto da lei, e os arts. 135 e 136 e o art. 148 em transcrições e fontes secundárias. As listas dos anexos não foram lidas item a item, e alterações pela LC 227/2026 e por atos posteriores não foram conferidas. A regra de transição de bens móveis usados foi lida em trecho, sem o número do artigo.",
+   "data": "10/11/2026",
+   "prioridade": "media",
+   "fonte": "LC 214/2025, arts. 125, 128, 135 e 136 (Planalto, Legisweb, normas.leg.br); TaxUp; buscadorncm",
+   "depende": "Seção 2, linhas de cesta básica, alimentos e higiene, e o caso do supermercado"
   }
  ],
  "changelog": [
@@ -10581,6 +10599,20 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
    "secao": "",
    "mudanca": "Sétimo perfil setorial, no módulo Bônus: regime monofásico de combustíveis, energia elétrica no fornecimento, Imposto Seletivo na extração de bens minerais, dois casos numéricos e ficha para o SIS.",
    "motivo": "Plano dos Perfis setoriais (sexto da ordem)."
+  },
+  {
+   "data": "10/11/2026",
+   "aula": "Perfil Setorial: Serviços Profissionais e Contabilidade (nova aula)",
+   "secao": "",
+   "mudanca": "Oitavo perfil setorial, no módulo Bônus: redução de 30% do art. 127, requisitos de pessoa física e sociedades, folha sem crédito, caso do escritório contábil e ficha para o SIS.",
+   "motivo": "Plano dos Perfis setoriais (sétimo da ordem)."
+  },
+  {
+   "data": "10/11/2026",
+   "aula": "Perfil Setorial: Comércio e Varejo (nova aula)",
+   "secao": "",
+   "mudanca": "Nono perfil setorial, no módulo Bônus: regra geral com alíquota por produto, saldo credor no varejo de alimentos, descontos e fidelidade, crédito presumido do estoque e de bens usados, substituição tributária, dois casos numéricos e ficha para o SIS.",
+   "motivo": "Plano dos Perfis setoriais (oitavo da ordem)."
   }
  ]
 }
@@ -16239,6 +16271,723 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
 ]
 </script>
 
+<!-- ============ AULA: aula-perfil-servicos-profissionais-contabilidade ============ -->
+<template id="tpl-aula-perfil-servicos-profissionais-contabilidade" data-title="Perfil Setorial: Serviços Profissionais e Contabilidade" data-modulo="Módulo Bônus" data-unidade="Perfis Setoriais">
+<div class="topbar">
+  <a href="#hub"><span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Hub de Estudos</a>
+  <span class="crumb">Módulo Bônus — Perfis Setoriais</span>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="pill-row">
+      <span class="pill">📒 Perfil setorial</span>
+      <span class="pill">Serviços profissionais e contabilidade</span>
+      <span class="pill">Leitura ~14 min</span>
+    </div>
+    <h1>Perfil Setorial: Serviços Profissionais e Contabilidade</h1>
+    <p>As profissões intelectuais fiscalizadas por conselho, como a contabilidade, a advocacia e a engenharia, têm <b>redução de 30%</b> nas alíquotas (art. 127). Mas o setor é de mão de obra, com pouco crédito a tomar, e vende para clientes que ora se creditam, ora não. Este perfil mostra a regra, os requisitos para pessoas físicas e sociedades e o que o preço dos serviços tende a fazer.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="toc">
+    <h4>Neste perfil</h4>
+    <div class="toc-row">
+      <a href="#setor"><span class="n">1</span> O setor e a reforma</a>
+      <a href="#regimes"><span class="n">2</span> Regime aplicável</a>
+      <a href="#atencao"><span class="n">3</span> Pontos de atenção</a>
+      <a href="#tempo"><span class="n">4</span> Linha do tempo do setor</a>
+      <a href="#ficha"><span class="n">5</span> Ficha do perfil para o SIS</a>
+      <a href="#quiz"><span class="n">🎯</span> Teste seus conhecimentos</a>
+    </div>
+  </div>
+
+  <section id="setor">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">balance</span></div>
+      <div><h2>1. O Setor e a Reforma</h2><div class="sub">Folha pesada, pouco crédito e clientes de dois tipos</div></div>
+    </div>
+    <p class="lead">O serviço profissional tem custo concentrado em pessoas, e a folha não gera crédito de IBS e CBS. O efeito da reforma tende a depender de quem é o cliente: o cliente empresa do regime regular recupera o imposto, e o cliente pessoa física ou optante do Simples no DAS, em geral, não (veja a <a href="#aula-cenario-3-quem-sente-mais" style="color:var(--lav3);font-weight:700;">Aula 3 da Unidade II</a>):</p>
+    <table class="data">
+      <tr><th>Grupo</th><th>O que a lei prevê</th></tr>
+      <tr><td>Profissões da lista do art. 127</td><td>Redução de 30% nas alíquotas de IBS e CBS sobre os serviços, para as 18 profissões intelectuais fiscalizadas por conselho, como administradores, advogados, arquitetos, contabilistas e economistas</td></tr>
+      <tr><td>Profissões intelectuais fora da lista</td><td>Sem a redução de 30%. Ter conselho profissional não basta: a profissão precisa constar do art. 127</td></tr>
+      <tr><td>Profissionais de saúde</td><td>Os serviços de saúde do Anexo III seguem a redução de 60% (art. 130), e não a de 30% (veja o <a href="#aula-perfil-saude" style="color:var(--lav3);font-weight:700;">perfil de saúde</a>)</td></tr>
+      <tr><td>Escritórios no Simples Nacional</td><td>Regime próprio, com IBS e CBS no DAS ou fora dele, e crédito limitado ao cliente que compra do optante (veja a <a href="#aula6-simples-nacional" style="color:var(--lav3);font-weight:700;">aula 6</a>)</td></tr>
+    </table>
+    <div class="highlight lav">
+      <span class="material-symbols-outlined">info</span>
+      <div>Quem está no Lucro Presumido e fatura acima de R$ 5 milhões tem o adicional da LC 224/2025 sobre os percentuais de presunção, que é assunto de renda, e não de consumo (veja o <a href="#aula-mapa-dos-tributos/presumido" style="color:var(--lav3);font-weight:700;">mapa dos tributos</a>).</div>
+    </div>
+  </section>
+
+  <section id="regimes">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">gavel</span></div>
+      <div><h2>2. Regime Aplicável</h2><div class="sub">O que o art. 127 da LC 214/2025 diz</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Tema</th><th>Regra</th><th>Base legal</th></tr>
+      <tr><td>Redução de 30%</td><td>Ficam reduzidas em 30% as alíquotas do IBS e da CBS sobre a prestação de serviços por profissionais que exercem atividades intelectuais de natureza científica, literária ou artística, submetidas à fiscalização por conselho profissional, nas 18 profissões do artigo</td><td>Art. 127, caput</td></tr>
+      <tr><td>Lista de profissões</td><td>A lista é fechada, nos incisos I a XVIII. Constam administradores, advogados, arquitetos e urbanistas, assistentes sociais, bibliotecários, biólogos, <b>contabilistas</b> e economistas (incisos I a VIII), e os demais, entre eles engenheiros e agrônomos, químicos, estatísticos e médicos veterinários (por fonte secundária)</td><td>Art. 127, I a XVIII</td></tr>
+      <tr><td>Pessoa física</td><td>A redução vale quando os serviços prestados estão vinculados à habilitação do profissional</td><td>Art. 127, §1º, I</td></tr>
+      <tr><td>Sociedade</td><td>A redução vale quando a sociedade cumpre, cumulativamente, os requisitos do §1º, II. Entre eles, os sócios têm habilitações profissionais diretamente relacionadas aos objetivos da sociedade e estão submetidos à fiscalização do conselho, e os serviços da atividade-fim são prestados diretamente pelos sócios, admitido o concurso de auxiliares ou colaboradores. Segundo fonte secundária, a sociedade não pode ter pessoa jurídica como sócia nem ser sócia de outra</td><td>Art. 127, §1º, II</td></tr>
+      <tr><td>O que não impede a redução</td><td>A natureza jurídica da sociedade, a união de diferentes profissionais da lista (desde que cada sócio atue na sua habilitação) e a forma de distribuição de lucros</td><td>Art. 127, §2º</td></tr>
+      <tr><td>Exceção do §3º</td><td>Os §§1º e 2º não se aplicam à prestação de serviços relacionada à profissão do inciso X por pessoa jurídica submetida à fiscalização de conselho. O texto do inciso X não foi conferido nesta aula</td><td>Art. 127, §3º</td></tr>
+      <tr><td>Local da operação</td><td>O serviço é tributado no domicílio principal do adquirente (a matriz do cliente), como nos demais serviços (veja o <a href="#aula-perfil-software-servicos-digitais" style="color:var(--lav3);font-weight:700;">perfil de software e serviços digitais</a>)</td><td>Art. 11, X</td></tr>
+      <tr><td>Exportação de serviço</td><td>Imune quando o cliente é residente no exterior e o consumo ocorre no exterior (<a href="#aula-importacao-exportacao-servicos" style="color:var(--lav3);font-weight:700;">aula específica</a>)</td><td>Art. 80</td></tr>
+    </table>
+    <div class="highlight">
+      <span class="material-symbols-outlined">fact_check</span>
+      <div>Segundo fonte secundária, a LC 227/2026 não alterou o art. 127, nem a lista, nem o percentual. A conferência do texto compilado fica no painel.</div>
+    </div>
+  </section>
+
+  <section id="atencao">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">warning</span></div>
+      <div><h2>3. Pontos de Atenção</h2><div class="sub">Onde o setor tende a ter dúvidas e perdas</div></div>
+    </div>
+    <ul class="checklist">
+      <li><span class="material-symbols-outlined">groups</span><div><b>Estrutura da sociedade:</b> a redução depende de como a sociedade é composta e de quem presta o serviço. Um escritório com sócio pessoa jurídica, ou com serviço da atividade-fim feito por não sócios, pode perder a redução. O contrato social precisa ser revisto.</div></li>
+      <li><span class="material-symbols-outlined">badge</span><div><b>Habilitação e conselho:</b> a redução vincula-se à habilitação. Serviço fora do campo da profissão não entra. Sócios com registro ativo no conselho são pressuposto.</div></li>
+      <li><span class="material-symbols-outlined">sell</span><div><b>Preço por tipo de cliente:</b> o cliente empresa do regime regular tende a ficar neutro, e o cliente pessoa física ou do Simples no DAS paga mais (veja o caso). A tabela de honorários pode precisar de duas leituras.</div></li>
+      <li><span class="material-symbols-outlined">pin_drop</span><div><b>Local do cliente:</b> a alíquota depende do domicílio do adquirente, que é a matriz. Contratos com clientes de várias filiais exigem o CNPJ da matriz no cadastro.</div></li>
+      <li><span class="material-symbols-outlined">receipt_long</span><div><b>Nota fiscal:</b> a NFS-e passa a trazer os campos de IBS e CBS por etapas, segundo o Ato Conjunto RFB/CGIBS nº 4/2026 (por fonte secundária) (veja a <a href="#aula-lc-obrigacoes-acessorias" style="color:var(--lav3);font-weight:700;">aula do item IX</a>).</div></li>
+    </ul>
+    <div class="highlight red" id="pn-39" data-painel="aula-perfil-servicos-profissionais-contabilidade#atencao">
+      <span class="material-symbols-outlined">flag</span>
+      <div><b>Partes do art. 127 sem conferência:</b> os requisitos das alíneas b, c e d do §1º, II, o inciso X do §3º, a lista completa dos 18 incisos e o destino do ISS fixo das sociedades uniprofissionais na transição não foram lidos por inteiro. O estado fica no painel.</div>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">calculate</span> Caso do escritório contábil (hipotético): quem sente o preço</h4>
+      <p>Um escritório de contabilidade, no Lucro Presumido, fatura R$ 500.000 por mês e compra R$ 60.000 de insumos creditáveis (aluguel, sistemas e energia). Hoje paga ISS de 3% e PIS e COFINS cumulativos de 3,65%, o que dá R$ 33.250 e uma margem de R$ 406.750 depois dos tributos e das compras. No novo modelo, a alíquota padrão hipotética de 25% com redução de 30% vira 17,5%, por fora. Para manter a mesma margem, o preço sem imposto precisa ser de R$ 466.750:</p>
+      <div class="case-mini"><span class="label">Preço sem imposto que mantém a margem: R$ 500.000 − R$ 33.250 de tributos de hoje</span><span class="val">R$ 466.750</span></div>
+      <div class="case-mini"><span class="label">Cliente do regime regular, que se credita de tudo: paga R$ 548.431 e recupera R$ 81.681</span><span class="val">Custo líquido R$ 466.750</span></div>
+      <div class="case-mini total"><span class="label">Cliente pessoa física ou do Simples no DAS, sem crédito: paga R$ 548.431, contra R$ 500.000 hoje</span><span class="val">+9,7% nos honorários</span></div>
+      <p>A margem da empresa é a mesma. Para o cliente do regime regular, o custo líquido cai 6,65%. Para quem não se credita, o preço sobe cerca de 9,7%, mesmo com a redução de 30%. O exemplo usa alíquotas hipotéticas e desconsidera o ISS fixo das sociedades uniprofissionais.</p>
+    </div>
+    <div class="highlight lav">
+      <span class="material-symbols-outlined">savings</span>
+      <div><b>Recolhimento do escritório:</b> com alíquota efetiva de 17,5%, o débito sobre os R$ 466.750 é de R$ 81.681, e o crédito de 25% sobre as compras de R$ 60.000 é de R$ 15.000. O recolhimento é de R$ 66.681. A folha, que é o maior custo, não gera crédito (veja a <a href="#aula-nao-cumulatividade" style="color:var(--lav3);font-weight:700;">aula de não cumulatividade</a>).</div>
+    </div>
+  </section>
+
+  <section id="tempo">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">timeline</span></div>
+      <div><h2>4. Linha do Tempo do Setor</h2><div class="sub">O que muda de 2026 a 2033</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Ano</th><th>O que muda para o setor</th></tr>
+      <tr><td>2026</td><td>Teste, com CBS a 0,9% e IBS a 0,1% destacados nas notas, com dispensa de recolhimento para quem cumpre as obrigações. ISS, PIS e COFINS seguem. Os campos entram na NFS-e por etapas (por fonte secundária)</td></tr>
+      <tr><td>2027</td><td>PIS e COFINS saem e a CBS passa a valer, já com a redução de 30% do art. 127. O Simples Nacional ganha as regras de IBS e CBS (veja a <a href="#aula6-simples-nacional" style="color:var(--lav3);font-weight:700;">aula 6</a>)</td></tr>
+      <tr><td>2029 a 2032</td><td>O ISS cai a 90%, 80%, 70% e 60% e o IBS sobe, com a alíquota do domicílio do cliente. Benefícios locais de ISS reduzem na mesma rampa (<a href="#aula-preco-na-transicao" style="color:var(--lav3);font-weight:700;">preço na transição</a>)</td></tr>
+      <tr><td>2033</td><td>ISS extinto e IBS pleno, com a redução de 30% aplicada sobre a alíquota de referência</td></tr>
+    </table>
+  </section>
+
+  <section id="ficha">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">assignment</span></div>
+      <div><h2>5. Ficha do Perfil para o SIS</h2><div class="sub">Os parâmetros do setor, num quadro padronizado</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Campo</th><th>Valor</th></tr>
+      <tr><td>Setor</td><td>Serviços profissionais e contabilidade</td></tr>
+      <tr><td>Regime aplicável</td><td>Regime diferenciado de redução de 30% para as 18 profissões do art. 127, com local da operação no domicílio principal do adquirente (art. 11, X) e exportação imune (art. 80)</td></tr>
+      <tr><td>Redução de alíquota</td><td>30% sobre as alíquotas de IBS e CBS para os serviços das profissões da lista. Sem redução para profissões fora da lista</td></tr>
+      <tr><td>Particularidades de crédito</td><td>Folha sem crédito; crédito pelas aquisições (aluguel, sistemas e serviços); fornecedor do Simples com crédito limitado</td></tr>
+      <tr><td>Requisitos de sociedade</td><td>Sócios habilitados e sob fiscalização do conselho, serviços da atividade-fim prestados pelos sócios, e demais requisitos do §1º, II; natureza jurídica, união de profissões da lista e distribuição de lucros não impedem</td></tr>
+      <tr><td>Benefícios em extinção</td><td>Benefícios municipais de ISS, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso</td></tr>
+      <tr><td>Documentos e obrigações do setor</td><td>NFS-e com campos de IBS e CBS; cadastro do cliente com a matriz</td></tr>
+      <tr><td>Pontos de atenção</td><td>Estrutura da sociedade; habilitação; preço por tipo de cliente; domicílio do cliente</td></tr>
+      <tr><td>Itens do painel</td><td>Partes do art. 127 sem conferência</td></tr>
+    </table>
+  </section>
+
+  <section id="quiz">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">quiz</span></div>
+      <div><h2>🎯 Teste Seus Conhecimentos</h2><div class="sub">10 perguntas sorteadas de um banco maior — aprovação com 70% de acerto</div></div>
+    </div>
+    <div class="quiz-box" id="quizBox"></div>
+  </section>
+
+  <div class="refs">
+    <h3><span class="material-symbols-outlined" style="color:var(--lav2);">menu_book</span> Base legal e referências</h3>
+    <ul>
+      <li>Lei Complementar nº 214/2025: art. 127 (redução de 30% para profissões intelectuais fiscalizadas por conselho, §§1º a 3º), art. 11, X (local da operação), art. 80 (exportação) e art. 130 (serviços de saúde).</li>
+      <li>Lei Complementar nº 227/2026 e Lei Complementar nº 224/2025 (por remissão ao mapa dos tributos). Ato Conjunto RFB/CGIBS nº 4/2026.</li>
+    </ul>
+    <p>Aulas relacionadas: <a href="#aula5-aliquotas" style="color:var(--lav3);font-weight:700;">alíquotas e reduções</a>, <a href="#aula6-simples-nacional" style="color:var(--lav3);font-weight:700;">Simples Nacional</a>, <a href="#aula-perfil-software-servicos-digitais" style="color:var(--lav3);font-weight:700;">perfil de software</a> e <a href="#aula-podcast-oportunidades-contador" style="color:var(--lav3);font-weight:700;">oportunidades para o contador</a>.</p>
+  </div>
+
+</div>
+</template>
+<script type="application/json" id="quiz-aula-perfil-servicos-profissionais-contabilidade">
+[
+ {
+  "q": "Entre os clientes de um escritório profissional, quem tende a sentir o aumento do preço dos honorários?",
+  "options": [
+   "Os clientes empresa do regime regular, porque o imposto por fora é custo para eles",
+   "Todos os clientes da mesma forma, porque a redução de 30% iguala o efeito para todos",
+   "Os clientes pessoa física e os optantes do Simples no DAS, que em geral não se creditam do imposto",
+   "Nenhum cliente, porque os serviços de contabilidade têm alíquota zero na reforma"
+  ],
+  "correct": 2,
+  "section": "setor",
+  "sectionLabel": "1. O setor e a reforma",
+  "rationale": "Quem se credita recupera o imposto, e quem não se credita arca com ele."
+ },
+ {
+  "q": "Qual é a redução do art. 127 e a quais serviços ela se aplica?",
+  "options": [
+   "30% das alíquotas de IBS e CBS, nos serviços das 18 profissões intelectuais fiscalizadas por conselho profissional",
+   "60% das alíquotas, nos serviços de todas as profissões que tenham conselho profissional",
+   "100% das alíquotas, nos serviços das profissões regulamentadas de nível superior",
+   "30% das alíquotas, nos serviços de qualquer atividade intelectual, mesmo sem conselho"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 127 reduz em 30% as alíquotas para as profissões da lista, fiscalizadas por conselho."
+ },
+ {
+  "q": "Os contabilistas estão na lista do art. 127?",
+  "options": [
+   "Sim, no inciso VII",
+   "Não, porque a contabilidade é atividade técnica e não intelectual de natureza científica",
+   "Sim, mas só quando o contabilista presta serviços a empresas do regime regular",
+   "Não, porque os contabilistas seguem a redução de 60% do regime de serviços de saúde"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O inciso VII do art. 127 lista os contabilistas."
+ },
+ {
+  "q": "Uma profissão com conselho profissional, mas fora da lista do art. 127, tem a redução de 30%?",
+  "options": [
+   "Sim, se a sociedade que presta o serviço tiver pelo menos três sócios habilitados",
+   "Sim, porque o critério da lei é apenas a existência de conselho profissional",
+   "Não: a lista é fechada, e ter conselho não basta",
+   "Sim, desde que o serviço seja prestado a clientes do regime regular de IBS e CBS"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "A redução depende de a profissão constar do art. 127, e não só de haver conselho."
+ },
+ {
+  "q": "Qual é a condição para a redução na prestação por pessoa física (art. 127, §1º, I)?",
+  "options": [
+   "Que os serviços prestados estejam vinculados à habilitação do profissional",
+   "Que a pessoa física esteja inscrita no Simples Nacional como microempreendedor individual",
+   "Que a pessoa física tenha receita anual inferior a R$ 3,6 milhões, com registro no conselho",
+   "Que a pessoa física preste serviço apenas a pessoas jurídicas do regime regular"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O §1º, I vincula a redução à habilitação do profissional."
+ },
+ {
+  "q": "A união de diferentes profissionais da lista numa mesma sociedade impede a redução?",
+  "options": [
+   "Sim, porque a redução só vale para sociedades de uma única profissão da lista",
+   "Não, desde que a atuação de cada sócio seja na sua habilitação profissional (art. 127, §2º, II)",
+   "Não, mas só se a sociedade for uma sociedade simples, e não uma sociedade limitada",
+   "Sim, porque a sociedade multiprofissional deve ter alíquota padrão sobre o serviço"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O §2º, II admite a união de profissionais da lista, com cada sócio atuando na sua habilitação."
+ },
+ {
+  "q": "A natureza jurídica da sociedade e a forma de distribuição de lucros impedem a redução (art. 127, §2º)?",
+  "options": [
+   "Somente a natureza jurídica impede, e a forma de distribuição de lucros é irrelevante",
+   "Não, nenhuma das duas impede a redução",
+   "Sim, só as sociedades limitadas têm direito, e a distribuição deve ser proporcional às cotas",
+   "Sim, só as sociedades simples têm direito, e a distribuição deve ser igual entre os sócios"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O §2º, I e III afasta os dois critérios como impedimento."
+ },
+ {
+  "q": "O que a alínea \"e\" do §1º, II, exige quanto aos serviços da atividade-fim?",
+  "options": [
+   "Que sejam subcontratados de outra sociedade da mesma profissão, com notas separadas",
+   "Que sejam prestados somente a clientes localizados no mesmo município do escritório",
+   "Que sejam prestados diretamente pelos sócios, admitido o concurso de auxiliares ou colaboradores",
+   "Que sejam prestados exclusivamente por empregados, sem participação dos sócios"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O serviço da atividade-fim precisa ser prestado diretamente pelos sócios."
+ },
+ {
+  "q": "No caso do escritório contábil (receita de R$ 500.000, ISS de 3% e PIS e COFINS cumulativos de 3,65%), qual é a carga de hoje?",
+  "options": [
+   "R$ 33.250, que é 6,65% de R$ 500.000",
+   "R$ 18.250, que é só o PIS e a COFINS cumulativos, porque o ISS é recolhido pela prefeitura",
+   "R$ 15.000, que é só o ISS de 3%, porque o PIS e a COFINS não incidem sobre serviços",
+   "R$ 87.500, que é 17,5% de R$ 500.000, pela alíquota efetiva do novo modelo"
+  ],
+  "correct": 0,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "3% + 3,65% = 6,65%, e 6,65% de R$ 500.000 são R$ 33.250."
+ },
+ {
+  "q": "Qual é a alíquota efetiva do escritório, com padrão hipotética de 25% e redução de 30%?",
+  "options": [
+   "5%, que é 25% reduzido em 20 pontos percentuais, pela soma das reduções da lei",
+   "17,5%, que é 25% × (1 − 0,30)",
+   "7,5%, que é 25% × 0,30, a parcela que corresponde à redução prevista no art. 127",
+   "25%, porque a redução do art. 127 só vale para pessoas físicas, e não para sociedades"
+  ],
+  "correct": 1,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "25% multiplicado por 0,70 resulta em 17,5%."
+ },
+ {
+  "q": "Qual preço sem imposto mantém a margem de hoje no escritório (receita líquida de tributos de R$ 466.750)?",
+  "options": [
+   "R$ 500.000, e o cliente sem crédito pagaria R$ 587.500 com 17,5% por fora",
+   "R$ 466.750, e o cliente sem crédito pagaria o mesmo valor, sem acréscimo de imposto",
+   "R$ 433.500, e o cliente sem crédito pagaria R$ 509.363 com 17,5% por fora",
+   "R$ 466.750, e o cliente sem crédito pagaria R$ 548.431 com 17,5% por fora"
+  ],
+  "correct": 3,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "O preço sem imposto é R$ 500.000 − R$ 33.250 = R$ 466.750. Com 17,5% por fora, são R$ 548.431."
+ },
+ {
+  "q": "E o cliente do regime regular que se credita de tudo, com o mesmo preço sem imposto?",
+  "options": [
+   "Custo líquido de R$ 500.000, igual ao de hoje, porque o crédito só compensa o imposto",
+   "Custo líquido de R$ 548.431, porque o imposto por fora é custo para a empresa",
+   "Custo líquido de R$ 466.750, ou 6,65% abaixo do que pagava",
+   "Custo líquido de R$ 581.681, porque o crédito só pode ser usado no ano seguinte"
+  ],
+  "correct": 2,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "O cliente paga R$ 548.431 e recupera R$ 81.681, ficando com R$ 466.750."
+ },
+ {
+  "q": "Por que a folha de pagamento pesa na carga de um escritório profissional?",
+  "options": [
+   "Porque a folha é tributada pelo IBS e pela CBS à alíquota padrão, sem redução alguma",
+   "Porque a folha entra na base de cálculo do ISS, que continua em vigor depois de 2033",
+   "Porque a folha gera crédito integral de IBS e CBS, o que eleva o recolhimento do escritório",
+   "Porque a folha não gera crédito de IBS e CBS, e o escritório tem poucas compras creditáveis"
+  ],
+  "correct": 3,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "A folha não é aquisição com imposto cobrado, e por isso não gera crédito."
+ },
+ {
+  "q": "O que muda para o setor em 2027, segundo a linha do tempo do perfil?",
+  "options": [
+   "Os escritórios passam a recolher só IBS, e a CBS fica restrita aos consumidores finais",
+   "PIS e COFINS saem e a CBS plena entra, já com a redução de 30% do art. 127",
+   "O ISS é extinto e o IBS passa a valer integralmente, com alíquota única para todos os clientes",
+   "A redução de 30% é extinta, e as profissões da lista passam à alíquota padrão da CBS"
+  ],
+  "correct": 1,
+  "section": "tempo",
+  "sectionLabel": "4. Linha do tempo",
+  "rationale": "Em 2027 saem PIS e COFINS e entra a CBS plena. O ISS só começa a cair em 2029."
+ },
+ {
+  "q": "Para que serve a ficha do perfil para o SIS?",
+  "options": [
+   "Calcular automaticamente o imposto devido por cada empresa, sem necessidade de revisão do contador",
+   "Substituir a leitura da lei complementar, que deixa de ser necessária para quem usa o SIS",
+   "Registrar o resultado fiscal de cada empresa do setor, ano a ano, para fins de fiscalização",
+   "Padronizar os parâmetros do setor (regime, reduções, crédito, benefícios e obrigações) para alimentar o perfil de empresa da ferramenta"
+  ],
+  "correct": 3,
+  "section": "ficha",
+  "sectionLabel": "5. Ficha para o SIS",
+  "rationale": "A ficha organiza os parâmetros do setor, e o contador continua revisando cada caso."
+ }
+]
+</script>
+
+<!-- ============ AULA: aula-perfil-comercio-varejo ============ -->
+<template id="tpl-aula-perfil-comercio-varejo" data-title="Perfil Setorial: Comércio e Varejo" data-modulo="Módulo Bônus" data-unidade="Perfis Setoriais">
+<div class="topbar">
+  <a href="#hub"><span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Hub de Estudos</a>
+  <span class="crumb">Módulo Bônus — Perfis Setoriais</span>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="pill-row">
+      <span class="pill">🛒 Perfil setorial</span>
+      <span class="pill">Comércio e varejo</span>
+      <span class="pill">Leitura ~15 min</span>
+    </div>
+    <h1>Perfil Setorial: Comércio e Varejo</h1>
+    <p>O comércio não tem regime próprio: segue a regra geral, e o que muda tudo é o <b>produto</b> (cesta básica com alíquota zero, alimentos e higiene com 60% de redução, o resto na alíquota padrão), o <b>cliente</b> (empresa que se credita ou consumidor final) e as <b>despesas gerais</b> que geram crédito. Um varejista pode, inclusive, acabar com saldo credor.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="toc">
+    <h4>Neste perfil</h4>
+    <div class="toc-row">
+      <a href="#setor"><span class="n">1</span> O setor e a reforma</a>
+      <a href="#regimes"><span class="n">2</span> Regime aplicável</a>
+      <a href="#atencao"><span class="n">3</span> Pontos de atenção</a>
+      <a href="#tempo"><span class="n">4</span> Linha do tempo do setor</a>
+      <a href="#ficha"><span class="n">5</span> Ficha do perfil para o SIS</a>
+      <a href="#quiz"><span class="n">🎯</span> Teste seus conhecimentos</a>
+    </div>
+  </div>
+
+  <section id="setor">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">storefront</span></div>
+      <div><h2>1. O Setor e a Reforma</h2><div class="sub">Atacado, varejo, supermercado e bens usados</div></div>
+    </div>
+    <p class="lead">Como o comércio é a ponta da cadeia, a reforma o alcança de duas formas: pela alíquota de cada produto vendido e pelo crédito das compras. A tendência é que o efeito dependa do mix de produtos e de clientes (veja a <a href="#aula-cenario-3-quem-sente-mais" style="color:var(--lav3);font-weight:700;">Aula 3 da Unidade II</a>):</p>
+    <table class="data">
+      <tr><th>Grupo</th><th>O que a lei prevê</th></tr>
+      <tr><td>Atacado e distribuição (vendas B2B)</td><td>Regra geral, com crédito pleno ao cliente empresa do regime regular. A neutralidade do imposto por fora favorece quem vende para empresas</td></tr>
+      <tr><td>Varejo de produtos em geral (B2C)</td><td>Regra geral. O consumidor final não se credita, e o imposto aparece no preço</td></tr>
+      <tr><td>Supermercados e varejo de alimentos</td><td>Mix de alíquota zero (cesta básica), 60% (alimentos e higiene dos anexos) e padrão, com classificação por NCM</td></tr>
+      <tr><td>Revenda de bens móveis usados</td><td>Regime de crédito presumido, com regra de transição para bens adquiridos até 31/12/2026 sem crédito de PIS e COFINS</td></tr>
+    </table>
+    <div class="highlight lav">
+      <span class="material-symbols-outlined">info</span>
+      <div>Farmácias seguem o <a href="#aula-perfil-saude" style="color:var(--lav3);font-weight:700;">perfil de saúde</a>, postos de combustível o <a href="#aula-perfil-energia-combustiveis-mineracao" style="color:var(--lav3);font-weight:700;">perfil de energia e combustíveis</a> e o comércio eletrônico o <a href="#aula-perfil-logistica-ecommerce" style="color:var(--lav3);font-weight:700;">perfil de logística e e-commerce</a>.</div>
+    </div>
+  </section>
+
+  <section id="regimes">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">gavel</span></div>
+      <div><h2>2. Regime Aplicável</h2><div class="sub">O que a LC 214/2025 diz para o comércio</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Situação</th><th>Regra</th><th>Base legal</th></tr>
+      <tr><td>Regra geral</td><td>Regime regular, não cumulativo, com base no valor da operação. O local da operação com bem móvel é o da entrega ou disponibilização ao destinatário, e o IBS segue o destino</td><td>Arts. 11, I, 12 e 15</td></tr>
+      <tr><td>Cesta Básica Nacional</td><td>Alíquota zero nas vendas dos produtos de alimentação humana do Anexo I, com a especificação das classificações NCM/SH</td><td>Art. 125; Anexo I</td></tr>
+      <tr><td>Alimentos do Anexo VII</td><td>Redução de 60% das alíquotas no fornecimento dos alimentos destinados ao consumo humano relacionados no anexo, por NCM/SH</td><td>Arts. 128, VI, e 135; Anexo VII</td></tr>
+      <tr><td>Higiene pessoal e limpeza</td><td>Redução de 60% para os produtos majoritariamente consumidos por famílias de baixa renda, relacionados no Anexo VIII</td><td>Art. 128, VII; Anexo VIII</td></tr>
+      <tr><td>Hortícolas, frutas e ovos</td><td>Alíquota zero, por fonte secundária (art. 148 e Anexo XV)</td><td>Art. 148</td></tr>
+      <tr><td>Desconto incondicional</td><td>Não integra a base. É a parcela redutora do preço que consta da nota e não depende de evento posterior, inclusive o programa de fidelidade não oneroso do próprio fornecedor. O desconto sob condição integra a base</td><td>Art. 12, §§2º e 3º</td></tr>
+      <tr><td>Devolução e cancelamento</td><td>A base é a mesma da operação original</td><td>Art. 12, §7º</td></tr>
+      <tr><td>Bonificações e brindes</td><td>A bonificação que consta da nota e não depende de evento posterior é desconto. Brindes fora do documento fiscal incidem</td><td>Art. 5º</td></tr>
+      <tr><td>Estoque de 1º/01/2027</td><td>Crédito presumido de CBS para quem não pôde se creditar de PIS e COFINS (regime cumulativo, monofásicos, substituição tributária e vedação parcial), com inventário em 31/12/2026 (<a href="#aula-virada-estoques-creditos" style="color:var(--lav3);font-weight:700;">aula da virada</a>)</td><td>Art. 381; Decreto 12.955/2026, art. 605</td></tr>
+      <tr><td>Bens móveis usados</td><td>Crédito presumido na revenda. Para bens adquiridos até 31/12/2026 sem crédito de PIS e COFINS, a alíquota da CBS é reduzida a zero para a parcela da base inferior ou igual ao valor líquido de aquisição</td><td>Regime de bens móveis usados (Título IV)</td></tr>
+      <tr><td>Substituição tributária e monofásicos</td><td>A substituição tributária do ICMS acompanha o ICMS até o fim da transição, e os monofásicos de PIS e COFINS saem em 2027 (veja a <a href="#aula-mapa-dos-tributos" style="color:var(--lav3);font-weight:700;">mapa dos tributos</a>)</td><td>ADCT, art. 128; extinção de PIS e COFINS</td></tr>
+    </table>
+    <div class="highlight">
+      <span class="material-symbols-outlined">list_alt</span>
+      <div>As alíquotas de cada produto dependem da classificação <b>NCM/SH</b> nos anexos (I, VII, VIII e XV). A aula não reproduz as listas. A consulta de CST e cClassTrib do SIS ajuda a localizar o código de cada operação.</div>
+    </div>
+  </section>
+
+  <section id="atencao">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">warning</span></div>
+      <div><h2>3. Pontos de Atenção</h2><div class="sub">Onde o setor tende a ter dúvidas e perdas</div></div>
+    </div>
+    <ul class="checklist">
+      <li><span class="material-symbols-outlined">qr_code_2</span><div><b>NCM é tudo:</b> a alíquota do produto depende do código no anexo. Uma NCM errada move um item entre alíquota zero, 60% e padrão. O cadastro de produtos vira a base da apuração.</div></li>
+      <li><span class="material-symbols-outlined">savings</span><div><b>Saldo credor no varejo de alimentos:</b> quem vende muito produto com alíquota zero ou reduzida e paga despesas gerais com alíquota padrão (aluguel, energia, sistemas) pode acumular saldo credor, que se compensa ou se ressarce (veja a <a href="#aula-lc-ressarcimento-creditos" style="color:var(--lav3);font-weight:700;">aula do item III</a>).</div></li>
+      <li><span class="material-symbols-outlined">groups</span><div><b>Atacado contra varejo:</b> quem vende a empresa do regime regular tende a ficar neutro, e quem vende a consumidor final vê o imposto no preço. A política de preços precisa separar os dois canais.</div></li>
+      <li><span class="material-symbols-outlined">inventory_2</span><div><b>Estoque de 31/12/2026:</b> varejistas do Lucro Presumido e quem vende monofásicos ou itens com substituição tributária têm direito a crédito presumido de CBS, mas só com inventário e documento idôneo, e apropriação até 30/06/2027 (veja a <a href="#aula-virada-estoques-creditos" style="color:var(--lav3);font-weight:700;">aula da virada</a>).</div></li>
+      <li><span class="material-symbols-outlined">payments</span><div><b>Cartões e split payment:</b> o varejo recebe boa parte das vendas por arranjos de pagamento, que participam da segregação do imposto quando o split estiver disponível. A data segue em aberto (veja a <a href="#aula-lc-regime-compensacao" style="color:var(--lav3);font-weight:700;">aula do item II</a>).</div></li>
+    </ul>
+    <div class="highlight red" id="pn-40" data-painel="aula-perfil-comercio-varejo#atencao">
+      <span class="material-symbols-outlined">flag</span>
+      <div><b>Listas por NCM:</b> os Anexos I, VII, VIII e XV definem a alíquota de cada produto. Eventuais alterações pela LC 227/2026 e por atos posteriores não foram conferidas item a item, e o estado fica no painel.</div>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">shopping_cart</span> Caso do supermercado (hipotético): saldo credor</h4>
+      <p>Um supermercado vende R$ 1.000.000 por mês: R$ 500.000 de cesta básica (alíquota zero), R$ 300.000 de itens com redução de 60% (10% efetivos, com padrão hipotética de 25%) e R$ 200.000 de itens na alíquota padrão. Compra R$ 400.000 de itens de cesta (sem imposto), R$ 240.000 de itens reduzidos (a 10%), R$ 160.000 de itens padrão (a 25%) e R$ 100.000 de despesas gerais (a 25%). Fornecedores no regime regular:</p>
+      <div class="case-mini"><span class="label">Débito: 10% de R$ 300.000 + 25% de R$ 200.000</span><span class="val">R$ 80.000</span></div>
+      <div class="case-mini"><span class="label">Crédito: R$ 24.000 (reduzidos) + R$ 40.000 (padrão) + R$ 25.000 (despesas gerais)</span><span class="val">R$ 89.000</span></div>
+      <div class="case-mini total"><span class="label">Crédito maior que o débito: R$ 80.000 − R$ 89.000</span><span class="val">Saldo credor de R$ 9.000</span></div>
+      <p>O saldo credor vem da combinação de saída reduzida com despesas gerais na alíquota padrão. Os números são hipotéticos.</p>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">sell</span> Caso do desconto (hipotético): na nota ou sob condição</h4>
+      <p>Uma venda de R$ 1.000, com IBS e CBS de 25% por fora (hipótese). Dois tipos de desconto de R$ 100:</p>
+      <div class="case-mini"><span class="label">Desconto incondicional, na nota: base de R$ 900 e imposto de 25%</span><span class="val">R$ 225</span></div>
+      <div class="case-mini total"><span class="label">Desconto condicional (para pagar à vista): a base segue em R$ 1.000</span><span class="val">R$ 250</span></div>
+      <p>O desconto condicional não reduz a base, mesmo que o cliente o use. Veja a regra na <a href="#aula-incidencia-e-base-de-calculo/base" style="color:var(--lav3);font-weight:700;">aula de incidência e base de cálculo</a>.</p>
+    </div>
+  </section>
+
+  <section id="tempo">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">timeline</span></div>
+      <div><h2>4. Linha do Tempo do Setor</h2><div class="sub">O que muda de 2026 a 2033</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Ano</th><th>O que muda para o setor</th></tr>
+      <tr><td>2026</td><td>Teste, com CBS a 0,9% e IBS a 0,1% destacados nos documentos fiscais, com dispensa de recolhimento para quem cumpre as obrigações. Inventário em 31/12/2026 para o crédito presumido do estoque</td></tr>
+      <tr><td>2027</td><td>PIS e COFINS saem, inclusive os monofásicos, e a CBS passa a valer plena, com alíquota zero na cesta básica e redução de 60% nos alimentos e na higiene dos anexos. O crédito presumido do estoque deve ser apropriado até 30/06/2027</td></tr>
+      <tr><td>2029 a 2032</td><td>ICMS cai a 90%, 80%, 70% e 60% e o IBS sobe, com alíquota do local de entrega. A substituição tributária do ICMS acompanha essa rampa (<a href="#aula-preco-na-transicao" style="color:var(--lav3);font-weight:700;">preço na transição</a>)</td></tr>
+      <tr><td>2033</td><td>ICMS e substituição tributária extintos e IBS pleno, com a redução e a alíquota zero dos produtos aplicadas sobre a alíquota de referência</td></tr>
+    </table>
+  </section>
+
+  <section id="ficha">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">assignment</span></div>
+      <div><h2>5. Ficha do Perfil para o SIS</h2><div class="sub">Os parâmetros do setor, num quadro padronizado</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Campo</th><th>Valor</th></tr>
+      <tr><td>Setor</td><td>Comércio e varejo</td></tr>
+      <tr><td>Regime aplicável</td><td>Regra geral (arts. 11, 12 e 15), com regimes diferenciados por produto (arts. 125, 128, 135 e 148) e crédito presumido de estoque e de bens móveis usados</td></tr>
+      <tr><td>Redução de alíquota</td><td>Zero para a cesta básica e hortifrúti; 60% para alimentos do Anexo VII e higiene e limpeza do Anexo VIII; padrão para os demais</td></tr>
+      <tr><td>Particularidades de crédito</td><td>Saldo credor com mix de saída reduzida e despesas gerais na alíquota padrão; crédito presumido do estoque de 1º/01/2027; crédito presumido na revenda de usados</td></tr>
+      <tr><td>Benefícios em extinção</td><td>Substituição tributária e benefícios de ICMS, reduzidos de 2029 a 2032 e extintos em 2033; monofásicos de PIS e COFINS saem em 2027</td></tr>
+      <tr><td>Documentos e obrigações do setor</td><td>Cadastro de produtos por NCM; documento fiscal com campos de IBS e CBS; inventário de 31/12/2026</td></tr>
+      <tr><td>Pontos de atenção</td><td>NCM e alíquota; saldo credor; canais B2B e B2C; estoque; descontos e fidelidade</td></tr>
+      <tr><td>Itens do painel</td><td>Listas de produtos por NCM nos anexos</td></tr>
+    </table>
+  </section>
+
+  <section id="quiz">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">quiz</span></div>
+      <div><h2>🎯 Teste Seus Conhecimentos</h2><div class="sub">10 perguntas sorteadas de um banco maior — aprovação com 70% de acerto</div></div>
+    </div>
+    <div class="quiz-box" id="quizBox"></div>
+  </section>
+
+  <div class="refs">
+    <h3><span class="material-symbols-outlined" style="color:var(--lav2);">menu_book</span> Base legal e referências</h3>
+    <ul>
+      <li>Lei Complementar nº 214/2025: art. 5º (brindes e bonificações), art. 11, I (local da operação), art. 12 (base de cálculo, §§2º, 3º e 7º), art. 15 (alíquota do IBS), art. 125 e Anexo I (cesta básica), art. 128, VI e VII, e arts. 135 e 136 e Anexos VII e VIII (alimentos e higiene), art. 148 e Anexo XV (hortícolas, frutas e ovos) e art. 381 (crédito presumido do estoque).</li>
+      <li>Decreto nº 12.955/2026, art. 605. Emenda Constitucional nº 132/2023 (ADCT, art. 128). Lei Complementar nº 227/2026.</li>
+    </ul>
+    <p>Aulas relacionadas: <a href="#aula5-aliquotas" style="color:var(--lav3);font-weight:700;">alíquotas e reduções</a>, <a href="#aula-nao-cumulatividade" style="color:var(--lav3);font-weight:700;">não cumulatividade</a>, <a href="#aula-virada-estoques-creditos" style="color:var(--lav3);font-weight:700;">virada de 2027</a> e <a href="#aula-perfil-logistica-ecommerce" style="color:var(--lav3);font-weight:700;">perfil de logística</a>.</p>
+  </div>
+
+</div>
+</template>
+<script type="application/json" id="quiz-aula-perfil-comercio-varejo">
+[
+ {
+  "q": "O que mais define a carga tributária de um supermercado no novo modelo?",
+  "options": [
+   "O porte da empresa, porque todo supermercado de grande porte paga a alíquota padrão",
+   "O Estado em que fica a matriz da empresa, porque o IBS é cobrado na origem das vendas, e não o local de entrega dos produtos ao consumidor, que é irrelevante para a alíquota",
+   "O mix de produtos (zero, 60% e padrão), o mix de clientes e as despesas gerais que geram crédito",
+   "O regime tributário da empresa, porque o comércio tem regime específico próprio na lei"
+  ],
+  "correct": 2,
+  "section": "setor",
+  "sectionLabel": "1. O setor e a reforma",
+  "rationale": "A alíquota depende do produto, o cliente define se o imposto é recuperado, e as despesas geram crédito."
+ },
+ {
+  "q": "Qual é a alíquota da Cesta Básica Nacional do Anexo I (art. 125)?",
+  "options": [
+   "30% de redução, como nos serviços das profissões intelectuais fiscalizadas",
+   "60% de redução, para todos os produtos de alimentação humana vendidos no varejo",
+   "Zero, nas vendas dos produtos de alimentação humana relacionados no anexo, por NCM/SH",
+   "Alíquota padrão, com devolução do imposto às famílias de baixa renda pelo cashback"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 125 reduz a zero as alíquotas do IBS e da CBS para os produtos do Anexo I."
+ },
+ {
+  "q": "Qual é o tratamento dos alimentos do Anexo VII (art. 135)?",
+  "options": [
+   "Alíquota zero, como a cesta básica, para todo alimento industrializado do Anexo VII",
+   "Redução de 30%, igual à dos serviços das profissões fiscalizadas por conselho",
+   "Redução de 60% das alíquotas, por NCM/SH",
+   "Alíquota padrão, porque alimentos industrializados não têm nenhuma redução na lei"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 135 reduz em 60% as alíquotas dos alimentos do Anexo VII."
+ },
+ {
+  "q": "Como os produtos de higiene pessoal e limpeza são tratados (art. 128, VII)?",
+  "options": [
+   "Alíquota zero para todos os produtos de higiene e limpeza vendidos no varejo do País",
+   "Alíquota padrão, porque higiene e limpeza não estão entre as reduções da lei complementar",
+   "Redução de 100% apenas para os produtos de higiene pessoal comprados pelo Poder Público",
+   "Redução de 60% para os majoritariamente consumidos por famílias de baixa renda, listados no Anexo VIII"
+  ],
+  "correct": 3,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 128, VII e o Anexo VIII tratam os produtos de higiene e limpeza de consumo popular."
+ },
+ {
+  "q": "O que define a alíquota de um alimento ou de um produto de higiene na venda?",
+  "options": [
+   "A classificação NCM/SH do produto nos anexos da lei",
+   "O preço de venda do produto, com limites de valor fixados para cada categoria",
+   "O nome comercial do produto na embalagem, conforme o rótulo do fabricante",
+   "O local de venda, porque cada Estado define as alíquotas dos alimentos de seu território"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "As listas dos anexos usam NCM/SH, e um erro de classificação muda a alíquota."
+ },
+ {
+  "q": "O desconto incondicional concedido na nota reduz a base de cálculo?",
+  "options": [
+   "Sim: o desconto que consta do documento fiscal e não depende de evento posterior não integra a base",
+   "Só se o desconto for superior a 10% do valor da operação registrada no documento",
+   "Não, porque todo desconto integra a base de cálculo do IBS e da CBS, sem distinção",
+   "Só se o cliente for empresa do regime regular, que se credita do imposto da compra"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 12, §2º exclui o desconto incondicional da base, e o §3º o define."
+ },
+ {
+  "q": "O desconto concedido sob condição, como pagar à vista, reduz a base?",
+  "options": [
+   "Não, mas o imposto sobre o desconto é devolvido ao cliente no mês seguinte",
+   "Não: o desconto condicional integra a base de cálculo, mesmo que o cliente o utilize",
+   "Sim, sempre, porque a nota fiscal já traz o valor com o desconto aplicado ao cliente, independentemente de o cliente cumprir ou não a condição prevista no contrato",
+   "Sim, mas só se o cliente cumprir a condição antes do vencimento da operação"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "Só o desconto incondicional reduz a base. O condicional integra a base."
+ },
+ {
+  "q": "No caso do supermercado, qual é o débito de IBS e CBS (reduzidos a 10% e padrão a 25%)?",
+  "options": [
+   "R$ 130.000, porque a cesta básica de R$ 500.000 também gera débito, a 10% do valor, e porque a alíquota padrão incide sobre toda a receita de forma uniforme",
+   "R$ 30.000, que é só o débito dos itens reduzidos, sem os itens na alíquota padrão",
+   "R$ 250.000, que é 25% de toda a receita de R$ 1.000.000, sem considerar as reduções",
+   "R$ 80.000: 10% de R$ 300.000 mais 25% de R$ 200.000"
+  ],
+  "correct": 3,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "A cesta básica tem alíquota zero. O débito é R$ 30.000 + R$ 50.000 = R$ 80.000."
+ },
+ {
+  "q": "Qual é o crédito total do supermercado no mesmo caso?",
+  "options": [
+   "R$ 89.000: R$ 24.000 dos itens reduzidos, R$ 40.000 dos itens padrão e R$ 25.000 das despesas gerais",
+   "R$ 40.000, que é só o crédito dos itens na alíquota padrão adquiridos para revenda",
+   "R$ 225.000, que é 25% de todas as compras de mercadorias e das despesas gerais",
+   "R$ 64.000, porque as despesas gerais não geram crédito para o varejo de alimentos"
+  ],
+  "correct": 0,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "Crédito de 10% de R$ 240.000, mais 25% de R$ 160.000 e 25% de R$ 100.000."
+ },
+ {
+  "q": "Qual é o resultado da apuração do supermercado?",
+  "options": [
+   "Saldo credor de R$ 9.000, porque o crédito de R$ 89.000 supera o débito de R$ 80.000",
+   "Saldo credor de R$ 89.000, porque o débito de R$ 80.000 não entra na apuração do varejo",
+   "Recolhimento de R$ 80.000, porque o crédito das compras só pode ser usado no mês seguinte, porque o crédito das compras só pode ser usado no mês seguinte, sem compensar o débito",
+   "Recolhimento de R$ 9.000, porque o débito é maior que o crédito do período de apuração"
+  ],
+  "correct": 0,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "R$ 80.000 de débito menos R$ 89.000 de crédito deixa saldo credor de R$ 9.000, a compensar ou ressarcir."
+ },
+ {
+  "q": "Por que um varejista de alimentos pode acumular saldo credor mesmo sem exportar?",
+  "options": [
+   "Porque o varejo de alimentos é isento, e a isenção gera crédito presumido sobre as compras, e a isenção gera crédito presumido sobre as compras de mercadorias para revenda",
+   "Porque vende com alíquota zero ou reduzida e tem despesas gerais com alíquota padrão, que geram crédito",
+   "Porque o ICMS pago sobre as compras é convertido em crédito de IBS e CBS no mesmo mês",
+   "Porque o regime regular proíbe o recolhimento mensal para empresas de varejo alimentar"
+  ],
+  "correct": 1,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "Saída reduzida e entradas na alíquota padrão levam o crédito a superar o débito."
+ },
+ {
+  "q": "Numa venda de R$ 1.000 com desconto incondicional de R$ 100 na nota (IBS e CBS de 25% por fora), qual é a base e o imposto?",
+  "options": [
+   "Base de R$ 1.000 e imposto de R$ 250, porque o desconto não reduz a base na nota fiscal",
+   "Base de R$ 900 e imposto de R$ 225",
+   "Base de R$ 900 e imposto de R$ 250, porque o imposto incide sobre o preço de tabela",
+   "Base de R$ 1.100 e imposto de R$ 275, porque o desconto se soma ao valor da operação"
+  ],
+  "correct": 1,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "O desconto incondicional reduz a base para R$ 900, e 25% de R$ 900 são R$ 225."
+ },
+ {
+  "q": "E se o desconto de R$ 100 for condicional, para pagamento à vista?",
+  "options": [
+   "A base sobe para R$ 1.100 e o imposto é de R$ 275, porque o desconto é um acréscimo",
+   "A base cai para R$ 900 apenas se o cliente for empresa do regime regular de apuração",
+   "A base cai para R$ 900 e o imposto é de R$ 225, desde que o cliente use o desconto",
+   "A base segue em R$ 1.000 e o imposto é de R$ 250, mesmo que o cliente use o desconto"
+  ],
+  "correct": 3,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "O desconto condicional integra a base, que continua em R$ 1.000."
+ },
+ {
+  "q": "O que acontece com a substituição tributária do ICMS na transição?",
+  "options": [
+   "Continua com as mesmas regras de hoje, sem nenhuma redução, até depois de 2033",
+   "Acompanha o ICMS até o fim da transição, reduzindo na rampa de 2029 a 2032",
+   "É extinta em 1º de janeiro de 2027, junto com o PIS e a COFINS dos regimes monofásicos",
+   "Passa a valer também para o IBS e para a CBS, em todos os produtos do varejo a partir de 2027"
+  ],
+  "correct": 1,
+  "section": "tempo",
+  "sectionLabel": "4. Linha do tempo",
+  "rationale": "A substituição tributária acompanha o ICMS, que é extinto em 2033."
+ },
+ {
+  "q": "Para que serve a ficha do perfil para o SIS?",
+  "options": [
+   "Calcular automaticamente o imposto devido por cada empresa, sem necessidade de revisão do contador",
+   "Registrar o resultado fiscal de cada empresa do setor, ano a ano, para fins de fiscalização",
+   "Padronizar os parâmetros do setor (regime, reduções, crédito, benefícios e obrigações) para alimentar o perfil de empresa da ferramenta",
+   "Substituir a leitura da lei complementar, que deixa de ser necessária para quem usa o SIS, e o SIS passa a ser a única fonte de consulta da empresa"
+  ],
+  "correct": 2,
+  "section": "ficha",
+  "sectionLabel": "5. Ficha para o SIS",
+  "rationale": "A ficha organiza os parâmetros do setor, e o contador continua revisando cada caso."
+ }
+]
+</script>
+
 <script>
 /* ===== Motor de busca (client-side, sem servidor) ===== */
 const SEARCH_ENTRIES = [];   // preenchido por buildSearchEntries() a partir das aulas do próprio arquivo
@@ -16520,7 +17269,9 @@ const modules = [
       {title:'Perfil Setorial: Software e Serviços Digitais', desc:'Licenciamento e SaaS como fornecimentos tributados (fim da disputa entre mercadoria e serviço), local da operação no domicílio principal do adquirente (a matriz do cliente), alíquota por destino, importação intragrupo, exportação, plataformas digitais, caso numérico B2B contra B2C, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-software-servicos-digitais.html'},
       {title:'Perfil Setorial: Serviços Financeiros e Meios de Pagamento', desc:'Regime específico de serviços financeiros (arts. 181 e 182), base de cálculo como margem, alíquotas somadas de IBS e CBS de 10,85% em 2027 a 12,50% em 2033 (art. 233), importação, arranjos de pagamento e seguros, caso numérico, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-servicos-financeiros.html'},
       {title:'Perfil Setorial: Construção e Imobiliário', desc:'Regime específico de bens imóveis (arts. 251 a 270): redução de 50% em alienação, construção e incorporação e de 70% na locação, redutor social e de ajuste, momento do pagamento na incorporação, apuração por obra, casos numéricos de incorporadora e empreiteira, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-construcao-imobiliario.html'},
-      {title:'Perfil Setorial: Energia, Combustíveis e Mineração', desc:'Regime monofásico de combustíveis com alíquota por unidade de medida (arts. 172 a 180), vedação de crédito na revenda, recolhimento da energia elétrica no fornecimento (art. 28), Imposto Seletivo na extração de bens minerais com teto de 0,25% (art. 422), casos numéricos, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-energia-combustiveis-mineracao.html'}
+      {title:'Perfil Setorial: Energia, Combustíveis e Mineração', desc:'Regime monofásico de combustíveis com alíquota por unidade de medida (arts. 172 a 180), vedação de crédito na revenda, recolhimento da energia elétrica no fornecimento (art. 28), Imposto Seletivo na extração de bens minerais com teto de 0,25% (art. 422), casos numéricos, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-energia-combustiveis-mineracao.html'},
+      {title:'Perfil Setorial: Serviços Profissionais e Contabilidade', desc:'Redução de 30% para as 18 profissões intelectuais fiscalizadas por conselho (art. 127), requisitos para pessoa física e sociedades, folha sem crédito, caso do escritório contábil (quem sente o preço), linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-servicos-profissionais-contabilidade.html'},
+      {title:'Perfil Setorial: Comércio e Varejo', desc:'Regra geral com alíquota por produto (cesta básica zero, 60% em alimentos e higiene, padrão nos demais), saldo credor no varejo de alimentos, descontos e programas de fidelidade na base, crédito presumido do estoque e de bens usados, substituição tributária na transição, casos numéricos, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-comercio-varejo.html'}
     ]},
     {t:'Precificação e Cenários na Reforma Tributária', d:'Precificação e cenários na reforma.', h:'4h', materials:[
       {title:'Preço na Transição: ICMS e ISS por Dentro, IBS e CBS por Fora', desc:'As regras de base da convivência (2026 a 2032), a rampa do ADCT, a conta do preço passo a passo com as duas leituras da base do ICMS e do ISS, o ponto em aberto sobre IBS e CBS na base do ICMS e do ISS e o que muda no ERP, nos contratos e na margem.', href:'1-Modulo/Bonus/aula-preco-na-transicao.html'}
