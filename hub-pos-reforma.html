@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>Hub de Estudos — Pós Reforma Tributária</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,0,0" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,0,0" />
@@ -422,6 +423,7 @@ body{margin:0;}
 #aula-view[data-aula="aula-lc-cashback"] .case-mini .val{font-weight:800;color:var(--charcoal);}
 #aula-view[data-aula="aula-lc-cashback"] .case-mini.total .val{color:var(--yellow);}
 #aula-view[data-aula="aula-lc-obrigacoes-acessorias"] .final-banner .material-symbols-outlined{font-size:36px;color:var(--yellow);margin-bottom:10px;}
+footer.site-aviso{max-width:1100px;margin:28px auto 0;padding:16px 24px 28px;border-top:1px solid rgba(50,65,85,.18);font-size:12px;line-height:1.6;color:var(--slate);text-align:center;}
 </style>
 </head>
 <body>
@@ -465,6 +467,8 @@ body{margin:0;}
 </div>
 
 <div id="aula-view" hidden></div>
+
+<footer class="site-aviso">Material de estudo sobre a Reforma Tributária do consumo. Não substitui a leitura da norma nem a orientação de um profissional habilitado. A legislação está em transição e muda com frequência: confira as fontes oficiais antes de aplicar. Os pontos ainda sem conferência estão indicados nas aulas e no painel de atualizações.</footer>
 
 <script>const AULA_INIT = {};   /* ganchos de JS próprio de cada aula (ex.: tabela interativa) */</script>
 
@@ -10373,6 +10377,15 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
    "prioridade": "media",
    "fonte": "LC 214/2025, art. 11 (texto atualizado pela LC 227/2026); Resolução CGIBS 6/2026 (não lida)",
    "depende": "Seção 3, bloco do local da operação, e a linha do domicílio do adquirente na seção 2"
+  },
+  {
+   "id": "aula-perfil-servicos-financeiros#atencao",
+   "tema": "Regime específico de serviços financeiros: partes sem conferência (base, arranjos de pagamento, exportação e ISS)",
+   "estado": "Foram lidos os arts. 181, 182 e 233 (com a LC 227/2026) e trechos dos arts. 223 e 231. Não foram lidos por inteiro: as deduções e a base das operações de crédito, os arranjos de pagamento (art. 214 e seguintes), a exportação (art. 232) e o ajuste das alíquotas para serviços que ainda sofrem ISS. A regulamentação do Comitê Gestor e do Banco Central não foi consultada. Os valores de 2031 e 2032 vêm do texto da LC 227/2026 e de fontes secundárias.",
+   "data": "10/11/2026",
+   "prioridade": "media",
+   "fonte": "LC 214/2025, arts. 181, 182, 223, 231 e 233 (Câmara e normas.leg.br); LC 227/2026; Machado Meyer",
+   "depende": "Seção 2, linhas de base, arranjos e exportação, e a seção 3"
   }
  ],
  "changelog": [
@@ -10529,6 +10542,13 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
    "secao": "",
    "mudanca": "Quarto perfil setorial (antecipado a pedido do usuário), no módulo Bônus: licenciamento e SaaS como fornecimentos tributados, local da operação no domicílio principal do adquirente (matriz), alíquota por destino, importação e exportação, plataformas, caso numérico B2B contra B2C e ficha para o SIS.",
    "motivo": "Plano dos Perfis setoriais, com antecipação do 12º setor pedida pelo usuário."
+  },
+  {
+   "data": "10/11/2026",
+   "aula": "Perfil Setorial: Serviços Financeiros e Meios de Pagamento (nova aula)",
+   "secao": "",
+   "mudanca": "Quinto perfil setorial, no módulo Bônus: regime específico de serviços financeiros, base como margem, alíquotas de 10,85% (2027 e 2028) a 12,50% (2033), importação, arranjos de pagamento e seguros, com caso numérico e ficha para o SIS.",
+   "motivo": "Plano dos Perfis setoriais (quarto da ordem, depois da antecipação do 12º)."
   }
  ]
 }
@@ -15119,6 +15139,359 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
 ]
 </script>
 
+<!-- ============ AULA: aula-perfil-servicos-financeiros ============ -->
+<template id="tpl-aula-perfil-servicos-financeiros" data-title="Perfil Setorial: Serviços Financeiros e Meios de Pagamento" data-modulo="Módulo Bônus" data-unidade="Perfis Setoriais">
+<div class="topbar">
+  <a href="#hub"><span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Hub de Estudos</a>
+  <span class="crumb">Módulo Bônus — Perfis Setoriais</span>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="pill-row">
+      <span class="pill">🏦 Perfil setorial</span>
+      <span class="pill">Serviços financeiros e meios de pagamento</span>
+      <span class="pill">Leitura ~16 min</span>
+    </div>
+    <h1>Perfil Setorial: Serviços Financeiros e Meios de Pagamento</h1>
+    <p>Os serviços financeiros têm regime específico: em vez de reduzir a alíquota por percentual, a lei <b>estreita a base de cálculo</b>, que passa a ser a receita das operações com as deduções do capítulo (na prática, a margem). As alíquotas somadas de IBS e CBS vão de 10,85% em 2027 a 12,50% em 2033. Este perfil organiza o que a lei prevê para crédito, meios de pagamento, seguros e consórcios.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="toc">
+    <h4>Neste perfil</h4>
+    <div class="toc-row">
+      <a href="#setor"><span class="n">1</span> O setor e a reforma</a>
+      <a href="#regimes"><span class="n">2</span> Regime aplicável</a>
+      <a href="#atencao"><span class="n">3</span> Pontos de atenção</a>
+      <a href="#tempo"><span class="n">4</span> Linha do tempo do setor</a>
+      <a href="#ficha"><span class="n">5</span> Ficha do perfil para o SIS</a>
+      <a href="#quiz"><span class="n">🎯</span> Teste seus conhecimentos</a>
+    </div>
+  </div>
+
+  <section id="setor">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">account_balance</span></div>
+      <div><h2>1. O Setor e a Reforma</h2><div class="sub">Um regime próprio, com base e alíquotas fixadas na lei</div></div>
+    </div>
+    <p class="lead">A Constituição manda manter a carga tributária sobre as operações de crédito das instituições financeiras bancárias. A LC 214/2025 cumpre isso com um regime específico, e a LC 227/2026 fixou as alíquotas ano a ano. Os grupos alcançados:</p>
+    <table class="data">
+      <tr><th>Grupo</th><th>O que a lei prevê</th></tr>
+      <tr><td>Operações de crédito</td><td>Captação e repasse, adiantamento, empréstimo, financiamento, desconto de títulos, recuperação de créditos e prestação de garantias (art. 182, I)</td></tr>
+      <tr><td>Meios de pagamento</td><td>Arranjos de pagamento, incluídas as operações dos instituidores e das instituições de pagamento, a liquidação antecipada de recebíveis e, com a LC 227/2026, a administração de programas de fidelização (art. 182, IX; regime dos arts. 214 e seguintes)</td></tr>
+      <tr><td>Seguros e afins</td><td>Seguros (exceto os de saúde), resseguros, capitalização, intermediação de consórcios, seguros, resseguros, previdência complementar e capitalização, e proteção patrimonial mutualista (art. 182)</td></tr>
+      <tr><td>Infraestrutura de mercado</td><td>Entidades administradoras de mercados organizados, infraestruturas de mercado e depositárias centrais (art. 182, X)</td></tr>
+    </table>
+    <div class="highlight lav">
+      <span class="material-symbols-outlined">info</span>
+      <div>Os seguros de saúde e os planos de assistência à saúde ficam fora desse regime e têm regime próprio, no <a href="#aula-perfil-saude" style="color:var(--lav3);font-weight:700;">perfil de saúde</a>. O mútuo e o crédito entre empresas não financeiras estão na <a href="#aula-cenario-3-quem-sente-mais/fato-gerador" style="color:var(--lav3);font-weight:700;">Aula 3 da Unidade II</a>.</div>
+    </div>
+  </section>
+
+  <section id="regimes">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">gavel</span></div>
+      <div><h2>2. Regime Aplicável</h2><div class="sub">O que a LC 214/2025 diz, com a redação da LC 227/2026</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Tema</th><th>Regra</th><th>Base legal</th></tr>
+      <tr><td>Regime e alcance</td><td>Os serviços financeiros sofrem IBS e CBS em regime específico. O regime vale para os prestadores supervisionados pelos órgãos do Sistema Financeiro Nacional e para os demais fornecedores previstos, e alcança a totalidade da contraprestação, independentemente da nomenclatura</td><td>Arts. 181 e 182</td></tr>
+      <tr><td>Base de cálculo</td><td>As receitas das operações, com as deduções previstas no capítulo. Nas operações de crédito, as despesas financeiras de captação são deduzidas da base na proporção das receitas de cada natureza. A lei tributa a margem, e não o valor bruto que transita</td><td>Regras do capítulo (art. 182 e seguintes)</td></tr>
+      <tr><td>Consórcios</td><td>As receitas compreendem as tarifas, comissões e taxas, com os encargos, multas e juros do contrato de participação, efetivamente pagas, pelo regime de caixa</td><td>Regras do capítulo</td></tr>
+      <tr><td>Seguros e resseguros</td><td>As receitas dos serviços compreendem as listadas na lei, na medida do efetivo recebimento, pelo regime de caixa, com as deduções previstas</td><td>Art. 223</td></tr>
+      <tr><td>Alíquotas (soma de IBS e CBS)</td><td>2027 e 2028: 10,85%. 2029: 11,00%. 2030: 11,15%. 2031: 11,30%. 2032: 11,50%. 2033: 12,50%. A partir de 2034, as alíquotas fixadas para 2033. Incidem sobre o valor dos serviços financeiros, sem o próprio IBS, a CBS e o ISS (por fonte secundária)</td><td>Art. 233, com a redação da LC 227/2026</td></tr>
+      <tr><td>Importação de serviços financeiros</td><td>Mesma alíquota dos serviços financeiros adquiridos de fornecedor no País. Quando o importador é contribuinte que realiza as operações dos incisos I a V do art. 182, a alíquota é zero na importação, mantido o direito de dedução dessas despesas da base</td><td>Art. 231</td></tr>
+      <tr><td>Exportação de serviços financeiros</td><td>Há seção própria para a exportação. Seu texto não foi lido para esta aula</td><td>Art. 232</td></tr>
+      <tr><td>Arranjos de pagamento</td><td>Regime específico próprio para os serviços de arranjos de pagamento, incluídas as instituições de pagamento. O detalhe da base não foi lido</td><td>Art. 214 e seguintes</td></tr>
+    </table>
+    <div class="highlight">
+      <span class="material-symbols-outlined">percent</span>
+      <div>Os percentuais de 30%, 60% e 100% dos regimes diferenciados <b>não se aplicam</b> aos serviços financeiros. A carga do setor vem da base reduzida e das alíquotas do art. 233. O tratamento dos serviços que ainda sofrem ISS na transição também consta do art. 233, e seu detalhe não foi conferido.</div>
+    </div>
+  </section>
+
+  <section id="atencao">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">warning</span></div>
+      <div><h2>3. Pontos de Atenção</h2><div class="sub">Onde o setor tende a ter dúvidas e perdas</div></div>
+    </div>
+    <ul class="checklist">
+      <li><span class="material-symbols-outlined">stacked_line_chart</span><div><b>A base é a margem:</b> aplicar a alíquota sobre a receita bruta, e não sobre a base com as deduções, é o erro mais caro do setor. O sistema precisa apurar a base por natureza de receita e por despesa de captação.</div></li>
+      <li><span class="material-symbols-outlined">event_available</span><div><b>Regime de caixa:</b> consórcios e seguros consideram as receitas no efetivo recebimento. A competência contábil e a base fiscal deixam de coincidir (veja a <a href="#aula-contabilizacao-ibs-cbs" style="color:var(--lav3);font-weight:700;">aula de contabilização</a>).</div></li>
+      <li><span class="material-symbols-outlined">payments</span><div><b>Meios de pagamento e split payment:</b> instituições de pagamento participam da segregação do imposto das operações de terceiros e têm regime próprio na própria atividade. A data do split segue em aberto (veja a <a href="#aula-lc-regime-compensacao" style="color:var(--lav3);font-weight:700;">aula do item II</a>).</div></li>
+      <li><span class="material-symbols-outlined">swap_horiz</span><div><b>Importação de serviços financeiros:</b> para quem realiza as operações dos incisos I a V do art. 182, a alíquota é zero na importação, e o direito de dedução é mantido. Para os demais importadores, vale a alíquota dos serviços nacionais.</div></li>
+      <li><span class="material-symbols-outlined">fact_check</span><div><b>Cliente empresarial:</b> a lei trata de hipóteses específicas em que o tomador do regime regular pode se creditar. A regra ainda não foi conferida em detalhe para esta aula.</div></li>
+    </ul>
+    <div class="highlight red" id="pn-36" data-painel="aula-perfil-servicos-financeiros#atencao">
+      <span class="material-symbols-outlined">flag</span>
+      <div><b>Partes do regime sem conferência:</b> a base e as deduções do capítulo, o regime dos arranjos de pagamento, a exportação (art. 232) e o ajuste para serviços que ainda sofrem ISS não foram lidos por inteiro. O estado fica no painel.</div>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">account_balance_wallet</span> Caso do crédito (hipotético): quanto vale a base</h4>
+      <p>Uma instituição financeira bancária (hipotética) tem R$ 10.000.000 de receitas de operações de crédito em um mês e R$ 6.000.000 de despesas de captação, todas dedutíveis (simplificação: uma só natureza de receita). A base é a margem:</p>
+      <div class="case-mini"><span class="label">Base de cálculo: R$ 10.000.000 de receitas − R$ 6.000.000 de captação</span><span class="val">R$ 4.000.000</span></div>
+      <div class="case-mini"><span class="label">2027 (soma de 10,85%): R$ 4.000.000 × 10,85%</span><span class="val">R$ 434.000</span></div>
+      <div class="case-mini"><span class="label">2033 (soma de 12,50%), com a mesma base: R$ 4.000.000 × 12,50%</span><span class="val">R$ 500.000</span></div>
+      <div class="case-mini total"><span class="label">Erro típico: aplicar 10,85% à receita bruta de R$ 10.000.000, ignorando as deduções</span><span class="val">R$ 1.085.000</span></div>
+      <p>O exemplo usa números hipotéticos. A alíquota sobe de 10,85% para 12,50% ao longo da transição, e a base depende das deduções reais de cada instituição.</p>
+    </div>
+  </section>
+
+  <section id="tempo">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">timeline</span></div>
+      <div><h2>4. Linha do Tempo do Setor</h2><div class="sub">O que muda de 2026 a 2034</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Ano</th><th>O que muda para o setor</th></tr>
+      <tr><td>2026</td><td>Teste, com CBS a 0,9% e IBS a 0,1% destacados nos documentos fiscais, com dispensa de recolhimento para quem cumpre as obrigações. PIS, COFINS e ISS seguem</td></tr>
+      <tr><td>2027 e 2028</td><td>PIS e COFINS saem. A soma das alíquotas de IBS e CBS sobre serviços financeiros é de 10,85%</td></tr>
+      <tr><td>2029 a 2032</td><td>A soma sobe: 11,00% em 2029, 11,15% em 2030, 11,30% em 2031 e 11,50% em 2032. O ISS sobre os serviços que ainda o sofrem cai na rampa (<a href="#aula-preco-na-transicao" style="color:var(--lav3);font-weight:700;">preço na transição</a>)</td></tr>
+      <tr><td>2033 em diante</td><td>12,50%, mantida a partir de 2034</td></tr>
+    </table>
+  </section>
+
+  <section id="ficha">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">assignment</span></div>
+      <div><h2>5. Ficha do Perfil para o SIS</h2><div class="sub">Os parâmetros do setor, num quadro padronizado</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Campo</th><th>Valor</th></tr>
+      <tr><td>Setor</td><td>Serviços financeiros e meios de pagamento</td></tr>
+      <tr><td>Regime aplicável</td><td>Regime específico (arts. 181 e 182), com regime dos arranjos de pagamento (art. 214 e seguintes), alíquotas fixadas (art. 233), importação (art. 231) e exportação (art. 232)</td></tr>
+      <tr><td>Redução de alíquota</td><td>Não há percentual de redução. A carga vem da base de cálculo reduzida e das alíquotas do art. 233 (10,85% em 2027 e 2028; 12,50% em 2033)</td></tr>
+      <tr><td>Particularidades de crédito</td><td>Dedução de despesas de captação na base; hipóteses específicas de crédito do tomador empresarial, a conferir</td></tr>
+      <tr><td>Benefícios em extinção</td><td>Não se aplica de forma geral. Serviços com ISS seguem a rampa do ISS</td></tr>
+      <tr><td>Documentos e obrigações do setor</td><td>Documentos fiscais com campos de IBS e CBS; apuração por natureza de receita; informações do split payment, quando disponível</td></tr>
+      <tr><td>Pontos de atenção</td><td>Base é a margem; regime de caixa em consórcios e seguros; split em instituições de pagamento; importação de serviços financeiros</td></tr>
+      <tr><td>Itens do painel</td><td>Partes do regime sem conferência</td></tr>
+    </table>
+  </section>
+
+  <section id="quiz">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">quiz</span></div>
+      <div><h2>🎯 Teste Seus Conhecimentos</h2><div class="sub">10 perguntas sorteadas de um banco maior — aprovação com 70% de acerto</div></div>
+    </div>
+    <div class="quiz-box" id="quizBox"></div>
+  </section>
+
+  <div class="refs">
+    <h3><span class="material-symbols-outlined" style="color:var(--lav2);">menu_book</span> Base legal e referências</h3>
+    <ul>
+      <li>Constituição Federal, EC nº 132/2023, art. 10 (manutenção da carga sobre as operações de crédito das instituições financeiras bancárias).</li>
+      <li>Lei Complementar nº 214/2025: arts. 181 e 182 (regime específico e rol de serviços financeiros), art. 214 e seguintes (arranjos de pagamento), art. 223 (seguros e resseguros), arts. 231 e 232 (importação e exportação) e art. 233 (alíquotas de 2027 a 2033, com a redação da LC 227/2026).</li>
+      <li>Lei Complementar nº 227/2026 (nova redação do art. 182, IX, e do art. 233).</li>
+    </ul>
+    <p>Aulas relacionadas: <a href="#aula-perfil-saude" style="color:var(--lav3);font-weight:700;">perfil de saúde</a>, <a href="#aula-importacao-exportacao-servicos" style="color:var(--lav3);font-weight:700;">importação e exportação</a>, <a href="#aula-contabilizacao-ibs-cbs" style="color:var(--lav3);font-weight:700;">contabilização</a> e <a href="#aula-lc-regime-compensacao" style="color:var(--lav3);font-weight:700;">crédito condicionado e split payment</a>.</p>
+  </div>
+
+</div>
+</template>
+<script type="application/json" id="quiz-aula-perfil-servicos-financeiros">
+[
+ {
+  "q": "Que tipo de tratamento a LC 214/2025 dá aos serviços financeiros?",
+  "options": [
+   "Alíquota zero em todas as operações, porque a Constituição proíbe tributar o crédito bancário",
+   "Regra geral, sem nenhum regime próprio, com a mesma base dos serviços prestados em geral",
+   "Redução de 60% sobre a alíquota de referência, como ocorre com os serviços de saúde e de educação, como ocorre com os serviços de saúde, de educação e de medicamentos registrados",
+   "Regime específico, com base de cálculo própria e alíquotas fixadas, em vez de percentuais de redução"
+  ],
+  "correct": 3,
+  "section": "setor",
+  "sectionLabel": "1. O setor e a reforma",
+  "rationale": "O art. 181 cria um regime específico, que estreita a base em vez de reduzir a alíquota."
+ },
+ {
+  "q": "Qual serviço fica fora do regime específico de serviços financeiros, por ter regime próprio?",
+  "options": [
+   "A capitalização e a intermediação de consórcios, seguros e previdência complementar",
+   "As operações de crédito e de financiamento feitas por instituições financeiras bancárias",
+   "Os arranjos de pagamento e a liquidação antecipada de recebíveis desses arranjos",
+   "Os seguros de saúde e os planos de assistência à saúde"
+  ],
+  "correct": 3,
+  "section": "setor",
+  "sectionLabel": "1. O setor e a reforma",
+  "rationale": "O art. 182, XI exclui os seguros de saúde, que têm regime próprio nos arts. 234 e seguintes."
+ },
+ {
+  "q": "A quem se aplica o regime específico, segundo os arts. 181 e 182?",
+  "options": [
+   "Aos prestadores supervisionados pelos órgãos do Sistema Financeiro Nacional e aos demais fornecedores previstos na lei",
+   "Somente aos bancos de qualquer espécie e às caixas econômicas, e a nenhum outro prestador, e a nenhum outro prestador, mesmo que seja supervisionado pelo Banco Central ou pela CVM",
+   "Somente às empresas que tenham a palavra \"financeira\" na denominação social registrada",
+   "A qualquer empresa que conceda crédito a clientes, mesmo que não seja supervisionada"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O regime alcança os supervisionados pelo SFN e os demais fornecedores de que trata o artigo."
+ },
+ {
+  "q": "O que o parágrafo único do art. 182 diz sobre a contraprestação?",
+  "options": [
+   "O regime se aplica só às tarifas bancárias, e os juros ficam sujeitos à regra geral do IBS e da CBS",
+   "O regime se aplica à totalidade da contraprestação pelos serviços, independentemente da nomenclatura",
+   "O regime depende do nome dado pela instituição à cobrança, conforme o contrato firmado",
+   "O regime se aplica só aos juros, e as tarifas e comissões ficam sujeitas ao ISS até 2033"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O nome dado à cobrança não muda o regime."
+ },
+ {
+  "q": "Qual é a base de cálculo do IBS e da CBS no regime específico de serviços financeiros?",
+  "options": [
+   "O valor total dos depósitos captados dos clientes, ao fim de cada mês de apuração",
+   "O lucro líquido da instituição, apurado conforme as normas contábeis do Banco Central",
+   "As receitas das operações, com as deduções previstas no capítulo, como as despesas de captação na proporção das receitas",
+   "O valor bruto de todas as operações realizadas, sem nenhuma dedução, como na regra geral, sem nenhuma dedução de despesas, como acontece na regra geral aplicável a todas as demais atividades"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "A base é a receita com as deduções do capítulo, o que equivale, na prática, a tributar a margem."
+ },
+ {
+  "q": "Como as receitas de um grupo de consórcio são consideradas na base?",
+  "options": [
+   "Tarifas, comissões, taxas e encargos efetivamente pagos, pelo regime de caixa",
+   "Pelo valor total da carta de crédito contemplada, no mês da contemplação do consorciado",
+   "Pelo valor das parcelas vencidas, ainda que o consorciado não as tenha pagado",
+   "Pelo regime de competência, no momento em que o contrato de participação é firmado"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "Nos consórcios, vale o efetivo pagamento, pelo regime de caixa."
+ },
+ {
+  "q": "Qual é a soma das alíquotas de IBS e CBS sobre serviços financeiros em 2027 e 2028 (art. 233)?",
+  "options": [
+   "10,85%",
+   "12,50%, que é a alíquota fixada para o último ano da transição, em 2033",
+   "4,65%, que é a alíquota de PIS e COFINS aplicada hoje às instituições financeiras",
+   "26,5%, que é a alíquota de referência de IBS e CBS prevista para os demais serviços"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 233, com a redação da LC 227/2026, fixa 10,85% para 2027 e 2028."
+ },
+ {
+  "q": "Qual é a soma das alíquotas em 2033, e como fica a partir de 2034?",
+  "options": [
+   "10,85% em 2033, voltando a subir a partir de 2034 conforme a alíquota de referência",
+   "11,50% em 2033, com revisão anual a partir de 2034 por resolução do Senado Federal",
+   "12,50% em 2033, mantida a partir de 2034",
+   "12,50% em 2033, caindo a 10,85% em 2034, com a extinção do período de transição"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "A alíquota sobe até 12,50% em 2033, e as de 2034 em diante são as fixadas para 2033."
+ },
+ {
+  "q": "No caso do crédito (receitas de R$ 10.000.000 e captação de R$ 6.000.000, soma de 10,85%), qual é o valor devido em 2027?",
+  "options": [
+   "R$ 260.000, que é 26,5% da base de R$ 4.000.000, pela alíquota de referência de IBS e CBS",
+   "R$ 1.085.000, que é 10,85% da receita bruta de R$ 10.000.000 do mês de apuração",
+   "R$ 434.000, que é 10,85% da base de R$ 4.000.000",
+   "R$ 650.000, que é 10,85% das despesas de captação somadas à base de cálculo da instituição"
+  ],
+  "correct": 2,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "A base é R$ 10.000.000 − R$ 6.000.000 = R$ 4.000.000. 10,85% de R$ 4.000.000 são R$ 434.000."
+ },
+ {
+  "q": "Qual é o erro típico no mesmo caso, ao aplicar a alíquota de 10,85%?",
+  "options": [
+   "Aplicar a alíquota só às tarifas e esquecer os juros, o que reduz o valor devido pela metade",
+   "Aplicar a alíquota de 12,50% em 2027, em vez de 10,85%, por engano sobre o ano de transição",
+   "Aplicar a alíquota à base e, em seguida, somar o ISS, o que dobra o valor devido no mês, o que dobra o valor devido no mês e ainda eleva a carga acima da registrada hoje pela instituição",
+   "Aplicar a alíquota à receita bruta de R$ 10.000.000, o que daria R$ 1.085.000, ignorando as deduções de captação"
+  ],
+  "correct": 3,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "No regime específico a base é a margem, e aplicar a alíquota à receita bruta superestima o imposto."
+ },
+ {
+  "q": "Com a mesma base de R$ 4.000.000, quanto seria devido em 2033, com a soma de 12,50%?",
+  "options": [
+   "R$ 1.250.000, porque a alíquota de 2033 incide sobre a receita bruta e não sobre a base",
+   "R$ 500.000",
+   "R$ 434.000, porque a base cresce e a alíquota se mantém igual à de 2027 e 2028",
+   "R$ 400.000, porque a alíquota de 2033 é de 10%, depois de revista pelo Comitê Gestor"
+  ],
+  "correct": 1,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "12,50% de R$ 4.000.000 são R$ 500.000."
+ },
+ {
+  "q": "Como a LC 214/2025 trata a importação de serviços financeiros (art. 231)?",
+  "options": [
+   "Com a alíquota de referência de IBS e CBS, em todos os casos, sem a dedução das despesas",
+   "Pela mesma alíquota dos serviços nacionais, com alíquota zero para o importador contribuinte das operações dos incisos I a V do art. 182, mantida a dedução",
+   "Como isenção, que anula o crédito, para todos os serviços financeiros contratados no exterior",
+   "Com alíquota zero para qualquer importador, sem nenhuma condição quanto à atividade que exerce, sem nenhuma condição quanto à atividade que exerce, e sem dependência de qualquer outro requisito da lei"
+  ],
+  "correct": 1,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "O art. 231 aplica a mesma alíquota dos serviços nacionais, com a alíquota zero para quem realiza as operações dos incisos I a V."
+ },
+ {
+  "q": "O que a LC 227/2026 acrescentou ao inciso IX do art. 182?",
+  "options": [
+   "A administração de programas de fidelização, no regime de arranjos de pagamento",
+   "A concessão de crédito consignado a servidores públicos, que passou a ter alíquota zero",
+   "A emissão de moeda eletrônica por empresas que não são instituições de pagamento",
+   "A oferta de investimentos em criptoativos, que deixou de ser serviço financeiro"
+  ],
+  "correct": 0,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "A nova redação inclui a administração de programas de fidelização entre os arranjos de pagamento."
+ },
+ {
+  "q": "Como as receitas de seguros e resseguros entram na base (art. 223)?",
+  "options": [
+   "No momento da ocorrência do sinistro, pelo valor da indenização paga ao segurado",
+   "Na medida do efetivo recebimento, pelo regime de caixa",
+   "No momento da emissão da apólice, pelo regime de competência, pelo valor total do prêmio",
+   "Somente no encerramento do exercício, com base no balanço patrimonial da seguradora"
+  ],
+  "correct": 1,
+  "section": "tempo",
+  "sectionLabel": "4. Linha do tempo",
+  "rationale": "Para seguros e resseguros, vale o efetivo recebimento."
+ },
+ {
+  "q": "Para que serve a ficha do perfil para o SIS?",
+  "options": [
+   "Calcular automaticamente o imposto devido por cada empresa, sem necessidade de revisão do contador",
+   "Registrar o resultado fiscal de cada empresa do setor, ano a ano, para fins de fiscalização",
+   "Padronizar os parâmetros do setor (regime, reduções, crédito, benefícios e obrigações) para alimentar o perfil de empresa da ferramenta",
+   "Substituir a leitura da lei complementar, que deixa de ser necessária para quem usa o SIS, e o SIS passa a ser a única fonte de consulta da empresa"
+  ],
+  "correct": 2,
+  "section": "ficha",
+  "sectionLabel": "5. Ficha para o SIS",
+  "rationale": "A ficha organiza os parâmetros do setor, e o contador continua revisando cada caso."
+ }
+]
+</script>
+
 <script>
 /* ===== Motor de busca (client-side, sem servidor) ===== */
 const SEARCH_ENTRIES = [];   // preenchido por buildSearchEntries() a partir das aulas do próprio arquivo
@@ -15397,7 +15770,8 @@ const modules = [
       {title:'Perfil Setorial: Agronegócio', desc:'Produtor rural não contribuinte (limite de R$ 3,6 milhões), crédito presumido de quem compra dele, redução de 60% em insumos e produtos in natura, alíquota zero em hortifrúti, cesta básica e máquinas, regime optativo das cooperativas, casos numéricos, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-agronegocio.html'},
       {title:'Perfil Setorial: Saúde', desc:'Redução de 60% nos serviços do Anexo III e nos medicamentos, alíquota zero em medicamentos por destinação terapêutica (nova redação do art. 146 pela LC 227/2026) e em dispositivos do Anexo XII, regime específico dos planos de saúde, caso numérico de clínica, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-saude.html'},
       {title:'Perfil Setorial: Logística, Transporte e E-commerce', desc:'Tributação por destino (local da entrega e alíquota por Estado e Município), frete na base de cálculo, transportador autônomo não contribuinte, regimes do transporte de passageiros, responsabilidade de plataformas e marketplaces, remessas internacionais, casos numéricos, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-logistica-ecommerce.html'},
-      {title:'Perfil Setorial: Software e Serviços Digitais', desc:'Licenciamento e SaaS como fornecimentos tributados (fim da disputa entre mercadoria e serviço), local da operação no domicílio principal do adquirente (a matriz do cliente), alíquota por destino, importação intragrupo, exportação, plataformas digitais, caso numérico B2B contra B2C, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-software-servicos-digitais.html'}
+      {title:'Perfil Setorial: Software e Serviços Digitais', desc:'Licenciamento e SaaS como fornecimentos tributados (fim da disputa entre mercadoria e serviço), local da operação no domicílio principal do adquirente (a matriz do cliente), alíquota por destino, importação intragrupo, exportação, plataformas digitais, caso numérico B2B contra B2C, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-software-servicos-digitais.html'},
+      {title:'Perfil Setorial: Serviços Financeiros e Meios de Pagamento', desc:'Regime específico de serviços financeiros (arts. 181 e 182), base de cálculo como margem, alíquotas somadas de IBS e CBS de 10,85% em 2027 a 12,50% em 2033 (art. 233), importação, arranjos de pagamento e seguros, caso numérico, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-servicos-financeiros.html'}
     ]},
     {t:'Precificação e Cenários na Reforma Tributária', d:'Precificação e cenários na reforma.', h:'4h', materials:[
       {title:'Preço na Transição: ICMS e ISS por Dentro, IBS e CBS por Fora', desc:'As regras de base da convivência (2026 a 2032), a rampa do ADCT, a conta do preço passo a passo com as duas leituras da base do ICMS e do ISS, o ponto em aberto sobre IBS e CBS na base do ICMS e do ISS e o que muda no ERP, nos contratos e na margem.', href:'1-Modulo/Bonus/aula-preco-na-transicao.html'}
