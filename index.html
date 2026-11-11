@@ -362,6 +362,19 @@ body{margin:0;}
 #aula-view .painel-flash{animation:painelflash 2.6s ease-out;}
 #aula-view tr.painel-flash > td{animation:painelflash 2.6s ease-out;}
 #aula-view .watch-chip .material-symbols-outlined{font-size:13px;}
+/* ===== Celular: tabelas com rolagem própria e marca do painel compacta ===== */
+#aula-view .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;margin:16px 0;border-radius:12px;box-shadow:0 2px 8px rgba(50,65,85,0.06);background:var(--white);}
+#aula-view .table-wrap > table.data{margin:0;border-radius:0;box-shadow:none;}
+#aula-view .highlight > div{flex:1 1 0;min-width:0;}
+#aula-view .highlight .watch-chip{align-self:flex-start;margin-left:auto;flex:0 0 auto;}
+@media (max-width:700px){
+  #aula-view .highlight{flex-wrap:wrap;gap:6px 12px;}
+  #aula-view .highlight > div{flex:1 1 calc(100% - 40px);}
+  #aula-view .highlight .watch-chip{margin-left:36px;}
+  #aula-view table.data th{padding:8px 8px;font-size:10.5px;}
+  #aula-view table.data td{padding:8px 8px;font-size:12px;}
+  #aula-view .case-card{padding:14px 14px;}
+}
 /* ===== Bloco "Base legal e referências" (fecha cada aula) ===== */
 #aula-view .refs{background:var(--white);border:1px solid #d8d8d8;border-radius:12px;padding:16px 20px;margin:30px 0 8px;}
 #aula-view .refs h3{margin:0 0 8px;font-size:13.5px;display:flex;align-items:center;gap:6px;}
@@ -17449,6 +17462,16 @@ function markCrossLessonLinks(stem){
     a.title = (a.title ? a.title + ' ' : '') + '(abre em nova aba)';
   });
 }
+/* Tabelas ganham um contêiner com rolagem horizontal própria, para não ultrapassar a borda do cartão no celular. */
+function wrapTables(){
+  aulaView.querySelectorAll('table.data').forEach(t => {
+    if(t.parentElement && t.parentElement.classList.contains('table-wrap')) return;
+    const w = document.createElement('div');
+    w.className = 'table-wrap';
+    t.parentNode.insertBefore(w, t);
+    w.appendChild(t);
+  });
+}
 function showAula(stem, secId){
   const tpl = document.getElementById('tpl-' + stem);
   if(!hubView.hidden) hubScroll = window.scrollY;
@@ -17465,6 +17488,7 @@ function showAula(stem, secId){
     if(AULA_INIT[stem]) AULA_INIT[stem]();
     decorateWatchChips(stem);
     markCrossLessonLinks(stem);
+    wrapTables();
   }
   hubView.hidden = true; aulaView.hidden = false;
   const target = secId ? aulaView.querySelector('#' + CSS.escape(secId)) : null;
