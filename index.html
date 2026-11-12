@@ -10435,6 +10435,15 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
    "prioridade": "media",
    "fonte": "LC 214/2025, arts. 125, 128, 135 e 136 (Planalto, Legisweb, normas.leg.br); TaxUp; buscadorncm",
    "depende": "Seção 2, linhas de cesta básica, alimentos e higiene, e o caso do supermercado"
+  },
+  {
+   "id": "aula-perfil-industria-zona-franca#atencao",
+   "tema": "Regime da Zona Franca de Manaus: partes sem conferência (arts. 446 a 449, CBS nas saídas, exclusões, Lei 15.273/2025)",
+   "estado": "Foram lidos, no texto da lei, os arts. 444 e 445 e os percentuais dos créditos presumidos nas compras (IBS de 7,5% e 13,5%; CBS de 7%) e nas saídas do IBS (55%, 75% e 90,25%). Não foram lidos por inteiro: os arts. 446 a 449, o crédito presumido de CBS nas saídas, o art. 443 (suspensão), as exclusões de produtos, o percentual de 100% (fonte secundária), o veto ao crédito de CBS para bens com IPI zero (fonte secundária), a Lei 15.273/2025 e a regulamentação da SUFRAMA e do Comitê Gestor.",
+   "data": "10/11/2026",
+   "prioridade": "media",
+   "fonte": "LC 214/2025, arts. 442 a 450 (Câmara, Planalto, normas.leg.br); SUFRAMA; Escola Superior de Negócios; Simtax",
+   "depende": "Seção 2 (linhas da Zona Franca) e os dois casos da seção 3"
   }
  ],
  "changelog": [
@@ -10626,6 +10635,13 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
    "secao": "",
    "mudanca": "Nono perfil setorial, no módulo Bônus: regra geral com alíquota por produto, saldo credor no varejo de alimentos, descontos e fidelidade, crédito presumido do estoque e de bens usados, substituição tributária, dois casos numéricos e ficha para o SIS.",
    "motivo": "Plano dos Perfis setoriais (oitavo da ordem)."
+  },
+  {
+   "data": "10/11/2026",
+   "aula": "Perfil Setorial: Indústria e Zona Franca (nova aula)",
+   "secao": "",
+   "mudanca": "Décimo perfil setorial, no módulo Bônus: indústria e regime da Zona Franca de Manaus (arts. 442 a 450), créditos presumidos nas compras e nas saídas, dois casos numéricos, linha do tempo até 2073 e ficha para o SIS.",
+   "motivo": "Plano dos Perfis setoriais (nono da ordem)."
   }
  ]
 }
@@ -17001,6 +17017,354 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
 ]
 </script>
 
+<!-- ============ AULA: aula-perfil-industria-zona-franca ============ -->
+<template id="tpl-aula-perfil-industria-zona-franca" data-title="Perfil Setorial: Indústria e Zona Franca" data-modulo="Módulo Bônus" data-unidade="Perfis Setoriais">
+<div class="topbar">
+  <a href="#hub"><span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Hub de Estudos</a>
+  <span class="crumb">Módulo Bônus — Perfis Setoriais</span>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="pill-row">
+      <span class="pill">🏭 Perfil setorial</span>
+      <span class="pill">Indústria e Zona Franca</span>
+      <span class="pill">Leitura ~16 min</span>
+    </div>
+    <h1>Perfil Setorial: Indústria e Zona Franca</h1>
+    <p>A indústria é o setor mais beneficiado pela não cumulatividade ampla: cadeia longa, créditos de insumos e de bens de capital e IPI com alíquota zero. A <b>Zona Franca de Manaus</b> tem regime próprio na LC 214/2025, com suspensão na importação, alíquota zero nas entradas nacionais e créditos presumidos nas compras e nas vendas.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="toc">
+    <h4>Neste perfil</h4>
+    <div class="toc-row">
+      <a href="#setor"><span class="n">1</span> O setor e a reforma</a>
+      <a href="#regimes"><span class="n">2</span> Regime aplicável</a>
+      <a href="#atencao"><span class="n">3</span> Pontos de atenção</a>
+      <a href="#tempo"><span class="n">4</span> Linha do tempo do setor</a>
+      <a href="#ficha"><span class="n">5</span> Ficha do perfil para o SIS</a>
+      <a href="#quiz"><span class="n">🎯</span> Teste seus conhecimentos</a>
+    </div>
+  </div>
+
+  <section id="setor">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">precision_manufacturing</span></div>
+      <div><h2>1. O Setor e a Reforma</h2><div class="sub">Cadeia longa, crédito pleno e regime próprio da Zona Franca</div></div>
+    </div>
+    <p class="lead">Na indústria, o imposto cobrado por fora e o crédito amplo tendem a ser neutros ao longo da cadeia, e o efeito sobre cada empresa depende de onde ela está e de quanto compra com crédito (veja a <a href="#aula-cenario-3-quem-sente-mais/industria" style="color:var(--lav3);font-weight:700;">Aula 3 da Unidade II</a>):</p>
+    <table class="data">
+      <tr><th>Grupo</th><th>O que a lei prevê</th></tr>
+      <tr><td>Indústria em geral</td><td>Regime regular, com crédito sobre insumos, bens de capital e serviços usados na atividade. O IPI passa a ter alíquota zero em 2027, salvo para produtos industrializados na Zona Franca de Manaus</td></tr>
+      <tr><td>Bens de capital</td><td>Crédito de IBS e CBS na aquisição, com tratamento próprio (veja a <a href="#aula-lc-bens-capital" style="color:var(--lav3);font-weight:700;">aula do item V</a>)</td></tr>
+      <tr><td>Indústrias da Zona Franca de Manaus</td><td>Regime próprio dos arts. 442 e seguintes da LC 214/2025, com a manutenção do modelo prevista no ADCT, até 2073</td></tr>
+      <tr><td>Exportadoras e indústrias com regime aduaneiro</td><td>Exportação imune com créditos mantidos, e suspensões de regimes aduaneiros como o drawback (veja a <a href="#aula-lc-regimes-aduaneiros" style="color:var(--lav3);font-weight:700;">aula do item VI</a>)</td></tr>
+    </table>
+    <div class="highlight lav">
+      <span class="material-symbols-outlined">info</span>
+      <div>Os tributos fora do consumo, como o IPI com alíquota zero e o ICMS que sai na rampa, estão no <a href="#aula-mapa-dos-tributos" style="color:var(--lav3);font-weight:700;">mapa dos tributos</a>. Quem fornece insumos para o agro está no <a href="#aula-perfil-agronegocio" style="color:var(--lav3);font-weight:700;">perfil de agronegócio</a>.</div>
+    </div>
+  </section>
+
+  <section id="regimes">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">gavel</span></div>
+      <div><h2>2. Regime Aplicável</h2><div class="sub">O que a LC 214/2025 diz para a indústria e para a Zona Franca</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Situação</th><th>Regra</th><th>Base legal</th></tr>
+      <tr><td>Regra geral da indústria</td><td>Regime regular, com o crédito financeiro amplo (veja a <a href="#aula-nao-cumulatividade" style="color:var(--lav3);font-weight:700;">aula de não cumulatividade</a>) e o IPI com alíquota zero a partir de 2027, salvo Zona Franca de Manaus</td><td>Arts. 47 e seguintes; EC 132/2023</td></tr>
+      <tr><td>Habilitação na Zona Franca</td><td>Os benefícios dependem de habilitação do contribuinte, na forma do regulamento</td><td>Art. 442</td></tr>
+      <tr><td>Importação por indústria incentivada</td><td>Fica suspensa a incidência do IBS e da CBS na importação de bem material realizada por indústria incentivada, para utilização na Zona Franca de Manaus. A suspensão se resolve, com os acréscimos legais, se o ingresso do bem no estabelecimento de destino não for comprovado no prazo ou se o bem for revendido ou transferido para fora da Zona Franca</td><td>Regras dos arts. 442 a 444</td></tr>
+      <tr><td>Importação para revenda presencial</td><td>Crédito presumido de IBS para o contribuinte habilitado do regime regular ou do Simples Nacional, calculado em 50% da alíquota do IBS aplicável na importação e deduzido do IBS devido. O importador do regime regular tem garantido o crédito integral do tributo incidente na importação</td><td>Art. 444</td></tr>
+      <tr><td>Entrada de bens nacionais na Zona Franca</td><td>Alíquotas de IBS e CBS reduzidas a zero na operação originada fora da Zona Franca que destine bem material industrializado de origem nacional a contribuinte habilitado, do regime regular ou do Simples Nacional. A lei exige controles específicos para verificar a entrada na Zona Franca</td><td>Art. 445</td></tr>
+      <tr><td>Crédito presumido nas compras</td><td>Para o bem comprado com alíquota zero do art. 445, crédito presumido calculado sobre o valor da operação. No IBS: 7,5% para bens das regiões Sul e Sudeste, exceto o Espírito Santo, e 13,5% para bens das demais regiões. Na CBS: 7%</td><td>Art. 447, §1º (por trechos)</td></tr>
+      <tr><td>Crédito presumido nas saídas</td><td>Crédito presumido de IBS calculado sobre o saldo devedor do IBS no período de apuração: 55% para bens de consumo final, 75% para bens de capital e 90,25% para bens intermediários. Segundo fonte secundária, há percentual de 100% para bens de informática e para produtos que tinham crédito estímulo de ICMS de 100% no Amazonas em 31/12/2023</td><td>Art. 450</td></tr>
+      <tr><td>Uso dos créditos presumidos</td><td>Em geral, os créditos presumidos só podem ser usados na compensação com IBS e CBS devidos, vedada a compensação com outros tributos e o ressarcimento em dinheiro (a regra textual citada na lei refere-se às Áreas de Livre Comércio)</td><td>Arts. 462, 465 e 467</td></tr>
+      <tr><td>Exportação</td><td>Imune, com créditos mantidos (veja a <a href="#aula-importacao-exportacao-servicos" style="color:var(--lav3);font-weight:700;">aula de importação e exportação</a>)</td><td>Constituição, art. 156-A, §1º, III</td></tr>
+    </table>
+    <div class="highlight">
+      <span class="material-symbols-outlined">warning</span>
+      <div>Segundo fonte secundária, a sanção da LC 214/2025 vetou o dispositivo que estenderia o crédito presumido de CBS aos bens com alíquota zero de IPI na TIPI de 31/12/2023, mantendo o benefício restrito a produtos com alíquota inferior a 6,5%. O regime da Zona Franca também recebeu atualização do seu marco regulatório pela Lei 15.273/2025, que não foi lida nesta aula.</div>
+    </div>
+  </section>
+
+  <section id="atencao">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">warning</span></div>
+      <div><h2>3. Pontos de Atenção</h2><div class="sub">Onde o setor tende a ter dúvidas e perdas</div></div>
+    </div>
+    <ul class="checklist">
+      <li><span class="material-symbols-outlined">account_tree</span><div><b>Cadeia longa e crédito:</b> a indústria compra muito com crédito. A neutralidade exige documento idôneo e a extinção do débito do fornecedor (veja a <a href="#aula-lc-regime-compensacao" style="color:var(--lav3);font-weight:700;">aula do item II</a>). O cadastro de fornecedores por regime (regular ou Simples) pesa no custo.</div></li>
+      <li><span class="material-symbols-outlined">construction</span><div><b>Bens de capital:</b> o crédito na compra de máquinas é parte central do planejamento de investimentos (veja a <a href="#aula-lc-bens-capital" style="color:var(--lav3);font-weight:700;">aula do item V</a>).</div></li>
+      <li><span class="material-symbols-outlined">verified_user</span><div><b>Controles na Zona Franca:</b> o benefício depende de habilitação e de prova da entrada do bem na Zona Franca nos prazos do regulamento. Sem a prova, a suspensão se resolve com acréscimos legais. Documentos de entrada e de saída são parte do regime.</div></li>
+      <li><span class="material-symbols-outlined">percent</span><div><b>Percentuais variam por bem e por origem:</b> o crédito presumido nas compras depende da região de origem do bem, e o das saídas, do tipo de bem (consumo final, capital ou intermediário). O cadastro do produto define o percentual.</div></li>
+      <li><span class="material-symbols-outlined">savings</span><div><b>Saldo credor:</b> a indústria que vende com alíquota reduzida, ou que exporta, e compra com alíquota padrão pode acumular saldo credor (veja a <a href="#aula-lc-ressarcimento-creditos" style="color:var(--lav3);font-weight:700;">aula do item III</a>). Os créditos presumidos da Zona Franca não se ressarcem em dinheiro.</div></li>
+      <li><span class="material-symbols-outlined">card_giftcard</span><div><b>Benefícios de ICMS:</b> incentivos estaduais à indústria reduzem de 2029 a 2032 e acabam em 2033, com compensação pelo fundo nas hipóteses da lei (veja a <a href="#aula7-guerra-fiscal" style="color:var(--lav3);font-weight:700;">aula 7</a>).</div></li>
+    </ul>
+    <div class="highlight red" id="pn-41" data-painel="aula-perfil-industria-zona-franca#atencao">
+      <span class="material-symbols-outlined">flag</span>
+      <div><b>Partes do regime da Zona Franca sem conferência:</b> os arts. 446 a 449, o crédito presumido de CBS nas saídas, as exclusões de produtos, a Lei 15.273/2025 e a regulamentação da SUFRAMA e do Comitê Gestor não foram lidos por inteiro. O estado fica no painel.</div>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">factory</span> Caso da indústria na Zona Franca (hipotético): crédito presumido nas saídas</h4>
+      <p>Uma indústria incentivada tem saldo devedor de IBS de R$ 1.000.000 no período (valor hipotético). O crédito presumido depende do tipo de bem vendido:</p>
+      <div class="case-mini"><span class="label">Bem de consumo final: 55% de R$ 1.000.000 = R$ 550.000 de crédito</span><span class="val">IBS a pagar R$ 450.000</span></div>
+      <div class="case-mini"><span class="label">Bem de capital: 75% de R$ 1.000.000 = R$ 750.000 de crédito</span><span class="val">IBS a pagar R$ 250.000</span></div>
+      <div class="case-mini total"><span class="label">Bem intermediário: 90,25% de R$ 1.000.000 = R$ 902.500 de crédito</span><span class="val">IBS a pagar R$ 97.500</span></div>
+      <p>O mesmo saldo devedor leva a pagamentos muito diferentes conforme o tipo de bem. O crédito presumido só compensa IBS e CBS, e não é ressarcido em dinheiro.</p>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">shopping_basket</span> Caso da compra para a Zona Franca (hipotético): crédito presumido na entrada</h4>
+      <p>Uma indústria incentivada compra de um fornecedor de São Paulo um bem intermediário nacional por R$ 100.000. A operação tem alíquota zero (art. 445), e o comprador apropria crédito presumido (IBS de 7,5% para bens do Sudeste, exceto o Espírito Santo, e CBS de 7%):</p>
+      <div class="case-mini"><span class="label">Crédito presumido de IBS: 7,5% de R$ 100.000</span><span class="val">R$ 7.500</span></div>
+      <div class="case-mini"><span class="label">Crédito presumido de CBS: 7% de R$ 100.000</span><span class="val">R$ 7.000</span></div>
+      <div class="case-mini total"><span class="label">Se o bem viesse de região fora do Sul e do Sudeste, o IBS seria de 13,5%: R$ 13.500</span><span class="val">R$ 13.500</span></div>
+      <p>Os percentuais variam por região de origem. O exemplo usa um valor hipotético e deve ser conferido nos §§ do art. 447.</p>
+    </div>
+  </section>
+
+  <section id="tempo">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">timeline</span></div>
+      <div><h2>4. Linha do Tempo do Setor</h2><div class="sub">O que muda de 2026 a 2033 e depois</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Ano</th><th>O que muda para o setor</th></tr>
+      <tr><td>2026</td><td>Teste, com CBS a 0,9% e IBS a 0,1% destacados nos documentos fiscais, com dispensa de recolhimento para quem cumpre as obrigações. IPI, ICMS, PIS e COFINS seguem</td></tr>
+      <tr><td>2027</td><td>PIS e COFINS saem, a CBS passa a valer plena e o IPI passa a ter alíquota zero, salvo produtos industrializados na Zona Franca. Os créditos presumidos da Zona Franca começam a funcionar nos termos da lei</td></tr>
+      <tr><td>2029 a 2032</td><td>ICMS cai a 90%, 80%, 70% e 60% e o IBS sobe. Os benefícios de ICMS da indústria reduzem na mesma rampa (<a href="#aula-preco-na-transicao" style="color:var(--lav3);font-weight:700;">preço na transição</a>)</td></tr>
+      <tr><td>2033 em diante</td><td>ICMS extinto e IBS pleno. A Zona Franca de Manaus tem seu modelo mantido até 2073, conforme o ADCT</td></tr>
+    </table>
+  </section>
+
+  <section id="ficha">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">assignment</span></div>
+      <div><h2>5. Ficha do Perfil para o SIS</h2><div class="sub">Os parâmetros do setor, num quadro padronizado</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Campo</th><th>Valor</th></tr>
+      <tr><td>Setor</td><td>Indústria e Zona Franca</td></tr>
+      <tr><td>Regime aplicável</td><td>Regra geral com crédito amplo (arts. 47 e seguintes) e regime da Zona Franca de Manaus (arts. 442 e seguintes)</td></tr>
+      <tr><td>Redução de alíquota</td><td>Alíquota zero do IPI em 2027, salvo Zona Franca. Alíquota zero do IBS e da CBS nas entradas nacionais na Zona Franca (art. 445)</td></tr>
+      <tr><td>Particularidades de crédito</td><td>Crédito de insumos e de bens de capital; créditos presumidos da Zona Franca (7,5% e 13,5% de IBS e 7% de CBS nas compras, 55%, 75% e 90,25% do saldo devedor de IBS nas saídas), sem ressarcimento em dinheiro</td></tr>
+      <tr><td>Benefícios em extinção</td><td>Benefícios de ICMS da indústria, reduzidos de 2029 a 2032 e extintos em 2033, com fundo de compensação nas hipóteses da lei</td></tr>
+      <tr><td>Documentos e obrigações do setor</td><td>Habilitação na Zona Franca; controles de entrada e de saída dos bens; documentos fiscais com campos de IBS e CBS</td></tr>
+      <tr><td>Pontos de atenção</td><td>Documento e extinção do débito do fornecedor; cadastro de produto por tipo de bem; prova de entrada na Zona Franca; saldo credor de exportadoras</td></tr>
+      <tr><td>Itens do painel</td><td>Partes do regime da Zona Franca sem conferência</td></tr>
+    </table>
+  </section>
+
+  <section id="quiz">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">quiz</span></div>
+      <div><h2>🎯 Teste Seus Conhecimentos</h2><div class="sub">10 perguntas sorteadas de um banco maior — aprovação com 70% de acerto</div></div>
+    </div>
+    <div class="quiz-box" id="quizBox"></div>
+  </section>
+
+  <div class="refs">
+    <h3><span class="material-symbols-outlined" style="color:var(--lav2);">menu_book</span> Base legal e referências</h3>
+    <ul>
+      <li>Lei Complementar nº 214/2025: arts. 47 e seguintes (créditos), arts. 442 a 450 (Zona Franca de Manaus, com os arts. 444, 445, 447 e 450) e arts. 462, 465 e 467 (créditos presumidos nas Áreas de Livre Comércio, por remissão).</li>
+      <li>Emenda Constitucional nº 132/2023 (IPI, ADCT arts. 92-A e 92-B e art. 126). Lei nº 15.273/2025 (marco regulatório da Zona Franca, não lida). Lei Complementar nº 227/2026.</li>
+    </ul>
+    <p>Aulas relacionadas: <a href="#aula-lc-bens-capital" style="color:var(--lav3);font-weight:700;">bens de capital</a>, <a href="#aula-lc-regimes-aduaneiros" style="color:var(--lav3);font-weight:700;">regimes aduaneiros</a>, <a href="#aula7-guerra-fiscal" style="color:var(--lav3);font-weight:700;">guerra fiscal e benefícios</a> e <a href="#aula-cenario-3-quem-sente-mais" style="color:var(--lav3);font-weight:700;">Aula 3 da Unidade II</a>.</p>
+  </div>
+
+</div>
+</template>
+<script type="application/json" id="quiz-aula-perfil-industria-zona-franca">
+[
+ {
+  "q": "Qual é o tratamento do IPI na reforma, e qual a exceção?",
+  "options": [
+   "Extinção total do IPI em 2027, sem nenhuma exceção para a Zona Franca de Manaus",
+   "Transferência do IPI para os Estados, que passam a cobrar o imposto junto com o ICMS",
+   "Manutenção do IPI com as mesmas alíquotas até 2033, quando é extinto, salvo bebidas",
+   "Alíquota zero a partir de 2027, salvo para produtos industrializados na Zona Franca de Manaus"
+  ],
+  "correct": 3,
+  "section": "setor",
+  "sectionLabel": "1. O setor e a reforma",
+  "rationale": "O IPI passa a ter alíquota zero em 2027, e a Zona Franca de Manaus é a exceção."
+ },
+ {
+  "q": "O que depende de habilitação na Zona Franca (art. 442)?",
+  "options": [
+   "Nenhum benefício, porque todas as empresas instaladas na Zona Franca têm direito automático",
+   "Somente a importação de máquinas, que é o único benefício sujeito a habilitação prévia",
+   "Apenas a venda a consumidor final, que é o único benefício sujeito a habilitação prévia",
+   "Os benefícios do regime, que dependem de habilitação do contribuinte na forma do regulamento"
+  ],
+  "correct": 3,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 442 vincula os benefícios à habilitação do contribuinte."
+ },
+ {
+  "q": "O que acontece com a suspensão na importação por indústria incentivada, se o ingresso do bem na Zona Franca não for comprovado no prazo?",
+  "options": [
+   "A suspensão se converte em isenção definitiva, sem exigência de nenhum acréscimo legal",
+   "A suspensão se resolve, com a exigência do imposto e dos acréscimos legais",
+   "A suspensão é prorrogada automaticamente por cinco anos, até que a prova seja apresentada",
+   "A suspensão se mantém, e a prova passa a ser exigida somente no encerramento do exercício"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "Sem a prova do ingresso do bem, a suspensão se resolve e exigem-se os acréscimos legais."
+ },
+ {
+  "q": "Qual é o crédito presumido de IBS na importação para revenda presencial na Zona Franca (art. 444)?",
+  "options": [
+   "50% da alíquota do IBS aplicável na importação, deduzido do IBS devido",
+   "55% do saldo devedor do IBS no período, como nas saídas de bens de consumo final",
+   "100% da alíquota do IBS aplicável na importação, que torna a operação isenta de IBS",
+   "7,5% do valor da operação, para bens de qualquer região de origem do País"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 444 calcula o crédito em 50% da alíquota do IBS na importação."
+ },
+ {
+  "q": "Qual é o tratamento da operação originada fora da Zona Franca que destina bem industrializado nacional a contribuinte habilitado (art. 445)?",
+  "options": [
+   "Alíquota padrão, com devolução do imposto por cashback ao comprador habilitado",
+   "Alíquotas de IBS e CBS reduzidas a zero, com controles específicos da entrada na Zona Franca",
+   "Isenção, que anula os créditos do remetente, sem nenhuma exigência para o destinatário",
+   "Redução de 60%, como nos alimentos, sem exigência de nenhum controle de entrada"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 445 reduz a zero as alíquotas e exige controles específicos de entrada."
+ },
+ {
+  "q": "No crédito presumido nas compras de bens nacionais com alíquota zero, qual é o percentual de IBS para bens do Sul e do Sudeste, exceto o Espírito Santo?",
+  "options": [
+   "7,5%",
+   "90,25%, que é o percentual do crédito nas saídas de bens intermediários da Zona Franca",
+   "55%, que é o percentual do crédito nas saídas de bens de consumo final da Zona Franca",
+   "13,5%, que é o percentual dos bens das demais regiões do País, e não o dos bens do Sul"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O percentual é de 7,5% para Sul e Sudeste (exceto ES) e 13,5% para as demais regiões."
+ },
+ {
+  "q": "Quais são os percentuais do crédito presumido de IBS nas saídas, sobre o saldo devedor do período (art. 450)?",
+  "options": [
+   "7,5% para bens de consumo final, 13,5% para bens de capital e 7% para bens intermediários",
+   "100% para todos os bens, qualquer que seja o tipo, o destino ou a origem dos insumos",
+   "55% para bens de consumo final, 75% para bens de capital e 90,25% para bens intermediários",
+   "90,25% para bens de consumo final, 75% para bens de capital e 55% para bens intermediários"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "Os percentuais são 55%, 75% e 90,25%, conforme o tipo de bem."
+ },
+ {
+  "q": "No caso da indústria na Zona Franca (saldo devedor de R$ 1.000.000), quanto de IBS paga ao vender um bem de consumo final?",
+  "options": [
+   "R$ 450.000: R$ 1.000.000 menos 55% de crédito presumido",
+   "R$ 250.000, que é o que resta depois de 75% de crédito presumido sobre o saldo devedor",
+   "R$ 97.500, que é o que resta depois de 90,25% de crédito presumido sobre o saldo devedor",
+   "R$ 550.000, que é o valor do crédito presumido, e não o do IBS a pagar pela indústria"
+  ],
+  "correct": 0,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "55% de R$ 1.000.000 são R$ 550.000, e o IBS a pagar é de R$ 450.000."
+ },
+ {
+  "q": "E ao vender um bem de capital, no mesmo caso?",
+  "options": [
+   "R$ 750.000, que é o valor do crédito presumido, e não o do IBS a pagar pela indústria",
+   "R$ 250.000: R$ 1.000.000 menos 75% de crédito presumido",
+   "R$ 97.500, que é o que resta depois de 90,25% de crédito presumido sobre o saldo devedor",
+   "R$ 450.000, que é o que resta depois de 55% de crédito presumido sobre o saldo devedor"
+  ],
+  "correct": 1,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "75% de R$ 1.000.000 são R$ 750.000, e o IBS a pagar é de R$ 250.000."
+ },
+ {
+  "q": "E ao vender um bem intermediário?",
+  "options": [
+   "R$ 450.000, que é o que resta depois de 55% de crédito presumido sobre o saldo devedor",
+   "R$ 902.500, que é o valor do crédito presumido, e não o do IBS a pagar pela indústria",
+   "R$ 250.000, que é o que resta depois de 75% de crédito presumido sobre o saldo devedor",
+   "R$ 97.500: R$ 1.000.000 menos 90,25% de crédito presumido"
+  ],
+  "correct": 3,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "90,25% de R$ 1.000.000 são R$ 902.500, e o IBS a pagar é de R$ 97.500."
+ },
+ {
+  "q": "No caso da compra para a Zona Franca (bem de R$ 100.000 de fornecedor de São Paulo), quanto é o crédito presumido de IBS e de CBS?",
+  "options": [
+   "R$ 13.500 de IBS (13,5%) e R$ 7.000 de CBS (7%), porque São Paulo está fora do Sul",
+   "R$ 7.500 de IBS (7,5%) e R$ 7.000 de CBS (7%)",
+   "R$ 55.000 de IBS (55%) e R$ 7.000 de CBS (7%), pelo percentual das saídas de consumo final",
+   "R$ 0 de IBS e de CBS, porque a operação com alíquota zero não gera crédito presumido"
+  ],
+  "correct": 1,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "São Paulo é Sudeste, fora do Espírito Santo. IBS de 7,5% e CBS de 7% sobre R$ 100.000."
+ },
+ {
+  "q": "Os créditos presumidos da Zona Franca podem ser ressarcidos em dinheiro?",
+  "options": [
+   "Não: só podem ser usados na compensação com IBS e CBS devidos, segundo a regra citada na lei",
+   "Sim, em até 60 dias, como os créditos acumulados de exportadoras do regime regular",
+   "Sim, mas só para bens de capital, e nunca para bens de consumo final ou intermediários",
+   "Sim, mas só quando a indústria é habilitada e optante do Simples Nacional"
+  ],
+  "correct": 0,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "A lei veda a compensação com outros tributos e o ressarcimento em dinheiro dos créditos presumidos."
+ },
+ {
+  "q": "Até quando o ADCT mantém o modelo da Zona Franca de Manaus, segundo a linha do tempo do perfil?",
+  "options": [
+   "Até 2027, quando o IPI passa a ter alíquota zero em todo o território nacional",
+   "Até 2050, com revisão obrigatória a cada dez anos pelo Congresso Nacional",
+   "Até 2073",
+   "Até 2033, junto com a extinção do ICMS e do ISS e o IBS pleno"
+  ],
+  "correct": 2,
+  "section": "tempo",
+  "sectionLabel": "4. Linha do tempo",
+  "rationale": "O ADCT, arts. 92-A e 92-B, mantém o modelo por prazo longo, até 2073."
+ },
+ {
+  "q": "Para que serve a ficha do perfil para o SIS?",
+  "options": [
+   "Calcular automaticamente o imposto devido por cada empresa, sem necessidade de revisão do contador",
+   "Substituir a leitura da lei complementar, que deixa de ser necessária para quem usa o SIS",
+   "Padronizar os parâmetros do setor (regime, reduções, crédito, benefícios e obrigações) para alimentar o perfil de empresa da ferramenta",
+   "Registrar o resultado fiscal de cada empresa do setor, ano a ano, para fins de fiscalização"
+  ],
+  "correct": 2,
+  "section": "ficha",
+  "sectionLabel": "5. Ficha para o SIS",
+  "rationale": "A ficha organiza os parâmetros do setor, e o contador continua revisando cada caso."
+ }
+]
+</script>
+
 <script>
 /* ===== Motor de busca (client-side, sem servidor) ===== */
 const SEARCH_ENTRIES = [];   // preenchido por buildSearchEntries() a partir das aulas do próprio arquivo
@@ -17284,7 +17648,8 @@ const modules = [
       {title:'Perfil Setorial: Construção e Imobiliário', desc:'Regime específico de bens imóveis (arts. 251 a 270): redução de 50% em alienação, construção e incorporação e de 70% na locação, redutor social e de ajuste, momento do pagamento na incorporação, apuração por obra, casos numéricos de incorporadora e empreiteira, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-construcao-imobiliario.html'},
       {title:'Perfil Setorial: Energia, Combustíveis e Mineração', desc:'Regime monofásico de combustíveis com alíquota por unidade de medida (arts. 172 a 180), vedação de crédito na revenda, recolhimento da energia elétrica no fornecimento (art. 28), Imposto Seletivo na extração de bens minerais com teto de 0,25% (art. 422), casos numéricos, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-energia-combustiveis-mineracao.html'},
       {title:'Perfil Setorial: Serviços Profissionais e Contabilidade', desc:'Redução de 30% para as 18 profissões intelectuais fiscalizadas por conselho (art. 127), requisitos para pessoa física e sociedades, folha sem crédito, caso do escritório contábil (quem sente o preço), linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-servicos-profissionais-contabilidade.html'},
-      {title:'Perfil Setorial: Comércio e Varejo', desc:'Regra geral com alíquota por produto (cesta básica zero, 60% em alimentos e higiene, padrão nos demais), saldo credor no varejo de alimentos, descontos e programas de fidelidade na base, crédito presumido do estoque e de bens usados, substituição tributária na transição, casos numéricos, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-comercio-varejo.html'}
+      {title:'Perfil Setorial: Comércio e Varejo', desc:'Regra geral com alíquota por produto (cesta básica zero, 60% em alimentos e higiene, padrão nos demais), saldo credor no varejo de alimentos, descontos e programas de fidelidade na base, crédito presumido do estoque e de bens usados, substituição tributária na transição, casos numéricos, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-comercio-varejo.html'},
+      {title:'Perfil Setorial: Indústria e Zona Franca', desc:'Não cumulatividade ampla e IPI com alíquota zero, bens de capital, regime da Zona Franca de Manaus (suspensão na importação, alíquota zero nas entradas nacionais, créditos presumidos nas compras e nas saídas), casos numéricos, linha do tempo até 2073 e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-industria-zona-franca.html'}
     ]},
     {t:'Precificação e Cenários na Reforma Tributária', d:'Precificação e cenários na reforma.', h:'4h', materials:[
       {title:'Preço na Transição: ICMS e ISS por Dentro, IBS e CBS por Fora', desc:'As regras de base da convivência (2026 a 2032), a rampa do ADCT, a conta do preço passo a passo com as duas leituras da base do ICMS e do ISS, o ponto em aberto sobre IBS e CBS na base do ICMS e do ISS e o que muda no ERP, nos contratos e na margem.', href:'1-Modulo/Bonus/aula-preco-na-transicao.html'}
