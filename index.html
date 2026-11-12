@@ -375,6 +375,22 @@ body{margin:0;}
   #aula-view table.data td{padding:8px 8px;font-size:12px;}
   #aula-view .case-card{padding:14px 14px;}
 }
+/* ===== Celular: padrão de rolagem horizontal para componentes largos ===== */
+.scroll-hint{display:none;}
+@media (max-width:700px){
+  #aula-view{overflow-x:clip;}
+  #aula-view .scroll-hint{display:block;font-size:11px;font-weight:700;color:var(--lav3);text-align:right;margin:10px 2px 4px;}
+  #aula-view .scroll-hint + .table-wrap, #aula-view .scroll-hint + .icon-grid{margin-top:0;}
+  #aula-view .table-wrap[data-cols="3"] > table{min-width:440px;}
+  #aula-view .table-wrap[data-cols="4"] > table{min-width:560px;}
+  #aula-view .table-wrap[data-cols="5"] > table{min-width:680px;}
+  #aula-view .table-wrap[data-cols="6"] > table, #aula-view .table-wrap[data-cols="7"] > table, #aula-view .table-wrap[data-cols="8"] > table{min-width:760px;}
+  #aula-view .icon-grid{grid-template-columns:repeat(3,minmax(172px,1fr)) !important;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:12px;}
+  #aula-view .table-wrap, #aula-view .icon-grid, #aula-view .flow{scrollbar-width:thin;scrollbar-color:var(--lav) rgba(50,65,85,0.1);}
+  #aula-view .table-wrap::-webkit-scrollbar, #aula-view .icon-grid::-webkit-scrollbar, #aula-view .flow::-webkit-scrollbar{height:8px;}
+  #aula-view .table-wrap::-webkit-scrollbar-track, #aula-view .icon-grid::-webkit-scrollbar-track, #aula-view .flow::-webkit-scrollbar-track{background:rgba(50,65,85,0.1);border-radius:8px;}
+  #aula-view .table-wrap::-webkit-scrollbar-thumb, #aula-view .icon-grid::-webkit-scrollbar-thumb, #aula-view .flow::-webkit-scrollbar-thumb{background:var(--lav);border-radius:8px;}
+}
 /* ===== Bloco "Base legal e referências" (fecha cada aula) ===== */
 #aula-view .refs{background:var(--white);border:1px solid #d8d8d8;border-radius:12px;padding:16px 20px;margin:30px 0 8px;}
 #aula-view .refs h3{margin:0 0 8px;font-size:13.5px;display:flex;align-items:center;gap:6px;}
@@ -10444,6 +10460,24 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
    "prioridade": "media",
    "fonte": "LC 214/2025, arts. 442 a 450 (Câmara, Planalto, normas.leg.br); SUFRAMA; Escola Superior de Negócios; Simtax",
    "depende": "Seção 2 (linhas da Zona Franca) e os dois casos da seção 3"
+  },
+  {
+   "id": "aula-perfil-educacao#atencao",
+   "tema": "Educação: Anexo II (NBS), §§ do art. 308 e requisitos da imunidade",
+   "estado": "Foram lidos o art. 129 e o parágrafo único, o caput do art. 308 e o inciso III do art. 9º (referência) no texto da lei. Não foram lidos por inteiro: o Anexo II com as NBS, os §§ do art. 308 (a aula usa o §1º, II, por fonte secundária, na leitura de que a CBS zero vale na proporção da ocupação efetiva das bolsas), os requisitos completos da imunidade e a regra de pesquisa e inovação. A regulamentação do Comitê Gestor e do Ministério da Educação não foi consultada.",
+   "data": "10/11/2026",
+   "prioridade": "media",
+   "fonte": "LC 214/2025, arts. 9º, 129 e 308 (Câmara, Legisweb); Radar da Reforma Tributária; Voga; Migalhas",
+   "depende": "Seção 2 (Prouni, Anexo II e imunidade) e o caso da faculdade"
+  },
+  {
+   "id": "aula-perfil-turismo-alimentacao#atencao",
+   "tema": "Regime específico de bares, restaurantes, hotelaria, parques e agências de turismo: partes sem conferência",
+   "estado": "Foram lidos, no texto da lei, o art. 277, o art. 280 (base na hotelaria), o art. 281 (redução de 40%), o art. 289 (base e alíquota da agência), o art. 291 (crédito da agência) e o conceito de hotelaria. Não foram lidos por inteiro: os arts. 273 a 276 (bares e restaurantes), 278, 279, 282 a 287 e 290, e a vedação de crédito do adquirente (arts. 276 e 283, por fonte secundária). Itens fora do regime (revenda sem preparo e bebidas alcoólicas) e a gorjeta também vêm de fonte secundária ou não foram conferidos. A alíquota de referência depende de resolução do Senado.",
+   "data": "10/11/2026",
+   "prioridade": "media",
+   "fonte": "LC 214/2025, Capítulo VII (Planalto, Câmara, normas.leg.br, Legisweb); TaxUp; Escola Superior de Negócios; Martinelli",
+   "depende": "Seção 2 (bares e restaurantes e crédito do adquirente) e o caso do restaurante"
   }
  ],
  "changelog": [
@@ -10642,6 +10676,20 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
    "secao": "",
    "mudanca": "Décimo perfil setorial, no módulo Bônus: indústria e regime da Zona Franca de Manaus (arts. 442 a 450), créditos presumidos nas compras e nas saídas, dois casos numéricos, linha do tempo até 2073 e ficha para o SIS.",
    "motivo": "Plano dos Perfis setoriais (nono da ordem)."
+  },
+  {
+   "data": "10/11/2026",
+   "aula": "Perfil Setorial: Educação (nova aula)",
+   "secao": "",
+   "mudanca": "Décimo primeiro perfil setorial, no módulo Bônus: os três tratamentos da educação (art. 129, art. 308 e art. 9º, III), a segregação de receita, a folha sem crédito, dois casos numéricos e a ficha para o SIS.",
+   "motivo": "Plano dos Perfis setoriais (décimo da ordem)."
+  },
+  {
+   "data": "10/11/2026",
+   "aula": "Perfil Setorial: Turismo, Hotelaria e Alimentação Fora do Lar (nova aula)",
+   "secao": "",
+   "mudanca": "Último perfil da ordem do plano, no módulo Bônus: regime específico do Capítulo VII, redução de 40%, base da hotelaria e da agência de turismo, crédito, dois casos numéricos e ficha para o SIS. Com ele, os 12 perfis setoriais estão prontos.",
+   "motivo": "Plano dos Perfis setoriais (décimo primeiro da ordem, fechando os 12)."
   }
  ]
 }
@@ -17365,6 +17413,698 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
 ]
 </script>
 
+<!-- ============ AULA: aula-perfil-educacao ============ -->
+<template id="tpl-aula-perfil-educacao" data-title="Perfil Setorial: Educação" data-modulo="Módulo Bônus" data-unidade="Perfis Setoriais">
+<div class="topbar">
+  <a href="#hub"><span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Hub de Estudos</a>
+  <span class="crumb">Módulo Bônus — Perfis Setoriais</span>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="pill-row">
+      <span class="pill">🎓 Perfil setorial</span>
+      <span class="pill">Educação</span>
+      <span class="pill">Leitura ~14 min</span>
+    </div>
+    <h1>Perfil Setorial: Educação</h1>
+    <p>A educação não tem um tratamento só, tem <b>três</b>: a redução de 60% para os serviços do Anexo II, a CBS zero para o ensino superior no Prouni e a imunidade das entidades sem fins lucrativos. A redução vale apenas para os serviços listados, e não para tudo o que a escola cobra. É setor de mão de obra, em que a folha não gera crédito.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="toc">
+    <h4>Neste perfil</h4>
+    <div class="toc-row">
+      <a href="#setor"><span class="n">1</span> O setor e a reforma</a>
+      <a href="#regimes"><span class="n">2</span> Regime aplicável</a>
+      <a href="#atencao"><span class="n">3</span> Pontos de atenção</a>
+      <a href="#tempo"><span class="n">4</span> Linha do tempo do setor</a>
+      <a href="#ficha"><span class="n">5</span> Ficha do perfil para o SIS</a>
+      <a href="#quiz"><span class="n">🎯</span> Teste seus conhecimentos</a>
+    </div>
+  </div>
+
+  <section id="setor">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">school</span></div>
+      <div><h2>1. O Setor e a Reforma</h2><div class="sub">Três tratamentos para o mesmo setor</div></div>
+    </div>
+    <p class="lead">A escola vende para famílias, que não se creditam, e tem a folha como maior custo. A tendência é que a redução de 60% alivie o preço, sem eliminar o efeito de poucos créditos a tomar (veja a <a href="#aula-cenario-3-quem-sente-mais" style="color:var(--lav3);font-weight:700;">Aula 3 da Unidade II</a>):</p>
+    <table class="data">
+      <tr><th>Tratamento</th><th>Quem alcança</th></tr>
+      <tr><td>Redução de 60% (art. 129)</td><td>Os serviços de educação listados no Anexo II, identificados pela NBS, prestados por escolas, faculdades e cursos, com ou sem fins lucrativos</td></tr>
+      <tr><td>CBS zero no ensino superior (art. 308)</td><td>Instituições privadas de ensino superior, com ou sem fins lucrativos, durante a adesão e vinculação ao Prouni</td></tr>
+      <tr><td>Imunidade (art. 9º, III)</td><td>Instituições de educação sem fins lucrativos que cumprem, cumulativamente, os requisitos legais</td></tr>
+      <tr><td>Fora desses tratamentos</td><td>Cantina, uniformes, transporte escolar e atividades extracurriculares ficam fora da redução (parágrafo único do art. 129)</td></tr>
+    </table>
+    <div class="highlight lav">
+      <span class="material-symbols-outlined">info</span>
+      <div>Os tributos fora do consumo, como o imposto de renda das escolas no Lucro Presumido, estão no <a href="#aula-mapa-dos-tributos" style="color:var(--lav3);font-weight:700;">mapa dos tributos</a>. Escolas no Simples Nacional seguem a <a href="#aula6-simples-nacional" style="color:var(--lav3);font-weight:700;">aula 6</a>.</div>
+    </div>
+  </section>
+
+  <section id="regimes">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">gavel</span></div>
+      <div><h2>2. Regime Aplicável</h2><div class="sub">O que a LC 214/2025 diz para a educação</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Situação</th><th>Regra</th><th>Base legal</th></tr>
+      <tr><td>Redução de 60%</td><td>Ficam reduzidas em 60% as alíquotas do IBS e da CBS sobre o fornecimento dos serviços de educação relacionados no Anexo II, com a especificação das classificações da NBS</td><td>Art. 129, caput; Anexo II</td></tr>
+      <tr><td>Alcance da redução</td><td>Aplica-se somente sobre os valores devidos pela contraprestação dos serviços listados no Anexo II, e não a outras operações realizadas no âmbito das escolas, das instituições ou dos estabelecimentos do fornecedor</td><td>Art. 129, parágrafo único, I e II</td></tr>
+      <tr><td>O que o Anexo II contempla</td><td>Educação infantil, fundamental e médio, ensino técnico e profissionalizante, educação de jovens e adultos, ensino superior (graduação e pós-graduação), educação especial e ensino de línguas de povos originários e de sistemas de escrita tátil (por fonte secundária). Sem previsão no Anexo II, não há redução</td><td>Anexo II</td></tr>
+      <tr><td>Prouni</td><td>Fica reduzida a zero a alíquota da CBS sobre os serviços de educação de ensino superior prestados por instituição privada, com ou sem fins lucrativos, durante o período de adesão e vinculação ao Programa Universidade para Todos (Lei nº 11.096/2005). A zeragem se dá na proporção da ocupação efetiva das bolsas devidas no âmbito do programa. O IBS segue devido com a redução de 60% (por fonte secundária)</td><td>Art. 308 e §1º</td></tr>
+      <tr><td>Imunidade</td><td>São imunes ao IBS e à CBS os fornecimentos de instituições de educação e de assistência social sem fins lucrativos que cumpram os requisitos legais, de forma cumulativa, entre eles não distribuir parcela do patrimônio ou das rendas e aplicar os recursos no País (por fonte secundária)</td><td>Art. 9º, III</td></tr>
+      <tr><td>Pesquisa e inovação</td><td>A redução se estende à ICT sem fins lucrativos que cumpra, cumulativamente, as condições da lei, entre elas as da imunidade do art. 9º, III. O texto completo dessa regra não foi lido</td><td>Regra do capítulo da educação</td></tr>
+      <tr><td>Alíquota padrão para o resto</td><td>Serviços fora do Anexo II e vendas de cantina, uniformes e livros fora da regra própria seguem a alíquota padrão do IBS e da CBS</td><td>Parágrafo único do art. 129</td></tr>
+    </table>
+    <div class="highlight">
+      <span class="material-symbols-outlined">fact_check</span>
+      <div>A redução depende de classificar cada serviço no Anexo II pela NBS. A consulta de CST e cClassTrib do SIS ajuda na classificação, e o resumo das reduções está na <a href="#aula5-aliquotas" style="color:var(--lav3);font-weight:700;">aula 5</a>.</div>
+    </div>
+  </section>
+
+  <section id="atencao">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">warning</span></div>
+      <div><h2>3. Pontos de Atenção</h2><div class="sub">Onde o setor tende a ter dúvidas e perdas</div></div>
+    </div>
+    <ul class="checklist">
+      <li><span class="material-symbols-outlined">call_split</span><div><b>Segregar a receita:</b> a escola precisa separar a mensalidade do Anexo II do restante (cantina, uniforme, transporte, extracurriculares). Aplicar a redução a tudo subapura o imposto.</div></li>
+      <li><span class="material-symbols-outlined">qr_code_2</span><div><b>NBS de cada serviço:</b> o curso, a modalidade e o nível precisam constar do Anexo II. Um serviço fora da lista paga a alíquota padrão.</div></li>
+      <li><span class="material-symbols-outlined">groups</span><div><b>Folha sem crédito:</b> professores e equipe são o maior custo e não geram crédito de IBS e CBS. A carga final depende das compras creditáveis (aluguel, energia, material e sistemas) (veja a <a href="#aula-nao-cumulatividade" style="color:var(--lav3);font-weight:700;">aula de não cumulatividade</a>).</div></li>
+      <li><span class="material-symbols-outlined">workspace_premium</span><div><b>Prouni e bolsas:</b> a CBS zero depende da adesão e da ocupação efetiva das bolsas. A faculdade precisa tratar CBS e IBS como regimes distintos, sem presumir isenção total.</div></li>
+      <li><span class="material-symbols-outlined">volunteer_activism</span><div><b>Entidade imune:</b> manter a imunidade exige cumprir os requisitos de forma permanente. Operações fora da finalidade institucional podem não estar cobertas.</div></li>
+    </ul>
+    <div class="highlight red" id="pn-42" data-painel="aula-perfil-educacao#atencao">
+      <span class="material-symbols-outlined">flag</span>
+      <div><b>Partes sem conferência:</b> o texto completo do Anexo II (NBS), os §§ do art. 308, o art. 9º, III em seus requisitos, a regra de pesquisa e inovação e a regulamentação do Comitê Gestor não foram lidos por inteiro. O estado fica no painel.</div>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">calculate</span> Caso da escola particular (hipotético): o que a redução não cobre</h4>
+      <p>Uma escola fatura R$ 1.000.000 de mensalidades do Anexo II e R$ 100.000 de cantina e uniformes, que ficam fora. Alíquota padrão hipotética de 25%, reduzida em 60% nas mensalidades (10%):</p>
+      <div class="case-mini"><span class="label">Mensalidades: 10% de R$ 1.000.000</span><span class="val">R$ 100.000</span></div>
+      <div class="case-mini"><span class="label">Cantina e uniformes: 25% de R$ 100.000</span><span class="val">R$ 25.000</span></div>
+      <div class="case-mini"><span class="label">Débito correto</span><span class="val">R$ 125.000</span></div>
+      <div class="case-mini total"><span class="label">Erro: aplicar 10% a toda a receita de R$ 1.100.000 daria R$ 110.000, e o imposto fica subapurado em</span><span class="val">R$ 15.000</span></div>
+      <p>O valor é hipotético. A regra está no parágrafo único do art. 129, que limita a redução à contraprestação dos serviços listados.</p>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">account_balance</span> Caso da faculdade no Prouni (hipotético, leitura de estudo)</h4>
+      <p>Uma faculdade privada tem R$ 10.000.000 de receita de graduação por mês. Alíquotas hipotéticas: CBS de 10% e IBS de 15%, ambos reduzidos em 60% (CBS efetiva de 4% e IBS efetivo de 6%). Suponha que a ocupação efetiva das bolsas do Prouni corresponda a 20%. Pela leitura do art. 308, §1º, II, a CBS fica zerada na proporção da ocupação das bolsas:</p>
+      <div class="case-mini"><span class="label">CBS sem o Prouni: 4% de R$ 10.000.000</span><span class="val">R$ 400.000</span></div>
+      <div class="case-mini"><span class="label">CBS com o Prouni: 4% sobre 80% da receita (zero sobre os 20%)</span><span class="val">R$ 320.000</span></div>
+      <div class="case-mini total"><span class="label">IBS: 6% de R$ 10.000.000, sem alteração pelo Prouni</span><span class="val">R$ 600.000</span></div>
+      <p>A forma exata de aplicar a proporção deve ser conferida no texto do §1º e na regulamentação.</p>
+    </div>
+  </section>
+
+  <section id="tempo">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">timeline</span></div>
+      <div><h2>4. Linha do Tempo do Setor</h2><div class="sub">O que muda de 2026 a 2033</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Ano</th><th>O que muda para o setor</th></tr>
+      <tr><td>2026</td><td>Teste, com CBS a 0,9% e IBS a 0,1% destacados nas notas, com dispensa de recolhimento para quem cumpre as obrigações. ISS, PIS e COFINS seguem</td></tr>
+      <tr><td>2027</td><td>PIS e COFINS saem e a CBS passa a valer plena, com a redução de 60% do Anexo II e a CBS zero do Prouni. O ISS segue</td></tr>
+      <tr><td>2029 a 2032</td><td>O ISS cai a 90%, 80%, 70% e 60% e o IBS sobe, com a redução de 60% aplicada ao IBS. Benefícios locais de ISS reduzem na mesma rampa (<a href="#aula-preco-na-transicao" style="color:var(--lav3);font-weight:700;">preço na transição</a>)</td></tr>
+      <tr><td>2033</td><td>ISS extinto e IBS pleno, com a redução de 60% sobre a alíquota de referência. A CBS do Prouni segue zerada durante a vinculação ao programa</td></tr>
+    </table>
+  </section>
+
+  <section id="ficha">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">assignment</span></div>
+      <div><h2>5. Ficha do Perfil para o SIS</h2><div class="sub">Os parâmetros do setor, num quadro padronizado</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Campo</th><th>Valor</th></tr>
+      <tr><td>Setor</td><td>Educação</td></tr>
+      <tr><td>Regime aplicável</td><td>Regime diferenciado de redução de 60% (art. 129 e Anexo II), CBS zero no Prouni (art. 308) e imunidade de entidades sem fins lucrativos (art. 9º, III)</td></tr>
+      <tr><td>Redução de alíquota</td><td>60% para os serviços do Anexo II, por NBS; CBS zero para o ensino superior no Prouni; alíquota padrão para o que não consta do anexo</td></tr>
+      <tr><td>Particularidades de crédito</td><td>Folha sem crédito; crédito pelas aquisições (aluguel, energia, material e sistemas); fornecedor do Simples com crédito limitado</td></tr>
+      <tr><td>Benefícios em extinção</td><td>Benefícios municipais de ISS, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso</td></tr>
+      <tr><td>Documentos e obrigações do setor</td><td>Classificação por NBS; segregação das receitas; controle de bolsas do Prouni; comprovação dos requisitos da imunidade</td></tr>
+      <tr><td>Pontos de atenção</td><td>Segregação da receita; NBS; folha sem crédito; Prouni; manutenção da imunidade</td></tr>
+      <tr><td>Itens do painel</td><td>Partes do regime sem conferência</td></tr>
+    </table>
+  </section>
+
+  <section id="quiz">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">quiz</span></div>
+      <div><h2>🎯 Teste Seus Conhecimentos</h2><div class="sub">10 perguntas sorteadas de um banco maior — aprovação com 70% de acerto</div></div>
+    </div>
+    <div class="quiz-box" id="quizBox"></div>
+  </section>
+
+  <div class="refs">
+    <h3><span class="material-symbols-outlined" style="color:var(--lav2);">menu_book</span> Base legal e referências</h3>
+    <ul>
+      <li>Lei Complementar nº 214/2025: art. 9º, III (imunidade), art. 128, I e art. 129 e Anexo II (redução de 60% para serviços de educação) e art. 308 (CBS zero no Prouni).</li>
+      <li>Lei nº 11.096/2005 (Prouni). Constituição Federal, art. 150, VI, "c" (imunidade). Lei Complementar nº 227/2026.</li>
+    </ul>
+    <p>Aulas relacionadas: <a href="#aula5-aliquotas" style="color:var(--lav3);font-weight:700;">alíquotas e reduções</a>, <a href="#aula6-simples-nacional" style="color:var(--lav3);font-weight:700;">Simples Nacional</a>, <a href="#aula-perfil-saude" style="color:var(--lav3);font-weight:700;">perfil de saúde</a> e <a href="#aula-perfil-servicos-profissionais-contabilidade" style="color:var(--lav3);font-weight:700;">perfil de serviços profissionais</a>.</p>
+  </div>
+
+</div>
+</template>
+<script type="application/json" id="quiz-aula-perfil-educacao">
+[
+ {
+  "q": "Quantos tratamentos tributários distintos a educação recebe na LC 214/2025?",
+  "options": [
+   "Nenhum: a educação fica fora do IBS e da CBS, por determinação da Constituição",
+   "Um só: a redução de 60%, que vale igualmente para todas as receitas de uma escola, sem nenhuma distinção entre mensalidades, cantina, uniformes ou atividades extracurriculares",
+   "Dois: a alíquota zero para escolas públicas e a redução de 30% para escolas privadas",
+   "Três: a redução de 60% (Anexo II), a CBS zero no Prouni e a imunidade das entidades sem fins lucrativos"
+  ],
+  "correct": 3,
+  "section": "setor",
+  "sectionLabel": "1. O setor e a reforma",
+  "rationale": "A educação tem a redução do art. 129, a CBS zero do art. 308 e a imunidade do art. 9º, III."
+ },
+ {
+  "q": "Qual é o tratamento geral dos serviços de educação do Anexo II (art. 129)?",
+  "options": [
+   "Regime específico próprio, com base de cálculo reduzida, como o dos serviços financeiros",
+   "Alíquota zero de IBS e CBS para todos os cursos oferecidos por escolas particulares",
+   "Redução de 60% das alíquotas de IBS e CBS, com serviços identificados pela classificação NBS",
+   "Redução de 30%, igual à das profissões intelectuais fiscalizadas por conselho profissional"
+  ],
+  "correct": 2,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 129 reduz em 60% as alíquotas dos serviços listados no Anexo II."
+ },
+ {
+  "q": "A redução de 60% se aplica a cantina, uniforme e transporte escolar?",
+  "options": [
+   "Sim, desde que a escola seja entidade imune, sem fins lucrativos, e cumpra os requisitos",
+   "Não: ela só se aplica à contraprestação dos serviços listados no Anexo II, e não a outras operações da escola",
+   "Sim, mas só se cobradas na mesma fatura da mensalidade, em valor único para o aluno",
+   "Sim, porque são operações realizadas dentro da escola e ligadas aos serviços educacionais, sem qualquer outra condição prevista na lei para o fornecedor dos serviços"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O parágrafo único do art. 129 limita a redução à contraprestação dos serviços listados."
+ },
+ {
+  "q": "O que acontece com um serviço educacional que não consta do Anexo II?",
+  "options": [
+   "Tem a redução de 60% por analogia, porque é serviço de educação em sentido amplo, desde que a escola comprove a finalidade educacional do serviço prestado ao aluno",
+   "Não tem a redução de 60%, e segue a alíquota padrão do IBS e da CBS",
+   "Tem alíquota zero, porque a lei presume a essencialidade de todo serviço educacional",
+   "Fica sujeito apenas ao ISS, que continua em vigor para a educação depois de 2033"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "Sem previsão no Anexo II, não há redução."
+ },
+ {
+  "q": "Qual é o benefício do art. 308 para o ensino superior?",
+  "options": [
+   "Imunidade ao IBS, para as instituições privadas que oferecem pelo menos uma bolsa integral",
+   "Alíquota zero de IBS e CBS, para qualquer instituição de ensino superior, pública ou privada",
+   "Redução de 60% da CBS, mas só para instituições sem fins lucrativos aderentes ao Prouni, e o IBS passa a ter alíquota zero em todos os casos, sem nenhuma outra condição",
+   "Alíquota da CBS reduzida a zero, durante a adesão e vinculação ao Prouni, para instituição privada com ou sem fins lucrativos"
+  ],
+  "correct": 3,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 308 zera a CBS (e não o IBS) durante a vinculação ao Prouni."
+ },
+ {
+  "q": "O IBS também é zerado para a instituição aderente ao Prouni?",
+  "options": [
+   "Não: o IBS segue devido, com a redução de 60% (por fonte secundária)",
+   "Não, porque o IBS é extinto para a educação superior a partir de 2033, sem exceção",
+   "Sim, porque a adesão ao Prouni zera todos os tributos sobre o consumo",
+   "Sim, mas só para as bolsas integrais, e não para as bolsas parciais do programa"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 308 trata só da CBS, e o IBS continua com a redução de 60%."
+ },
+ {
+  "q": "Quem tem a imunidade ao IBS e à CBS prevista no art. 9º, III?",
+  "options": [
+   "Somente as escolas públicas mantidas pela União, pelos Estados e pelos Municípios",
+   "Instituições de educação e de assistência social sem fins lucrativos que cumpram, cumulativamente, os requisitos legais",
+   "Somente as faculdades que oferecem pelo menos 20% das vagas em bolsas integrais",
+   "Todas as escolas privadas, qualquer que seja o seu regime e a sua forma de constituição, desde que paguem em dia o imposto de renda e a contribuição social do exercício"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "A imunidade alcança entidades sem fins lucrativos que cumprem os requisitos cumulativos."
+ },
+ {
+  "q": "No caso da escola (mensalidades de R$ 1.000.000 com alíquota efetiva de 10%), qual é o débito sobre as mensalidades?",
+  "options": [
+   "R$ 40.000, que é 4% de R$ 1.000.000, pela alíquota zero da CBS no Prouni",
+   "R$ 125.000, que é 12,5% de R$ 1.000.000, pela redução de 50% de bens imóveis",
+   "R$ 250.000, que é 25% de R$ 1.000.000, sem aplicar a redução de 60%",
+   "R$ 100.000, que é 10% de R$ 1.000.000"
+  ],
+  "correct": 3,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "25% × 0,40 = 10%, e 10% de R$ 1.000.000 são R$ 100.000."
+ },
+ {
+  "q": "E o débito sobre a cantina e os uniformes (R$ 100.000), que ficam fora do Anexo II?",
+  "options": [
+   "R$ 25.000, pela alíquota padrão de 25%",
+   "R$ 0, porque a cantina de escola fica isenta de IBS e de CBS pela lei complementar",
+   "R$ 10.000, pela mesma alíquota reduzida de 10% das mensalidades do Anexo II",
+   "R$ 12.500, pela redução de 50% do regime de bens imóveis aplicada à escola"
+  ],
+  "correct": 0,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "A cantina não está no Anexo II e paga a alíquota padrão: 25% de R$ 100.000."
+ },
+ {
+  "q": "Se a escola aplicasse 10% a toda a receita de R$ 1.100.000, em quanto subapuraria o imposto?",
+  "options": [
+   "R$ 15.000: o débito correto é de R$ 125.000, e o erro daria R$ 110.000",
+   "Nada, porque a redução de 60% vale para todas as receitas da escola, sem distinção",
+   "R$ 110.000, que é todo o valor apurado a 10% sobre a receita total da escola no mês",
+   "R$ 25.000, que é o débito da cantina e dos uniformes sem qualquer redução aplicável"
+  ],
+  "correct": 0,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "O débito correto é R$ 100.000 + R$ 25.000 = R$ 125.000. Aplicar 10% a tudo dá R$ 110.000."
+ },
+ {
+  "q": "Por que a folha pesa na carga de uma escola?",
+  "options": [
+   "Porque a folha gera crédito integral de IBS e CBS, o que eleva o recolhimento da escola",
+   "Porque a folha não gera crédito de IBS e CBS, e a escola tem poucas compras creditáveis",
+   "Porque a folha de professores entra na base do ISS, que continua em vigor depois de 2033",
+   "Porque a folha é tributada pelo IBS à alíquota padrão, sem redução, para as escolas, e por isso a escola não consegue abater nenhum valor na apuração do imposto devido"
+  ],
+  "correct": 1,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "Folha de pagamento não é aquisição com imposto cobrado, e não gera crédito."
+ },
+ {
+  "q": "Segundo o art. 308, §1º, II, a alíquota zero da CBS no Prouni se dá na proporção de quê?",
+  "options": [
+   "Do valor das mensalidades pagas pelos alunos bolsistas, apenas no mês em que a bolsa é concedida",
+   "Do número de alunos matriculados em cursos de graduação, qualquer que seja a bolsa",
+   "Da ocupação efetiva das bolsas devidas no âmbito do programa",
+   "Do total da receita de ensino superior da instituição, sem relação com as bolsas oferecidas"
+  ],
+  "correct": 2,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "O §1º, II liga a zeragem à ocupação efetiva das bolsas devidas no âmbito do programa."
+ },
+ {
+  "q": "O que muda para a educação em 2027, segundo a linha do tempo do perfil?",
+  "options": [
+   "O ISS é extinto e o IBS passa a valer integralmente, com alíquota única para todas as escolas",
+   "Todas as escolas passam a ser imunes ao IBS e à CBS, qualquer que seja a sua natureza",
+   "PIS e COFINS saem e a CBS plena entra, com a redução de 60% do Anexo II e a CBS zero do Prouni",
+   "A redução de 60% é extinta, e os serviços de educação passam à alíquota padrão da CBS"
+  ],
+  "correct": 2,
+  "section": "tempo",
+  "sectionLabel": "4. Linha do tempo",
+  "rationale": "Em 2027 saem PIS e COFINS e entra a CBS plena. O ISS só começa a cair em 2029."
+ },
+ {
+  "q": "Para que serve a ficha do perfil para o SIS?",
+  "options": [
+   "Padronizar os parâmetros do setor (regime, reduções, crédito, benefícios e obrigações) para alimentar o perfil de empresa da ferramenta",
+   "Registrar o resultado fiscal de cada empresa do setor, ano a ano, para fins de fiscalização",
+   "Substituir a leitura da lei complementar, que deixa de ser necessária para quem usa o SIS, e o SIS passa a ser a única fonte de consulta da empresa",
+   "Calcular automaticamente o imposto devido por cada empresa, sem necessidade de revisão do contador"
+  ],
+  "correct": 0,
+  "section": "ficha",
+  "sectionLabel": "5. Ficha para o SIS",
+  "rationale": "A ficha organiza os parâmetros do setor, e o contador continua revisando cada caso."
+ }
+]
+</script>
+
+<!-- ============ AULA: aula-perfil-turismo-alimentacao ============ -->
+<template id="tpl-aula-perfil-turismo-alimentacao" data-title="Perfil Setorial: Turismo, Hotelaria e Alimentação Fora do Lar" data-modulo="Módulo Bônus" data-unidade="Perfis Setoriais">
+<div class="topbar">
+  <a href="#hub"><span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Hub de Estudos</a>
+  <span class="crumb">Módulo Bônus — Perfis Setoriais</span>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="pill-row">
+      <span class="pill">🏨 Perfil setorial</span>
+      <span class="pill">Turismo, hotelaria e alimentação fora do lar</span>
+      <span class="pill">Leitura ~14 min</span>
+    </div>
+    <h1>Perfil Setorial: Turismo, Hotelaria e Alimentação Fora do Lar</h1>
+    <p>Bares, restaurantes, hotelaria, parques de diversão e temáticos e agências de turismo têm um regime específico (Capítulo VII da LC 214/2025): <b>redução de 40%</b> nas alíquotas, base de cálculo própria na agência de turismo (só a margem) e regras de crédito que mudam conforme o elo. O cliente pessoa física não se credita, e o ponto central é saber qual receita entra no regime.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="toc">
+    <h4>Neste perfil</h4>
+    <div class="toc-row">
+      <a href="#setor"><span class="n">1</span> O setor e a reforma</a>
+      <a href="#regimes"><span class="n">2</span> Regime aplicável</a>
+      <a href="#atencao"><span class="n">3</span> Pontos de atenção</a>
+      <a href="#tempo"><span class="n">4</span> Linha do tempo do setor</a>
+      <a href="#ficha"><span class="n">5</span> Ficha do perfil para o SIS</a>
+      <a href="#quiz"><span class="n">🎯</span> Teste seus conhecimentos</a>
+    </div>
+  </div>
+
+  <section id="setor">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">restaurant</span></div>
+      <div><h2>1. O Setor e a Reforma</h2><div class="sub">Consumidor final, redução de 40% e crédito limitado</div></div>
+    </div>
+    <p class="lead">O setor vende sobretudo ao consumidor final, que não se credita. A tendência é que a redução de 40% alivie o preço, e que o efeito dependa de quanto a empresa compra com crédito e de quanto da sua receita está dentro do regime (veja a <a href="#aula-cenario-3-quem-sente-mais" style="color:var(--lav3);font-weight:700;">Aula 3 da Unidade II</a>):</p>
+    <table class="data">
+      <tr><th>Grupo</th><th>O que a lei prevê</th></tr>
+      <tr><td>Bares, restaurantes e lanchonetes</td><td>Regime específico para o fornecimento de alimentação e bebidas, com redução de 40% das alíquotas (arts. 273 a 276 e 281)</td></tr>
+      <tr><td>Hotelaria, parques de diversão e parques temáticos</td><td>Regime específico, com base de cálculo igual ao valor da operação e redução de 40% (arts. 277 a 283)</td></tr>
+      <tr><td>Agências de turismo</td><td>Regime específico: a base é o valor da operação menos os valores repassados aos fornecedores intermediados, com a mesma alíquota da hotelaria (arts. 288 a 291)</td></tr>
+      <tr><td>Locação por temporada de imóvel mobiliado</td><td>O conceito de hotelaria inclui o imóvel residencial mobiliado, ainda que de uso não exclusivo dos hóspedes</td></tr>
+    </table>
+    <div class="highlight lav">
+      <span class="material-symbols-outlined">info</span>
+      <div>O transporte coletivo de passageiros, que consta do mesmo capítulo, está no <a href="#aula-perfil-logistica-ecommerce" style="color:var(--lav3);font-weight:700;">perfil de logística e e-commerce</a>. Os tributos fora do consumo, como o imposto de renda dos restaurantes no Lucro Presumido, estão no <a href="#aula-mapa-dos-tributos" style="color:var(--lav3);font-weight:700;">mapa dos tributos</a>.</div>
+    </div>
+  </section>
+
+  <section id="regimes">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">gavel</span></div>
+      <div><h2>2. Regime Aplicável</h2><div class="sub">O que o Capítulo VII da LC 214/2025 diz</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Situação</th><th>Regra</th><th>Base legal</th></tr>
+      <tr><td>Redução geral</td><td>As alíquotas do IBS e da CBS relativas às operações do capítulo ficam reduzidas em 40%. Com uma alíquota de referência de 26,5%, a alíquota efetiva seria de 15,9%</td><td>Art. 281</td></tr>
+      <tr><td>Conceito de hotelaria</td><td>Fornecimento de alojamento temporário e de outros serviços incluídos no valor cobrado pela hospedagem, em unidades de uso exclusivo dos hóspedes, por estabelecimento destinado a essa finalidade, ou em imóvel residencial mobiliado, ainda que de uso não exclusivo dos hóspedes</td><td>Seção de hotelaria</td></tr>
+      <tr><td>Hotelaria, parques de diversão e parques temáticos</td><td>Regime específico de incidência, com base de cálculo igual ao valor da operação. O fornecedor se credita pelas regras gerais</td><td>Arts. 277 e 280</td></tr>
+      <tr><td>Alimentação e bebidas nos hotéis e parques</td><td>As operações de fornecimento de alimentação e bebidas pelos estabelecimentos de hotelaria e de parques observam as regras do regime específico de bares e restaurantes</td><td>Seção de hotelaria</td></tr>
+      <tr><td>Bares e restaurantes</td><td>Regime específico do fornecimento de alimentação e bebidas por bares, restaurantes e lanchonetes. O adquirente não se credita nessas operações (por fonte secundária, arts. 276 e 283). O regime não alcança todas as receitas do estabelecimento (por fonte secundária, itens revendidos sem preparo e bebidas alcoólicas ficam fora)</td><td>Arts. 273 a 276</td></tr>
+      <tr><td>Agência de turismo: base e alíquota</td><td>Na intermediação de serviços turísticos, a base é o valor da operação, deduzidos os valores repassados aos fornecedores intermediados, com base no documento do agenciamento. A alíquota é a mesma da hotelaria e dos parques</td><td>Art. 289, I e II</td></tr>
+      <tr><td>Agência de turismo: crédito</td><td>É permitida a apropriação de créditos nas aquisições de bens e serviços pela agência, vedado o crédito dos valores deduzidos da base</td><td>Art. 291</td></tr>
+      <tr><td>Plataformas de reserva</td><td>As plataformas digitais podem ser responsáveis pelo imposto das operações intermediadas (veja o <a href="#aula-perfil-software-servicos-digitais" style="color:var(--lav3);font-weight:700;">perfil de software e serviços digitais</a>)</td><td>Arts. 22 e 23</td></tr>
+    </table>
+    <div class="highlight">
+      <span class="material-symbols-outlined">percent</span>
+      <div>A redução de 40% é <b>sobre a alíquota de referência</b>, que o Senado fixa por resolução. Os valores desta aula usam alíquotas hipotéticas. As reduções de 30%, 60% e 100% de outros regimes não se aplicam a este capítulo.</div>
+    </div>
+  </section>
+
+  <section id="atencao">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">warning</span></div>
+      <div><h2>3. Pontos de Atenção</h2><div class="sub">Onde o setor tende a ter dúvidas e perdas</div></div>
+    </div>
+    <ul class="checklist">
+      <li><span class="material-symbols-outlined">call_split</span><div><b>O que entra no regime:</b> a redução vale para o fornecimento de alimentação e bebidas e para os serviços listados. Itens revendidos sem preparo e bebidas alcoólicas ficam de fora (por fonte secundária). O cardápio e o cadastro de produtos definem a alíquota de cada receita.</div></li>
+      <li><span class="material-symbols-outlined">inventory_2</span><div><b>Crédito de entrada menor:</b> os insumos de cozinha, como hortifrúti e itens da cesta básica, podem ter alíquota zero, e quem compra a alíquota zero não gera crédito. O restaurante pode ter menos crédito a abater do que um setor que compra com alíquota padrão (veja o caso).</div></li>
+      <li><span class="material-symbols-outlined">groups</span><div><b>Cliente empresa:</b> o adquirente não toma crédito na alimentação e na hospedagem do regime (por fonte secundária). Contratos corporativos de eventos, hospedagem e refeições podem pesar no preço.</div></li>
+      <li><span class="material-symbols-outlined">travel_explore</span><div><b>Agência de turismo:</b> a base é só a margem de intermediação, e a agência se credita de suas aquisições, exceto dos valores deduzidos da base. O repasse ao fornecedor precisa constar do documento do agenciamento.</div></li>
+      <li><span class="material-symbols-outlined">home_work</span><div><b>Locação por temporada:</b> o imóvel residencial mobiliado oferecido a hóspedes entra no conceito de hotelaria. Quem aluga por temporada deve conferir o enquadramento.</div></li>
+    </ul>
+    <div class="highlight red" id="pn-43" data-painel="aula-perfil-turismo-alimentacao#atencao">
+      <span class="material-symbols-outlined">flag</span>
+      <div><b>Partes do regime sem conferência:</b> os arts. 273 a 276 (bares e restaurantes), 278 a 279 e 282 a 287, 290 e a vedação de crédito do adquirente (arts. 276 e 283) foram lidos só em trechos ou por fonte secundária. Itens fora do regime e gorjetas também não foram conferidos. O estado fica no painel.</div>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">ramen_dining</span> Caso do restaurante (hipotético): o crédito de entrada</h4>
+      <p>Um restaurante fatura R$ 500.000 por mês de refeições e tem R$ 50.000 de despesas gerais (aluguel e energia) a 25%. Alíquota padrão hipotética de 25%, reduzida em 40%, o que dá 15% e um débito de R$ 75.000. Os insumos de R$ 150.000 podem ter alíquota padrão ou zero:</p>
+      <div class="case-mini"><span class="label">Cenário A, insumos a 25%: crédito de R$ 37.500 + R$ 12.500 das despesas gerais. Recolhimento: R$ 75.000 − R$ 50.000</span><span class="val">R$ 25.000</span></div>
+      <div class="case-mini total"><span class="label">Cenário B, insumos a alíquota zero (sem crédito): só o crédito de R$ 12.500 das despesas gerais. Recolhimento: R$ 75.000 − R$ 12.500</span><span class="val">R$ 62.500</span></div>
+      <p>A mesma redução de 40% leva a recolhimentos diferentes conforme a alíquota dos insumos. Os valores são hipotéticos.</p>
+    </div>
+    <div class="case-card">
+      <h4><span class="material-symbols-outlined">luggage</span> Caso da agência de turismo (hipotético): só a margem</h4>
+      <p>Uma agência vende um pacote de R$ 10.000 e repassa R$ 8.000 aos fornecedores intermediados (hotel e transporte), com o repasse comprovado no documento do agenciamento. A alíquota efetiva hipotética é de 15% (25% reduzida em 40%):</p>
+      <div class="case-mini"><span class="label">Base de cálculo: R$ 10.000 − R$ 8.000 repassados</span><span class="val">R$ 2.000</span></div>
+      <div class="case-mini"><span class="label">IBS e CBS: 15% de R$ 2.000</span><span class="val">R$ 300</span></div>
+      <div class="case-mini total"><span class="label">Se incidissem sobre o valor total de R$ 10.000, o imposto seria de 15% × R$ 10.000</span><span class="val">R$ 1.500</span></div>
+      <p>O regime tributa a margem de intermediação. Os números são hipotéticos.</p>
+    </div>
+  </section>
+
+  <section id="tempo">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">timeline</span></div>
+      <div><h2>4. Linha do Tempo do Setor</h2><div class="sub">O que muda de 2026 a 2033</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Ano</th><th>O que muda para o setor</th></tr>
+      <tr><td>2026</td><td>Teste, com CBS a 0,9% e IBS a 0,1% destacados nos documentos fiscais, com dispensa de recolhimento para quem cumpre as obrigações. ISS, ICMS, PIS e COFINS seguem</td></tr>
+      <tr><td>2027</td><td>PIS e COFINS saem e a CBS passa a valer plena, já com a redução de 40% do regime específico. O ICMS e o ISS seguem</td></tr>
+      <tr><td>2029 a 2032</td><td>ICMS e ISS caem a 90%, 80%, 70% e 60% e o IBS sobe. Os benefícios locais do setor reduzem na mesma rampa (<a href="#aula-preco-na-transicao" style="color:var(--lav3);font-weight:700;">preço na transição</a>)</td></tr>
+      <tr><td>2033</td><td>ICMS e ISS extintos e IBS pleno, com a redução de 40% aplicada sobre a alíquota de referência</td></tr>
+    </table>
+  </section>
+
+  <section id="ficha">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">assignment</span></div>
+      <div><h2>5. Ficha do Perfil para o SIS</h2><div class="sub">Os parâmetros do setor, num quadro padronizado</div></div>
+    </div>
+    <table class="data">
+      <tr><th>Campo</th><th>Valor</th></tr>
+      <tr><td>Setor</td><td>Turismo, hotelaria e alimentação fora do lar</td></tr>
+      <tr><td>Regime aplicável</td><td>Regime específico do Capítulo VII (arts. 273 a 291): bares e restaurantes, hotelaria, parques de diversão e temáticos e agências de turismo</td></tr>
+      <tr><td>Redução de alíquota</td><td>40% sobre a alíquota de referência (art. 281)</td></tr>
+      <tr><td>Particularidades de crédito</td><td>O fornecedor se credita pelas regras gerais; o adquirente não toma crédito na alimentação e na hospedagem do regime (por fonte secundária); agência de turismo se credita, exceto dos valores deduzidos da base</td></tr>
+      <tr><td>Base de cálculo</td><td>Valor da operação na hotelaria e nos parques; valor da operação menos os repasses a fornecedores na agência de turismo (art. 289)</td></tr>
+      <tr><td>Benefícios em extinção</td><td>Benefícios de ICMS e ISS do setor, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso</td></tr>
+      <tr><td>Documentos e obrigações do setor</td><td>Cadastro de produtos e cardápio por alíquota; documento do agenciamento com os repasses; documentos fiscais com campos de IBS e CBS</td></tr>
+      <tr><td>Pontos de atenção</td><td>O que entra no regime; crédito de entrada; cliente empresa; agência de turismo; locação por temporada</td></tr>
+      <tr><td>Itens do painel</td><td>Partes do regime sem conferência</td></tr>
+    </table>
+  </section>
+
+  <section id="quiz">
+    <div class="sec-head">
+      <div class="ic"><span class="material-symbols-outlined">quiz</span></div>
+      <div><h2>🎯 Teste Seus Conhecimentos</h2><div class="sub">10 perguntas sorteadas de um banco maior — aprovação com 70% de acerto</div></div>
+    </div>
+    <div class="quiz-box" id="quizBox"></div>
+  </section>
+
+  <div class="refs">
+    <h3><span class="material-symbols-outlined" style="color:var(--lav2);">menu_book</span> Base legal e referências</h3>
+    <ul>
+      <li>Lei Complementar nº 214/2025, Capítulo VII do Título V (arts. 273 a 291): arts. 277 e 280 (hotelaria, parques de diversão e temáticos), art. 281 (redução de 40%), arts. 288 a 291 (agências de turismo, com o art. 289 sobre a base e o art. 291 sobre o crédito) e arts. 22 e 23 (plataformas digitais, por remissão).</li>
+      <li>Lei Complementar nº 227/2026. Resolução do Senado Federal sobre a alíquota de referência (em definição).</li>
+    </ul>
+    <p>Aulas relacionadas: <a href="#aula5-aliquotas" style="color:var(--lav3);font-weight:700;">alíquotas e reduções</a>, <a href="#aula-perfil-comercio-varejo" style="color:var(--lav3);font-weight:700;">perfil de comércio e varejo</a>, <a href="#aula-perfil-logistica-ecommerce" style="color:var(--lav3);font-weight:700;">perfil de logística</a> e <a href="#aula-perfil-software-servicos-digitais" style="color:var(--lav3);font-weight:700;">perfil de software</a>.</p>
+  </div>
+
+</div>
+</template>
+<script type="application/json" id="quiz-aula-perfil-turismo-alimentacao">
+[
+ {
+  "q": "Que segmentos o regime específico do Capítulo VII da LC 214/2025 alcança no turismo e na alimentação?",
+  "options": [
+   "Qualquer empresa que atenda a turistas, inclusive o comércio e os serviços de saúde da região",
+   "Bares e restaurantes, hotelaria, parques de diversão e temáticos e agências de turismo",
+   "Somente os restaurantes de hotel e os parques temáticos, e nenhum outro tipo de estabelecimento",
+   "Somente as agências de turismo e as companhias aéreas, com as demais atividades na regra geral"
+  ],
+  "correct": 1,
+  "section": "setor",
+  "sectionLabel": "1. O setor e a reforma",
+  "rationale": "O capítulo trata de bares e restaurantes, hotelaria, parques e agências de turismo."
+ },
+ {
+  "q": "Qual é a redução de alíquota das operações do capítulo (art. 281)?",
+  "options": [
+   "30% das alíquotas, como nas profissões intelectuais fiscalizadas por conselho profissional",
+   "60% das alíquotas, como nos serviços de saúde e de educação, nos medicamentos e nos insumos",
+   "100% das alíquotas, com alíquota zero para todo o turismo realizado no território nacional",
+   "40% das alíquotas de IBS e CBS"
+  ],
+  "correct": 3,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 281 reduz em 40% as alíquotas das operações do capítulo."
+ },
+ {
+  "q": "Com a alíquota de referência de 26,5%, qual seria a alíquota efetiva com a redução de 40%?",
+  "options": [
+   "15,9%, que é 26,5% × 0,60",
+   "5,3%, que é 26,5% × 0,20, pela soma da redução de 40% com a de 60% da saúde",
+   "10,6%, que é 26,5% × 0,40, a parcela que corresponde à redução prevista no art. 281",
+   "26,5%, porque a redução de 40% só vale para as operações realizadas com cartão de crédito"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "26,5% reduzido em 40% fica em 26,5% × 0,60 = 15,9%."
+ },
+ {
+  "q": "Qual é a base de cálculo na hotelaria e nos parques de diversão e temáticos (art. 280)?",
+  "options": [
+   "A margem de lucro do estabelecimento, depois de deduzidos os custos de hospedagem",
+   "O valor da operação",
+   "O valor repassado aos fornecedores, como acontece nas agências de turismo",
+   "O valor das diárias menos o das refeições servidas aos hóspedes no mesmo período"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 280 adota o valor da operação."
+ },
+ {
+  "q": "O que a lei considera serviço de hotelaria?",
+  "options": [
+   "Somente a hospedagem em hotéis e pousadas registrados no órgão público de turismo",
+   "O alojamento temporário e outros serviços incluídos no valor cobrado, em unidades de uso exclusivo dos hóspedes ou em imóvel residencial mobiliado",
+   "Somente a hospedagem com refeições incluídas na diária, qualquer que seja o imóvel utilizado",
+   "Somente a hospedagem em imóveis de uso exclusivo dos hóspedes, e nunca em imóveis residenciais"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O conceito inclui o imóvel residencial mobiliado, ainda que de uso não exclusivo."
+ },
+ {
+  "q": "Como o hotel é tratado em relação à alimentação e às bebidas que fornece?",
+  "options": [
+   "Essas operações observam o regime específico de bares e restaurantes",
+   "Ficam isentas, porque são incluídas no valor da hospedagem cobrada do hóspede",
+   "Seguem o regime da hotelaria, com base de cálculo igual ao valor da diária cobrada",
+   "Seguem a regra geral, com alíquota padrão, porque o hotel não é restaurante"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "A lei manda aplicar o regime de bares e restaurantes à alimentação e bebidas dos hotéis e parques."
+ },
+ {
+  "q": "Qual é a base de cálculo da agência de turismo na intermediação (art. 289, I)?",
+  "options": [
+   "O valor da operação, deduzidos os valores repassados aos fornecedores intermediados, com base no documento do agenciamento",
+   "O valor total do pacote vendido, sem nenhuma dedução de repasses aos fornecedores",
+   "O valor repassado aos fornecedores intermediados, e não o valor cobrado do cliente",
+   "O valor das comissões recebidas dos fornecedores, sem considerar a taxa cobrada do cliente"
+  ],
+  "correct": 0,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "A base é a margem de intermediação, com os repasses documentados."
+ },
+ {
+  "q": "Como a agência de turismo trata o crédito (art. 291)?",
+  "options": [
+   "Pode se creditar só dos valores repassados aos fornecedores, e de nenhuma outra aquisição",
+   "Pode se creditar nas aquisições de bens e serviços, exceto dos valores deduzidos da base",
+   "Não pode se creditar de nada, porque a base já é reduzida pela dedução dos repasses",
+   "Pode se creditar de tudo, inclusive dos valores repassados e deduzidos da base de cálculo"
+  ],
+  "correct": 1,
+  "section": "regimes",
+  "sectionLabel": "2. Regime aplicável",
+  "rationale": "O art. 291 permite os créditos e veda o dos valores deduzidos da base."
+ },
+ {
+  "q": "No caso do restaurante (receita de R$ 500.000, alíquota efetiva de 15%), qual é o débito?",
+  "options": [
+   "R$ 75.000, que é 15% de R$ 500.000",
+   "R$ 200.000, que é 40% de R$ 500.000, o percentual da redução, e não o da alíquota",
+   "R$ 50.000, que é 10% de R$ 500.000, pela redução de 60% do regime de saúde",
+   "R$ 125.000, que é 25% de R$ 500.000, sem a redução de 40% do regime específico"
+  ],
+  "correct": 0,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "25% × 0,60 = 15%, e 15% de R$ 500.000 são R$ 75.000."
+ },
+ {
+  "q": "No cenário A (insumos de R$ 150.000 a 25% e despesas gerais de R$ 50.000), quanto o restaurante recolhe?",
+  "options": [
+   "R$ 62.500, que é o recolhimento do cenário com insumos a alíquota zero",
+   "R$ 75.000, porque os insumos de cozinha não geram crédito para o restaurante",
+   "R$ 25.000: débito de R$ 75.000 menos créditos de R$ 50.000",
+   "R$ 37.500, que é só o crédito dos insumos, e não o recolhimento do restaurante"
+  ],
+  "correct": 2,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "Os créditos somam R$ 37.500 (insumos) + R$ 12.500 (despesas), e o recolhimento é de R$ 25.000."
+ },
+ {
+  "q": "E no cenário B (insumos com alíquota zero), quanto recolhe?",
+  "options": [
+   "R$ 75.000, porque as despesas gerais do restaurante também deixam de gerar crédito",
+   "R$ 25.000, porque os insumos de alíquota zero também geram crédito integral de 25%",
+   "R$ 62.500: débito de R$ 75.000 menos crédito de R$ 12.500 das despesas gerais",
+   "R$ 37.500, que é o crédito dos insumos do cenário A, e não o recolhimento do cenário B"
+  ],
+  "correct": 2,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "Insumos com alíquota zero não geram crédito, e só as despesas gerais abatem o débito."
+ },
+ {
+  "q": "No caso da agência (pacote de R$ 10.000, repasse de R$ 8.000, alíquota efetiva de 15%), qual é o imposto?",
+  "options": [
+   "R$ 1.500, que é 15% do valor total do pacote de R$ 10.000, sem dedução do repasse",
+   "R$ 2.500, que é 25% do valor total do pacote, sem a redução de 40%",
+   "R$ 1.200, que é 15% do valor repassado aos fornecedores intermediados pela agência",
+   "R$ 300, que é 15% da base de R$ 2.000"
+  ],
+  "correct": 3,
+  "section": "atencao",
+  "sectionLabel": "3. Pontos de atenção",
+  "rationale": "A base é R$ 10.000 − R$ 8.000 = R$ 2.000, e 15% disso são R$ 300."
+ },
+ {
+  "q": "O que muda para o setor em 2027, segundo a linha do tempo do perfil?",
+  "options": [
+   "O ICMS e o ISS são extintos e o IBS passa a valer integralmente, com alíquota única",
+   "A redução de 40% é extinta, e o setor passa à alíquota padrão da CBS e do IBS",
+   "O setor passa a ser imune ao IBS e à CBS, qualquer que seja o tipo de estabelecimento",
+   "PIS e COFINS saem e a CBS plena entra, já com a redução de 40% do regime específico"
+  ],
+  "correct": 3,
+  "section": "tempo",
+  "sectionLabel": "4. Linha do tempo",
+  "rationale": "Em 2027 saem PIS e COFINS e entra a CBS plena. ICMS e ISS só caem a partir de 2029."
+ },
+ {
+  "q": "Para que serve a ficha do perfil para o SIS?",
+  "options": [
+   "Calcular automaticamente o imposto devido por cada empresa, sem necessidade de revisão do contador",
+   "Registrar o resultado fiscal de cada empresa do setor, ano a ano, para fins de fiscalização",
+   "Padronizar os parâmetros do setor (regime, reduções, crédito, benefícios e obrigações) para alimentar o perfil de empresa da ferramenta",
+   "Substituir a leitura da lei complementar, que deixa de ser necessária para quem usa o SIS"
+  ],
+  "correct": 2,
+  "section": "ficha",
+  "sectionLabel": "5. Ficha para o SIS",
+  "rationale": "A ficha organiza os parâmetros do setor, e o contador continua revisando cada caso."
+ }
+]
+</script>
+
 <script>
 /* ===== Motor de busca (client-side, sem servidor) ===== */
 const SEARCH_ENTRIES = [];   // preenchido por buildSearchEntries() a partir das aulas do próprio arquivo
@@ -17649,7 +18389,9 @@ const modules = [
       {title:'Perfil Setorial: Energia, Combustíveis e Mineração', desc:'Regime monofásico de combustíveis com alíquota por unidade de medida (arts. 172 a 180), vedação de crédito na revenda, recolhimento da energia elétrica no fornecimento (art. 28), Imposto Seletivo na extração de bens minerais com teto de 0,25% (art. 422), casos numéricos, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-energia-combustiveis-mineracao.html'},
       {title:'Perfil Setorial: Serviços Profissionais e Contabilidade', desc:'Redução de 30% para as 18 profissões intelectuais fiscalizadas por conselho (art. 127), requisitos para pessoa física e sociedades, folha sem crédito, caso do escritório contábil (quem sente o preço), linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-servicos-profissionais-contabilidade.html'},
       {title:'Perfil Setorial: Comércio e Varejo', desc:'Regra geral com alíquota por produto (cesta básica zero, 60% em alimentos e higiene, padrão nos demais), saldo credor no varejo de alimentos, descontos e programas de fidelidade na base, crédito presumido do estoque e de bens usados, substituição tributária na transição, casos numéricos, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-comercio-varejo.html'},
-      {title:'Perfil Setorial: Indústria e Zona Franca', desc:'Não cumulatividade ampla e IPI com alíquota zero, bens de capital, regime da Zona Franca de Manaus (suspensão na importação, alíquota zero nas entradas nacionais, créditos presumidos nas compras e nas saídas), casos numéricos, linha do tempo até 2073 e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-industria-zona-franca.html'}
+      {title:'Perfil Setorial: Indústria e Zona Franca', desc:'Não cumulatividade ampla e IPI com alíquota zero, bens de capital, regime da Zona Franca de Manaus (suspensão na importação, alíquota zero nas entradas nacionais, créditos presumidos nas compras e nas saídas), casos numéricos, linha do tempo até 2073 e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-industria-zona-franca.html'},
+      {title:'Perfil Setorial: Educação', desc:'Três tratamentos: redução de 60% para os serviços do Anexo II (art. 129), CBS zero no ensino superior do Prouni (art. 308) e imunidade das entidades sem fins lucrativos (art. 9º, III). Segregação de receita, folha sem crédito, casos numéricos da escola e da faculdade, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-educacao.html'},
+      {title:'Perfil Setorial: Turismo, Hotelaria e Alimentação Fora do Lar', desc:'Regime específico do Capítulo VII (arts. 273 a 291): redução de 40% para bares, restaurantes, hotelaria, parques e agências de turismo, base da hotelaria como valor da operação, base da agência como margem de intermediação, regras de crédito, casos numéricos do restaurante e da agência, linha do tempo e ficha para o SIS.', href:'1-Modulo/Bonus/aula-perfil-turismo-alimentacao.html'}
     ]},
     {t:'Precificação e Cenários na Reforma Tributária', d:'Precificação e cenários na reforma.', h:'4h', materials:[
       {title:'Preço na Transição: ICMS e ISS por Dentro, IBS e CBS por Fora', desc:'As regras de base da convivência (2026 a 2032), a rampa do ADCT, a conta do preço passo a passo com as duas leituras da base do ICMS e do ISS, o ponto em aberto sobre IBS e CBS na base do ICMS e do ISS e o que muda no ERP, nos contratos e na margem.', href:'1-Modulo/Bonus/aula-preco-na-transicao.html'}
@@ -17829,13 +18571,27 @@ function markCrossLessonLinks(stem){
 }
 /* Tabelas ganham um contêiner com rolagem horizontal própria, para não ultrapassar a borda do cartão no celular. */
 function wrapTables(){
-  aulaView.querySelectorAll('table.data').forEach(t => {
+  const HINT = '↔ Arraste para o lado para ver tudo';
+  const addHint = el => {
+    const p = el.previousElementSibling;
+    if(p && p.classList.contains('scroll-hint')) return;
+    const d = document.createElement('div');
+    d.className = 'scroll-hint';
+    d.textContent = HINT;
+    el.parentNode.insertBefore(d, el);
+  };
+  aulaView.querySelectorAll('table').forEach(t => {
     if(t.parentElement && t.parentElement.classList.contains('table-wrap')) return;
+    let cols = 0;
+    Array.prototype.forEach.call(t.rows, r => { cols = Math.max(cols, r.cells.length); });
     const w = document.createElement('div');
     w.className = 'table-wrap';
+    w.setAttribute('data-cols', String(cols));
     t.parentNode.insertBefore(w, t);
     w.appendChild(t);
+    if(cols >= 3) addHint(w);
   });
+  aulaView.querySelectorAll('.icon-grid').forEach(g => addHint(g));
 }
 function showAula(stem, secId){
   const tpl = document.getElementById('tpl-' + stem);
