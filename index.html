@@ -391,6 +391,17 @@ body{margin:0;}
   #aula-view .table-wrap::-webkit-scrollbar-track, #aula-view .icon-grid::-webkit-scrollbar-track, #aula-view .flow::-webkit-scrollbar-track{background:rgba(50,65,85,0.1);border-radius:8px;}
   #aula-view .table-wrap::-webkit-scrollbar-thumb, #aula-view .icon-grid::-webkit-scrollbar-thumb, #aula-view .flow::-webkit-scrollbar-thumb{background:var(--lav);border-radius:8px;}
 }
+/* ===== Cabeçalho congelado nas tabelas (como no Excel) ===== */
+#aula-view table.data, #aula-view table.interactive{overflow:clip;}
+#aula-view table.data tr:first-child > th, #aula-view table.interactive tr:first-child > th{position:sticky;top:var(--topbar-h,49px);z-index:3;}
+@media (min-width:1001px){
+  #aula-view .table-wrap{overflow:visible;}
+  #aula-view .table-wrap > table.data, #aula-view .table-wrap > table.interactive{border-radius:12px;}
+}
+@media (max-width:1000px){
+  #aula-view .table-wrap{max-height:72vh;overflow:auto;}
+  #aula-view .table-wrap > table.data tr:first-child > th, #aula-view .table-wrap > table.interactive tr:first-child > th{top:0;}
+}
 /* ===== Bloco "Base legal e referências" (fecha cada aula) ===== */
 #aula-view .refs{background:var(--white);border:1px solid #d8d8d8;border-radius:12px;padding:16px 20px;margin:30px 0 8px;}
 #aula-view .refs h3{margin:0 0 8px;font-size:13.5px;display:flex;align-items:center;gap:6px;}
@@ -18593,6 +18604,12 @@ function wrapTables(){
   });
   aulaView.querySelectorAll('.icon-grid').forEach(g => addHint(g));
 }
+/* A faixa fixa do topo muda de altura conforme a largura da tela: medimos para o cabeçalho das tabelas grudar logo abaixo dela. */
+function syncTopbarH(){
+  const tb = aulaView.querySelector('.topbar');
+  if(tb && tb.offsetHeight) aulaView.style.setProperty('--topbar-h', tb.offsetHeight + 'px');
+}
+window.addEventListener('resize', syncTopbarH);
 function showAula(stem, secId){
   const tpl = document.getElementById('tpl-' + stem);
   if(!hubView.hidden) hubScroll = window.scrollY;
@@ -18611,7 +18628,7 @@ function showAula(stem, secId){
     markCrossLessonLinks(stem);
     wrapTables();
   }
-  hubView.hidden = true; aulaView.hidden = false;
+  hubView.hidden = true; aulaView.hidden = false; syncTopbarH();
   const target = secId ? aulaView.querySelector('#' + CSS.escape(secId)) : null;
   if(target) target.scrollIntoView({block:'center'}); else window.scrollTo(0, 0);
   if(target && target.hasAttribute('data-painel')) flashRef(target);
