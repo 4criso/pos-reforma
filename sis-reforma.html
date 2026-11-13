@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIS | Reforma Tributária</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,0,0" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap">
+<!--
+  SIS — hub de trabalho da Reforma Tributária (arquivo único), por perfil de empresa.
+  Rotas por hash: #portal, #plano, #cst. Ordem do arquivo: style (shell + escopo por visão),
+  nav, #view, blocos JSON (cst-data, perfis) e o script principal.
+  PERFIL PRIVADO: o bloco JSON com data-perfil e id perfil-infios concentra a logo, o perfil da empresa,
+  as frentes de trabalho e os códigos relevantes desse perfil. Apague esse bloco para obter uma versão genérica.
+  FICHA SETORIAL: o bloco setores-data (12 setores) é gerado por script a partir das fichas dos perfis setoriais do hub do PÓS: python3 gerar-setores.py hub-pos-reforma.html --inserir sis-reforma.html. Nunca digitar à mão.
+  DIAGNÓSTICO: o bloco checklist-data (sete blocos) é gerado por script: python3 gerar-checklist.py --inserir sis-reforma.html. Os itens são de redação própria. A classificação sugerida usa limites de trabalho (inferência de estudo).
+  FLUXO DE CAIXA: rota #caixa, usa os valores da carga efetiva e os prazos do campo caixa do perfil.
+  CALENDÁRIO DE PREÇO: rota #preco, usa os valores da carga efetiva (mesmas premissas).
+  CARGA EFETIVA: simulador parametrizável (rota #carga). Os valores iniciais vêm do campo carga do perfil; os do perfil privado ficam no bloco dele.
+  VERSÃO DA TABELA CST: os campos versao, publicacao e links do bloco cst-data alimentam o selo amarelo, a legenda e o rodapé da tela de consulta.
+  Ao carregar uma planilha nova, atualize versao e publicacao (os textos usam os marcadores {versao} e {publicacao}).
+  Tabela CST: gerada por script a partir do Informe Técnico oficial (nunca digitar à mão).
+-->
+<style>
+
+:root{
+  --charcoal:#324155; --yellow:#D0FF25; --platinum:#E7E7E7; --white:#FFFFFF;
+  --slate:#58636E; --lav:#A9A0EB; --lav1:#8377D1; --lav2:#6656D0; --lav3:#5436CC;
+  --nav-h:40px; --legend-h:34px;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:var(--platinum);color:var(--charcoal);}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;font-size:20px;line-height:1;}
+.topnav{background:var(--charcoal);border-bottom:1px solid rgba(255,255,255,0.1);position:sticky;top:0;z-index:40;height:var(--nav-h);}
+.topnav .inner{max-width:1260px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:4px;height:100%;}
+.topnav a{color:var(--platinum);text-decoration:none;font-size:12.5px;font-weight:700;padding:0 14px;height:100%;display:flex;align-items:center;border-bottom:3px solid transparent;}
+.topnav a:hover{color:var(--white);}
+.topnav a.active{color:var(--yellow);border-bottom-color:var(--yellow);}
+.topnav .spacer{flex:1;}
+.topnav .perfil{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--lav);font-weight:700;}
+.topnav select{background:var(--charcoal);color:var(--platinum);border:1px solid rgba(255,255,255,0.3);border-radius:6px;font-size:12px;padding:3px 8px;font-family:inherit;}
+.sis-brand{font-size:26px;font-weight:800;letter-spacing:-0.5px;color:var(--white);}
+.sis-brand span{color:var(--yellow);}
+[data-v="cst"] .src-badge a{color:var(--charcoal);text-decoration:underline;font-weight:800;}
+.sis-brand small{font-size:12px;font-weight:600;color:var(--lav);margin-left:10px;letter-spacing:0;}
+
+/* ===== Visão: Portal ===== */
+[data-v="portal"] header{background:var(--charcoal);color:var(--white);padding:44px 32px 40px;border-bottom:4px solid var(--yellow);}
+[data-v="portal"] .brand{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;max-width:1100px;margin-left:auto;margin-right:auto;}
+[data-v="portal"] .brand .logo{font-size:30px;font-weight:800;letter-spacing:-0.5px;color:var(--white);}
+[data-v="portal"] .brand .logo span{color:var(--yellow);}
+[data-v="portal"] .brand .tag{font-size:12px;color:var(--lav);font-weight:600;letter-spacing:0.3px;}
+[data-v="portal"] header .inner{max-width:1100px;margin:0 auto;}
+[data-v="portal"] header h1{margin:10px 0 8px;font-size:28px;font-weight:800;max-width:640px;line-height:1.25;}
+[data-v="portal"] header p{margin:0;font-size:14px;color:var(--platinum);max-width:640px;line-height:1.6;}
+[data-v="portal"] main{max-width:1100px;margin:0 auto;padding:36px 24px 60px;}
+[data-v="portal"] .section-title{font-size:13px;text-transform:uppercase;letter-spacing:0.6px;color:var(--slate);font-weight:800;margin:0 0 14px;}
+[data-v="portal"] .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:40px;}
+[data-v="portal"] .card{background:var(--white);border-radius:12px;padding:22px;
+    border-top:4px solid var(--lav2);
+    box-shadow:0 1px 3px rgba(50,65,85,0.1);
+    display:flex;flex-direction:column;gap:10px;
+    text-decoration:none;color:inherit;
+    transition:transform .15s ease, box-shadow .15s ease;}
+[data-v="portal"] .card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(50,65,85,0.15);}
+[data-v="portal"] .card .icon{width:38px;height:38px;border-radius:9px;background:var(--charcoal);color:var(--yellow);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;}
+[data-v="portal"] .card h3{margin:2px 0 0;font-size:16px;font-weight:800;}
+[data-v="portal"] .card p{margin:0;font-size:13px;color:var(--slate);line-height:1.5;flex:1;}
+[data-v="portal"] .card .status{font-size:11px;font-weight:800;letter-spacing:0.3px;text-transform:uppercase;
+    padding:4px 10px;border-radius:20px;width:fit-content;}
+[data-v="portal"] .status.live{background:#e8ffcf;color:#4a6b0a;}
+[data-v="portal"] .status.soon{background:var(--platinum);color:var(--slate);}
+[data-v="portal"] .card.disabled{opacity:0.65;cursor:default;}
+[data-v="portal"] .card.disabled:hover{transform:none;box-shadow:0 1px 3px rgba(50,65,85,0.1);}
+[data-v="portal"] .roadmap{background:var(--white);border-radius:12px;padding:24px 26px;border:1px solid #d8d8d8;}
+[data-v="portal"] .roadmap h3{margin:0 0 12px;font-size:15px;}
+[data-v="portal"] .roadmap ol{margin:0;padding-left:20px;font-size:13.5px;line-height:1.9;color:var(--charcoal);}
+[data-v="portal"] .roadmap li span{color:var(--slate);font-size:12.5px;}
+[data-v="portal"] footer{max-width:1100px;margin:0 auto 40px;padding:0 24px;font-size:12px;color:var(--slate);line-height:1.6;}
+
+
+/* ===== Visão: Plano de Ação ===== */
+[data-v="plano"] header{background:var(--charcoal);color:var(--white);padding:26px 32px 22px;border-bottom:4px solid var(--yellow);}
+[data-v="plano"] .brand{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
+[data-v="plano"] .brand .logo{font-size:26px;font-weight:800;letter-spacing:-0.5px;color:var(--white);}
+[data-v="plano"] .brand .logo span{color:var(--yellow);}
+[data-v="plano"] .brand .tag{font-size:12px;color:var(--lav);font-weight:600;}
+[data-v="plano"] header h1{margin:6px 0 2px;font-size:19px;font-weight:700;}
+[data-v="plano"] header p{margin:0;font-size:12.5px;color:var(--platinum);max-width:780px;line-height:1.5;}
+[data-v="plano"] header a.back{color:var(--lav);font-size:12px;text-decoration:none;font-weight:700;}
+[data-v="plano"] main{max-width:1180px;margin:0 auto;padding:24px 24px 60px;}
+[data-v="plano"] .progress-wrap{background:var(--white);border-radius:12px;padding:18px 22px;margin-bottom:24px;border:1px solid #d8d8d8;}
+[data-v="plano"] .progress-wrap h2{margin:0 0 4px;font-size:14px;}
+[data-v="plano"] .progress-wrap .sub{font-size:12px;color:var(--slate);margin-bottom:12px;}
+[data-v="plano"] .bar{height:10px;background:var(--platinum);border-radius:6px;overflow:hidden;}
+[data-v="plano"] .bar-fill{height:100%;background:linear-gradient(90deg,var(--lav2),var(--yellow));}
+[data-v="plano"] .progress-legend{display:flex;gap:16px;margin-top:10px;font-size:11.5px;color:var(--slate);flex-wrap:wrap;}
+[data-v="plano"] .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;}
+[data-v="plano"] .dot.done{background:#7bc142;}
+[data-v="plano"] .dot.wip{background:var(--yellow);}
+[data-v="plano"] .dot.todo{background:#ccc;}
+[data-v="plano"] .section-title{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--slate);font-weight:800;margin:0 0 14px;}
+[data-v="plano"] .profile-table{background:var(--white);border-radius:12px;overflow:hidden;border:1px solid #d8d8d8;margin-bottom:32px;}
+[data-v="plano"] .profile-table table{width:100%;border-collapse:collapse;}
+[data-v="plano"] .profile-table td{padding:10px 16px;font-size:13px;border-bottom:1px solid var(--platinum);vertical-align:top;}
+[data-v="plano"] .profile-table tr:last-child td{border-bottom:none;}
+[data-v="plano"] .profile-table td.item{font-weight:700;width:220px;color:var(--charcoal);}
+[data-v="plano"] .status-pill{font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap;display:inline-block;}
+[data-v="plano"] .status-pill.confirmado{background:#e3f6d8;color:#3f6b1a;}
+[data-v="plano"] .status-pill.pendente{background:#fff1cf;color:#8a5a00;}
+[data-v="plano"] .accordion{margin-bottom:12px;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(50,65,85,0.12);}
+[data-v="plano"] .acc-header{display:flex;align-items:center;gap:12px;padding:16px 18px;background:var(--charcoal);color:var(--white);cursor:pointer;user-select:none;}
+[data-v="plano"] .acc-header:hover{background:#3c4d64;}
+[data-v="plano"] .acc-header .num{background:var(--yellow);color:var(--charcoal);font-weight:800;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+[data-v="plano"] .acc-header .titlewrap{flex:1;}
+[data-v="plano"] .acc-header h3{margin:0;font-size:14.5px;font-weight:800;}
+[data-v="plano"] .acc-header .chev{font-size:11px;color:var(--lav);transition:transform .2s ease;flex-shrink:0;}
+[data-v="plano"] .acc-header.open .chev{transform:rotate(90deg);}
+[data-v="plano"] .status-tag{font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+[data-v="plano"] .status-tag.todo{background:rgba(255,255,255,0.15);color:var(--platinum);}
+[data-v="plano"] .status-tag.wip{background:var(--yellow);color:var(--charcoal);}
+[data-v="plano"] .status-tag.done{background:#7bc142;color:#1c3300;}
+[data-v="plano"] .acc-body{background:var(--white);max-height:0;overflow:hidden;transition:max-height .3s ease;}
+[data-v="plano"] .acc-body.expanded{max-height:2000px;}
+[data-v="plano"] .acc-body-inner{padding:18px 22px 20px;}
+[data-v="plano"] .acc-body-inner p{margin:0 0 12px;font-size:13.5px;line-height:1.6;color:var(--charcoal);}
+[data-v="plano"] .acc-body-inner ul{margin:0 0 14px;padding-left:20px;font-size:13px;line-height:1.8;color:var(--slate);}
+[data-v="plano"] .tool-link{display:inline-flex;align-items:center;gap:8px;background:var(--lav);color:var(--charcoal);font-weight:800;font-size:12.5px;padding:8px 14px;border-radius:8px;text-decoration:none;margin-top:4px;}
+[data-v="plano"] .tool-link:hover{background:var(--lav1);color:var(--white);}
+[data-v="plano"] footer{max-width:1180px;margin:0 auto 40px;padding:0 24px;font-size:12px;color:var(--slate);line-height:1.6;}
+[data-v="plano"] footer .reminder{background:var(--white);border-left:4px solid var(--lav);padding:12px 16px;border-radius:6px;margin-top:10px;}
+
+
+/* ===== Visão: Carga efetiva ===== */
+[data-v="carga"] header{background:var(--charcoal);color:var(--white);padding:26px 32px 22px;border-bottom:4px solid var(--yellow);}
+[data-v="carga"] .brand{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
+[data-v="carga"] .brand .logo{font-size:26px;font-weight:800;letter-spacing:-0.5px;color:var(--white);}
+[data-v="carga"] .brand .logo span{color:var(--yellow);}
+[data-v="carga"] .brand .tag{font-size:12px;color:var(--lav);font-weight:600;}
+[data-v="carga"] header h1{margin:6px 0 2px;font-size:19px;font-weight:700;}
+[data-v="carga"] header p{margin:0;font-size:12.5px;color:var(--platinum);max-width:780px;line-height:1.5;}
+[data-v="carga"] header a.back{color:var(--lav);font-size:12px;text-decoration:none;font-weight:700;}
+[data-v="carga"] main{max-width:1180px;margin:0 auto;padding:24px 24px 60px;}
+[data-v="carga"] .progress-wrap{background:var(--white);border-radius:12px;padding:18px 22px;margin-bottom:24px;border:1px solid #d8d8d8;}
+[data-v="carga"] .progress-wrap h2{margin:0 0 4px;font-size:14px;}
+[data-v="carga"] .progress-wrap .sub{font-size:12px;color:var(--slate);margin-bottom:12px;}
+[data-v="carga"] .bar{height:10px;background:var(--platinum);border-radius:6px;overflow:hidden;}
+[data-v="carga"] .bar-fill{height:100%;background:linear-gradient(90deg,var(--lav2),var(--yellow));}
+[data-v="carga"] .progress-legend{display:flex;gap:16px;margin-top:10px;font-size:11.5px;color:var(--slate);flex-wrap:wrap;}
+[data-v="carga"] .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;}
+[data-v="carga"] .dot.done{background:#7bc142;}
+[data-v="carga"] .dot.wip{background:var(--yellow);}
+[data-v="carga"] .dot.todo{background:#ccc;}
+[data-v="carga"] .section-title{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--slate);font-weight:800;margin:0 0 14px;}
+[data-v="carga"] .profile-table{background:var(--white);border-radius:12px;overflow:hidden;border:1px solid #d8d8d8;margin-bottom:32px;}
+[data-v="carga"] .profile-table table{width:100%;border-collapse:collapse;}
+[data-v="carga"] .profile-table td{padding:10px 16px;font-size:13px;border-bottom:1px solid var(--platinum);vertical-align:top;}
+[data-v="carga"] .profile-table tr:last-child td{border-bottom:none;}
+[data-v="carga"] .profile-table td.item{font-weight:700;width:220px;color:var(--charcoal);}
+[data-v="carga"] .status-pill{font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap;display:inline-block;}
+[data-v="carga"] .status-pill.confirmado{background:#e3f6d8;color:#3f6b1a;}
+[data-v="carga"] .status-pill.pendente{background:#fff1cf;color:#8a5a00;}
+[data-v="carga"] .accordion{margin-bottom:12px;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(50,65,85,0.12);}
+[data-v="carga"] .acc-header{display:flex;align-items:center;gap:12px;padding:16px 18px;background:var(--charcoal);color:var(--white);cursor:pointer;user-select:none;}
+[data-v="carga"] .acc-header:hover{background:#3c4d64;}
+[data-v="carga"] .acc-header .num{background:var(--yellow);color:var(--charcoal);font-weight:800;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+[data-v="carga"] .acc-header .titlewrap{flex:1;}
+[data-v="carga"] .acc-header h3{margin:0;font-size:14.5px;font-weight:800;}
+[data-v="carga"] .acc-header .chev{font-size:11px;color:var(--lav);transition:transform .2s ease;flex-shrink:0;}
+[data-v="carga"] .acc-header.open .chev{transform:rotate(90deg);}
+[data-v="carga"] .status-tag{font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+[data-v="carga"] .status-tag.todo{background:rgba(255,255,255,0.15);color:var(--platinum);}
+[data-v="carga"] .status-tag.wip{background:var(--yellow);color:var(--charcoal);}
+[data-v="carga"] .status-tag.done{background:#7bc142;color:#1c3300;}
+[data-v="carga"] .acc-body{background:var(--white);max-height:0;overflow:hidden;transition:max-height .3s ease;}
+[data-v="carga"] .acc-body.expanded{max-height:2000px;}
+[data-v="carga"] .acc-body-inner{padding:18px 22px 20px;}
+[data-v="carga"] .acc-body-inner p{margin:0 0 12px;font-size:13.5px;line-height:1.6;color:var(--charcoal);}
+[data-v="carga"] .acc-body-inner ul{margin:0 0 14px;padding-left:20px;font-size:13px;line-height:1.8;color:var(--slate);}
+[data-v="carga"] .tool-link{display:inline-flex;align-items:center;gap:8px;background:var(--lav);color:var(--charcoal);font-weight:800;font-size:12.5px;padding:8px 14px;border-radius:8px;text-decoration:none;margin-top:4px;}
+[data-v="carga"] .tool-link:hover{background:var(--lav1);color:var(--white);}
+[data-v="carga"] footer{max-width:1180px;margin:0 auto 40px;padding:0 24px;font-size:12px;color:var(--slate);line-height:1.6;}
+[data-v="carga"] footer .reminder{background:var(--white);border-left:4px solid var(--lav);padding:12px 16px;border-radius:6px;margin-top:10px;}
+
+
+
+[data-v="carga"] .c-aviso{background:#fff7d6;border:1px solid #ecd98a;border-radius:10px;padding:10px 14px;margin-bottom:18px;font-size:12px;color:#6b4300;line-height:1.55;}
+[data-v="carga"] .c-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:20px;}
+[data-v="carga"] .c-grp{background:var(--white);border:1px solid #d8d8d8;border-radius:12px;padding:14px 16px;}
+[data-v="carga"] .c-grp h3{margin:0 0 10px;font-size:13px;}
+[data-v="carga"] .c-campo{display:flex;flex-direction:column;gap:3px;margin-bottom:9px;font-size:11.5px;color:var(--slate);}
+[data-v="carga"] .c-campo input{font-family:inherit;font-size:13px;padding:7px 9px;border:1.5px solid var(--platinum);border-radius:8px;color:var(--charcoal);background:var(--white);width:100%;}
+[data-v="carga"] .c-campo input:focus{outline:none;border-color:var(--lav2);}
+[data-v="carga"] .c-res{background:var(--white);border:1px solid #d8d8d8;border-radius:12px;padding:14px 16px;margin-bottom:18px;overflow-x:auto;}
+[data-v="carga"] .c-res h3{margin:0 0 10px;font-size:14px;}
+[data-v="carga"] .c-tab{width:100%;border-collapse:collapse;font-size:12px;min-width:780px;}
+[data-v="carga"] .c-tab th, [data-v="carga"] .c-tab td{padding:6px 8px;border-bottom:1px solid #eee;text-align:right;white-space:nowrap;}
+[data-v="carga"] .c-tab th:first-child, [data-v="carga"] .c-tab td:first-child{text-align:left;white-space:normal;position:sticky;left:0;background:#fff;}
+[data-v="carga"] .c-tab th{font-size:11px;color:var(--slate);background:#f6f5fb;}
+[data-v="carga"] .c-tab tr.tot td{font-weight:800;background:#f6f5fb;}
+[data-v="carga"] .c-tab td.neg{color:#8f1f14;}
+[data-v="carga"] .c-ler{margin:12px 0 0;padding-left:18px;font-size:12.5px;line-height:1.6;}
+[data-v="carga"] .c-notas{font-size:11.5px;color:var(--slate);line-height:1.6;margin-bottom:18px;}
+[data-v="carga"] .c-notas li{margin:2px 0;}
+[data-v="carga"] .btn{font-family:inherit;font-size:12.5px;font-weight:800;border:0;border-radius:8px;padding:9px 16px;cursor:pointer;background:var(--white);color:var(--charcoal);border:1.5px solid var(--platinum);margin-bottom:18px;}
+[data-v="carga"] .c-tab tr.rev td{background:#fff7d6;}
+[data-v="carga"] .c-tab td.rev-tag{font-weight:800;color:#6b4300;}
+/* ===== Visão: Ficha setorial ===== */
+[data-v="setor"] header{background:var(--charcoal);color:var(--white);padding:26px 32px 22px;border-bottom:4px solid var(--yellow);}
+[data-v="setor"] .brand{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
+[data-v="setor"] .brand .logo{font-size:26px;font-weight:800;letter-spacing:-0.5px;color:var(--white);}
+[data-v="setor"] .brand .logo span{color:var(--yellow);}
+[data-v="setor"] .brand .tag{font-size:12px;color:var(--lav);font-weight:600;}
+[data-v="setor"] header h1{margin:6px 0 2px;font-size:19px;font-weight:700;}
+[data-v="setor"] header p{margin:0;font-size:12.5px;color:var(--platinum);max-width:780px;line-height:1.5;}
+[data-v="setor"] header a.back{color:var(--lav);font-size:12px;text-decoration:none;font-weight:700;}
+[data-v="setor"] main{max-width:1180px;margin:0 auto;padding:24px 24px 60px;}
+[data-v="setor"] .progress-wrap{background:var(--white);border-radius:12px;padding:18px 22px;margin-bottom:24px;border:1px solid #d8d8d8;}
+[data-v="setor"] .progress-wrap h2{margin:0 0 4px;font-size:14px;}
+[data-v="setor"] .progress-wrap .sub{font-size:12px;color:var(--slate);margin-bottom:12px;}
+[data-v="setor"] .bar{height:10px;background:var(--platinum);border-radius:6px;overflow:hidden;}
+[data-v="setor"] .bar-fill{height:100%;background:linear-gradient(90deg,var(--lav2),var(--yellow));}
+[data-v="setor"] .progress-legend{display:flex;gap:16px;margin-top:10px;font-size:11.5px;color:var(--slate);flex-wrap:wrap;}
+[data-v="setor"] .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;}
+[data-v="setor"] .dot.done{background:#7bc142;}
+[data-v="setor"] .dot.wip{background:var(--yellow);}
+[data-v="setor"] .dot.todo{background:#ccc;}
+[data-v="setor"] .section-title{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--slate);font-weight:800;margin:0 0 14px;}
+[data-v="setor"] .profile-table{background:var(--white);border-radius:12px;overflow:hidden;border:1px solid #d8d8d8;margin-bottom:32px;}
+[data-v="setor"] .profile-table table{width:100%;border-collapse:collapse;}
+[data-v="setor"] .profile-table td{padding:10px 16px;font-size:13px;border-bottom:1px solid var(--platinum);vertical-align:top;}
+[data-v="setor"] .profile-table tr:last-child td{border-bottom:none;}
+[data-v="setor"] .profile-table td.item{font-weight:700;width:220px;color:var(--charcoal);}
+[data-v="setor"] .status-pill{font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap;display:inline-block;}
+[data-v="setor"] .status-pill.confirmado{background:#e3f6d8;color:#3f6b1a;}
+[data-v="setor"] .status-pill.pendente{background:#fff1cf;color:#8a5a00;}
+[data-v="setor"] .accordion{margin-bottom:12px;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(50,65,85,0.12);}
+[data-v="setor"] .acc-header{display:flex;align-items:center;gap:12px;padding:16px 18px;background:var(--charcoal);color:var(--white);cursor:pointer;user-select:none;}
+[data-v="setor"] .acc-header:hover{background:#3c4d64;}
+[data-v="setor"] .acc-header .num{background:var(--yellow);color:var(--charcoal);font-weight:800;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+[data-v="setor"] .acc-header .titlewrap{flex:1;}
+[data-v="setor"] .acc-header h3{margin:0;font-size:14.5px;font-weight:800;}
+[data-v="setor"] .acc-header .chev{font-size:11px;color:var(--lav);transition:transform .2s ease;flex-shrink:0;}
+[data-v="setor"] .acc-header.open .chev{transform:rotate(90deg);}
+[data-v="setor"] .status-tag{font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+[data-v="setor"] .status-tag.todo{background:rgba(255,255,255,0.15);color:var(--platinum);}
+[data-v="setor"] .status-tag.wip{background:var(--yellow);color:var(--charcoal);}
+[data-v="setor"] .status-tag.done{background:#7bc142;color:#1c3300;}
+[data-v="setor"] .acc-body{background:var(--white);max-height:0;overflow:hidden;transition:max-height .3s ease;}
+[data-v="setor"] .acc-body.expanded{max-height:2000px;}
+[data-v="setor"] .acc-body-inner{padding:18px 22px 20px;}
+[data-v="setor"] .acc-body-inner p{margin:0 0 12px;font-size:13.5px;line-height:1.6;color:var(--charcoal);}
+[data-v="setor"] .acc-body-inner ul{margin:0 0 14px;padding-left:20px;font-size:13px;line-height:1.8;color:var(--slate);}
+[data-v="setor"] .tool-link{display:inline-flex;align-items:center;gap:8px;background:var(--lav);color:var(--charcoal);font-weight:800;font-size:12.5px;padding:8px 14px;border-radius:8px;text-decoration:none;margin-top:4px;}
+[data-v="setor"] .tool-link:hover{background:var(--lav1);color:var(--white);}
+[data-v="setor"] footer{max-width:1180px;margin:0 auto 40px;padding:0 24px;font-size:12px;color:var(--slate);line-height:1.6;}
+[data-v="setor"] footer .reminder{background:var(--white);border-left:4px solid var(--lav);padding:12px 16px;border-radius:6px;margin-top:10px;}
+
+
+
+[data-v="setor"] .setor-sel{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--white);border:1px solid #d8d8d8;border-radius:12px;padding:12px 18px;margin-bottom:24px;font-size:12.5px;color:var(--slate);}
+[data-v="setor"] .setor-sel label{font-weight:800;color:var(--charcoal);}
+[data-v="setor"] .setor-sel select{font-family:inherit;font-size:13px;padding:7px 10px;border:1.5px solid var(--platinum);border-radius:8px;color:var(--charcoal);background:var(--white);min-width:300px;}
+[data-v="setor"] .setor-sel .nota{flex:1 1 100%;font-size:11.5px;}
+[data-v="setor"] .painel-list{display:grid;gap:10px;margin-bottom:28px;}
+[data-v="setor"] .painel-item{background:var(--white);border:1px solid #d8d8d8;border-left:4px solid var(--lav2);border-radius:10px;padding:12px 16px;font-size:12.5px;line-height:1.55;}
+[data-v="setor"] .painel-item .meta{font-size:11px;color:var(--slate);margin-top:6px;}
+[data-v="setor"] .pri{font-size:10.5px;font-weight:800;padding:2px 9px;border-radius:20px;margin-left:8px;display:inline-block;}
+[data-v="setor"] .pri.alta{background:#ffe2e0;color:#9a2a22;}
+[data-v="setor"] .pri.media{background:#fff1cf;color:#6b4300;}
+[data-v="setor"] .pri.baixa{background:#e3f6d8;color:#3f6b1a;}
+[data-v="setor"] .linkpos{display:inline-flex;align-items:center;gap:6px;margin:0 0 24px;color:var(--lav3);font-weight:800;font-size:13px;text-decoration:none;}
+[data-v="setor"] .linkpos:hover{text-decoration:underline;}
+[data-v="setor"] .vazio{background:var(--white);border:1px dashed #cfcfcf;border-radius:12px;padding:22px;font-size:13px;color:var(--slate);margin-bottom:24px;}
+[data-v="plano"] .setor-box{background:var(--white);border:1px solid #d8d8d8;border-radius:12px;padding:14px 20px;margin:-14px 0 32px;font-size:13px;}
+[data-v="plano"] .setor-box h4{margin:0 0 8px;font-size:13px;}
+[data-v="plano"] .setor-box ul{margin:0 0 10px;padding-left:18px;}
+[data-v="plano"] .setor-box li{margin:3px 0;}
+[data-v="plano"] .setor-box a{color:var(--lav3);font-weight:700;text-decoration:none;font-size:12.5px;}
+[data-v="portal"] .card h3{overflow-wrap:anywhere;}
+@media (max-width:700px){
+  [data-v="setor"] .profile-table{overflow-x:auto;}
+  [data-v="setor"] .profile-table td.item{width:120px;}
+  [data-v="setor"] .setor-sel select{min-width:0;width:100%;}
+}
+/* ===== Visão: Diagnóstico ===== */
+[data-v="diag"] header{background:var(--charcoal);color:var(--white);padding:26px 32px 22px;border-bottom:4px solid var(--yellow);}
+[data-v="diag"] .brand{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
+[data-v="diag"] .brand .logo{font-size:26px;font-weight:800;letter-spacing:-0.5px;color:var(--white);}
+[data-v="diag"] .brand .logo span{color:var(--yellow);}
+[data-v="diag"] .brand .tag{font-size:12px;color:var(--lav);font-weight:600;}
+[data-v="diag"] header h1{margin:6px 0 2px;font-size:19px;font-weight:700;}
+[data-v="diag"] header p{margin:0;font-size:12.5px;color:var(--platinum);max-width:780px;line-height:1.5;}
+[data-v="diag"] header a.back{color:var(--lav);font-size:12px;text-decoration:none;font-weight:700;}
+[data-v="diag"] main{max-width:1180px;margin:0 auto;padding:24px 24px 60px;}
+[data-v="diag"] .progress-wrap{background:var(--white);border-radius:12px;padding:18px 22px;margin-bottom:24px;border:1px solid #d8d8d8;}
+[data-v="diag"] .progress-wrap h2{margin:0 0 4px;font-size:14px;}
+[data-v="diag"] .progress-wrap .sub{font-size:12px;color:var(--slate);margin-bottom:12px;}
+[data-v="diag"] .bar{height:10px;background:var(--platinum);border-radius:6px;overflow:hidden;}
+[data-v="diag"] .bar-fill{height:100%;background:linear-gradient(90deg,var(--lav2),var(--yellow));}
+[data-v="diag"] .progress-legend{display:flex;gap:16px;margin-top:10px;font-size:11.5px;color:var(--slate);flex-wrap:wrap;}
+[data-v="diag"] .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;}
+[data-v="diag"] .dot.done{background:#7bc142;}
+[data-v="diag"] .dot.wip{background:var(--yellow);}
+[data-v="diag"] .dot.todo{background:#ccc;}
+[data-v="diag"] .section-title{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--slate);font-weight:800;margin:0 0 14px;}
+[data-v="diag"] .profile-table{background:var(--white);border-radius:12px;overflow:hidden;border:1px solid #d8d8d8;margin-bottom:32px;}
+[data-v="diag"] .profile-table table{width:100%;border-collapse:collapse;}
+[data-v="diag"] .profile-table td{padding:10px 16px;font-size:13px;border-bottom:1px solid var(--platinum);vertical-align:top;}
+[data-v="diag"] .profile-table tr:last-child td{border-bottom:none;}
+[data-v="diag"] .profile-table td.item{font-weight:700;width:220px;color:var(--charcoal);}
+[data-v="diag"] .status-pill{font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap;display:inline-block;}
+[data-v="diag"] .status-pill.confirmado{background:#e3f6d8;color:#3f6b1a;}
+[data-v="diag"] .status-pill.pendente{background:#fff1cf;color:#8a5a00;}
+[data-v="diag"] .accordion{margin-bottom:12px;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(50,65,85,0.12);}
+[data-v="diag"] .acc-header{display:flex;align-items:center;gap:12px;padding:16px 18px;background:var(--charcoal);color:var(--white);cursor:pointer;user-select:none;}
+[data-v="diag"] .acc-header:hover{background:#3c4d64;}
+[data-v="diag"] .acc-header .num{background:var(--yellow);color:var(--charcoal);font-weight:800;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+[data-v="diag"] .acc-header .titlewrap{flex:1;}
+[data-v="diag"] .acc-header h3{margin:0;font-size:14.5px;font-weight:800;}
+[data-v="diag"] .acc-header .chev{font-size:11px;color:var(--lav);transition:transform .2s ease;flex-shrink:0;}
+[data-v="diag"] .acc-header.open .chev{transform:rotate(90deg);}
+[data-v="diag"] .status-tag{font-size:10.5px;font-weight:800;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+[data-v="diag"] .status-tag.todo{background:rgba(255,255,255,0.15);color:var(--platinum);}
+[data-v="diag"] .status-tag.wip{background:var(--yellow);color:var(--charcoal);}
+[data-v="diag"] .status-tag.done{background:#7bc142;color:#1c3300;}
+[data-v="diag"] .acc-body{background:var(--white);max-height:0;overflow:hidden;transition:max-height .3s ease;}
+[data-v="diag"] .acc-body.expanded{max-height:2000px;}
+[data-v="diag"] .acc-body-inner{padding:18px 22px 20px;}
+[data-v="diag"] .acc-body-inner p{margin:0 0 12px;font-size:13.5px;line-height:1.6;color:var(--charcoal);}
+[data-v="diag"] .acc-body-inner ul{margin:0 0 14px;padding-left:20px;font-size:13px;line-height:1.8;color:var(--slate);}
+[data-v="diag"] .tool-link{display:inline-flex;align-items:center;gap:8px;background:var(--lav);color:var(--charcoal);font-weight:800;font-size:12.5px;padding:8px 14px;border-radius:8px;text-decoration:none;margin-top:4px;}
+[data-v="diag"] .tool-link:hover{background:var(--lav1);color:var(--white);}
+[data-v="diag"] footer{max-width:1180px;margin:0 auto 40px;padding:0 24px;font-size:12px;color:var(--slate);line-height:1.6;}
+[data-v="diag"] footer .reminder{background:var(--white);border-left:4px solid var(--lav);padding:12px 16px;border-radius:6px;margin-top:10px;}
+
+
+
+[data-v="diag"] .diag-aviso{background:#fff7d6;border:1px solid #ecd98a;border-radius:10px;padding:10px 14px;margin-bottom:18px;font-size:12px;color:#6b4300;line-height:1.55;}
+[data-v="diag"] .diag-resumo{background:var(--white);border:1px solid #d8d8d8;border-radius:12px;padding:16px 20px;margin-bottom:22px;}
+[data-v="diag"] .diag-resumo h3{margin:0 0 10px;font-size:14px;}
+[data-v="diag"] .diag-tab{width:100%;border-collapse:collapse;font-size:12.5px;}
+[data-v="diag"] .diag-tab td, [data-v="diag"] .diag-tab th{padding:6px 8px;border-bottom:1px solid #eee;text-align:left;vertical-align:middle;}
+[data-v="diag"] .diag-tab th{font-size:11px;color:var(--slate);text-transform:uppercase;letter-spacing:.4px;}
+[data-v="diag"] .barra{height:8px;background:#ececec;border-radius:6px;overflow:hidden;min-width:90px;}
+[data-v="diag"] .barra > i{display:block;height:100%;background:var(--lav2);}
+[data-v="diag"] .barra.risco > i{background:#c9573f;}
+[data-v="diag"] .classe{display:inline-block;font-weight:800;font-size:13px;padding:5px 14px;border-radius:20px;letter-spacing:.4px;}
+[data-v="diag"] .classe.CRITICO{background:#ffd9d4;color:#8f1f14;}
+[data-v="diag"] .classe.ALTO{background:#ffe6c7;color:#8a4a00;}
+[data-v="diag"] .classe.MODERADO{background:#fff1cf;color:#6b4300;}
+[data-v="diag"] .classe.BAIXO{background:#e3f6d8;color:#3f6b1a;}
+[data-v="diag"] .classe.NEUTRO{background:#dfe9ff;color:#25437f;}
+[data-v="diag"] .classe.SEM{background:#eee;color:#555;}
+[data-v="diag"] .motivos{margin:10px 0 0;padding-left:18px;font-size:12px;color:var(--slate);line-height:1.6;}
+[data-v="diag"] .limites{margin-top:8px;font-size:11.5px;color:var(--slate);}
+[data-v="diag"] .acoes{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 24px;}
+[data-v="diag"] .btn{font-family:inherit;font-size:12.5px;font-weight:800;border:0;border-radius:8px;padding:9px 16px;cursor:pointer;background:var(--lav2);color:#fff;}
+[data-v="diag"] .btn.sec{background:var(--white);color:var(--charcoal);border:1.5px solid var(--platinum);}
+[data-v="diag"] details.diag-bloco{background:var(--white);border:1px solid #d8d8d8;border-radius:12px;margin-bottom:12px;overflow:hidden;}
+[data-v="diag"] details.diag-bloco > summary{cursor:pointer;list-style:none;padding:13px 18px;font-weight:800;font-size:14px;display:flex;justify-content:space-between;gap:10px;align-items:center;}
+[data-v="diag"] details.diag-bloco > summary::-webkit-details-marker{display:none;}
+[data-v="diag"] .bloco-desc{padding:0 18px 8px;font-size:12px;color:var(--slate);}
+[data-v="diag"] .grupo-tit{padding:8px 18px 4px;font-size:11.5px;font-weight:800;color:var(--lav3);text-transform:uppercase;letter-spacing:.4px;}
+[data-v="diag"] .diag-item{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:8px 18px;border-top:1px solid #f0f0f0;font-size:12.5px;}
+[data-v="diag"] .diag-item .txt{flex:1 1 auto;line-height:1.5;}
+[data-v="diag"] .diag-item .dica{display:block;font-size:11px;color:var(--slate);margin-top:2px;}
+[data-v="diag"] .opts{display:flex;gap:4px;flex:0 0 auto;}
+[data-v="diag"] .opt{font-family:inherit;font-size:11px;font-weight:800;border:1.5px solid var(--platinum);background:var(--white);color:var(--slate);border-radius:7px;padding:5px 9px;cursor:pointer;}
+[data-v="diag"] .opt.on{background:var(--lav2);border-color:var(--lav2);color:#fff;}
+[data-v="diag"] .opt.on.neg{background:#c9573f;border-color:#c9573f;}
+[data-v="diag"] .sug{font-size:10px;font-weight:800;color:#6b4300;background:#fff1cf;border-radius:10px;padding:1px 7px;margin-left:6px;}
+@media (max-width:700px){
+  [data-v="diag"] .diag-item{flex-direction:column;align-items:flex-start;gap:6px;}
+  [data-v="diag"] .diag-resumo{overflow-x:auto;}
+  [data-v="diag"] .diag-tab{min-width:420px;}
+}
+/* ===== Visão: Consulta CST ===== */
+[data-v="cst"] h1,[data-v="cst"] h2,[data-v="cst"] h3{font-family:'Space Grotesk',sans-serif;}
+[data-v="cst"] header{background:linear-gradient(135deg,var(--charcoal) 60%,#3a4b62 100%);color:var(--white);padding:22px 32px 20px;border-bottom:4px solid var(--yellow);position:relative;overflow:hidden;}
+[data-v="cst"] header::after{content:'';position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(208,255,37,0.12),transparent 70%);}
+[data-v="cst"] .brand{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;}
+[data-v="cst"] header h1{margin:6px 0 2px;font-size:19px;font-weight:700;}
+[data-v="cst"] header p{margin:0;font-size:12.5px;color:var(--platinum);max-width:780px;line-height:1.5;}
+[data-v="cst"] .src-badge{display:inline-block;margin-top:8px;background:var(--yellow);color:var(--charcoal);font-weight:800;font-size:11px;padding:3px 10px;border-radius:20px;}
+[data-v="cst"] .controls{max-width:1260px;margin:20px auto 0;padding:0 24px;display:flex;gap:12px;flex-wrap:wrap;}
+[data-v="cst"] .controls input[type="text"]{flex:1;min-width:240px;padding:11px 14px;border:2px solid var(--charcoal);border-radius:8px;font-size:14px;outline:none;}
+[data-v="cst"] .controls input[type="text"]:focus{border-color:var(--lav2);box-shadow:0 0 0 3px rgba(101,86,208,0.15);}
+[data-v="cst"] .controls select{padding:11px 14px;border:2px solid var(--charcoal);border-radius:8px;font-size:13.5px;background:var(--white);color:var(--charcoal);min-width:230px;}
+[data-v="cst"] .controls label.chk{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;background:var(--white);border:2px solid var(--charcoal);border-radius:8px;padding:0 14px;cursor:pointer;}
+[data-v="cst"] .controls label.chk input{transform:scale(1.15);accent-color:var(--lav2);}
+[data-v="cst"] main{max-width:1260px;margin:0 auto;padding:16px 24px 20px;}
+[data-v="cst"] .legend{background:var(--white);border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:12.5px;color:var(--slate);border:1px solid #d8d8d8;}
+[data-v="cst"] .legend b{color:var(--charcoal);}
+[data-v="cst"] .count{font-size:13px;color:var(--slate);margin:4px 2px 10px;font-weight:600;}
+[data-v="cst"] .ind-legend-row{position:sticky;top:var(--nav-h);z-index:35;height:var(--legend-h);
+    display:grid;grid-template-columns: 84px 1.3fr repeat(8, 58px);gap:6px;align-items:center;
+    padding:0 14px;background:var(--charcoal);color:var(--platinum);font-size:8.4px;font-weight:800;
+    text-transform:uppercase;letter-spacing:.2px;text-align:center;border-radius:10px 10px 0 0;}
+[data-v="cst"] .ind-legend-row div:nth-child(1),[data-v="cst"] .ind-legend-row div:nth-child(2){text-align:left;color:var(--yellow);}
+[data-v="cst"] .accordion{margin-bottom:12px;border-radius:0 0 10px 10px;overflow:visible;box-shadow:0 1px 3px rgba(50,65,85,0.12);}
+[data-v="cst"] .accordion:first-of-type{border-radius:10px;}
+[data-v="cst"] .acc-header{display:grid;grid-template-columns: 84px 1.3fr repeat(8, 58px);align-items:center;gap:6px;padding:12px 14px;background:var(--white);color:var(--charcoal);cursor:pointer;user-select:none;border-left:5px solid var(--lav2);}
+[data-v="cst"] .acc-header:hover{background:#faf9ff;}
+[data-v="cst"] .acc-header .badge{background:var(--charcoal);color:var(--yellow);font-weight:800;padding:4px 0;border-radius:5px;font-size:13px;text-align:center;}
+[data-v="cst"] .acc-header .label{font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;}
+[data-v="cst"] .acc-header .chev{transition:transform .2s ease;font-size:11px;color:var(--lav2);flex-shrink:0;}
+[data-v="cst"] .acc-header.open .chev{transform:rotate(90deg);}
+[data-v="cst"] .acc-header.open{border-left-color:var(--yellow);}
+[data-v="cst"] .ind-col{display:flex;justify-content:center;}
+[data-v="cst"] .dot{width:10px;height:10px;border-radius:50%;background:#e2e2e2;}
+[data-v="cst"] .dot.on{background:var(--lav2);}
+[data-v="cst"] .acc-body{background:var(--white);max-height:0;overflow:hidden;transition:max-height .3s ease;}
+[data-v="cst"] .acc-body.expanded{max-height:none;overflow:visible;}
+[data-v="cst"] table{width:100%;border-collapse:collapse;}
+[data-v="cst"] thead th{position:sticky;top:calc(var(--nav-h) + var(--legend-h));z-index:25;
+    background:var(--lav);color:var(--charcoal);font-size:9.5px;text-transform:uppercase;
+    letter-spacing:.2px;font-weight:800;padding:7px 10px;text-align:left;white-space:nowrap;}
+[data-v="cst"] td{padding:8px 10px;text-align:left;font-size:12.5px;border-bottom:1px solid var(--platinum);vertical-align:top;}
+[data-v="cst"] td.code{font-family:'Consolas',monospace;font-weight:700;color:var(--lav3);white-space:nowrap;width:80px;}
+[data-v="cst"] tr:hover td{background:#faf9ff;}
+[data-v="cst"] tr.hl td{background:#fbffe8;}
+[data-v="cst"] tr.encerrado td{opacity:0.5;}
+[data-v="cst"] .pct-bar-wrap{display:flex;align-items:center;gap:6px;min-width:70px;}
+[data-v="cst"] .pct-bar{flex:1;height:6px;background:var(--platinum);border-radius:4px;overflow:hidden;min-width:36px;}
+[data-v="cst"] .pct-bar-fill{height:100%;background:linear-gradient(90deg,var(--lav1),var(--yellow));}
+[data-v="cst"] .pct-num{font-size:11px;font-weight:800;color:var(--charcoal);width:32px;text-align:right;}
+[data-v="cst"] .flag{width:9px;height:9px;border-radius:50%;background:#e2e2e2;display:inline-block;}
+[data-v="cst"] .flag.on{background:#7bc142;}
+[data-v="cst"] .doc-pill{display:inline-block;background:var(--platinum);color:var(--charcoal);font-weight:700;font-size:9.5px;padding:2px 6px;border-radius:10px;margin:1px 2px 1px 0;}
+[data-v="cst"] .end-pill{display:inline-block;background:#e57373;color:#fff;font-weight:800;font-size:10px;padding:2px 8px;border-radius:12px;margin-left:6px;}
+[data-v="cst"] .star{display:inline-block;margin-left:6px;font-size:10px;font-weight:800;color:var(--charcoal);background:var(--yellow);padding:2px 7px;border-radius:20px;}
+[data-v="cst"] .empty{text-align:center;padding:40px;color:var(--slate);font-size:14px;}
+[data-v="cst"] footer{max-width:1260px;margin:0 auto 40px;padding:0 24px;font-size:12px;color:var(--slate);line-height:1.6;}
+[data-v="cst"] footer a{color:var(--lav3);}
+[data-v="cst"] footer .disclaimer{background:var(--white);border-left:4px solid var(--lav);padding:12px 16px;border-radius:6px;margin-top:10px;}
+@media (max-width: 1050px){[data-v="cst"] .acc-header,[data-v="cst"] .ind-legend-row{grid-template-columns: 70px 1fr;}
+[data-v="cst"] .ind-col,[data-v="cst"] .ind-legend-row div:nth-child(n+3){display:none;}
+
+  }
+
+
+.aviso-topo{background:#8f1f14;color:#fff;font-size:12px;font-weight:700;text-align:center;padding:7px 14px;letter-spacing:.3px;}
+.estudo-box{max-width:1260px;margin:0 auto 36px;padding:14px 24px;font-size:12.5px;line-height:1.9;color:var(--slate);}
+.estudo-box b{display:block;color:var(--charcoal);margin-bottom:2px;}
+.estudo-box a{display:inline-block;margin:0 16px 0 0;color:var(--lav3);font-weight:700;text-decoration:none;}
+.estudo-box a:hover{text-decoration:underline;}
+#topnav a.nav-pos{margin-left:8px;}
+</style>
+</head>
+<body>
+<div id="avisoTopo"></div>
+<nav class="topnav"><div class="inner" id="topnav">
+  <a href="#portal" data-r="portal">Portal</a>
+  <a href="#plano" data-r="plano">Plano de Ação</a>
+  <a href="#cst" data-r="cst">Consulta CST</a>
+  <a href="#setor" data-r="setor">Ficha setorial</a>
+  <a href="#diagnostico" data-r="diagnostico">Diagnóstico</a>
+  <a href="#carga" data-r="carga">Carga efetiva</a>
+  <a href="#caixa" data-r="caixa">Fluxo de caixa</a>
+  <a href="#preco" data-r="preco">Calendário de preço</a>
+  <a href="#" id="navPos" class="nav-pos" target="_blank" rel="noopener" style="display:none">PÓS (estudos) ↗</a>
+  <span class="spacer"></span>
+  <label class="perfil">Perfil <select id="perfilSel" aria-label="Perfil de empresa"></select></label>
+</div></nav>
+<div id="view"></div>
+
+<script type="application/json" id="cst-data">{"cstIndicators":{"000":{"label":"Tributação integral","exigeTrib":1,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"010":{"label":"Tributação com alíquotas uniformes","exigeTrib":1,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"011":{"label":"Tributação com alíquotas uniformes reduzidas","exigeTrib":1,"monofasica":0,"reducao":1,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"200":{"label":"Alíquota reduzida","exigeTrib":1,"monofasica":0,"reducao":1,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"220":{"label":"Alíquota fixa","exigeTrib":1,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"222":{"label":"Redução de base de cálculo","exigeTrib":1,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":1},"221":{"label":"Alíquota fixa proporcional","exigeTrib":1,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"400":{"label":"Isenção","exigeTrib":0,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"410":{"label":"Imunidade e não incidência","exigeTrib":0,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"510":{"label":"Diferimento","exigeTrib":1,"monofasica":0,"reducao":0,"diferimento":1,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"515":{"label":"Diferimento com redução de alíquota","exigeTrib":1,"monofasica":0,"reducao":1,"diferimento":1,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"550":{"label":"Suspensão","exigeTrib":1,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"620":{"label":"Tributação monofásica","exigeTrib":0,"monofasica":1,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"800":{"label":"Transferência de crédito","exigeTrib":0,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":1,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"810":{"label":"Ajuste de IBS na ZFM","exigeTrib":0,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":1,"ajusteCompet":0,"redutorBC":0},"811":{"label":"Ajustes","exigeTrib":0,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":1,"redutorBC":0},"820":{"label":"Tributação em documento específico","exigeTrib":0,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0},"830":{"label":"Exclusão de base de cálculo","exigeTrib":1,"monofasica":0,"reducao":0,"diferimento":0,"transfCred":0,"credPresZFM":0,"ajusteCompet":0,"redutorBC":0}},"data":[["000","Tributação integral","000001","Situações tributadas integralmente pelo IBS e CBS.",["NFe","NFCe","CTe","CTe OS","BPe","BPe-TA","NF3e","NFSe","NFCom","NFAg","NFGas","DIR","DUIMP"],false,false,0,0,0,0],["000","Tributação integral","000002","Exploração de via",["NFSe Via"],false,false,0,0,0,0],["000","Tributação integral","000003","Regime automotivo - projetos incentivados (art. 311)",["NFe"],false,false,0,0,0,1],["000","Tributação integral","000004","Regime automotivo - projetos incentivados (art. 312)",["NFe"],false,false,0,0,0,1],["000","Tributação integral","000005","Operação com EAC destinado à mistura com gasolina A, mas com saída do biocombustível com destinação diversa",["NFe"],false,false,0,0,0,0],["000","Tributação integral","000006","Situações tributadas integralmente pelo IBS e CBS realizadas por autônomo",["NFSe"],false,false,0,0,0,0],["010","Tributação com alíquotas uniformes","010001","Operações do FGTS não realizadas pela Caixa Econômica Federal",["NFSe","DERE"],false,false,0,0,0,0],["010","Tributação com alíquotas uniformes","010002","Operações do serviço financeiro",["NFSe","DERE"],false,false,0,0,0,0],["011","Tributação com alíquotas uniformes reduzidas","011001","Planos de assistência funerária.",["DERE"],false,false,60,60,0,0],["011","Tributação com alíquotas uniformes reduzidas","011002","Planos de assistência à saúde",["DERE"],false,false,60,60,0,0],["011","Tributação com alíquotas uniformes reduzidas","011003","Intermediação de planos de assistência à saúde",["NFSe"],false,false,60,60,0,0],["011","Tributação com alíquotas uniformes reduzidas","011004","Concursos e prognósticos",["DERE"],false,false,0,0,0,0],["011","Tributação com alíquotas uniformes reduzidas","011005","Planos de assistência à saúde de animais domésticos",["DERE"],false,false,30,30,0,0],["200","Alíquota reduzida","200001","Serviços de transporte de bens até as zonas de processamento de exportação e bens exportados a partir das zonas de processamento de exportação",["CTe","NFSe"],false,false,100,100,0,0],["200","Alíquota reduzida","200002","Fornecimento ou importação para produtor rural não contribuinte ou TAC",["NFe","NFCe","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200003","Vendas de produtos destinados à alimentação humana (Anexo I)",["NFe","NFCe","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200004","Fornecimento de dispositivos médicos (Anexo XII)",["NFe","NFCe","NFSe","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200005","Fornecimento de dispositivos médicos para órgãos da administração pública e entidades de saúde imunes (Anexo IV)",["NFe","NFSe","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200006","Situação de emergência de saúde pública reconhecida pelo Poder público ",["NFe","NFCe","NFSe","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200007","Fornecimento dos dispositivos de acessibilidade próprios para pessoas com deficiência (Anexo XIII)",["NFe","NFCe","NFSe","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200008","Fornecimento dos dispositivos de acessibilidade próprios para pessoas com deficiência adquiridos por órgãos da administração pública (Anexo V)",["NFe","NFSe","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200009","Fornecimento dos medicamentos registrados na Anvisa",["NFe","NFCe","DIR","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200010","Fornecimento dos medicamentos registrados na Anvisa, adquiridos por órgãos da administração pública",["NFe","NFCe","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200011","Fornecimento das composições para nutrição enteral e parenteral quando adquiridas por órgãos da administração pública (Anexo VI)",["NFe","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200012","Situação de emergência de saúde pública reconhecida pelo Poder público",["NFe","NFCe","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200013","Fornecimento de tampões higiênicos, absorventes higiênicos internos ou externos",["NFe","NFCe","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200014","Fornecimento dos produtos hortícolas, frutas e ovos (Anexo XV)",["NFe","NFCe","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200015","Venda de automóveis de passageiros de fabricação nacional adquiridos por motoristas profissionais ou pessoas com deficiência",["NFe","NFCe"],false,false,100,100,0,0],["200","Alíquota reduzida","200016","Prestação de serviços de pesquisa e desenvolvimento por Instituição Científica, Tecnológica e de Inovação (ICT)",["NFSe"],false,false,100,100,0,0],["200","Alíquota reduzida","200017","Operações relacionadas ao FGTS",["NFSe","DERE"],false,false,100,100,0,0],["200","Alíquota reduzida","200018","Operações de resseguro e retrocessão",["DERE"],false,false,100,100,0,0],["200","Alíquota reduzida","200019","Importador dos serviços financeiros contribuinte",["NFSe","DERE"],false,false,100,100,0,0],["200","Alíquota reduzida","200020","Operação praticada por sociedades cooperativas optantes por regime específico do IBS e CBS",["NFe","NFCe","CTe","NF3e","NFSe"],false,false,100,100,0,0],["200","Alíquota reduzida","200021","Serviços de transporte público coletivo de passageiros ferroviário e hidroviário",["BPe-TM","NFSe"],false,false,100,100,0,0],["200","Alíquota reduzida","200022","Operação originada fora da ZFM que destine bem material industrializado a contribuinte estabelecido na ZFM",["NFe"],false,false,100,100,1,0],["200","Alíquota reduzida","200023","Operação realizada por indústria incentivada que destine bem material intermediário para outra indústria incentivada na ZFM",["NFe"],false,false,100,100,0,0],["200","Alíquota reduzida","200024","Operação originada fora das Áreas de Livre Comércio destinadas a contribuinte estabelecido nas Áreas de Livre Comércio",["NFe"],false,false,100,100,1,0],["200","Alíquota reduzida","200025","Fornecimento dos serviços de educação relacionados ao Programa Universidade para Todos (Prouni)",["NFSe"],false,false,60,100,0,0],["200","Alíquota reduzida","200026","Locação de imóveis localizados nas zonas reabilitadas",["NFSe"],false,false,80,80,0,0],["200","Alíquota reduzida","200027","Operações de locação, cessão onerosa e arrendamento de bens imóveis",["NFSe"],false,false,70,70,0,0],["200","Alíquota reduzida","200028","Fornecimento dos serviços de educação (Anexo II)",["NFSe"],false,false,60,60,0,0],["200","Alíquota reduzida","200029","Fornecimento dos serviços de saúde humana (Anexo III)",["NFSe"],false,false,60,60,0,0],["200","Alíquota reduzida","200030","Venda dos dispositivos médicos (Anexo IV)",["NFe","NFCe","NFSe","DUIMP"],false,false,60,60,0,0],["200","Alíquota reduzida","200031","Fornecimento dos dispositivos de acessibilidade próprios para pessoas com deficiência (Anexo V)",["NFe","NFCe","NFSe","DUIMP"],false,false,60,60,0,0],["200","Alíquota reduzida","200032","Fornecimento dos medicamentos registrados na Anvisa ou produzidos por farmácias de manipulação, ressalvados os medicamentos sujeitos à alíquota zero",["NFe","NFCe","DIR","DUIMP"],false,false,60,60,0,0],["200","Alíquota reduzida","200033","Fornecimento das composições para nutrição enteral e parenteral (Anexo VI)",["NFe","NFCe","DUIMP"],false,false,60,60,0,0],["200","Alíquota reduzida","200034","Fornecimento dos alimentos destinados ao consumo humano (Anexo VII)",["NFe","NFCe","DUIMP"],false,false,60,60,0,0],["200","Alíquota reduzida","200035","Fornecimento dos produtos de higiene pessoal e limpeza (Anexo VIII)",["NFe","NFCe","DUIMP"],false,false,60,60,0,0],["200","Alíquota reduzida","200036","Fornecimento de produtos agropecuários, aquícolas, pesqueiros, florestais e extrativistas vegetais in natura",["NFe","NFCe","DUIMP"],false,false,60,60,0,0],["200","Alíquota reduzida","200037","Fornecimento de serviços ambientais de conservação ou recuperação da vegetação nativa",["NFSe"],false,false,60,60,0,0],["200","Alíquota reduzida","200038","Fornecimento dos insumos agropecuários e aquícolas (Anexo IX)",["NFe","NFCe","NFSe","DUIMP"],false,false,60,60,0,0],["200","Alíquota reduzida","200039","Fornecimento dos bens e serviços relacionados com produções nacionais artísticas, culturais, de eventos, jornalísticas e audiovisuais (Anexo X)",["NFe","NFSe","DUIMP"],false,false,60,60,0,0],["200","Alíquota reduzida","200040","Fornecimento de serviços de comunicação institucional à administração pública",["NFSe"],false,false,60,60,0,0],["200","Alíquota reduzida","200041","Fornecimento de serviço de educação desportiva (art. 141. I)",["NFSe"],false,false,60,60,0,0],["200","Alíquota reduzida","200042","Fornecimento de serviço de gestão e exploração do desporto (art. 141. II)",["NFSe"],false,false,60,60,0,0],["200","Alíquota reduzida","200043","Fornecimento à administração pública dos serviços e dos bens relativos à soberania (Anexo XI)",["NFe","NFSe","NFCom","DUIMP"],false,false,60,60,0,0],["200","Alíquota reduzida","200044","Operações e prestações de serviços de segurança da informação e segurança cibernética desenvolvidos por sociedade que tenha sócio brasileiro (Anexo XI)",["NFSe","NFCom"],false,false,60,60,0,0],["200","Alíquota reduzida","200045","Operações relacionadas a projetos de reabilitação urbana de zonas históricas e de áreas críticas de recuperação e reconversão urbanística",["NFe ABI","NFSe"],false,false,60,60,0,0],["200","Alíquota reduzida","200046","Operações com bens imóveis",["NFe ABI","NFSe"],false,false,50,50,0,0],["200","Alíquota reduzida","200047","Bares e Restaurantes",["NFe","NFCe"],false,false,40,40,0,0],["200","Alíquota reduzida","200048","Hotelaria, Parques de Diversão e Parques Temáticos",["NFSe"],false,false,40,40,0,0],["200","Alíquota reduzida","200049","Transporte coletivo de passageiros rodoviário, ferroviário e hidroviário",["BPe"],false,false,40,40,0,0],["200","Alíquota reduzida","200050","Serviços de transporte aéreo regional coletivo de passageiros ou de carga",["CTe","CTe OS","BPe-TA"],false,false,40,40,0,0],["200","Alíquota reduzida","200051","Agências de Turismo",["NFSe"],false,false,40,40,0,0],["200","Alíquota reduzida","200052","Prestação de serviços de profissões intelectuais",["NFSe"],false,false,30,30,0,0],["200","Alíquota reduzida","200053","Fornecimento de medicamentos registrados na Anvisa, quando classificados como soros ou vacinas",["NFe","NFCe","DIR","DUIMP"],false,false,100,100,0,0],["200","Alíquota reduzida","200054","Fornecimento de bem material pela cooperativa de produção agropecuária a associado não sujeito ao regime regular do IBS e da CBS",["NFe","NFCe","NFSe"],false,false,100,100,0,0],["200","Alíquota reduzida","200055","Fornecimento dos serviços com redução de alíquota de 60% realizado por autônomo",["NFSe"],false,false,60,60,0,0],["200","Alíquota reduzida","200056","Fornecimento dos serviços com redução de alíquota de 30% realizado por autônomo",["NFSe"],false,false,30,30,0,0],["220","Alíquota fixa","220001","Incorporação imobiliária submetida ao regime especial de tributação",["NFe ABI"],true,false,0,0,0,0],["220","Alíquota fixa","220002","Incorporação imobiliária submetida ao regime especial de tributação",["NFe ABI"],true,false,0,0,0,0],["220","Alíquota fixa","220003","Alienação de imóvel decorrente de parcelamento do solo",["NFe ABI"],true,false,0,0,0,0],["221","Alíquota fixa proporcional","221001","Locação, cessão onerosa ou arrendamento de bem imóvel com alíquota sobre a receita bruta",["NFSe"],false,false,0,0,0,0],["221","Alíquota fixa proporcional","221002","Incorporação imobiliária submetida ao regime especial de tributação",["NFe ABI"],false,false,0,0,0,0],["221","Alíquota fixa proporcional","221003","Incorporação imobiliária submetida ao regime especial de tributação",["NFe ABI"],false,false,0,0,0,0],["221","Alíquota fixa proporcional","221004","Alienação de imóvel decorrente de parcelamento do solo",["NFe ABI"],false,false,0,0,0,0],["222","Redução de base de cálculo","222001","Transporte internacional de passageiros, caso os trechos de ida e volta sejam vendidos em conjunto",["CTe OS","BPe","BPe-TA"],false,false,0,0,0,0],["400","Isenção","400001","Fornecimento de serviços de transporte público coletivo de passageiros rodoviário e metroviário",["BPe","BPe-TM","NFSe"],false,false,0,0,0,0],["400","Isenção","400002","Fornecimento de serviços de transporte público coletivo de passageiros rodoviário e metroviário com medição por quilômetro rodado",["CTe OS"],false,false,0,0,0,0],["400","Isenção","400003","Bagagens",["DIR","DUIMP"],false,false,0,0,0,0],["400","Isenção","400004","Remessas internacionais",["DIR","DUIMP"],false,false,0,0,0,0],["410","Imunidade e não incidência","410001","Fornecimento de bonificações quando constem no documento fiscal e que não dependam de evento posterior",["NFe ABI","NFe","NFCe","CTe","CTe OS","BPe","BPe-TA","NF3e","NFSe","NFCom","NFAg","NFGas","DUIMP"],false,false,0,0,0,0],["410","Imunidade e não incidência","410002","Transferências entre estabelecimentos pertencentes ao mesmo contribuinte",["NFe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410003","Doações e amostras grátis sem contraprestação em benefício do doador",["NFe ABI","NFe","NFCe","CTe","CTe OS","BPe","BPe-TA","NF3e","NFSe","NFCom","NFAg","NFGas","DERE","DIR","DUIMP"],false,false,0,0,0,0],["410","Imunidade e não incidência","410004","Exportações de bens e serviços",["NFe","CTe","CTe OS","BPe","BPe-TA","NF3e","NFSe","NFCom"],false,false,0,0,0,0],["410","Imunidade e não incidência","410005","Fornecimentos realizados pela União, pelos Estados, pelo Distrito Federal e pelos Municípios",["NFe","NFCe","NFSe","NFAg"],false,false,0,0,0,0],["410","Imunidade e não incidência","410006","Fornecimentos realizados por entidades religiosas e templos de qualquer culto",["NFe","NFCe","NFSe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410007","Fornecimentos realizados por partidos políticos, entidades sindicais e instituições de educação e de assistência social",["NFe","NFCe","NFSe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410008","Fornecimentos de livros, jornais, periódicos e do papel destinado a sua impressão",["NFe","NFCe","NFSe","NFCom","DIR","DUIMP"],false,false,0,0,0,0],["410","Imunidade e não incidência","410009","Fornecimentos de fonogramas e videofonogramas musicais produzidos no Brasil",["NFe","NFCe","NFSe","NFCom","DIR","DUIMP"],false,false,0,0,0,0],["410","Imunidade e não incidência","410010","Fornecimentos de serviço de comunicação nas modalidades de radiodifusão sonora e de sons e imagens de recepção livre e gratuita",["NFSe","NFCom","DERE"],false,false,0,0,0,0],["410","Imunidade e não incidência","410011","Fornecimentos de ouro, quando definido em lei como ativo financeiro ou instrumento cambial",[],false,false,0,0,0,0],["410","Imunidade e não incidência","410012","Fornecimento de condomínio edilício não optante pelo regime regular",["NFe","NFCe","NFSe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410013","Exportações de combustíveis",["NFe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410014","Fornecimento de produtor rural não contribuinte",["NFe","NFCe","NFSe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410015","Fornecimento por transportador autônomo não contribuinte",["CTe","NFSe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410016","Fornecimento ou aquisição de resíduos sólidos",["NFe"],false,false,0,0,0,1],["410","Imunidade e não incidência","410017","Aquisição de bem móvel com crédito presumido sob condição de revenda realizada",["NFe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410018","Operações relacionadas aos fundos garantidores e executores de políticas públicas",["NFe ABI","DERE"],false,false,0,0,0,0],["410","Imunidade e não incidência","410019","Exclusão da gorjeta na base de cálculo no fornecimento de alimentação",["NFe","NFCe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410020","Exclusão do valor de intermediação na base de cálculo no fornecimento de alimentação",["NFe","NFCe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410021","Contribuição de que trata o art. 149-A da Constituição Federal",["NF3e"],false,false,0,0,0,0],["410","Imunidade e não incidência","410022","Consolidação da propriedade do bem pelo credor",["NFe ABI","NFe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410023","Alienação de bens móveis ou imóveis que tenham sido objeto de garantia em que o prestador da garantia não seja contribuinte",["NFe ABI","NFe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410024","Consolidação da propriedade do bem pelo grupo de consórcio",["NFe ABI","NFe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410025","Alienação de bem que tenha sido objeto de garantia em que o prestador da garantia não seja contribuinte",["NFe ABI","NFe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410026","Doação e amostras grátis com anulação de crédito",["NFe ABI","NFe","NFCe","CTe","CTe OS","BPe","BPe-TA","NF3e","NFSe","NFCom","NFAg","NFGas","DERE"],false,false,0,0,0,0],["410","Imunidade e não incidência","410027","Exportação de serviço ou de bem imaterial",["NFe","CTe","CTe OS","NFSe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410028","Operações com bens imóveis realizadas por pessoas físicas não consideradas contribuintes",[],false,false,0,0,0,0],["410","Imunidade e não incidência","410029","Operações acobertadas somente pelo ICMS",["NFe","NFCe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410030","Estorno de crédito por perecimento, deteriorização, roubo, furto ou extravio.",["NFe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410031","Fornecimento em período anterior ao início de vigência de incidências de CBS e IBS",["NFe","NF3e","NFCom","NFAg","NFGas"],false,false,0,0,0,0],["410","Imunidade e não incidência","410032","Tributos incidentes na operação que não integram a base de cálculo do IBS e da CBS",["NF3e","NFCom","NFAg","NFGas"],false,false,0,0,0,0],["410","Imunidade e não incidência","410033","Operações de Fundos de Investimento Imobiliário (FII) e Fundos de Investimento nas Cadeias Produtivas do Agronegócio (Fiagro)",["NFe ABI","NFSe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410034","Operações de fundos de investimento",[],false,false,0,0,0,0],["410","Imunidade e não incidência","410035","Fornecimento realizado por nanoempreendedor",["NFe","NFCe","CTe","CTe OS","NFSe"],false,false,0,0,0,0],["410","Imunidade e não incidência","410036","Descontos financeiros em nota fatura",["NF3e","NFCom","NFAg","NFGas"],false,false,0,0,0,0],["410","Imunidade e não incidência","410037","Importação os bens materiais sem incidência de IBS e CBS",["DIR","DUIMP"],false,false,0,0,0,0],["410","Imunidade e não incidência","410999","Operações não onerosas sem previsão de tributação, não especificadas anteriormente",["NFe ABI","NFe","NFCe","CTe","CTe OS","BPe","BPe-TA","BPe-TM","NF3e","NFSe","NFCom","NFAg","NFGas","DIR","DUIMP"],false,false,0,0,0,0],["510","Diferimento","510001","Operações, sujeitas a diferimento, com energia elétrica, relativas à importação, geração, comercialização, distribuição e transmissão",["NFe","NF3e","DUIMP"],false,false,0,0,0,0],["515","Diferimento com redução de alíquota","515001","Operações, sujeitas a diferimento, com insumos agropecuários e aquícolas (Anexo IX)",["NFe","NFSe","DUIMP"],false,false,60,60,0,0],["550","Suspensão","550001","Exportações de bens materiais",["NFe"],false,false,0,0,1,0],["550","Suspensão","550002","Regime de Trânsito",["DUIMP"],false,false,0,0,1,0],["550","Suspensão","550003","Regimes de Depósito (art. 85)",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550004","Regimes de Depósito (art. 87)",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550005","Regimes de Depósito (art. 87, Parágrafo único)",["NFe"],false,false,0,0,1,0],["550","Suspensão","550006","Regimes de Permanência Temporária com suspensão total",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550007","Regimes de Aperfeiçoamento (Recof)",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550008","Importação de bens para o Regime de Repetro-Temporário",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550009","GNL-Temporário",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550010","Repetro-Permanente",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550011","Repetro-Industrialização",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550012","Repetro-Nacional",["NFe"],false,false,0,0,1,0],["550","Suspensão","550013","Repetro-Entreposto",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550014","Zona de Processamento de Exportação",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550015","Regime Tributário para Incentivo à Modernização e à Ampliação da Estrutura Portuária",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550016","Regime Especial de Incentivos para o Desenvolvimento da Infraestrutura",["NFe","NFSe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550017","Regime Tributário para Incentivo à Atividade Naval - Renaval (Art. 107, I)",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550018","Desoneração da aquisição de bens de capital",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550019","Importação de bem material por indústria incentivada para utilização na ZFM",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550020","Áreas de livre comércio",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550021","Industrialização destinada a exportações",["NFe"],false,false,0,0,1,0],["550","Suspensão","550022","Regime Especial de Incentivos para a Produção de Hidrogênio de Baixa Emissão de Carbono (Rehidro)",["NFe","NFSe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550023","Operações com hidrocarbonetos líquidos derivados de petróleo não combustíveis ou de gás natural, inclusive nafta",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550024","Regime Tributário para Incentivo à Atividade Naval - Renaval (Art. 107, II)",["DUIMP"],false,false,0,0,1,0],["550","Suspensão","550025","Regime Tributário para Incentivo à Atividade Naval - Renaval (Art. 107, III)",["DUIMP"],false,false,0,0,1,0],["550","Suspensão","550026","Regimes de admissão temporária com suspensão total do pagamento dos tributos (ZFM)",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550027","Regimes de Aperfeiçoamento (Drawback)",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550028","Regimes de Aperfeiçoamento (Admissão temporária)",["NFe","DUIMP"],false,false,0,0,1,0],["550","Suspensão","550029","Zona de Processamento de Exportação",["NFe"],false,false,0,0,1,0],["620","Tributação monofásica","620001","Tributação monofásica sobre combustíveis",["NFe","DUIMP"],false,false,0,0,0,0],["620","Tributação monofásica","620002","Tributação monofásica com responsabilidade pela retenção sobre combustíveis",["NFe","DUIMP"],false,false,0,0,0,0],["620","Tributação monofásica","620003","Tributação monofásica com responsabilidade de retenção de tributos por terceiros",["NFe","DUIMP"],false,false,0,0,0,0],["620","Tributação monofásica","620004","Tributação monofásica sobre mistura de EAC com gasolina A em percentual superior ao obrigatório",["NFe"],false,false,0,0,0,0],["620","Tributação monofásica","620005","Tributação monofásica sobre mistura de EAC com gasolina A em percentual inferior ao obrigatório",["NFe"],false,false,0,0,0,0],["620","Tributação monofásica","620006","Tributação monofásica sobre combustíveis cobrada anteriormente",["NFe","NFCe"],false,false,0,0,0,0],["620","Tributação monofásica","620007","Perecimento, deteriorização, roubo, furto ou extravio no regime monofásico",["NFe"],false,false,0,0,0,0],["800","Transferência de crédito","800001","Fusão, cisão ou incorporação",["NFe","NFSe"],false,false,0,0,0,0],["800","Transferência de crédito","800002","Transferência de crédito do associado, inclusive as cooperativas singulares",["NFe","NFSe"],false,false,0,0,0,0],["810","Ajuste de IBS na ZFM","810001","Crédito presumido de IBS sobre o valor apurado nos fornecimentos a partir da ZFM",["NFe"],false,false,0,0,0,0],["811","Ajustes","811001","Anulação de Crédito por Saídas Imunes/Isentas",["NFe","NFSe"],false,false,0,0,0,0],["811","Ajustes","811002","Débitos de notas fiscais não processadas na apuração",["NFe","NFSe"],false,false,0,0,0,0],["811","Ajustes","811003","Desenquadramento do Simples Nacional",["NFe","NFSe"],false,false,0,0,0,0],["820","Tributação em documento específico","820001","Documento com informações de fornecimento de serviços de planos de assistência à saúde elencados no art. 234 da Lei Complementar nº214, de 2025\n",["NFSe"],false,false,0,0,0,0],["820","Tributação em documento específico","820002","Documento com informações de fornecimento de serviços de planos de assistência funerária",["NFSe"],false,false,0,0,0,0],["820","Tributação em documento específico","820003","Documento com informações de fornecimento de serviços de planos de assistência à saúde de animais domésticos",["NFSe"],false,false,0,0,0,0],["820","Tributação em documento específico","820004","Documento com informações de prestação de serviços de consursos de prognósticos",["NFSe"],false,false,0,0,0,0],["820","Tributação em documento específico","820005","Documento com informações de alienação de bens imóveis",["NFe ABI"],false,false,0,0,0,0],["820","Tributação em documento específico","820006","Documento com informações de fornecimento de serviços de exploração de via",["NFSe"],false,false,0,0,0,0],["820","Tributação em documento específico","820007","Documento com informações de fornecimento de serviços financeiros",["NFSe"],false,false,0,0,0,0],["820","Tributação em documento específico","820008","Documento com informações de fornecimento de serviço continuado, mas com tributação realizada em fatura anterior",["NF3e","NFCom","NFAg","NFGas"],false,false,0,0,0,0],["820","Tributação em documento específico","820009","Fornecimentos declarados e tributados em outro documento",["CTe OS","NF3e","NFSe","NFCom","NFAg","NFGas"],false,false,0,0,0,0],["830","Exclusão de base de cálculo","830001","Documento com exclusão da BC da CBS e do IBS de energia elétrica fornecida pela distribuidora à UC",["NFe","NF3e"],false,false,0,0,0,0]],"meta":{"badge":"Dados oficiais — Informe Técnico 2025.002 v{versao}, publicado {publicacao}","legenda":"<b>Dados 100% oficiais<\/b> — Informe Técnico 2025.002 v{versao} (RFB + Comitê Gestor do IBS), publicado {publicacao}. As colunas de % Red. IBS/CBS, Trib. Regular e Créd. Presumido vêm direto da planilha, por código. <b>Atenção ao significado:<\/b> Trib. Regular e Créd. Presumido são indicadores de preenchimento de grupos do documento fiscal (ind_gTribRegular e ind_gCredPresOper, conforme a Nota Técnica). A marca sinaliza que o grupo se aplica ao código, e não que a operação tenha, por si só, tributação regular ou crédito presumido. <b>Obs:<\/b> não existe, na planilha oficial, um indicador de \"Redutor de BC\" por código individual — esse indicador só existe no nível do CST (mostrado no cabeçalho do grupo); se precisarem dele por código, será necessário calcular a partir de % Red. IBS/CBS.","fonte":" Portal Nacional da NF-e — \"Tabela de Classificação Tributária do IBS e CBS\", publicada em {publicacao} (Informe Técnico 2025.002 v{versao}). Base legal: LC 214/2025 e LC 227/2026.","aviso":" atualizada periodicamente pela Receita Federal + Comitê Gestor do IBS. Códigos com fundo apagado e tag \"Encerrado\" já tiveram fim de vigência (ex: 220001 a 220003, encerrados em 01/01/2026). Confirme sempre a versão mais recente no Portal da NF-e e com a consultoria tributária.\n  ","versao":"1.71","publicacao":"30/10/2026","links":[{"texto":"Tabela CST/cClassTrib (Diversos)","href":"https://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=/NJarYc9nus="},{"texto":"Informes Técnicos NF-e","href":"https://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=hXzemuyNHW4="}]},"intro":"Ferramenta interna para consulta do CST e do cClassTrib do IBS/CBS (LC 214/2025). Cabeçalho e colunas ficam fixos ao rolar, como no Excel — use para localizar exceções, reduções e isenções antes de orientar a emissão e a classificação dos documentos fiscais.","lembrete":" confira se a tabela oficial de CST/cClassTrib foi atualizada — <a href=\"https://www.nfe.fazenda.gov.br/portal/listaConteudo.aspx?tipoConteudo=/NJarYc9nus=\" target=\"_blank\" style=\"color:var(--lav3);\">Portal da NF-e → Documentos → Diversos<\/a>. Este aviso não dispara sozinho: vale criar um lembrete recorrente na sua agenda (ex: todo primeiro dia útil do mês)."}</script>
+<script type="application/json" id="setores-data">{"meta":{"estudo":{"portal":[{"aula":"aula3-transicao","titulo":"Período de Transição: o Cronograma 2023–2033"},{"aula":"aula-mapa-dos-tributos","titulo":"Mapa dos Tributos: o que Sai, o que Fica e o que Está Mudando"}],"plano":[{"aula":"aula-cenario-4-analisando-empresa","titulo":"Analisando a Empresa no Novo Cenário"},{"aula":"aula-cenario-5-aplicacao-pratica","titulo":"Aplicação Prática e Comunicação com o Cliente"},{"aula":"aula-virada-estoques-creditos","titulo":"A Virada de 2027: Estoques, Créditos Acumulados e Contratos"}],"cst":[{"aula":"aula-lc-obrigacoes-acessorias","titulo":"Obrigações Acessórias: os Critérios de Simplificação"},{"aula":"aula5-aliquotas","titulo":"Alíquotas Reduzidas e Isenções"}],"setor":[{"aula":"aula5-aliquotas","titulo":"Alíquotas Reduzidas e Isenções"},{"aula":"aula-cenario-3-quem-sente-mais","titulo":"Quem Tende a Sentir Mais os Efeitos da Reforma"}],"diagnostico":[{"aula":"aula-cenario-3-quem-sente-mais","titulo":"Quem Tende a Sentir Mais os Efeitos da Reforma"},{"aula":"aula-cenario-4-analisando-empresa","titulo":"Analisando a Empresa no Novo Cenário"},{"aula":"aula-cenario-5-aplicacao-pratica","titulo":"Aplicação Prática e Comunicação com o Cliente"}],"carga":[{"aula":"aula-nao-cumulatividade","titulo":"Não Cumulatividade e a Tributação na Cadeia de Consumo"},{"aula":"aula-mapa-dos-tributos","titulo":"Mapa dos Tributos: o que Sai, o que Fica e o que Está Mudando"},{"aula":"aula-cenario-3-quem-sente-mais","titulo":"Quem Tende a Sentir Mais os Efeitos da Reforma"}],"caixa":[{"aula":"aula-lc-regime-compensacao","titulo":"Regime de Compensação: o Crédito Condicionado ao Pagamento"},{"aula":"aula-lc-ressarcimento-creditos","titulo":"Ressarcimento de Créditos Acumulados: Forma e Prazo"},{"aula":"aula-contabilizacao-ibs-cbs","titulo":"Contabilização do IBS e da CBS"}],"preco":[{"aula":"aula-preco-na-transicao","titulo":"Preço na Transição: ICMS e ISS por Dentro, IBS e CBS por Fora"},{"aula":"aula-virada-estoques-creditos","titulo":"A Virada de 2027: Estoques, Créditos Acumulados e Contratos"}]},"posBase":"https://4criso.github.io/pos-reforma/hub-pos-reforma.html","fonte":"Fichas dos perfis setoriais do hub do PÓS (seção \"Ficha do perfil para o SIS\")","gerado":"10/11/2026"},"setores":[{"id":"agronegocio","nome":"Agronegócio","aula":"aula-perfil-agronegocio","ficha":[["Setor","Agronegócio"],["Regime aplicável","Regra geral para quem é contribuinte, com regimes diferenciados (arts. 137, 138, 148 e 125), regime específico optativo das cooperativas (arts. 271 e 272) e regime do produtor rural não contribuinte (arts. 164 a 168)"],["Redução de alíquota","60% para insumos (Anexo IX) e produtos in natura; zero para hortícolas, frutas, ovos, cesta básica e máquinas destinadas a produtor não contribuinte"],["Particularidades de crédito","Crédito presumido nas compras de não contribuinte, com percentual anual; transferência de créditos do associado à cooperativa; diferimento de insumos; exportação com créditos mantidos"],["Benefícios em extinção","Benefícios de ICMS do setor, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso"],["Obrigações acessórias do setor","Documento fiscal do adquirente discriminando valor da operação, crédito presumido e valor líquido; registro dos insumos no Ministério da Agricultura"],["Pontos de atenção","Limite de receita e opção pelo regime regular; percentual do crédito presumido; registro dos insumos; encerramento do diferimento; saldo credor de exportadoras"],["Itens do painel","Percentuais do crédito presumido de 2027"]],"painel":[{"tema":"Percentuais do crédito presumido na compra de produtor rural não contribuinte (2027)","estado":"O art. 168 da LC 214/2025 manda divulgar os percentuais todos os anos, até setembro, por ato conjunto do Ministro da Fazenda e do Comitê Gestor do IBS, com vigência em 1º de janeiro do ano seguinte. Em 10/11/2026 não localizei a publicação do ato para 2027. Os números da aula são hipóteses. A Resolução CGIBS 6/2026 prevê documento fiscal específico do adquirente (por fonte secundária).","data":"10/11/2026","prioridade":"alta","fonte":"LC 214/2025, art. 168, §4º; buscas em fontes secundárias (cnbsp, Radar da Reforma Tributária)"}]},{"id":"saude","nome":"Saúde","aula":"aula-perfil-saude","ficha":[["Setor","Saúde"],["Regime aplicável","Regimes diferenciados (arts. 128, 130, 131, 133, 144 e 146) e regime específico de planos de saúde (arts. 234 a 237). Cooperativas de saúde: art. 234, III, e arts. 271 e 272"],["Redução de alíquota","60% para serviços do Anexo III, medicamentos e dispositivos do Anexo IV; zero para dispositivos do Anexo XII, medicamentos por destinação terapêutica e compras de órgãos públicos e entidades imunes com CEBAS (SUS)"],["Particularidades de crédito","Folha sem crédito; alíquota zero mantém créditos (saldo credor a compensar ou ressarcir); crédito de plano para empregados só nas hipóteses previstas"],["Benefícios em extinção","Benefícios de ISS e de ICMS do setor, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso"],["Documentos e classificações próprios","NBS do Anexo III (serviços), NCM dos Anexos IV e XII (dispositivos), registro na Anvisa e destinação terapêutica (medicamentos)"],["Pontos de atenção","Estrutura de custos (créditos); classificação; prova da destinação do medicamento; CEBAS e SUS; regime próprio dos planos"],["Itens do painel","Lista periódica de medicamentos com alíquota zero"]],"painel":[{"tema":"Lista periódica de medicamentos com alíquota zero (art. 146, LC 227/2026)","estado":"A LC 227/2026 revogou o Anexo XIV e passou a definir a alíquota zero de medicamentos por destinação terapêutica (doenças raras, negligenciadas, oncologia, diabetes, HIV/aids e outras IST e doenças cardiovasculares, mais o Programa Farmácia Popular por fonte secundária). A nova redação prevê atualização periódica por ato conjunto do Ministério da Fazenda e do Comitê Gestor do IBS. Em 10/11/2026 não localizei o primeiro ato.","data":"10/11/2026","prioridade":"media","fonte":"LC 227/2026, nova redação do art. 146 (Legisweb); Conjur (05/11/2026); Fecomércio RS"}]},{"id":"logistica-ecommerce","nome":"Logística, Transporte e E-commerce","aula":"aula-perfil-logistica-ecommerce","ficha":[["Setor","Logística, transporte e e-commerce"],["Regime aplicável","Regra geral para cargas e armazenagem (sem regime de redução localizado), com regime do transportador autônomo não contribuinte (art. 169), regimes de transporte de passageiros (art. 157 e arts. 284 e seguintes) e regras de plataformas digitais e de remessas internacionais (arts. 22, 23 e 96)"],["Redução de alíquota","Alíquota zero para veículos de carga destinados a transportador autônomo não contribuinte (art. 110, II). Percentuais do transporte coletivo de passageiros a conferir"],["Particularidades de crédito","Crédito presumido na contratação de autônomo não contribuinte ou MEI; crédito do frete contratado; extinção do débito do fornecedor"],["Benefícios em extinção","Benefícios de ICMS de localização e do transporte, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso"],["Documentos e obrigações do setor","CT-e e MDF-e com campos de IBS e CBS; informações das plataformas ao Comitê Gestor e à Receita; split payment quando disponível"],["Pontos de atenção","Alíquota por destino; frete na base; responsabilidade de plataformas; remessa internacional; crédito presumido do autônomo"],["Itens do painel","Percentuais do transporte coletivo de passageiros"]],"painel":[{"tema":"Transporte coletivo de passageiros: percentuais do regime diferenciado e do regime específico (art. 157 e arts. 284 e seguintes)","estado":"A LC 214/2025 trata o transporte coletivo urbano, semiurbano e metropolitano (art. 157) e o intermunicipal, interestadual, ferroviário, hidroviário e aéreo regional (arts. 284 e seguintes). A LC 227/2026 incluiu percentuais de redução de 60%, 50%, 40% e 30% para certos sujeitos passivos em dispositivo desse regime. As fontes consultadas divergem sobre os percentuais, e o texto integral dos artigos não foi lido. A aula não afirma percentuais.","data":"10/11/2026","prioridade":"baixa","fonte":"LC 214/2025 (Planalto, Fazenda/MG); LC 227/2026"}]},{"id":"servicos-financeiros","nome":"Serviços Financeiros e Meios de Pagamento","aula":"aula-perfil-servicos-financeiros","ficha":[["Setor","Serviços financeiros e meios de pagamento"],["Regime aplicável","Regime específico (arts. 181 e 182), com regime dos arranjos de pagamento (art. 214 e seguintes), alíquotas fixadas (art. 233), importação (art. 231) e exportação (art. 232)"],["Redução de alíquota","Não há percentual de redução. A carga vem da base de cálculo reduzida e das alíquotas do art. 233 (10,85% em 2027 e 2028; 12,50% em 2033)"],["Particularidades de crédito","Dedução de despesas de captação na base; hipóteses específicas de crédito do tomador empresarial, a conferir"],["Benefícios em extinção","Não se aplica de forma geral. Serviços com ISS seguem a rampa do ISS"],["Documentos e obrigações do setor","Documentos fiscais com campos de IBS e CBS; apuração por natureza de receita; informações do split payment, quando disponível"],["Pontos de atenção","Base é a margem; regime de caixa em consórcios e seguros; split em instituições de pagamento; importação de serviços financeiros"],["Itens do painel","Partes do regime sem conferência"]],"painel":[{"tema":"Regime específico de serviços financeiros: partes sem conferência (base, arranjos de pagamento, exportação e ISS)","estado":"Foram lidos os arts. 181, 182 e 233 (com a LC 227/2026) e trechos dos arts. 223 e 231. Não foram lidos por inteiro: as deduções e a base das operações de crédito, os arranjos de pagamento (art. 214 e seguintes), a exportação (art. 232) e o ajuste das alíquotas para serviços que ainda sofrem ISS. A regulamentação do Comitê Gestor e do Banco Central não foi consultada. Os valores de 2031 e 2032 vêm do texto da LC 227/2026 e de fontes secundárias.","data":"10/11/2026","prioridade":"media","fonte":"LC 214/2025, arts. 181, 182, 223, 231 e 233 (Câmara e normas.leg.br); LC 227/2026; Machado Meyer"}]},{"id":"construcao-imobiliario","nome":"Construção e Imobiliário","aula":"aula-perfil-construcao-imobiliario","ficha":[["Setor","Construção e imobiliário"],["Regime aplicável","Regime específico de bens imóveis (arts. 251 a 270), para contribuintes do regime regular"],["Redução de alíquota","50% para alienação, construção civil, incorporação, administração e intermediação; 70% para locação, cessão onerosa e arrendamento (art. 261)"],["Particularidades de crédito","Saída reduzida e entrada com alíquota padrão, com possível saldo credor; apuração por obra"],["Redutores","Redutor de ajuste (vinculado ao imóvel) e redutor social de R$ 100.000 por imóvel residencial novo e R$ 30.000 por lote (art. 259)"],["Benefícios em extinção","Benefícios de ISS e ICMS do setor, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso"],["Documentos e obrigações do setor","Identificação cadastral da obra; apuração por empreendimento com CNPJ ou CPF; documento fiscal com campos de IBS e CBS"],["Pontos de atenção","Saldo credor na obra; cadastro e contabilidade por obra; momento do pagamento na incorporação; controle dos redutores; limites da pessoa física"],["Itens do painel","Partes do regime de bens imóveis sem conferência"]],"painel":[{"tema":"Regime de bens imóveis: partes sem conferência (redutor de ajuste, locação, transição de obras e patrimônio de afetação)","estado":"Foram lidos o art. 251, o art. 259 (redutor social), o art. 261 (50% e 70%), o art. 270 e a existência da Seção V (incorporação e parcelamento). Não foram lidos por inteiro: o redutor de ajuste, o momento do fato gerador da locação, as regras de transição de obras e contratos em curso e o tratamento do regime especial das incorporadoras (patrimônio de afetação). A regulamentação do Comitê Gestor não foi consultada. A atualização do redutor social pelo IPCA vem de fonte secundária.","data":"10/11/2026","prioridade":"media","fonte":"LC 214/2025, arts. 251 a 270 (Legisweb, Radar da Reforma Tributária); LC 227/2026"}]},{"id":"energia-combustiveis-mineracao","nome":"Energia, Combustíveis e Mineração","aula":"aula-perfil-energia-combustiveis-mineracao","ficha":[["Setor","Energia, combustíveis e mineração"],["Regime aplicável","Regime específico monofásico de combustíveis (arts. 172 a 180); energia elétrica com recolhimento no fornecimento (art. 28); Imposto Seletivo na extração de bens minerais (arts. 413 e 422)"],["Redução de alíquota","Não há percentual de redução nos combustíveis. Alíquotas por unidade de medida, com biocombustíveis em alíquota inferior à dos fósseis. IS de minerais com teto de 0,25%"],["Particularidades de crédito","Vedação de crédito na aquisição de combustível para distribuição, comercialização ou revenda; crédito nas demais hipóteses; saldo credor de exportadoras"],["Benefícios em extinção","Benefícios de ICMS do setor, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso. Monofásicos de PIS e COFINS saem em 2027"],["Documentos e obrigações do setor","CST e cClassTrib de monofasia; documentos fiscais com campos de IBS e CBS; controle de combustível para uso e para revenda"],["Pontos de atenção","Revenda sem crédito; uso do combustível como insumo; recolhimento da energia no fornecimento; IS na extração; saldo credor na exportação"],["Itens do painel","Valores das alíquotas por unidade de medida dos combustíveis"]],"painel":[{"tema":"Alíquotas por unidade de medida dos combustíveis (art. 174) e valores de 2027","estado":"O art. 174 manda fixar alíquotas uniformes, específicas por unidade de medida e diferenciadas por produto, reajustadas no ano anterior ao de sua vigência. Em 10/11/2026 não localizei os valores por litro de cada combustível para 2027. Os números da aula são hipóteses. O rol completo dos combustíveis do art. 172 (12 incisos) foi lido só em parte no texto da lei, e o restante vem de fonte secundária.","data":"10/11/2026","prioridade":"alta","fonte":"LC 214/2025, arts. 172 a 180 (Ministério da Fazenda, Legisweb, Conteúdo Jurídico); LC 227/2026"}]},{"id":"servicos-profissionais-contabilidade","nome":"Serviços Profissionais e Contabilidade","aula":"aula-perfil-servicos-profissionais-contabilidade","ficha":[["Setor","Serviços profissionais e contabilidade"],["Regime aplicável","Regime diferenciado de redução de 30% para as 18 profissões do art. 127, com local da operação no domicílio principal do adquirente (art. 11, X) e exportação imune (art. 80)"],["Redução de alíquota","30% sobre as alíquotas de IBS e CBS para os serviços das profissões da lista. Sem redução para profissões fora da lista"],["Particularidades de crédito","Folha sem crédito; crédito pelas aquisições (aluguel, sistemas e serviços); fornecedor do Simples com crédito limitado"],["Requisitos de sociedade","Sócios habilitados e sob fiscalização do conselho, serviços da atividade-fim prestados pelos sócios, e demais requisitos do §1º, II; natureza jurídica, união de profissões da lista e distribuição de lucros não impedem"],["Benefícios em extinção","Benefícios municipais de ISS, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso"],["Documentos e obrigações do setor","NFS-e com campos de IBS e CBS; cadastro do cliente com a matriz"],["Pontos de atenção","Estrutura da sociedade; habilitação; preço por tipo de cliente; domicílio do cliente"],["Itens do painel","Partes do art. 127 sem conferência"]],"painel":[{"tema":"Redução de 30% do art. 127: partes sem conferência","estado":"Foram lidos o caput do art. 127, os incisos I a VIII, o §1º (I e as alíneas a e e do II), o §2º e o §3º, no texto do Planalto e de transcrições. Não foram lidos por inteiro: as alíneas b, c e d do §1º, II, o inciso X (referido no §3º) e os incisos IX a XVIII. Por fonte secundária: que a LC 227/2026 não alterou o art. 127 e que a sociedade não pode ter pessoa jurídica como sócia. Não foi tratado o destino do ISS fixo das sociedades uniprofissionais na transição.","data":"10/11/2026","prioridade":"baixa","fonte":"LC 214/2025, art. 127 (Planalto, modeloinicial); Marchesan; Barbieri Advogados"}]},{"id":"comercio-varejo","nome":"Comércio e Varejo","aula":"aula-perfil-comercio-varejo","ficha":[["Setor","Comércio e varejo"],["Regime aplicável","Regra geral (arts. 11, 12 e 15), com regimes diferenciados por produto (arts. 125, 128, 135 e 148) e crédito presumido de estoque e de bens móveis usados"],["Redução de alíquota","Zero para a cesta básica e hortifrúti; 60% para alimentos do Anexo VII e higiene e limpeza do Anexo VIII; padrão para os demais"],["Particularidades de crédito","Saldo credor com mix de saída reduzida e despesas gerais na alíquota padrão; crédito presumido do estoque de 1º/01/2027; crédito presumido na revenda de usados"],["Benefícios em extinção","Substituição tributária e benefícios de ICMS, reduzidos de 2029 a 2032 e extintos em 2033; monofásicos de PIS e COFINS saem em 2027"],["Documentos e obrigações do setor","Cadastro de produtos por NCM; documento fiscal com campos de IBS e CBS; inventário de 31/12/2026"],["Pontos de atenção","NCM e alíquota; saldo credor; canais B2B e B2C; estoque; descontos e fidelidade"],["Itens do painel","Listas de produtos por NCM nos anexos"]],"painel":[{"tema":"Listas por NCM dos Anexos I, VII, VIII e XV (cesta básica, alimentos, higiene e hortifrúti)","estado":"A alíquota de cada alimento e produto de higiene depende da classificação nos anexos da LC 214/2025. Foram lidos o art. 125 e o art. 128 no texto da lei, e os arts. 135 e 136 e o art. 148 em transcrições e fontes secundárias. As listas dos anexos não foram lidas item a item, e alterações pela LC 227/2026 e por atos posteriores não foram conferidas. A regra de transição de bens móveis usados foi lida em trecho, sem o número do artigo.","data":"10/11/2026","prioridade":"media","fonte":"LC 214/2025, arts. 125, 128, 135 e 136 (Planalto, Legisweb, normas.leg.br); TaxUp; buscadorncm"}]},{"id":"industria-zona-franca","nome":"Indústria e Zona Franca","aula":"aula-perfil-industria-zona-franca","ficha":[["Setor","Indústria e Zona Franca"],["Regime aplicável","Regra geral com crédito amplo (arts. 47 e seguintes) e regime da Zona Franca de Manaus (arts. 442 e seguintes)"],["Redução de alíquota","Alíquota zero do IPI em 2027, salvo Zona Franca. Alíquota zero do IBS e da CBS nas entradas nacionais na Zona Franca (art. 445)"],["Particularidades de crédito","Crédito de insumos e de bens de capital; créditos presumidos da Zona Franca (7,5% e 13,5% de IBS e 7% de CBS nas compras, 55%, 75% e 90,25% do saldo devedor de IBS nas saídas), sem ressarcimento em dinheiro"],["Benefícios em extinção","Benefícios de ICMS da indústria, reduzidos de 2029 a 2032 e extintos em 2033, com fundo de compensação nas hipóteses da lei"],["Documentos e obrigações do setor","Habilitação na Zona Franca; controles de entrada e de saída dos bens; documentos fiscais com campos de IBS e CBS"],["Pontos de atenção","Documento e extinção do débito do fornecedor; cadastro de produto por tipo de bem; prova de entrada na Zona Franca; saldo credor de exportadoras"],["Itens do painel","Partes do regime da Zona Franca sem conferência"]],"painel":[{"tema":"Regime da Zona Franca de Manaus: partes sem conferência (arts. 446 a 449, CBS nas saídas, exclusões, Lei 15.273/2025)","estado":"Foram lidos, no texto da lei, os arts. 444 e 445 e os percentuais dos créditos presumidos nas compras (IBS de 7,5% e 13,5%; CBS de 7%) e nas saídas do IBS (55%, 75% e 90,25%). Não foram lidos por inteiro: os arts. 446 a 449, o crédito presumido de CBS nas saídas, o art. 443 (suspensão), as exclusões de produtos, o percentual de 100% (fonte secundária), o veto ao crédito de CBS para bens com IPI zero (fonte secundária), a Lei 15.273/2025 e a regulamentação da SUFRAMA e do Comitê Gestor.","data":"10/11/2026","prioridade":"media","fonte":"LC 214/2025, arts. 442 a 450 (Câmara, Planalto, normas.leg.br); SUFRAMA; Escola Superior de Negócios; Simtax"}]},{"id":"educacao","nome":"Educação","aula":"aula-perfil-educacao","ficha":[["Setor","Educação"],["Regime aplicável","Regime diferenciado de redução de 60% (art. 129 e Anexo II), CBS zero no Prouni (art. 308) e imunidade de entidades sem fins lucrativos (art. 9º, III)"],["Redução de alíquota","60% para os serviços do Anexo II, por NBS; CBS zero para o ensino superior no Prouni; alíquota padrão para o que não consta do anexo"],["Particularidades de crédito","Folha sem crédito; crédito pelas aquisições (aluguel, energia, material e sistemas); fornecedor do Simples com crédito limitado"],["Benefícios em extinção","Benefícios municipais de ISS, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso"],["Documentos e obrigações do setor","Classificação por NBS; segregação das receitas; controle de bolsas do Prouni; comprovação dos requisitos da imunidade"],["Pontos de atenção","Segregação da receita; NBS; folha sem crédito; Prouni; manutenção da imunidade"],["Itens do painel","Partes do regime sem conferência"]],"painel":[{"tema":"Educação: Anexo II (NBS), §§ do art. 308 e requisitos da imunidade","estado":"Foram lidos o art. 129 e o parágrafo único, o caput do art. 308 e o inciso III do art. 9º (referência) no texto da lei. Não foram lidos por inteiro: o Anexo II com as NBS, os §§ do art. 308 (a aula usa o §1º, II, por fonte secundária, na leitura de que a CBS zero vale na proporção da ocupação efetiva das bolsas), os requisitos completos da imunidade e a regra de pesquisa e inovação. A regulamentação do Comitê Gestor e do Ministério da Educação não foi consultada.","data":"10/11/2026","prioridade":"media","fonte":"LC 214/2025, arts. 9º, 129 e 308 (Câmara, Legisweb); Radar da Reforma Tributária; Voga; Migalhas"}]},{"id":"turismo-alimentacao","nome":"Turismo, Hotelaria e Alimentação Fora do Lar","aula":"aula-perfil-turismo-alimentacao","ficha":[["Setor","Turismo, hotelaria e alimentação fora do lar"],["Regime aplicável","Regime específico do Capítulo VII (arts. 273 a 291): bares e restaurantes, hotelaria, parques de diversão e temáticos e agências de turismo"],["Redução de alíquota","40% sobre a alíquota de referência (art. 281)"],["Particularidades de crédito","O fornecedor se credita pelas regras gerais; o adquirente não toma crédito na alimentação e na hospedagem do regime (por fonte secundária); agência de turismo se credita, exceto dos valores deduzidos da base"],["Base de cálculo","Valor da operação na hotelaria e nos parques; valor da operação menos os repasses a fornecedores na agência de turismo (art. 289)"],["Benefícios em extinção","Benefícios de ICMS e ISS do setor, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso"],["Documentos e obrigações do setor","Cadastro de produtos e cardápio por alíquota; documento do agenciamento com os repasses; documentos fiscais com campos de IBS e CBS"],["Pontos de atenção","O que entra no regime; crédito de entrada; cliente empresa; agência de turismo; locação por temporada"],["Itens do painel","Partes do regime sem conferência"]],"painel":[{"tema":"Regime específico de bares, restaurantes, hotelaria, parques e agências de turismo: partes sem conferência","estado":"Foram lidos, no texto da lei, o art. 277, o art. 280 (base na hotelaria), o art. 281 (redução de 40%), o art. 289 (base e alíquota da agência), o art. 291 (crédito da agência) e o conceito de hotelaria. Não foram lidos por inteiro: os arts. 273 a 276 (bares e restaurantes), 278, 279, 282 a 287 e 290, e a vedação de crédito do adquirente (arts. 276 e 283, por fonte secundária). Itens fora do regime (revenda sem preparo e bebidas alcoólicas) e a gorjeta também vêm de fonte secundária ou não foram conferidos. A alíquota de referência depende de resolução do Senado.","data":"10/11/2026","prioridade":"media","fonte":"LC 214/2025, Capítulo VII (Planalto, Câmara, normas.leg.br, Legisweb); TaxUp; Escola Superior de Negócios; Martinelli"}]},{"id":"software-servicos-digitais","nome":"Software e Serviços Digitais","aula":"aula-perfil-software-servicos-digitais","ficha":[["Setor","Software e serviços digitais"],["Regime aplicável","Regra geral para licenciamento de bens imateriais e para serviços (art. 3º), com local da operação no domicílio principal do adquirente (art. 11, X e §3º), importação com o adquirente como contribuinte (art. 21, V), exportação imune (art. 80) e responsabilidade de plataformas (arts. 22 e 23)"],["Redução de alíquota","Sem redução específica localizada para software e serviços de TI. A redução de 30% depende de a atividade ser de profissão fiscalizada por conselho"],["Particularidades de crédito","Crédito pelas aquisições (nuvem, licenças, serviços e importações); folha de pagamento sem crédito; extinção do débito do fornecedor"],["Benefícios em extinção","Benefícios municipais de ISS, reduzidos de 2029 a 2032 e extintos em 2033, a mapear caso a caso"],["Documentos e obrigações do setor","NFS-e com campos de IBS e CBS; classificação por NBS e cClassTrib; cadastro do cliente com a matriz"],["Pontos de atenção","Domicílio do adquirente; classificação de licença, assinatura e serviço; importação intragrupo; exportação; efeito por tipo de cliente"],["Itens do painel","Regulamentação do local da operação e do cadastro do adquirente"]],"painel":[{"tema":"Local da operação de serviços e bens imateriais: nova redação do art. 11, X, e cadastro com identificação única","estado":"A LC 227/2026 deu nova redação ao inciso X do art. 11 (domicílio principal do adquirente residente no País, ou do destinatário se o adquirente for do exterior) e o §3º usa o cadastro com identificação única, com o estabelecimento matriz como domicílio principal da pessoa jurídica. A regulamentação do Comitê Gestor sobre o cadastro e sobre a aplicação prática não foi lida.","data":"10/11/2026","prioridade":"media","fonte":"LC 214/2025, art. 11 (texto atualizado pela LC 227/2026); Resolução CGIBS 6/2026 (não lida)"}]}]}</script>
+<script type="application/json" id="checklist-data">{"meta":{"versao":"1.0","gerado":"12/11/2026","nota":"Redação própria, com a estrutura de sete dimensões do modelo estudado. A contagem é a dos itens deste arquivo. A classificação sugerida usa limites de trabalho (inferência de estudo), porque o modelo estudado é qualitativo."},"blocos":[{"id":"b1","titulo":"Perfil operacional","tipo":"perfil","descricao":"Descreve a empresa. Não tem pontuação: as respostas alimentam a classificação sugerida.","grupos":[{"id":"b1g1","titulo":"Atividade","itens":[{"id":"b1a1","texto":"Indústria (produção ou transformação de bens)"},{"id":"b1a2","texto":"Comércio (revenda de mercadorias)"},{"id":"b1a3","texto":"Prestação de serviços"},{"id":"b1a4","texto":"Locação de bens móveis ou imóveis"},{"id":"b1a5","texto":"Operações financeiras, seguros ou mútuo oneroso"},{"id":"b1a6","texto":"Atividade mista (mais de uma das anteriores)"}]},{"id":"b1g2","titulo":"Posição na cadeia e clientes","itens":[{"id":"b1c1","texto":"Início da cadeia (produção primária, extração ou matéria-prima)"},{"id":"b1c2","texto":"Etapa intermediária (fabricante, atacadista ou prestador de serviços a empresas)"},{"id":"b1c3","texto":"Etapa final (varejo ou prestador ao consumidor)"},{"id":"b1c4","texto":"Vende principalmente a empresas que tomam crédito (B2B)"},{"id":"b1c5","texto":"Vende principalmente a consumidores finais (B2C)"},{"id":"b1c6","texto":"Vendas mistas, B2B e B2C"}]},{"id":"b1g3","titulo":"Operações praticadas","itens":[{"id":"b1o1","texto":"Vende mercadorias com NF-e"},{"id":"b1o2","texto":"Presta serviços com NFS-e"},{"id":"b1o3","texto":"Transfere bens entre estabelecimentos"},{"id":"b1o4","texto":"Exporta bens ou serviços","dica":"Exportação: art. 80 para serviços"},{"id":"b1o5","texto":"Importa bens, serviços ou direitos, inclusive de empresas do grupo","dica":"Adquirente no País é contribuinte: art. 21, V"},{"id":"b1o6","texto":"Faz operações não onerosas (doação, bonificação ou amostra)"},{"id":"b1o7","texto":"Remete bens para conserto, industrialização ou demonstração"},{"id":"b1o8","texto":"Loca bens"},{"id":"b1o9","texto":"Concede ou toma mútuo oneroso"}]}]},{"id":"b2","titulo":"Créditos e sua gestão","tipo":"preparo","descricao":"Mede o quanto a empresa está preparada para gerar, comprovar e usar créditos de IBS e CBS.","grupos":[{"id":"b2g1","titulo":"Entradas (compras)","itens":[{"id":"b2e1","texto":"As compras são feitas com documento fiscal idôneo (NF-e ou NFS-e)."},{"id":"b2e2","texto":"A empresa sabe quais fornecedores estão no regime regular de IBS e CBS e quais estão no Simples Nacional, em que o crédito do adquirente é limitado.","dica":"Art. 47, §9º"},{"id":"b2e3","texto":"A empresa acompanha se o tributo do fornecedor foi extinto, condição para o crédito.","dica":"Arts. 27 e 47"},{"id":"b2e4","texto":"As aquisições de uso e consumo da atividade estão mapeadas, pois passam a gerar crédito no regime regular.","dica":"Exceto uso ou consumo pessoal (art. 57)"},{"id":"b2e5","texto":"Os prazos de pagamento aos fornecedores são controlados, pelo efeito sobre o momento do crédito."},{"id":"b2e6","texto":"O ERP rastreia, por documento, o pagamento e a extinção do tributo do fornecedor."}]},{"id":"b2g2","titulo":"Saídas (vendas e serviços)","itens":[{"id":"b2s1","texto":"Os documentos fiscais de saída são emitidos com classificação e destaques corretos."},{"id":"b2s2","texto":"A empresa sabe qual parcela da receita vai a clientes que tomam crédito (B2B) e qual vai a consumidores finais."},{"id":"b2s3","texto":"A pontualidade dos clientes foi avaliada, pelo efeito do split payment sobre o recebimento."},{"id":"b2s4","texto":"A empresa compara o prazo de recebimento com a apuração por competência, que antecipa o débito."},{"id":"b2s5","texto":"O efeito das vendas parceladas sobre o caixa foi avaliado."}]},{"id":"b2g3","titulo":"Extinção do tributo","itens":[{"id":"b2x1","texto":"A empresa conhece as formas de extinção do tributo: pagamento direto, split payment, compensação e pagamento pelo responsável.","dica":"Art. 27"},{"id":"b2x2","texto":"A empresa sabe em que operações o split payment pode reter o imposto no recebimento."},{"id":"b2x3","texto":"Há rotina para compensar ou ressarcir créditos acumulados."},{"id":"b2x4","texto":"Foram mapeadas as hipóteses de responsabilidade tributária que alcançam a empresa (plataformas, adquirentes e importações).","dica":"Arts. 21 a 23"}]}]},{"id":"b3","titulo":"Benefícios e regimes fiscais","tipo":"dependencia","descricao":"Marque Sim quando a empresa usa ou depende do regime, e Parcial quando depende em parte. Quanto mais itens marcados, maior a dependência de regras que mudam.","grupos":[{"id":"b3g1","titulo":"Regimes diferenciados (alíquota reduzida)","itens":[{"id":"b3d1","texto":"Serviços de profissões intelectuais fiscalizadas por conselho (redução de 30%).","dica":"Art. 127"},{"id":"b3d2","texto":"Serviços de saúde (redução de 60%).","dica":"Art. 130"},{"id":"b3d3","texto":"Serviços de educação (redução de 60%).","dica":"Art. 129"},{"id":"b3d4","texto":"Medicamentos ou dispositivos médicos (redução de 60% ou alíquota zero).","dica":"Arts. 131, 133, 144 e 146"},{"id":"b3d5","texto":"Alimentos da cesta básica, hortifrúti ou produtos agropecuários (alíquota zero ou redução).","dica":"Arts. 125, 137, 138 e 148"},{"id":"b3d6","texto":"Produtos de higiene pessoal e limpeza de consumo popular (redução de 60%).","dica":"Art. 128, VII"},{"id":"b3d7","texto":"Dispositivos de acessibilidade para pessoas com deficiência (redução de 60%).","dica":"Art. 128"}]},{"id":"b3g2","titulo":"Regimes específicos","itens":[{"id":"b3r1","texto":"Bares, restaurantes e lanchonetes.","dica":"Capítulo VII (arts. 273 a 291)"},{"id":"b3r2","texto":"Hotelaria, parques de diversão e parques temáticos.","dica":"Capítulo VII (arts. 273 a 291)"},{"id":"b3r3","texto":"Agências de turismo.","dica":"Arts. 288 a 291"},{"id":"b3r4","texto":"Cooperativas.","dica":"Arts. 271 e 272"},{"id":"b3r5","texto":"Planos de assistência à saúde.","dica":"Arts. 234 a 237"},{"id":"b3r6","texto":"Serviços financeiros, seguros ou meios de pagamento.","dica":"Arts. 181 e 182"},{"id":"b3r7","texto":"Combustíveis (incidência única, por unidade de medida).","dica":"Arts. 172 a 180"},{"id":"b3r8","texto":"Bens imóveis (construção, incorporação, locação ou alienação).","dica":"Arts. 251 a 270"},{"id":"b3r9","texto":"Transporte coletivo de passageiros.","dica":"Art. 157 e arts. 284 e seguintes"}]},{"id":"b3g3","titulo":"Benefícios e regimes que saem ou mudam","itens":[{"id":"b3b1","texto":"Substituição tributária do ICMS."},{"id":"b3b2","texto":"DIFAL de ICMS."},{"id":"b3b3","texto":"Incentivos de ICMS ou de ISS, estaduais ou municipais."},{"id":"b3b4","texto":"Redução de base de cálculo ou diferimento de ICMS."},{"id":"b3b5","texto":"Regimes monofásicos de PIS e COFINS."},{"id":"b3b6","texto":"PIS e COFINS no regime cumulativo em parte da receita, sem crédito de insumos."},{"id":"b3b7","texto":"IPI com redução ou isenção, ou produção na Zona Franca de Manaus."},{"id":"b3b8","texto":"Incentivos de instalação em localidades específicas (filiais)."},{"id":"b3b9","texto":"Desoneração da folha por contribuição sobre a receita bruta (CPRB), em reoneração gradual.","dica":"Lei 14.973/2024"}]}]},{"id":"b4","titulo":"Classificação fiscal e documentos","tipo":"preparo","descricao":"Mede a qualidade do cadastro fiscal e dos documentos eletrônicos.","grupos":[{"id":"b4g1","titulo":"Classificação de produtos e serviços","itens":[{"id":"b4n1","texto":"As NCM dos produtos estão revisadas e atualizadas."},{"id":"b4n2","texto":"Os códigos de serviço (LC 116 e NBS) estão corretos e revisados."},{"id":"b4n3","texto":"Os CFOP das operações foram mapeados."},{"id":"b4n4","texto":"A empresa distingue as operações onerosas das não onerosas."},{"id":"b4n5","texto":"Os itens com regime diferenciado de IBS e CBS estão identificados."},{"id":"b4n6","texto":"Os itens com alíquota zero estão identificados."},{"id":"b4n7","texto":"A empresa começou a analisar as alíquotas pelo destino da operação.","dica":"Arts. 11 e 15"}]},{"id":"b4g2","titulo":"Documentos fiscais eletrônicos","itens":[{"id":"b4f1","texto":"O ERP emite os documentos fiscais com os campos de IBS e CBS, cuja obrigatoriedade é por etapas."},{"id":"b4f2","texto":"O aceite das NF-e de entrada está formalizado."},{"id":"b4f3","texto":"Há controle do prazo de cancelamento de documentos fiscais."},{"id":"b4f4","texto":"A idoneidade do emitente dos documentos de entrada é verificada."},{"id":"b4f5","texto":"O débito e o crédito são rastreáveis até o documento fiscal."},{"id":"b4f6","texto":"O cadastro de clientes traz a matriz de cada cliente, que define o destino de serviços e bens imateriais.","dica":"Art. 11, X"}]}]},{"id":"b5","titulo":"Formação de preço e fluxo de caixa","tipo":"preparo","descricao":"Mede o quanto a empresa já olhou para preço e caixa na transição.","grupos":[{"id":"b5g1","titulo":"Preço","itens":[{"id":"b5p1","texto":"A empresa sabe quais tributos estão embutidos no preço de cada produto ou serviço."},{"id":"b5p2","texto":"Há plano para retirar o PIS e a COFINS do preço em 2027."},{"id":"b5p3","texto":"Há plano para retirar o ICMS e o ISS do preço, de forma gradual, de 2029 a 2032."},{"id":"b5p4","texto":"A revisão dos preços durante a transição está planejada."},{"id":"b5p5","texto":"A margem foi analisada com e sem o crédito concedido ao cliente."},{"id":"b5p6","texto":"O efeito de o imposto passar a aparecer por fora no preço foi avaliado."},{"id":"b5p7","texto":"A empresa avaliou preços diferentes para clientes que tomam crédito (B2B) e para os que não tomam (B2C)."}]},{"id":"b5g2","titulo":"Caixa","itens":[{"id":"b5k1","texto":"A empresa entende que o débito segue a competência e o crédito segue a extinção do tributo do fornecedor."},{"id":"b5k2","texto":"O fluxo de caixa foi projetado considerando o atraso do crédito."},{"id":"b5k3","texto":"O efeito das vendas parceladas sobre o caixa foi analisado."},{"id":"b5k4","texto":"Os fornecedores pontuais foram mapeados, para antecipar o crédito."},{"id":"b5k5","texto":"O capital de giro foi avaliado para suportar a restrição de crédito."},{"id":"b5k6","texto":"O efeito do split payment no caixa foi analisado."}]}]},{"id":"b6","titulo":"Planejamento e estrutura","tipo":"preparo","descricao":"Mede se a análise tributária e a estrutura da empresa foram revistas.","grupos":[{"id":"b6g1","titulo":"Análise tributária","itens":[{"id":"b6a1","texto":"Os tributos sobre o consumo (IBS, CBS e Imposto Seletivo) foram analisados."},{"id":"b6a2","texto":"Os tributos sobre a renda (IRPJ e CSLL) foram reavaliados no novo contexto."},{"id":"b6a3","texto":"Os tributos sobre a folha, como a CPRB e as contribuições previdenciárias, foram considerados."},{"id":"b6a4","texto":"A estrutura logística e a localização dos estabelecimentos foram revistas, pelo efeito do destino."},{"id":"b6a5","texto":"Os clientes foram analisados quanto ao regime (que tomam crédito ou não)."},{"id":"b6a6","texto":"Os fornecedores foram analisados quanto ao regime tributário, pelo efeito sobre o crédito."},{"id":"b6a7","texto":"O enquadramento no Simples Nacional contra o regime regular foi reavaliado, se aplicável."}]},{"id":"b6g2","titulo":"Estrutura societária e operacional","itens":[{"id":"b6e1","texto":"A estrutura societária foi avaliada frente à reforma."},{"id":"b6e2","texto":"Reorganizações ou desmembramentos foram analisados."},{"id":"b6e3","texto":"Oportunidades em regimes diferenciados ou específicos foram avaliadas."},{"id":"b6e4","texto":"Contratos com clientes e fornecedores foram revisados quanto a preço, tributos e documentos."},{"id":"b6e5","texto":"As contingências tributárias atuais foram mapeadas."}]}]},{"id":"b7","titulo":"Maturidade e preparação","tipo":"preparo","descricao":"Mede conhecimento, sistemas e processos internos para a transição.","grupos":[{"id":"b7g1","titulo":"Conhecimento e capacitação","itens":[{"id":"b7k1","texto":"Gestores e sócios foram informados sobre os impactos da reforma."},{"id":"b7k2","texto":"A equipe contábil e financeira está capacitada na LC 214/2025."},{"id":"b7k3","texto":"Um assessor tributário com experiência na reforma foi consultado."},{"id":"b7k4","texto":"O cronograma de transição (2026 a 2033) é conhecido pela empresa."}]},{"id":"b7g2","titulo":"Sistemas e tecnologia","itens":[{"id":"b7s1","texto":"O ERP será atualizado para IBS, CBS e Imposto Seletivo."},{"id":"b7s2","texto":"A apuração assistida foi avaliada."},{"id":"b7s3","texto":"O controle do split payment está previsto no sistema."},{"id":"b7s4","texto":"A emissão dos documentos fiscais com os novos campos está mapeada."},{"id":"b7s5","texto":"A integração com os sistemas da Receita Federal e do Comitê Gestor do IBS foi avaliada."}]},{"id":"b7g3","titulo":"Processos internos","itens":[{"id":"b7p1","texto":"O mapa de impacto da empresa foi elaborado (operações, créditos, débitos e incentivos)."},{"id":"b7p2","texto":"O relatório de cenário foi apresentado aos sócios."},{"id":"b7p3","texto":"Há plano de ação formalizado para a adaptação."},{"id":"b7p4","texto":"A revisão periódica do planejamento tributário está agendada."}]}]}]}</script>
+<script type="application/json" data-perfil id="perfil-modelo">{"id":"modelo","nome":"Modelo genérico","privado":false,"logo":"","logoAlt":"","textos":{"intro":"Central de ferramentas e material de apoio para o time contábil acompanhar a transição para o IBS/CBS. Este portal cresce por etapas conforme os módulos vão sendo desenvolvidos.","cards":{"cst":{"titulo":"Consulta CST / cClassTrib","desc":"Busca e filtro dos códigos de Classificação Tributária do IBS/CBS, com indicadores por CST e destaque para os pontos mais relevantes ao perfil da empresa."},"plano":{"titulo":"Plano de Ação da Reforma","desc":"Painel com as 6 frentes de trabalho (diagnóstico, fluxo de caixa, créditos, sistemas, fornecedores, cronograma), status de cada uma e o perfil fiscal da empresa."},"split":{"titulo":"Simulador de Split Payment","desc":"Estimativa do impacto do split payment no fluxo de caixa a partir do faturamento recorrente da empresa."},"cronograma":{"titulo":"Cronograma da Reforma","desc":"Linha do tempo oficial de transição (2026–2033) com marcos que afetam diretamente a empresa."}},"planoIntro":"Painel de acompanhamento das 6 frentes de trabalho e do perfil fiscal da empresa. Cada frente é atualizada conforme o material vai sendo estudado e discutido com a consultoria.","roadmap":[["Consulta CST / cClassTrib ","— concluído, com efeito sanfona e indicadores"],["Painel do Plano de Ação ","— concluído, com status por frente e link direto pra ferramenta de CST"],["Cronograma da Reforma ","— linha do tempo visual dos marcos legais"],["Simulador de Split Payment ","— depende de dados de faturamento e do modelo de receita da empresa"]]},"empresa":[{"item":"Grupo","valor":"—","status":"pendente"},{"item":"Atividade","valor":"—","status":"pendente"},{"item":"Estrutura societária","valor":"—","status":"pendente"},{"item":"Regime tributário","valor":"—","status":"pendente"},{"item":"Estrutura fiscal interna","valor":"—","status":"pendente"},{"item":"Faturamento / porte","valor":"—","status":"pendente"},{"item":"Modelo de receita","valor":"—","status":"pendente"},{"item":"ERP utilizado","valor":"—","status":"pendente"},{"item":"Relação com a matriz (Alemanha)","valor":"—","status":"pendente"},{"item":"Principais clientes","valor":"—","status":"pendente"},{"item":"Principais fornecedores","valor":"—","status":"pendente"}],"frentes":[{"n":"1.1","title":"Diagnóstico e impacto específico na empresa","status":"todo","desc":"Como a empresa fatura e como cada operação se classifica no IBS/CBS, que tributa pelo objeto da operação (NBS e NCM, com o cClassTrib), e não pelo CNAE. Inclui o tratamento de cada estabelecimento, a importação de serviços e bens imateriais do exterior (o adquirente no País é o contribuinte, arts. 63 a 70 da LC 214/2025) e a exportação de serviços (fornecimento a residente no exterior com consumo no exterior, art. 80).","items":["Confirmar o modelo de receita e o código NBS ou NCM de cada oferta","Mapear as operações de cada estabelecimento por NBS, NCM e cClassTrib, e não pelo CNAE","Verificar as operações com o exterior: importação de serviços ou bens imateriais e exportação"]},{"n":"1.2","title":"Fluxo de caixa e Split Payment","status":"todo","desc":"Como o split payment, quando implantado, pode afetar o recebimento das vendas e o capital de giro. A data de implantação ainda depende de regulamentação.","items":["Simular o impacto do split payment no fluxo de caixa","Levantar o que precisa ser antecipado com a Tesouraria/Financeiro"]},{"n":"1.3","title":"Créditos tributários (transição PIS/COFINS/ICMS → IBS/CBS)","status":"todo","desc":"Levantamento dos créditos acumulados e dos prazos de aproveitamento. Créditos de PIS e COFINS escriturados até 31/12/2026 permanecem utilizáveis, com o prazo que já corria, e podem ser compensados com a CBS (art. 378 da LC 214/2025). Os créditos de transição dos arts. 379 a 381 têm prazo de cinco anos (art. 383). O saldo credor de ICMS segue o art. 134 do ADCT. O crédito do adquirente também depende da extinção do débito do fornecedor (arts. 27, 47 e 48).","items":["Levantar os créditos acumulados hoje (PIS e COFINS não cumulativos e, se houver, ICMS)","Montar o cronograma de utilização dentro dos prazos legais (cinco anos para os créditos dos arts. 379 a 381; regra própria para o saldo de ICMS)","Mapear os principais fornecedores quanto ao regime tributário (regular ou Simples Nacional) e ao cumprimento das obrigações, que afetam o crédito do adquirente"]},{"n":"1.4","title":"Sistemas e Tecnologia (ERP e processos)","status":"todo","desc":"Adequação do ERP às novas regras de crédito e débito e apoio à consultoria com ferramentas internas.","items":["Usar a consulta de CST/cClassTrib, construída com os dados oficiais do Informe Técnico 2025.002","Mapear pontos de integração com o ERP e com a consultoria"],"link":{"rota":"cst","label":"Abrir ferramenta CST/cClassTrib →"}},{"n":"1.5","title":"Fornecedores, clientes e cadeia de suprimentos","status":"todo","desc":"Mapeamento de fornecedores por regime tributário e cumprimento das obrigações, e impacto em decisões de compra.","items":["Mapear os principais fornecedores e o regime tributário de cada um (regular ou Simples Nacional)","Mapear os principais clientes e a natureza das operações (empresas que se creditam ou consumidores finais)"]},{"n":"1.6","title":"Cronograma regulatório e obrigações acessórias","status":"todo","desc":"Linha do tempo oficial da reforma e novas obrigações acessórias.","items":["Montar a linha do tempo 2026–2033 com os marcos que afetam a empresa","Acompanhar as novas obrigações acessórias (campos de IBS e CBS nos documentos fiscais e apuração assistida) conforme os atos da Receita Federal e do Comitê Gestor do IBS"]}],"cstRelevantes":[]}</script>
+
+<script>
+(function(){
+'use strict';
+var $=function(id){return document.getElementById(id);};
+var esc=function(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');};
+
+/* ===== Dados e perfis ===== */
+var CST=JSON.parse($('cst-data').textContent);
+var SETORES=JSON.parse($('setores-data').textContent);
+var PERFIS=Array.prototype.slice.call(document.querySelectorAll('script[data-perfil]')).map(function(s){return JSON.parse(s.textContent);});
+var STORE='sis-perfil';
+var perfil=PERFIS[0];
+try{var sid=localStorage.getItem(STORE);var sp=PERFIS.filter(function(x){return x.id===sid;})[0];if(sp)perfil=sp;}catch(e){}
+var planoOpen={};
+var cstOpen={};
+var cstUI={q:'',cst:'',onlyRel:false,hideEnc:false};
+
+function fmt(s){return String(s==null?'':s).replace(/\{versao\}/g,CST.meta.versao).replace(/\{publicacao\}/g,CST.meta.publicacao);}
+/* ===== Consulta CST: lógica pura ===== */
+function cstRows(p){
+  var rel={};((p&&p.cstRelevantes)||[]).forEach(function(c){rel[c]=true;});
+  return CST.data.map(function(r){var x=r.slice();x[6]=!!rel[r[2]];return x;});
+}
+function cstFilter(rows,f){
+  var q=(f.q||'').trim().toLowerCase();
+  return rows.filter(function(row){
+    var c=row[0],label=row[1],code=row[2],desc=row[3],enc=row[5],star=row[6];
+    if(f.cst&&c!==f.cst)return false;
+    if(f.onlyRel&&!star)return false;
+    if(f.hideEnc&&enc)return false;
+    if(q){var hay=(c+label+code+desc).toLowerCase();if(hay.indexOf(q)<0)return false;}
+    return true;
+  });
+}
+function dotsHtml(c){
+  var m=CST.cstIndicators[c]||{};
+  var cols=['exigeTrib','monofasica','reducao','diferimento','transfCred','credPresZFM','ajusteCompet','redutorBC'];
+  return cols.map(function(k){return '<div class="ind-col"><div class="dot '+(m[k]?'on':'')+'"></div></div>';}).join('');
+}
+function pctCell(v){
+  v=v||0;
+  return '<div class="pct-bar-wrap"><div class="pct-bar"><div class="pct-bar-fill" style="width:'+v+'%;"></div></div><span class="pct-num">'+v+'%</span></div>';
+}
+function cstResultsHtml(rows,f,open){
+  var filtered=cstFilter(rows,f);
+  var count=filtered.length+' código(s) de '+rows.length+' no total';
+  if(!filtered.length)return {count:count,html:'<div class="empty">Nenhum código encontrado.</div>'};
+  var groups={},order=[];
+  filtered.forEach(function(row){var k=row[0];if(!groups[k]){groups[k]=[];order.push(k);}groups[k].push(row);});
+  var autoExpand=!!(f.q&&f.q.trim()||f.cst||f.onlyRel||f.hideEnc);
+  var html='<div class="ind-legend-row"><div>CST</div><div>Descrição</div>'+
+    '<div>Exige</div><div>Mono</div><div>Redução</div><div>Diferim.</div><div>Transf.</div><div>Créd.ZFM</div><div>Ajuste</div><div>Red.BC</div></div>'+
+  order.map(function(c){
+    var rs=groups[c],label=rs[0][1],isOpen=autoExpand?true:!!open[c];
+    return '<div class="accordion">'+
+      '<div class="acc-header '+(isOpen?'open':'')+'" data-cst="'+esc(c)+'">'+
+        '<div class="badge">'+esc(c)+'</div>'+
+        '<div class="label"><span class="chev">▶</span> '+esc(label)+'</div>'+dotsHtml(c)+
+      '</div>'+
+      '<div class="acc-body '+(isOpen?'expanded':'')+'"><table><thead><tr>'+
+        '<th>Código</th><th>Descrição</th><th>% Red. IBS</th><th>% Red. CBS</th><th>Trib. Reg.</th><th>Créd. Pres.</th><th>Documentos</th></tr></thead><tbody>'+
+        rs.map(function(r){
+          return '<tr class="'+(r[6]?'hl':'')+' '+(r[5]?'encerrado':'')+'">'+
+            '<td class="code">'+esc(r[2])+'</td>'+
+            '<td>'+esc(r[3])+(r[6]?'<span class="star">relevante</span>':'')+(r[5]?'<span class="end-pill">Encerrado</span>':'')+'</td>'+
+            '<td>'+pctCell(r[7])+'</td><td>'+pctCell(r[8])+'</td>'+
+            '<td><span class="flag '+(r[9]?'on':'')+'"></span></td><td><span class="flag '+(r[10]?'on':'')+'"></span></td>'+
+            '<td>'+(r[4].map(function(d){return '<span class="doc-pill">'+esc(d)+'</span>';}).join('')||'<span style="color:#bbb;font-size:11px;">—</span>')+'</td></tr>';
+        }).join('')+
+      '</tbody></table></div></div>';
+  }).join('');
+  return {count:count,html:html};
+}
+
+/* ===== Plano de ação: lógica pura ===== */
+var STATUS_LABEL={todo:'Não iniciado',wip:'Em andamento',done:'Concluído'};
+function planoResumo(frentes){
+  var n=frentes.length,done=frentes.filter(function(f){return f.status==='done';}).length,wip=frentes.filter(function(f){return f.status==='wip';}).length;
+  var pct=n?Math.round((done+wip)/n*100):0;
+  var partes=[];
+  if(wip)partes.push(wip+' de '+n+' frentes em andamento');
+  partes.push(done?(done+' concluída'+(done>1?'s':'')):'nenhuma concluída ainda');
+  return {pct:pct,texto:partes.join(', ')};
+}
+function frentesHtml(frentes,open){
+  return frentes.map(function(f){
+    var isOpen=!!open[f.n];
+    return '<div class="accordion"><div class="acc-header '+(isOpen?'open':'')+'" data-n="'+esc(f.n)+'">'+
+      '<div class="num">'+esc(f.n)+'</div><div class="titlewrap"><h3>'+esc(f.title)+'</h3></div>'+
+      '<span class="status-tag '+esc(f.status)+'">'+STATUS_LABEL[f.status]+'</span><span class="chev">▶</span></div>'+
+      '<div class="acc-body '+(isOpen?'expanded':'')+'"><div class="acc-body-inner"><p>'+esc(f.desc)+'</p>'+
+      '<ul>'+f.items.map(function(i){return '<li>'+esc(i)+'</li>';}).join('')+'</ul>'+
+      (f.link?'<a class="tool-link" href="#'+esc(f.link.rota)+'">'+esc(f.link.label)+'</a>':'')+
+      '</div></div></div>';
+  }).join('');
+}
+
+/* ===== Visões ===== */
+function brand(p,h){
+  return p.logo?'<img src="'+p.logo+'" alt="'+esc(p.logoAlt||p.nome)+'" style="height:'+h+'px;width:auto;display:block;">':'<span class="sis-brand">SIS<small>Reforma Tributária</small></span>';
+}
+
+/* ===== Ficha setorial ===== */
+function setorId(p){
+  var id='';try{id=localStorage.getItem('sis-setor-'+p.id)||'';}catch(e){}
+  if(id==='-')return '';
+  if(!id)id=p.setor||'';
+  return SETORES.setores.filter(function(x){return x.id===id;}).length?id:'';
+}
+function setorDe(p){var id=setorId(p);return SETORES.setores.filter(function(x){return x.id===id;})[0]||null;}
+function fichaCampo(s,campo){var r=(s&&s.ficha||[]).filter(function(x){return x[0]===campo;})[0];return r?r[1]:'';}
+function setorHtml(p){
+  var s=setorDe(p),pos=SETORES.meta.posBase||'';
+  var opts='<option value="-"'+(s?'':' selected')+'>— Escolha um setor —</option>'+SETORES.setores.map(function(x){return '<option value="'+esc(x.id)+'"'+(s&&s.id===x.id?' selected':'')+'>'+esc(x.nome)+'</option>';}).join('');
+  var corpo;
+  if(!s){corpo='<div class="vazio">Escolha o setor da empresa para ver os parâmetros do regime tributário: regime aplicável, redução de alíquota, crédito, benefícios em extinção, documentos e pontos de atenção.</div>';}
+  else{
+    corpo='<div class="section-title">Ficha: '+esc(s.nome)+'</div><div class="profile-table"><table>'+
+      s.ficha.map(function(r){return '<tr><td class="item">'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>';}).join('')+'</table></div>'+
+      (pos?'<a class="linkpos" href="'+esc(pos)+'#'+esc(s.aula)+'" target="_blank" rel="noopener"><span class="material-symbols-outlined">menu_book</span>Ler o perfil completo no PÓS ↗</a>':'')+
+      '<div class="section-title">Acompanhamento no painel do PÓS</div><div class="painel-list">'+
+      (s.painel.length?s.painel.map(function(i){return '<div class="painel-item"><b>'+esc(i.tema)+'</b><span class="pri '+esc(i.prioridade)+'">'+esc(i.prioridade)+'</span><div>'+esc(i.estado)+'</div><div class="meta">Verificado em '+esc(i.data)+(i.fonte?' · Fonte: '+esc(i.fonte):'')+'</div></div>';}).join(''):'<div class="painel-item">Nenhum item acompanhado.</div>')+'</div>';
+  }
+  return '<div data-v="setor">'+
+  '<header><div class="brand">'+brand(p,36)+'</div><h1>Ficha setorial — Reforma Tributária</h1><p>Parâmetros do regime tributário de cada setor, gerados a partir dos perfis setoriais do PÓS (LC 214/2025). Servem de modelo inicial para o perfil de empresa. Os dados reais da empresa vêm do perfil, e não desta ficha.</p></header>'+
+  '<main><div class="setor-sel"><label for="setorSel">Setor do perfil '+esc(p.nome)+'</label><select id="setorSel">'+opts+'</select><span class="nota">A escolha fica salva neste navegador, para o perfil selecionado no topo.</span></div>'+corpo+'</main>'+
+  '<footer><div>Material de estudo, que não substitui a leitura da norma nem a orientação de um profissional habilitado. Confira as fontes oficiais antes de aplicar, e veja no PÓS o que ainda não foi conferido em cada setor.</div></footer></div>';
+}
+function setorBox(p){
+  var s=setorDe(p);if(!s)return '';
+  var pts=fichaCampo(s,'Pontos de atenção');
+  var lista=pts?pts.split(/;\s*/).filter(Boolean):[];
+  return '<div class="setor-box"><h4>Pontos de atenção do setor (modelo: '+esc(s.nome)+')</h4>'+(lista.length?'<ul>'+lista.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>':'')+'<a href="#setor">Ver a ficha setorial completa →</a></div>';
+}
+
+/* ===== Diagnóstico por checklist ===== */
+var CHK=JSON.parse($('checklist-data').textContent);
+var DIAG_LIMITES={depCritico:40,b7Critico:40,depAlto:30,baseAlto:50,depModerado:15,prepModerado:60,depNeutro:25,minResp:0.5};
+function chkItens(){var o=[];CHK.blocos.forEach(function(b){b.grupos.forEach(function(g){g.itens.forEach(function(i){o.push({id:i.id,bloco:b.id,tipo:b.tipo,texto:i.texto,grupo:g.titulo});});});});return o;}
+function diagResp(p){
+  var r={},sug={};
+  (p.diagSugestoes&&Object.keys(p.diagSugestoes)||[]).forEach(function(k){r[k]=p.diagSugestoes[k];sug[k]=true;});
+  try{var t=localStorage.getItem('sis-diag-'+p.id);if(t){var d=JSON.parse(t);Object.keys(d).forEach(function(k){r[k]=d[k];delete sug[k];});}}catch(e){}
+  return {resp:r,sug:sug};
+}
+function diagSalvar(p,id,v){
+  var d={};try{var t=localStorage.getItem('sis-diag-'+p.id);if(t)d=JSON.parse(t);}catch(e){}
+  if(v===null)delete d[id];else d[id]=v;
+  try{localStorage.setItem('sis-diag-'+p.id,JSON.stringify(d));}catch(e){}
+}
+function diagCalc(resp){
+  var blocos=[],pcts={},flags={};
+  CHK.blocos.forEach(function(b){
+    var itens=[];b.grupos.forEach(function(g){g.itens.forEach(function(i){itens.push(i);});});
+    var resp_n=0,soma=0,marc=[],naoI=[],parc=[];
+    itens.forEach(function(i){
+      var v=resp[i.id];
+      if(b.tipo==='perfil'){if(v===1||v==='1')flags[i.id]=true;if(v===1||v===0)resp_n++;return;}
+      if(v===undefined||v==='na')return;
+      resp_n++;soma+=Number(v);
+      if(b.tipo==='dependencia'&&Number(v)>0)marc.push(i);
+      if(b.tipo==='preparo'){if(Number(v)===0)naoI.push(i);else if(Number(v)===0.5)parc.push(i);}
+    });
+    var pct=(b.tipo!=='perfil'&&resp_n)?soma/resp_n*100:null;
+    pcts[b.id]=pct;
+    blocos.push({id:b.id,titulo:b.titulo,tipo:b.tipo,total:itens.length,respondidos:resp_n,pct:pct,marcados:marc,lacunas:naoI,parciais:parc});
+  });
+  var pont=blocos.filter(function(b){return b.tipo!=='perfil';});
+  var totPont=pont.reduce(function(a,b){return a+b.total;},0),respPont=pont.reduce(function(a,b){return a+b.respondidos;},0);
+  var prepVals=['b2','b4','b5','b6','b7'].map(function(k){return pcts[k];}).filter(function(x){return x!==null&&x!==undefined;});
+  var prep=prepVals.length?prepVals.reduce(function(a,b){return a+b;},0)/prepVals.length:null;
+  var L=DIAG_LIMITES,dep=pcts.b3,b2=pcts.b2,b5=pcts.b5,b7=pcts.b7,motivos=[],classe=null;
+  if(respPont<totPont*L.minResp){motivos.push('Responda ao menos '+Math.round(L.minResp*100)+'% dos itens pontuados ('+respPont+' de '+totPont+' respondidos).');}
+  else{
+    var serv=!!(flags.b1a3||flags.b1a6),neutroPerfil=!!((flags.b1o4&&!flags.b1c5)||flags.b1c1);
+    var f=function(x){return x===null||x===undefined?'sem resposta':Math.round(x)+'%';};
+    motivos.push('Dependência de benefícios e regimes (bloco 3): '+f(dep)+'.');
+    motivos.push('Preparação média (blocos 2, 4, 5, 6 e 7): '+f(prep)+'. Créditos: '+f(b2)+'. Preço e caixa: '+f(b5)+'. Maturidade: '+f(b7)+'.');
+    if(neutroPerfil&&dep!==null&&dep<L.depNeutro){classe='NEUTRO';motivos.push('Perfil de início de cadeia ou exportador sem venda ao consumidor final, e pouca dependência de regimes que mudam.');}
+    else if(dep!==null&&dep>=L.depCritico&&b7!==null&&b7<L.b7Critico&&serv){classe='CRITICO';motivos.push('Dependência alta de regimes que mudam, baixa preparação e atividade de serviços ou mista.');}
+    else if((dep!==null&&dep>=L.depAlto)||(b2!==null&&b5!==null&&b7!==null&&b2<L.baseAlto&&b5<L.baseAlto&&b7<L.baseAlto)){classe='ALTO';motivos.push('Dependência relevante de regimes que mudam, ou lacunas ao mesmo tempo em créditos, preço e maturidade.');}
+    else if((dep!==null&&dep>=L.depModerado)||(prep!==null&&prep<L.prepModerado)){classe='MODERADO';motivos.push('Alguma dependência de regimes que mudam, ou preparação ainda abaixo do esperado.');}
+    else{classe='BAIXO';motivos.push('Pouca dependência de regimes que mudam e preparação adequada.');}
+  }
+  return {blocos:blocos,classe:classe,motivos:motivos,dep:dep,prep:prep,flags:flags,respPont:respPont,totPont:totPont};
+}
+var CLASSE_NOME={CRITICO:'CRÍTICO',ALTO:'ALTO',MODERADO:'MODERADO',BAIXO:'BAIXO',NEUTRO:'NEUTRO',SEM:'A CLASSIFICAR'};
+function diagResumoHtml(c){
+  var linhas=c.blocos.filter(function(b){return b.tipo!=='perfil';}).map(function(b){
+    var p=b.pct===null?0:Math.round(b.pct);
+    return '<tr><td>'+esc(b.titulo)+(b.tipo==='dependencia'?' <span style="color:var(--slate);font-size:11px;">(risco: quanto maior, mais dependência)</span>':'')+'</td><td>'+b.respondidos+' de '+b.total+'</td><td><div class="barra'+(b.tipo==='dependencia'?' risco':'')+'"><i style="width:'+p+'%"></i></div></td><td>'+(b.pct===null?'—':p+'%')+'</td></tr>';
+  }).join('');
+  var cl=c.classe||'SEM';
+  return '<div class="diag-resumo"><h3>Resultado</h3><div><span class="classe '+cl+'">'+CLASSE_NOME[cl]+'</span></div><ul class="motivos">'+c.motivos.map(function(m){return '<li>'+esc(m)+'</li>';}).join('')+'</ul>'+
+    '<table class="diag-tab" style="margin-top:12px;"><tr><th>Bloco</th><th>Respondidos</th><th>Barra</th><th>%</th></tr>'+linhas+'</table>'+
+    '<div class="limites"><b>Limites de trabalho (inferência de estudo):</b> neutro com dependência abaixo de '+DIAG_LIMITES.depNeutro+'%; crítico com dependência a partir de '+DIAG_LIMITES.depCritico+'%, maturidade abaixo de '+DIAG_LIMITES.b7Critico+'% e serviços ou atividade mista; alto com dependência a partir de '+DIAG_LIMITES.depAlto+'% ou créditos, preço e maturidade abaixo de '+DIAG_LIMITES.baseAlto+'%; moderado com dependência a partir de '+DIAG_LIMITES.depModerado+'% ou preparação abaixo de '+DIAG_LIMITES.prepModerado+'%. O modelo estudado é qualitativo, e a classificação é só uma sugestão para o contador revisar.</div></div>';
+}
+function diagItemHtml(i,tipo,val,sug){
+  var ops=tipo==='perfil'?[['1','Sim',''],['0','Não','']]:(tipo==='dependencia'?[['1','Sim','neg'],['0.5','Em parte','neg'],['0','Não',''],['na','N/A','']]:[['1','Sim',''],['0.5','Parcial',''],['0','Não','neg'],['na','N/A','']]);
+  return '<div class="diag-item" data-id="'+esc(i.id)+'" data-tipo="'+esc(tipo)+'"><div class="txt">'+esc(i.texto)+(sug?'<span class="sug">sugerido pelo perfil</span>':'')+(i.dica?'<span class="dica">'+esc(i.dica)+'</span>':'')+'</div><div class="opts">'+ops.map(function(o){var on=(val!==undefined&&String(val)===o[0]);return '<button type="button" class="opt'+(on?' on '+o[2]:'')+'" data-v="'+o[0]+'"'+(o[2]?' data-neg="1"':'')+'>'+o[1]+'</button>';}).join('')+'</div></div>';
+}
+function diagHtml(p){
+  var R=diagResp(p),c=diagCalc(R.resp),s=setorDe(p);
+  var blocos=CHK.blocos.map(function(b,ix){
+    return '<details class="diag-bloco"'+(ix===0?' open':'')+'><summary><span>Bloco '+(ix+1)+' — '+esc(b.titulo)+'</span></summary><div class="bloco-desc">'+esc(b.descricao)+'</div>'+
+      b.grupos.map(function(g){return '<div class="grupo-tit">'+esc(g.titulo)+'</div>'+g.itens.map(function(i){return diagItemHtml(i,b.tipo,R.resp[i.id],R.sug[i.id]);}).join('');}).join('')+'</details>';
+  }).join('');
+  return '<div data-v="diag">'+
+  '<header><div class="brand">'+brand(p,36)+'</div><h1>Diagnóstico por checklist — Reforma Tributária</h1><p>Sete blocos para medir a exposição da empresa à reforma do consumo: perfil, créditos, benefícios e regimes, classificação e documentos, preço e caixa, planejamento e maturidade. As respostas ficam salvas neste navegador, para o perfil selecionado.</p></header>'+
+  '<main><div class="diag-aviso"><b>Como usar:</b> responda Sim, Parcial ou Não em cada item (N/A quando não se aplica). No bloco 3, Sim significa que a empresa depende do regime. '+(s?'Setor do perfil: <b>'+esc(s.nome)+'</b> (veja a <a href="#setor">ficha setorial</a>). ':'Escolha o setor na <a href="#setor">ficha setorial</a> para ver os pontos do setor no relatório. ')+'Itens marcados como "sugerido pelo perfil" vêm dos dados do perfil e devem ser confirmados.</div>'+
+  '<div id="diagResumo">'+diagResumoHtml(c)+'</div>'+
+  '<div class="acoes"><button type="button" class="btn" id="diagBaixar">Baixar relatório de cenário (HTML)</button><button type="button" class="btn sec" id="diagAbrir">Abrir para imprimir</button><button type="button" class="btn sec" id="diagLimpar">Limpar respostas deste perfil</button></div>'+
+  '<div id="diagBox">'+blocos+'</div></main>'+
+  '<footer><div>Material de apoio, que não substitui a leitura da norma nem a orientação de um profissional habilitado. Os itens são de redação própria e a classificação usa limites de trabalho, que o contador deve rever.</div></footer></div>';
+}
+function relatorioHtml(p){
+  var R=diagResp(p),c=diagCalc(R.resp),s=setorDe(p),hoje=new Date().toLocaleDateString('pt-BR');
+  var its=chkItens(),nm={};its.forEach(function(i){nm[i.id]=i;});
+  var perfilMarc=its.filter(function(i){return i.tipo==='perfil'&&c.flags[i.id];}).map(function(i){return '<li>'+esc(i.texto)+'</li>';}).join('');
+  var emp=(p.empresa||[]).map(function(e){return '<tr><td>'+esc(e.item)+'</td><td>'+esc(e.valor)+'</td><td>'+(e.status==='confirmado'?'Confirmado':'Pendente')+'</td></tr>';}).join('');
+  var tab=c.blocos.filter(function(b){return b.tipo!=='perfil';}).map(function(b){return '<tr><td>'+esc(b.titulo)+'</td><td>'+b.respondidos+' de '+b.total+'</td><td>'+(b.pct===null?'—':Math.round(b.pct)+'%')+'</td></tr>';}).join('');
+  var dep=c.blocos.filter(function(b){return b.tipo==='dependencia';}).map(function(b){return b.marcados.map(function(i){return '<li>'+esc(i.texto)+'</li>';}).join('');}).join('');
+  var lac=c.blocos.filter(function(b){return b.tipo==='preparo';}).map(function(b){var a=b.lacunas.concat(b.parciais);return a.length?'<h4>'+esc(b.titulo)+'</h4><ul>'+a.map(function(i){return '<li>'+esc(i.texto)+(b.parciais.indexOf(i)>=0?' <i>(parcial)</i>':'')+'</li>';}).join('')+'</ul>':'';}).join('');
+  var fich=s?s.ficha.filter(function(r){return ['Regime aplicável','Redução de alíquota','Particularidades de crédito','Benefícios em extinção','Pontos de atenção'].indexOf(r[0])>=0;}).map(function(r){return '<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>';}).join(''):'';
+  var cl=c.classe||'SEM';
+  return '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Relatório de cenário — '+esc(p.nome)+'</title><style>body{font-family:Segoe UI,Arial,sans-serif;color:#324155;max-width:900px;margin:30px auto;padding:0 20px;line-height:1.55;font-size:14px;}h1{font-size:22px;margin:0 0 4px;}h2{font-size:16px;border-bottom:2px solid #D0FF25;padding-bottom:4px;margin-top:28px;}h4{margin:12px 0 4px;}table{border-collapse:collapse;width:100%;font-size:13px;}td,th{border:1px solid #d8d8d8;padding:6px 8px;text-align:left;vertical-align:top;}th{background:#f1f0f7;}.cl{display:inline-block;font-weight:800;padding:5px 14px;border-radius:20px;background:#eee;}.conf{background:#fff7d6;border:1px solid #ecd98a;padding:8px 12px;border-radius:8px;font-size:12px;}.lin{border-bottom:1px solid #999;height:26px;}@media print{h2{break-after:avoid;}}</style></head><body>'+
+  '<div class="conf"><b>Documento confidencial.</b> Contém análise da empresa identificada e é de uso do contador responsável e da empresa. Material de apoio, que não substitui a leitura da norma nem a orientação de um profissional habilitado.</div>'+
+  '<h1>Relatório de cenário empresarial — Reforma Tributária</h1><div>Perfil: <b>'+esc(p.nome)+'</b> · Gerado em '+hoje+' · Validade sugerida: 12 meses, ou antes se o cenário mudar (critério de trabalho)</div>'+
+  '<h2>1. Identificação e perfil</h2>'+(emp?'<table><tr><th>Item</th><th>Informação</th><th>Status</th></tr>'+emp+'</table>':'<p>Perfil sem dados cadastrais preenchidos.</p>')+(s?'<p>Setor (modelo): <b>'+esc(s.nome)+'</b></p>':'')+(perfilMarc?'<h4>Perfil operacional marcado no checklist</h4><ul>'+perfilMarc+'</ul>':'')+
+  '<h2>2. Resultado do checklist</h2><p>Classificação sugerida: <span class="cl">'+CLASSE_NOME[cl]+'</span></p><ul>'+c.motivos.map(function(m){return '<li>'+esc(m)+'</li>';}).join('')+'</ul><table><tr><th>Bloco</th><th>Respondidos</th><th>%</th></tr>'+tab+'</table><p style="font-size:12px;">Os limites da classificação são de trabalho (inferência de estudo). O modelo estudado é qualitativo. A classificação final é do contador.</p>'+
+  '<h2>3. Dependências e lacunas</h2><h4>Regimes e benefícios de que a empresa depende (bloco 3)</h4>'+(dep?'<ul>'+dep+'</ul>':'<p>Nenhum item marcado.</p>')+'<h4>Lacunas de preparação (respondidas como Não ou Parcial)</h4>'+(lac||'<p>Nenhuma lacuna registrada.</p>')+
+  (fich?'<h2>4. Pontos do setor</h2><table>'+fich+'</table>':'<h2>4. Pontos do setor</h2><p>Setor não escolhido.</p>')+
+  '<h2>5. Cronograma da transição e parecer</h2><table><tr><th>Período</th><th>O que muda</th></tr><tr><td>2026</td><td>Teste, com CBS a 0,9% e IBS a 0,1% destacados nos documentos fiscais, com dispensa de recolhimento para quem cumpre as obrigações acessórias. PIS, COFINS, ICMS e ISS seguem.</td></tr><tr><td>2027</td><td>PIS e COFINS saem e a CBS passa a valer plena (alíquota de referência por resolução do Senado). O IPI passa a ter alíquota zero, salvo Zona Franca de Manaus, e o Imposto Seletivo entra.</td></tr><tr><td>2029 a 2032</td><td>ICMS e ISS caem a 90%, 80%, 70% e 60%, e o IBS sobe.</td></tr><tr><td>2033</td><td>ICMS e ISS extintos e IBS pleno.</td></tr></table>'+
+  '<h4>Parecer do contador</h4><div class="lin"></div><div class="lin"></div><div class="lin"></div><div class="lin"></div></body></html>';
+}
+function baixarRelatorio(p,abrir){
+  var html=relatorioHtml(p),blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob);
+  if(abrir){window.open(url,'_blank');return;}
+  var a=document.createElement('a');a.href=url;a.download='relatorio-cenario-'+p.id+'.html';document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(url);a.remove();},800);
+}
+
+/* ===== Estimativa de carga efetiva ===== */
+var CARGA_CAMPOS=[
+ {g:'Receitas do período (R$, sem imposto)',c:[['recServ','Receita nacional de serviços'],['recBens','Receita nacional de bens'],['exp','Receita de exportação (imune)'],['icmsBens','ICMS destacado nas vendas de bens (hoje)'],['ipiBens','IPI destacado nas vendas de bens (hoje)']]},
+ {g:'Compras do período (R$, sem imposto)',c:[['comprasReg','Compras no Brasil de fornecedores no regime regular'],['comprasSimples','Compras de fornecedores do Simples Nacional'],['simplesCred','Crédito aproveitado nas compras do Simples (% da alíquota)'],['imports','Importações de serviços e bens (pagas e creditadas)'],['benef','Benefícios a empregados e planos de saúde (R$)'],['benefCred','Parcela dos benefícios que gera crédito (%, regra de uso e consumo pessoal)'],['comprasBensCred','Compras de mercadorias com crédito de PIS e COFINS hoje']]},
+ {g:'Folha e clientes',c:[['folha','Folha de contribuição previdenciária (R$)'],['credClientes','Receita nacional com clientes que tomam crédito (%)']]},
+ {g:'Alíquotas e premissas (%)',c:[['cbs','CBS plena (estimativa do TCU para 2027: 11,3%)'],['total','Alíquota de referência total, IBS + CBS (teto de 26,5% da LC 214)'],['reducao','Redução de alíquota da atividade (0, 30, 40, 50 ou 60)'],['rPCserv','PIS e COFINS cumulativos sobre serviços hoje'],['rPCbens','PIS e COFINS não cumulativos sobre bens hoje'],['rISS','ISS hoje'],['cprbBase','CPRB, alíquota-base (a conferir)']]}
+];
+var CARGA_PADRAO={recServ:10000000,recBens:0,exp:0,icmsBens:0,ipiBens:0,comprasReg:2000000,comprasSimples:500000,simplesCred:0,imports:0,benef:0,benefCred:0,comprasBensCred:0,folha:5000000,credClientes:70,cbs:11.3,total:26.5,reducao:0,rPCserv:3.65,rPCbens:9.25,rISS:2,cprbBase:4.5};
+function cargaTabelaAno(ano,P){
+  var cbs=P.cbs/100,ibsPleno=Math.max(0,P.total/100-cbs),T;
+  if(ano<=2026)T={pc:1,cbs:0,ibs:0,iss:1,ipi:1,cprb:0.6,fol:0.10};
+  else if(ano===2027)T={pc:0,cbs:cbs,ibs:0.001,iss:1,ipi:0,cprb:0.4,fol:0.15};
+  else if(ano===2028)T={pc:0,cbs:cbs,ibs:0.001,iss:1,ipi:0,cprb:0,fol:0.20};
+  else if(ano<=2032){var k=ano-2028;T={pc:0,cbs:cbs,ibs:ibsPleno*k/10,iss:1-k/10,ipi:0,cprb:0,fol:0.20};}
+  else T={pc:0,cbs:cbs,ibs:ibsPleno,iss:0,ipi:0,cprb:0,fol:0.20};
+  return T;
+}
+function cargaCalc(P,ano){
+  var T=cargaTabelaAno(ano,P),r=T.cbs+T.ibs,rEf=r*(1-P.reducao/100),base=P.recServ+P.recBens;
+  var debito=base*rEf,credito=(P.comprasReg+P.comprasSimples*(P.simplesCred/100)+P.benef*(P.benefCred/100))*r,liq=debito-credito;
+  var pc=T.pc?(P.recServ*P.rPCserv/100+P.rPCbens/100*(P.recBens-P.icmsBens-P.ipiBens-P.comprasBensCred)):0;
+  var iss=P.recServ*P.rISS/100*T.iss,icms=P.icmsBens*T.iss,ipi=P.ipiBens*T.ipi;
+  var cprb=P.recServ*P.cprbBase/100*T.cprb,fol=P.folha*T.fol;
+  var antigos=pc+iss+icms+ipi,absorvido=debito*(1-P.credClientes/100);
+  return {ano:ano,aliq:r,aliqEf:rEf,debito:debito,credito:credito,liquido:liq,saldoCredor:liq<0?-liq:0,imposto:liq>0?liq:0,importacao:P.imports*r,pisCofins:pc,iss:iss,icms:icms,ipi:ipi,antigos:antigos,cprb:cprb,folha:fol,pessoal:cprb+fol,custoConsumo:antigos+absorvido,totalRecolhido:antigos+(liq>0?liq:0)+cprb+fol};
+}
+function cargaPar(p){
+  var P={},base=(p.carga&&p.carga.valores)?p.carga.valores:CARGA_PADRAO,sv={};
+  try{var t=localStorage.getItem('sis-carga-'+p.id);if(t)sv=JSON.parse(t);}catch(e){}
+  Object.keys(CARGA_PADRAO).forEach(function(k){var v=sv[k]!==undefined?sv[k]:(base[k]!==undefined?base[k]:CARGA_PADRAO[k]);v=Number(v);P[k]=isFinite(v)?v:0;});
+  return P;
+}
+function fmtR(v){return (v<0?'−':'')+'R$ '+Math.abs(Math.round(v)).toLocaleString('pt-BR');}
+function cargaResHtml(P){
+  var anos=[2026,2027,2028,2029,2030,2031,2032,2033],L=anos.map(function(a){return cargaCalc(P,a);}),b=L[0];
+  var linhas=[['Alíquota efetiva de IBS e CBS (%)',function(x){return (x.aliqEf*100).toFixed(2).replace('.',',')+'%';}],
+   ['IBS e CBS — débito sobre a receita nacional',function(x){return fmtR(x.debito);}],['IBS e CBS — crédito das compras',function(x){return fmtR(-x.credito);}],
+   ['IBS e CBS — recolhimento líquido',function(x){return fmtR(x.imposto);},'tot'],['Saldo credor do período',function(x){return x.saldoCredor?fmtR(x.saldoCredor):'—';}],
+   ['PIS e COFINS',function(x){return fmtR(x.pisCofins);}],['ISS',function(x){return fmtR(x.iss);}],['ICMS e IPI',function(x){return fmtR(x.icms+x.ipi);}],
+   ['CPRB',function(x){return fmtR(x.cprb);}],['Contribuição sobre a folha',function(x){return fmtR(x.folha);}],
+   ['Total recolhido (tributos sobre o consumo, CPRB e folha)',function(x){return fmtR(x.totalRecolhido);},'tot'],
+   ['Custo econômico do consumo (se o preço sem imposto for mantido)',function(x){return fmtR(x.custoConsumo);}],['Custo de pessoal tributário (CPRB e folha)',function(x){return fmtR(x.pessoal);},'tot']];
+  var tab='<table class="c-tab"><tr><th>Ano</th>'+anos.map(function(a){return '<th>'+a+(a===2026?' (hoje)':'')+'</th>';}).join('')+'</tr>'+
+   linhas.map(function(l){return '<tr'+(l[2]?' class="'+l[2]+'"':'')+'><td>'+esc(l[0])+'</td>'+L.map(function(x){var t=l[1](x);return '<td'+(t.indexOf('−')===0?' class="neg"':'')+'>'+t+'</td>';}).join('')+'</tr>';}).join('')+'</table>';
+  var u=L[7],m=L[2],ler=[];
+  ler.push('A contribuição sobre a folha e a CPRB passam de '+fmtR(b.pessoal)+' em 2026 para '+fmtR(m.pessoal)+' em 2028 ('+(b.pessoal?Math.round((m.pessoal/b.pessoal-1)*100)+'%':'—')+'), com a reoneração gradual da folha (Lei 14.973/2024).');
+  ler.push('No novo modelo pleno (2033), o IBS e a CBS sobre a receita nacional de '+fmtR(P.recServ+P.recBens)+' geram débito de '+fmtR(u.debito)+' e crédito de '+fmtR(u.credito)+' sobre as compras, com '+(u.saldoCredor?'saldo credor de '+fmtR(u.saldoCredor):'recolhimento líquido de '+fmtR(u.imposto))+'. A exportação de '+fmtR(P.exp)+' é imune e não gera débito.');
+  ler.push('Tributos sobre o consumo que hoje são custo (PIS, COFINS, ISS, ICMS e IPI): '+fmtR(b.custoConsumo)+'. No novo modelo pleno, o custo equivale a '+fmtR(u.custoConsumo)+', parcela do imposto cobrada de clientes que não tomam crédito e que a empresa absorveria se não subir o preço.');
+  return '<div class="c-res"><h3>Resultado por ano</h3>'+tab+'<ul class="c-ler">'+ler.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul></div>';
+}
+function cargaHtml(p){
+  var P=cargaPar(p),notas=(p.carga&&p.carga.notas)||[],per=(p.carga&&p.carga.periodo)||'exemplo hipotético';
+  var grupos=CARGA_CAMPOS.map(function(g){return '<div class="c-grp"><h3>'+esc(g.g)+'</h3>'+g.c.map(function(c){return '<label class="c-campo">'+esc(c[1])+'<input type="number" step="any" data-k="'+c[0]+'" value="'+P[c[0]]+'"></label>';}).join('')+'</div>';}).join('');
+  return '<div data-v="carga">'+
+  '<header><div class="brand">'+brand(p,36)+'</div><h1>Estimativa de carga efetiva — IBS e CBS</h1><p>Simulador com os valores do perfil como ponto de partida. Todos os campos são editáveis, e o resultado é recalculado a cada alteração. Período dos valores: '+esc(per)+'.</p></header>'+
+  '<main><div class="c-aviso"><b>Leia antes:</b> é uma estimativa de estudo, e não uma apuração. Usa alíquotas hipotéticas (a CBS de 11,3% é a estimativa do TCU para 2027, e a alíquota de referência total tem o teto de 26,5% da LC 214, ambas a confirmar pela resolução do Senado). Considera o imposto por fora, fornecedores no regime regular com documento idôneo e a extinção do tributo no mesmo período, e ignora o prazo do crédito e o split payment. A transição do IBS de 2029 a 2032 é aproximada (10% a 40% da alíquota plena, com ISS e ICMS a 90%, 80%, 70% e 60%).</div>'+
+  '<div class="c-grid" id="cargaCampos">'+grupos+'</div><button type="button" class="btn" id="cargaRestaurar">Restaurar os valores iniciais do perfil</button>'+
+  '<div id="cargaRes">'+cargaResHtml(P)+'</div>'+
+  (notas.length?'<div class="section-title">Origem dos valores iniciais</div><ul class="c-notas">'+notas.map(function(n){return '<li>'+esc(n)+'</li>';}).join('')+'</ul>':'')+'</main>'+
+  '<footer><div>Estimativa de apoio, que não substitui a apuração nem a orientação de um profissional habilitado. Confira alíquotas, prazos e regras nas fontes oficiais antes de decidir.</div></footer></div>';
+}
+function bindCarga(view){
+  var box=view.querySelector('#cargaCampos'),res=view.querySelector('#cargaRes');if(!box)return;
+  box.addEventListener('input',function(e){
+    var i=e.target;if(!i||!i.getAttribute||!i.getAttribute('data-k'))return;
+    var sv={};try{var t=localStorage.getItem('sis-carga-'+perfil.id);if(t)sv=JSON.parse(t);}catch(x){}
+    sv[i.getAttribute('data-k')]=i.value===''?0:Number(i.value);
+    try{localStorage.setItem('sis-carga-'+perfil.id,JSON.stringify(sv));}catch(x){}
+    res.innerHTML=cargaResHtml(cargaPar(perfil));   /* só o resultado é redesenhado: os campos mantêm o foco */
+  });
+  var rs=view.querySelector('#cargaRestaurar');
+  if(rs)rs.addEventListener('click',function(){try{localStorage.removeItem('sis-carga-'+perfil.id);}catch(x){}mount();});
+}
+
+/* ===== Fluxo de caixa: competência x caixa ===== */
+var CAIXA_PADRAO={meses:12,pmr:45,pmp:30,lp:40,lc:40,juros:12,caixaAplicado:0,ano:2033};
+var CAIXA_CAMPOS=[
+ {g:'Prazos (dias)',c:[['pmr','Prazo médio de recebimento das vendas'],['pmp','Prazo médio de pagamento aos fornecedores'],['lp','Dias entre a emissão da nota e o pagamento do imposto apurado'],['lc','Dias até o crédito da compra poder ser usado (extinção do tributo do fornecedor)']]},
+ {g:'Período e custo',c:[['meses','Meses do período dos valores da carga efetiva'],['juros','Custo do dinheiro (% ao ano)'],['caixaAplicado','Caixa aplicado hoje (R$, só para comparação)']]}
+];
+function caixaPar(p){
+  var P={},base=(p.caixa&&p.caixa.valores)?p.caixa.valores:CAIXA_PADRAO,sv={};
+  try{var t=localStorage.getItem('sis-caixa-'+p.id);if(t)sv=JSON.parse(t);}catch(e){}
+  Object.keys(CAIXA_PADRAO).forEach(function(k){var v=sv[k]!==undefined?sv[k]:(base[k]!==undefined?base[k]:CAIXA_PADRAO[k]);v=Number(v);P[k]=isFinite(v)?v:0;});
+  return P;
+}
+function caixaCalc(C,K,ano){
+  var b=cargaCalc(C,ano),m=K.meses>0?K.meses:1,D=b.debito/m,Cr=b.credito/m;
+  var capC=Cr*Math.max(0,K.lc-K.pmp)/30;
+  var calc=function(pmr){var v=D*Math.max(0,pmr-K.lp)/30;return {capV:v,capC:capC,cap:v+capC,custo:(v+capC)*K.juros/100};};
+  var sem=calc(K.pmr);
+  return {ano:ano,debitoMes:D,creditoMes:Cr,liquidoMes:D-Cr,sem:sem,com:{capV:0,capC:0,cap:0,custo:0},sens:[30,45,60,90,120].map(function(d){var r=calc(d);r.pmr=d;return r;}),aliq:b.aliqEf};
+}
+function caixaResHtml(C,K){
+  var R=caixaCalc(C,K,K.ano),sem=R.sem;
+  var ler=[];
+  ler.push('No ano de '+K.ano+', a média mensal de IBS e CBS é de '+fmtR(R.debitoMes)+' de débito e '+fmtR(R.creditoMes)+' de crédito das compras, ou '+fmtR(R.liquidoMes)+' de imposto líquido por mês.');
+  ler.push('Sem split payment, o imposto das vendas é pago '+K.lp+' dias após a emissão e o dinheiro entra em '+K.pmr+' dias: '+(K.pmr>K.lp?'a empresa financia '+(K.pmr-K.lp)+' dias de imposto sobre as vendas ('+fmtR(sem.capV)+').':'não há financiamento do imposto das vendas.')+' O crédito das compras só pode ser usado '+K.lc+' dias após a compra, e o fornecedor é pago em '+K.pmp+' dias: '+(K.lc>K.pmp?'a defasagem do crédito é de '+(K.lc-K.pmp)+' dias ('+fmtR(sem.capC)+').':'não há defasagem do crédito.'));
+  ler.push('Capital de giro adicional estimado: '+fmtR(sem.cap)+', com custo de '+fmtR(sem.custo)+' ao ano a '+K.juros+'% ao ano'+(K.caixaAplicado>0?', o que equivale a '+(sem.cap/K.caixaAplicado*100).toFixed(1).replace('.',',')+'% do caixa aplicado hoje.':'.'));
+  var linhas=[['Imposto das vendas pago antes do recebimento',function(x){return fmtR(x.capV);}],['Crédito das compras ainda não utilizável',function(x){return fmtR(x.capC);}],['Capital de giro adicional',function(x){return fmtR(x.cap);},'tot'],['Custo anual do financiamento',function(x){return fmtR(x.custo);}]];
+  var tab='<table class="c-tab" style="min-width:520px;"><tr><th></th><th>Sem split payment</th><th>Com split payment (aproximação)</th></tr>'+linhas.map(function(l){return '<tr'+(l[2]?' class="'+l[2]+'"':'')+'><td>'+esc(l[0])+'</td><td>'+l[1](R.sem)+'</td><td>'+l[1](R.com)+'</td></tr>';}).join('')+'</table>';
+  var sens='<table class="c-tab" style="min-width:560px;margin-top:14px;"><tr><th>Se o prazo de recebimento for de</th>'+R.sens.map(function(x){return '<th>'+x.pmr+' dias</th>';}).join('')+'</tr><tr><td>Capital de giro adicional, sem split</td>'+R.sens.map(function(x){return '<td>'+fmtR(x.cap)+'</td>';}).join('')+'</tr></table>';
+  return '<div class="c-res"><h3>Resultado, no ano de '+K.ano+'</h3>'+tab+'<h3 style="margin-top:16px;">Sensibilidade ao prazo de recebimento</h3>'+sens+'<ul class="c-ler">'+ler.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul></div>';
+}
+function caixaHtml(p){
+  var C=cargaPar(p),K=caixaPar(p),notas=(p.caixa&&p.caixa.notas)||[];
+  var anos=[2027,2028,2029,2030,2031,2032,2033];
+  var grupos=CAIXA_CAMPOS.map(function(g){return '<div class="c-grp"><h3>'+esc(g.g)+'</h3>'+g.c.map(function(c){return '<label class="c-campo">'+esc(c[1])+'<input type="number" step="any" data-k="'+c[0]+'" value="'+K[c[0]]+'"></label>';}).join('')+'</div>';}).join('');
+  var sel='<div class="c-grp"><h3>Ano de análise</h3><label class="c-campo">Ano do novo modelo<select id="caixaAno" data-k="ano" style="font-family:inherit;font-size:13px;padding:7px 9px;border:1.5px solid var(--platinum);border-radius:8px;">'+anos.map(function(a){return '<option value="'+a+'"'+(K.ano===a?' selected':'')+'>'+a+'</option>';}).join('')+'</select></label></div>';
+  return '<div data-v="carga">'+
+  '<header><div class="brand">'+brand(p,36)+'</div><h1>Fluxo de caixa — competência contra caixa</h1><p>Estima o capital de giro que o imposto passa a exigir: o débito nasce na emissão da nota, e o crédito só pode ser usado depois que o tributo do fornecedor é extinto. Usa os valores da tela de carga efetiva (mesmas receitas, compras e alíquotas) e os prazos abaixo.</p></header>'+
+  '<main><div class="c-aviso"><b>Leia antes:</b> é uma estimativa de estudo. Considera o estado estável (média mensal), prazos únicos para todos os clientes e fornecedores, o pagamento do imposto apurado em um prazo fixo e o split payment como eliminação da defasagem (aproximação: o imposto sai do caixa no ato do recebimento). A data e as regras do split payment ainda não estão definidas em ato oficial, e o prazo de vencimento do imposto apurado é uma hipótese. Os valores de receita, compras e alíquotas vêm da <a href="#carga">carga efetiva</a>.</div>'+
+  '<div class="c-grid" id="caixaCampos">'+sel+grupos+'</div><button type="button" class="btn" id="caixaRestaurar">Restaurar os valores iniciais do perfil</button>'+
+  '<div id="caixaRes">'+caixaResHtml(C,K)+'</div>'+
+  (notas.length?'<div class="section-title">Origem dos valores iniciais</div><ul class="c-notas">'+notas.map(function(n){return '<li>'+esc(n)+'</li>';}).join('')+'</ul>':'')+'</main>'+
+  '<footer><div>Estimativa de apoio, que não substitui a apuração nem a orientação de um profissional habilitado. Confira prazos e regras nas fontes oficiais antes de decidir.</div></footer></div>';
+}
+function bindCaixa(view){
+  var box=view.querySelector('#caixaCampos'),res=view.querySelector('#caixaRes');if(!box)return;
+  var h=function(e){
+    var i=e.target;if(!i||!i.getAttribute||!i.getAttribute('data-k'))return;
+    var sv={};try{var t=localStorage.getItem('sis-caixa-'+perfil.id);if(t)sv=JSON.parse(t);}catch(x){}
+    sv[i.getAttribute('data-k')]=i.value===''?0:Number(i.value);
+    try{localStorage.setItem('sis-caixa-'+perfil.id,JSON.stringify(sv));}catch(x){}
+    res.innerHTML=caixaResHtml(cargaPar(perfil),caixaPar(perfil));
+  };
+  box.addEventListener('input',h);box.addEventListener('change',h);
+  var rs=view.querySelector('#caixaRestaurar');
+  if(rs)rs.addEventListener('click',function(){try{localStorage.removeItem('sis-caixa-'+perfil.id);}catch(x){}mount();});
+}
+
+/* ===== Calendário de refazimento de preço ===== */
+function precoCalc(P,ano){
+  var T=cargaTabelaAno(ano,P),c=cargaCalc(P,ano),b0=cargaCalc(P,2026);
+  var tot=P.recServ+P.recBens||1,s=P.credClientes/100;
+  var tS0=P.recServ*(P.rPCserv+P.rISS)/100,NS=P.recServ-tS0,embS=P.rISS/100*T.iss+(T.pc?P.rPCserv/100:0);
+  var iS=P.recServ?NS/(1-embS)/P.recServ*100:100;
+  var pcNet=P.rPCbens/100*(P.recBens-P.icmsBens-P.ipiBens-P.comprasBensCred);
+  var tB0=P.icmsBens+P.ipiBens+Math.max(0,pcNet),NB=P.recBens-tB0;
+  var embB=P.recBens?(P.icmsBens/P.recBens)*T.iss+(P.ipiBens/P.recBens)*T.ipi+(Math.max(0,pcNet)/P.recBens)*T.pc:0;
+  var iB=P.recBens?NB/(1-embB)/P.recBens*100:100;
+  var wS=P.recServ/tot,wB=P.recBens/tot;
+  var credito=wS*iS+wB*iB,semCred=credito*(1+c.aliqEf);
+  return {ano:ano,aliqEf:c.aliqEf,embS:embS,embB:embB,idxServ:iS,idxBens:iB,idxCred:credito,idxSemCred:semCred,idxMedio:s*credito+(1-s)*semCred,pressaoFolha:(c.pessoal-b0.pessoal)/tot*100};
+}
+function precoLinhas(P,limiar){
+  var L=[2026,2027,2028,2029,2030,2031,2032,2033].map(function(a){return precoCalc(P,a);});
+  L.forEach(function(x,i){var p=i?L[i-1]:null;x.dCred=p?x.idxCred-p.idxCred:0;x.dSem=p?x.idxSemCred-p.idxSemCred:0;x.rev=!!(p&&(Math.abs(x.dCred)>=limiar||Math.abs(x.dSem)>=limiar));});
+  return L;
+}
+function precoPar(p){var sv={};try{var t=localStorage.getItem('sis-preco-'+p.id);if(t)sv=JSON.parse(t);}catch(e){}var v=Number(sv.limiar);return {limiar:isFinite(v)&&sv.limiar!==undefined?v:1};}
+function precoResHtml(P,K){
+  var L=precoLinhas(P,K.limiar),f1=function(v){return v.toFixed(1).replace('.',',');},pp=function(v){return (v>=0?'+':'−')+Math.abs(v).toFixed(1).replace('.',',');};
+  var cols=[['Alíquota efetiva de IBS e CBS (%)',function(x){return (x.aliqEf*100).toFixed(2).replace('.',',')+'%';}],
+   ['Preço sem IBS e CBS: serviços (hoje = 100)',function(x){return f1(x.idxServ);}],['Preço sem IBS e CBS: bens (hoje = 100)',function(x){return f1(x.idxBens);}],
+   ['Custo do cliente que toma crédito (hoje = 100)',function(x){return f1(x.idxCred);}],['Preço ao cliente que não toma crédito (hoje = 100)',function(x){return f1(x.idxSemCred);}],
+   ['Preço médio conforme o % de clientes com crédito',function(x){return f1(x.idxMedio);}],
+   ['Variação do preço ao cliente sem crédito no ano (pontos)',function(x,i){return i?pp(x.dSem):'—';}],
+   ['Pressão de custo da folha, contra 2026 (% da receita)',function(x){return f1(x.pressaoFolha)+'%';}],
+   ['Rever o preço neste ano?',function(x){return x.rev?'Sim':'—';},'rev']];
+  var tab='<table class="c-tab" style="min-width:820px;"><tr><th>Índice de preço, que mantém a receita líquida de tributos de hoje</th>'+L.map(function(x){return '<th>'+x.ano+(x.ano===2026?' (hoje)':'')+'</th>';}).join('')+'</tr>'+
+   cols.map(function(c){return '<tr><td>'+esc(c[0])+'</td>'+L.map(function(x,i){return '<td'+(c[2]&&x.rev?' class="rev-tag"':'')+'>'+c[1](x,i)+'</td>';}).join('')+'</tr>';}).join('')+'</table>';
+  var rev=L.filter(function(x){return x.rev;}).map(function(x){return x.ano;}),mx=L.slice(1).reduce(function(a,x){return Math.abs(x.dSem)>Math.abs(a.dSem)?x:a;},L[1]),u=L[7];
+  var ler=[];
+  ler.push('Com o limiar de '+String(K.limiar).replace('.',',')+' ponto(s), o preço pede revisão em: '+(rev.length?rev.join(', '):'nenhum ano')+'. O maior passo é em '+mx.ano+' ('+pp(mx.dSem)+' ponto(s) para o cliente que não toma crédito).');
+  ler.push('No novo modelo pleno (2033), o preço sem IBS e CBS, para manter a receita líquida de tributos de hoje, equivale a '+f1(u.idxCred)+' do atual. O cliente que toma crédito paga esse valor líquido, e o que não toma crédito paga '+f1(u.idxSemCred)+', com o imposto por fora.');
+  ler.push('Em 2028, a reoneração da folha e a extinção da CPRB pressionam o custo em '+f1(L[2].pressaoFolha)+'% da receita contra 2026 (Lei 14.973/2024). Repassar ou não é decisão comercial, e não faz parte do índice de preço acima.');
+  return '<div class="c-res"><h3>Calendário de preço, 2026 a 2033</h3>'+tab+'<ul class="c-ler">'+ler.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul></div>';
+}
+var PRECO_MARCOS=[['2026','Teste: destacar a CBS de 0,9% e o IBS de 0,1% nas notas, sem alterar o preço. Mapear contratos com cláusula de reajuste ou de repasse de tributos.'],['2027','PIS e COFINS saem, a CBS passa a valer plena e o IPI vai a zero (salvo Zona Franca de Manaus): primeira revisão de preço. O ISS e o ICMS seguem.'],['2028','Reoneração da folha completa (CPRB extinta): avaliar o repasse do custo e o efeito no preço.'],['2029 a 2032','ISS e ICMS caem 10 pontos por ano (a 90%, 80%, 70% e 60%) e o IBS sobe: revisão anual, com atenção ao preço ao cliente que não toma crédito.'],['2033','IBS pleno, ISS e ICMS extintos: última revisão e revisão dos contratos de longo prazo.']];
+function precoHtml(p){
+  var P=cargaPar(p),K=precoPar(p);
+  var pos=(SETORES.meta&&SETORES.meta.posBase)||'';
+  var marcos='<table class="c-tab" style="min-width:0;"><tr><th>Período</th><th style="text-align:left;">O que fazer com o preço</th></tr>'+PRECO_MARCOS.map(function(m){return '<tr><td>'+esc(m[0])+'</td><td style="text-align:left;white-space:normal;">'+esc(m[1])+'</td></tr>';}).join('')+'</table>';
+  return '<div data-v="carga">'+
+  '<header><div class="brand">'+brand(p,36)+'</div><h1>Calendário de refazimento de preço — 2026 a 2033</h1><p>Para cada ano, o preço que mantém a receita líquida de tributos de hoje, para o cliente que toma crédito e para o que não toma. Usa os valores da tela de carga efetiva (mesmas receitas, alíquotas e % de clientes com crédito).</p></header>'+
+  '<main><div class="c-aviso"><b>Leia antes:</b> é uma estimativa de estudo, e a decisão de preço é comercial. O índice supõe que a empresa mantenha a receita líquida de PIS, COFINS, ISS, ICMS e IPI de hoje (o ISS e o ICMS ficam por dentro do preço, e o IBS e a CBS vão por fora), com alíquotas hipotéticas e o cliente que toma crédito recuperando todo o IBS e a CBS. Não inclui o custo de pessoal, mostrado à parte, nem a reação do mercado. A transição do IBS de 2029 a 2032 é aproximada (veja a <a href="#carga">carga efetiva</a>)'+(pos?'. A conta de preço na transição está explicada no <a href="'+esc(pos)+'#aula-preco-na-transicao" target="_blank" rel="noopener">PÓS ↗</a>':'')+'.</div>'+
+  '<div class="c-grid" id="precoCampos"><div class="c-grp"><h3>Critério de revisão</h3><label class="c-campo">Variação mínima do preço para pedir revisão (pontos do índice)<input type="number" step="any" data-k="limiar" value="'+K.limiar+'"></label></div></div>'+
+  '<div id="precoRes">'+precoResHtml(P,K)+'</div><div class="section-title">Marcos da transição</div><div class="c-res">'+marcos+'</div></main>'+
+  '<footer><div>Estimativa de apoio, que não substitui a análise comercial nem a orientação de um profissional habilitado. Confira alíquotas e prazos nas fontes oficiais antes de decidir.</div></footer></div>';
+}
+function bindPreco(view){
+  var box=view.querySelector('#precoCampos'),res=view.querySelector('#precoRes');if(!box)return;
+  box.addEventListener('input',function(e){
+    var i=e.target;if(!i||!i.getAttribute||!i.getAttribute('data-k'))return;
+    try{localStorage.setItem('sis-preco-'+perfil.id,JSON.stringify({limiar:i.value===''?0:Number(i.value)}));}catch(x){}
+    res.innerHTML=precoResHtml(cargaPar(perfil),precoPar(perfil));
+  });
+}
+function portalHtml(p){
+  var c=p.textos.cards;
+  return '<div data-v="portal">'+
+  '<header><div class="inner"><div class="brand">'+brand(p,36)+'</div><h1>Portal interno — Reforma Tributária</h1><p>'+esc(p.textos.intro)+'</p></div></header>'+
+  '<div style="max-width:1100px;margin:22px auto 0;padding:0 24px;"><div style="background:var(--white);border-left:4px solid var(--yellow);border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;font-size:12.5px;color:var(--slate);">'+
+  '<span class="material-symbols-outlined" style="color:var(--lav2);">notifications</span><div><strong style="color:var(--charcoal);">Lembrete mensal:</strong>'+CST.lembrete+'</div></div></div>'+
+  '<main><div class="section-title">Ferramentas</div><div class="grid">'+
+  '<a class="card" href="#cst"><div class="icon"><span class="material-symbols-outlined">rule_settings</span></div><span class="status live">Disponível</span><h3>'+esc(c.cst.titulo)+'</h3><p>'+esc(c.cst.desc)+'</p></a>'+
+  '<a class="card" href="#plano"><div class="icon"><span class="material-symbols-outlined">checklist</span></div><span class="status live">Disponível</span><h3>'+esc(c.plano.titulo)+'</h3><p>'+esc(c.plano.desc)+'</p></a>'+
+  '<a class="card" href="#setor"><div class="icon"><span class="material-symbols-outlined">domain</span></div><span class="status live">Disponível</span><h3>Ficha setorial</h3><p>Parâmetros do regime tributário de 12 setores (regime, reduções, crédito, benefícios e obrigações), gerados a partir dos perfis setoriais do PÓS.</p></a>'+
+  '<a class="card" href="#diagnostico"><div class="icon"><span class="material-symbols-outlined">fact_check</span></div><span class="status live">Disponível</span><h3>Diagnóstico por checklist</h3><p>Sete blocos para medir a exposição da empresa à reforma (perfil, créditos, benefícios, documentos, preço e caixa, planejamento e maturidade), com classificação sugerida e relatório de cenário.</p></a>'+
+  '<a class="card" href="#carga"><div class="icon"><span class="material-symbols-outlined">calculate</span></div><span class="status live">Disponível</span><h3>Carga efetiva</h3><p>Simulador parametrizável de IBS e CBS de 2026 a 2033: débito, crédito das compras, saldo credor, exportação imune e reoneração da folha, com valores iniciais do perfil.</p></a>'+
+  '<a class="card" href="#caixa"><div class="icon"><span class="material-symbols-outlined">payments</span></div><span class="status live">Disponível</span><h3>Fluxo de caixa</h3><p>Competência contra caixa: capital de giro que o imposto passa a exigir, com e sem split payment, e sensibilidade ao prazo de recebimento.</p></a>'+
+  '<a class="card" href="#preco"><div class="icon"><span class="material-symbols-outlined">timeline</span></div><span class="status live">Disponível</span><h3>Calendário de preço</h3><p>Quando refazer o preço de 2026 a 2033: o índice que mantém a receita líquida de tributos, para o cliente que toma crédito e para o que não toma, e a pressão de custo da folha.</p></a>'+
+  '</div><div class="section-title">Como o portal vai crescer</div><div class="roadmap"><h3>Próximos módulos, na ordem que faz mais sentido construir</h3><ol>'+
+  (p.textos.roadmap||[]).map(function(r){return '<li>'+esc(r[0])+' <span>'+esc(r[1])+'</span></li>';}).join('')+'</ol></div></main>'+
+  '<footer>Portal interno de apoio — não substitui orientação da consultoria tributária terceirizada nem a leitura da LC 214/2025 e normas complementares.</footer></div>';
+}
+function planoHtml(p){
+  var r=planoResumo(p.frentes);
+  return '<div data-v="plano">'+
+  '<header><div class="brand">'+brand(p,36)+'</div><h1>Plano de Ação — Reforma Tributária</h1><p>'+esc(p.textos.planoIntro)+'</p></header>'+
+  '<main><div class="progress-wrap"><h2>Progresso geral</h2><div class="sub">'+esc(r.texto)+'</div><div class="bar"><div class="bar-fill" style="width:'+r.pct+'%;"></div></div>'+
+  '<div class="progress-legend"><span><span class="dot done"></span>Concluído</span><span><span class="dot wip"></span>Em andamento</span><span><span class="dot todo"></span>Não iniciado</span></div></div>'+
+  '<div class="section-title">Perfil da empresa</div><div class="profile-table"><table>'+
+  p.empresa.map(function(e){return '<tr><td class="item">'+esc(e.item)+'</td><td>'+esc(e.valor)+'</td><td><span class="status-pill '+esc(e.status)+'">'+(e.status==='confirmado'?'Confirmado':'Pendente')+'</span></td></tr>';}).join('')+
+  '<tr><td class="item">Setor (modelo)</td><td>'+esc(setorDe(p)?setorDe(p).nome:'—')+'</td><td><span class="status-pill pendente">Pendente</span></td></tr>'+
+  '</table></div>'+setorBox(p)+'<div class="section-title">Frentes de trabalho</div><div id="frentes">'+frentesHtml(p.frentes,planoOpen)+'</div></main>'+
+  '<footer><div>O lembrete de verificação mensal da tabela de CST/cClassTrib está na página inicial do <a href="#portal">Portal</a>.</div></footer></div>';
+}
+function cstHtml(p){
+  var rows=cstRows(p),groups=[];
+  rows.forEach(function(r){if(!groups.filter(function(g){return g[0]===r[0];}).length)groups.push([r[0],r[1]]);});
+  var rel=(p.cstRelevantes||[]).length>0;
+  var res=cstResultsHtml(rows,cstUI,cstOpen);
+  return '<div data-v="cst">'+
+  '<header><div class="brand">'+brand(p,34)+'</div><h1>Consulta de Classificação Tributária (CST / cClassTrib)</h1><p>'+esc(CST.intro)+'</p><div class="src-badge">'+esc(fmt(CST.meta.badge))+((CST.meta.links||[]).map(function(l){return ' · <a href="'+esc(l.href)+'" target="_blank" rel="noopener">'+esc(l.texto)+' ↗</a>';}).join(''))+'</div>'+'</header>'+
+  '<div class="controls"><input type="text" id="search" placeholder="Buscar por código ou palavra-chave..." value="'+esc(cstUI.q)+'">'+
+  '<select id="cstFilter"><option value="">Todos os CST</option>'+groups.map(function(g){return '<option value="'+esc(g[0])+'"'+(cstUI.cst===g[0]?' selected':'')+'>'+esc(g[0])+' — '+esc(g[1])+'</option>';}).join('')+'</select>'+
+  '<label class="chk"'+(rel?'':' title="Este perfil não tem códigos marcados como relevantes"')+'><input type="checkbox" id="onlyRelevant"'+(cstUI.onlyRel&&rel?' checked':'')+(rel?'':' disabled')+'> Só relevantes p/ '+esc(p.nome)+'</label>'+
+  '<label class="chk"><input type="checkbox" id="hideEncerrados"'+(cstUI.hideEnc?' checked':'')+'> Ocultar encerrados</label></div>'+
+  '<main><div class="legend">'+fmt(CST.meta.legenda)+'</div><div class="count" id="count">'+esc(res.count)+'</div><div id="results">'+res.html+'</div></main>'+
+  '<footer><div><strong>Fonte oficial:</strong>'+esc(fmt(CST.meta.fonte))+'</div><div class="disclaimer"><strong>Tabela viva:</strong>'+esc(CST.meta.aviso)+'</div></footer></div>';
+}
+
+/* ===== Montagem e eventos ===== */
+var ROTAS={portal:portalHtml,plano:planoHtml,cst:cstHtml,setor:setorHtml,diagnostico:diagHtml,carga:cargaHtml,caixa:caixaHtml,preco:precoHtml};
+function rotaAtual(){var r=((location.hash||'#portal').slice(1)).split('/')[0];return ROTAS[r]?r:'portal';}
+function bindPlano(view){
+  var fr=view.querySelector('#frentes');if(!fr)return;
+  fr.addEventListener('click',function(e){
+    var h=e.target.closest?e.target.closest('.acc-header[data-n]'):null;if(!h)return;
+    var n=h.getAttribute('data-n');planoOpen[n]=!planoOpen[n];fr.innerHTML=frentesHtml(perfil.frentes,planoOpen);
+  });
+}
+function bindCst(view){
+  var search=view.querySelector('#search'),sel=view.querySelector('#cstFilter'),rel=view.querySelector('#onlyRelevant'),hide=view.querySelector('#hideEncerrados');
+  var results=view.querySelector('#results'),count=view.querySelector('#count');
+  if(!search||!results)return;
+  function render(){
+    var rows=cstRows(perfil);var r=cstResultsHtml(rows,cstUI,cstOpen);
+    count.textContent=r.count;results.innerHTML=r.html;   /* só atualiza #count e #results: os campos de busca não são recriados */
+  }
+  search.addEventListener('input',function(){cstUI.q=search.value;render();});
+  sel.addEventListener('change',function(){cstUI.cst=sel.value;render();});
+  rel.addEventListener('change',function(){cstUI.onlyRel=rel.checked;render();});
+  hide.addEventListener('change',function(){cstUI.hideEnc=hide.checked;render();});
+  results.addEventListener('click',function(e){
+    var h=e.target.closest?e.target.closest('.acc-header[data-cst]'):null;if(!h)return;
+    var c=h.getAttribute('data-cst');cstOpen[c]=!cstOpen[c];render();
+  });
+}
+function bindDiag(view){
+  var box=view.querySelector('#diagBox'),res=view.querySelector('#diagResumo');if(!box)return;
+  box.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('.opt'):null;if(!b)return;
+    var it=b.closest('.diag-item'),id=it.getAttribute('data-id'),v=b.getAttribute('data-v'),ja=b.classList.contains('on');
+    Array.prototype.forEach.call(it.querySelectorAll('.opt'),function(x){x.classList.remove('on');x.classList.remove('neg');});
+    var sg=it.querySelector('.sug');if(sg)sg.remove();
+    if(ja){diagSalvar(perfil,id,null);}else{diagSalvar(perfil,id,v==='na'?'na':Number(v));b.classList.add('on');if(b.getAttribute('data-neg')==='1')b.classList.add('neg');}
+    res.innerHTML=diagResumoHtml(diagCalc(diagResp(perfil).resp));
+  });
+  var bx=view.querySelector('#diagBaixar'),ab=view.querySelector('#diagAbrir'),lp=view.querySelector('#diagLimpar');
+  if(bx)bx.addEventListener('click',function(){baixarRelatorio(perfil,false);});
+  if(ab)ab.addEventListener('click',function(){baixarRelatorio(perfil,true);});
+  if(lp)lp.addEventListener('click',function(){if(window.confirm('Limpar as respostas do perfil '+perfil.nome+'?')){try{localStorage.removeItem('sis-diag-'+perfil.id);}catch(e){}mount();}});
+}
+function bindSetor(view){
+  var sel=view.querySelector('#setorSel');if(!sel)return;
+  sel.addEventListener('change',function(){try{localStorage.setItem('sis-setor-'+perfil.id,sel.value);}catch(e){}mount();});
+}
+
+/* ===== Integração com o PÓS e identificação do perfil ===== */
+function chrome(){
+  var av=$('avisoTopo');if(av)av.innerHTML=perfil.aviso?'<div class="aviso-topo">'+esc(perfil.aviso)+'</div>':'';
+  if(perfil.tituloPagina)document.title=perfil.tituloPagina;
+  var np=$('navPos'),pb=(SETORES.meta&&SETORES.meta.posBase)||'';
+  if(np&&pb){np.href=pb;np.style.display='';}
+}
+function estudoHtml(rota){
+  var pb=(SETORES.meta&&SETORES.meta.posBase)||'',est=(SETORES.meta&&SETORES.meta.estudo&&SETORES.meta.estudo[rota])||[];
+  if(!pb||!est.length)return '';
+  return '<div class="estudo-box"><b>Para estudar no PÓS</b>'+est.map(function(e){return '<a href="'+esc(pb)+'#'+esc(e.aula)+'" target="_blank" rel="noopener">'+esc(e.titulo)+' ↗</a>';}).join('')+'</div>';
+}
+function mount(){
+  var rota=rotaAtual(),view=$('view');
+  view.innerHTML=ROTAS[rota](perfil)+estudoHtml(rota);chrome();
+  Array.prototype.forEach.call(document.querySelectorAll('#topnav a[data-r]'),function(a){a.classList.toggle('active',a.getAttribute('data-r')===rota);});
+  if(rota==='plano')bindPlano(view);
+  if(rota==='cst')bindCst(view);
+  if(rota==='setor')bindSetor(view);
+  if(rota==='diagnostico')bindDiag(view);
+  if(rota==='carga')bindCarga(view);
+  if(rota==='caixa')bindCaixa(view);
+  if(rota==='preco')bindPreco(view);
+}
+function preencherPerfis(){
+  var sel=$('perfilSel');if(!sel)return;
+  if(PERFIS.length<2&&sel.parentNode)sel.parentNode.style.display='none';
+  sel.innerHTML=PERFIS.map(function(p){return '<option value="'+esc(p.id)+'"'+(p.id===perfil.id?' selected':'')+'>'+esc(p.nome)+(p.privado?' (privado)':'')+'</option>';}).join('');
+  sel.addEventListener('change',function(){
+    var p=PERFIS.filter(function(x){return x.id===sel.value;})[0];if(!p)return;
+    perfil=p;try{localStorage.setItem(STORE,p.id);}catch(e){}
+    if(!(perfil.cstRelevantes||[]).length)cstUI.onlyRel=false;
+    mount();
+  });
+}
+function init(){
+  if(!$('view'))return;
+  preencherPerfis();
+  window.addEventListener('hashchange',function(){mount();window.scrollTo(0,0);});
+  mount();
+}
+window.__SIS__={cstRows:cstRows,cstFilter:cstFilter,cstResultsHtml:cstResultsHtml,planoResumo:planoResumo,frentesHtml:frentesHtml,portalHtml:portalHtml,planoHtml:planoHtml,cstHtml:cstHtml,setorHtml:setorHtml,setorDe:setorDe,estudoHtml:estudoHtml,SETORES:SETORES,diagHtml:diagHtml,cargaHtml:cargaHtml,cargaCalc:cargaCalc,cargaPar:cargaPar,caixaHtml:caixaHtml,caixaCalc:caixaCalc,caixaPar:caixaPar,precoHtml:precoHtml,precoCalc:precoCalc,precoLinhas:precoLinhas,diagCalc:diagCalc,relatorioHtml:relatorioHtml,CHK:CHK,diagResp:diagResp,perfis:PERFIS,CST:CST};
+init();
+})();
+
+</script>
+</body>
+</html>
