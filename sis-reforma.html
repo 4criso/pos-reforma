@@ -442,6 +442,27 @@ body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans
   }
 
 
+[data-v="manual"] header{background:var(--charcoal);color:var(--white);padding:26px 32px 22px;border-bottom:4px solid var(--yellow);}
+[data-v="manual"] header h1{margin:6px 0 2px;font-size:19px;font-weight:700;}
+[data-v="manual"] header p{margin:0;font-size:12.5px;color:var(--platinum);max-width:820px;line-height:1.5;}
+[data-v="manual"] main{max-width:980px;margin:0 auto;padding:24px 24px 50px;}
+[data-v="manual"] .mn-grupo{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--slate);margin:26px 0 10px;}
+[data-v="manual"] details.mn-sec{background:var(--white);border:1px solid var(--platinum);border-radius:10px;margin-bottom:10px;}
+[data-v="manual"] details.mn-sec>summary{cursor:pointer;list-style:none;padding:14px 18px;font-size:14px;font-weight:700;color:var(--charcoal);display:flex;align-items:center;gap:10px;}
+[data-v="manual"] details.mn-sec>summary::-webkit-details-marker{display:none;}
+[data-v="manual"] details.mn-sec>summary::after{content:"+";margin-left:auto;color:var(--lav2);font-size:18px;font-weight:700;}
+[data-v="manual"] details.mn-sec[open]>summary::after{content:"\2212";}
+[data-v="manual"] details.mn-sec[open]>summary{border-bottom:1px solid var(--platinum);}
+[data-v="manual"] .mn-body{padding:14px 18px 16px;font-size:13px;color:var(--slate);line-height:1.65;}
+[data-v="manual"] .mn-body p{margin:0 0 10px;}
+[data-v="manual"] .mn-body b{color:var(--charcoal);}
+[data-v="manual"] .mn-body h4{margin:14px 0 6px;font-size:12px;letter-spacing:.4px;text-transform:uppercase;color:var(--charcoal);}
+[data-v="manual"] .mn-body ol,[data-v="manual"] .mn-body ul{margin:0 0 10px;padding-left:22px;}
+[data-v="manual"] .mn-body li{margin-bottom:5px;}
+[data-v="manual"] .mn-note{background:#fff7d6;border:1px solid #ecd98a;border-radius:8px;padding:9px 12px;margin:10px 0 4px;font-size:12px;color:#6b4300;line-height:1.55;}
+[data-v="manual"] .mn-ir{display:inline-block;margin-top:2px;font-size:12px;font-weight:700;color:var(--lav2);text-decoration:none;}
+[data-v="manual"] .mn-intro{background:var(--white);border-left:4px solid var(--yellow);border-radius:8px;padding:14px 18px;font-size:13px;color:var(--slate);line-height:1.65;}
+[data-v="manual"] footer{max-width:980px;margin:0 auto 40px;padding:0 24px;font-size:12px;color:var(--slate);line-height:1.6;}
 .aviso-topo{background:#8f1f14;color:#fff;font-size:12px;font-weight:700;text-align:center;padding:7px 14px;letter-spacing:.3px;}
 .estudo-box{max-width:1260px;margin:0 auto 36px;padding:14px 24px;font-size:12.5px;line-height:1.9;color:var(--slate);}
 .estudo-box b{display:block;color:var(--charcoal);margin-bottom:2px;}
@@ -461,6 +482,7 @@ body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans
   <a href="#carga" data-r="carga">Carga efetiva</a>
   <a href="#caixa" data-r="caixa">Fluxo de caixa</a>
   <a href="#preco" data-r="preco">Calendário de preço</a>
+  <a href="#manual" data-r="manual">Manual</a>
   <a href="#" id="navPos" class="nav-pos" target="_blank" rel="noopener" style="display:none">PÓS (estudos) ↗</a>
   <span class="spacer"></span>
   <label class="perfil">Perfil <select id="perfilSel" aria-label="Perfil de empresa"></select></label>
@@ -917,6 +939,7 @@ function portalHtml(p){
   '<a class="card" href="#carga"><div class="icon"><span class="material-symbols-outlined">calculate</span></div><span class="status live">Disponível</span><h3>Carga efetiva</h3><p>Simulador parametrizável de IBS e CBS de 2026 a 2033: débito, crédito das compras, saldo credor, exportação imune e reoneração da folha, com valores iniciais do perfil.</p></a>'+
   '<a class="card" href="#caixa"><div class="icon"><span class="material-symbols-outlined">payments</span></div><span class="status live">Disponível</span><h3>Fluxo de caixa</h3><p>Competência contra caixa: capital de giro que o imposto passa a exigir, com e sem split payment, e sensibilidade ao prazo de recebimento.</p></a>'+
   '<a class="card" href="#preco"><div class="icon"><span class="material-symbols-outlined">timeline</span></div><span class="status live">Disponível</span><h3>Calendário de preço</h3><p>Quando refazer o preço de 2026 a 2033: o índice que mantém a receita líquida de tributos, para o cliente que toma crédito e para o que não toma, e a pressão de custo da folha.</p></a>'+
+  '<a class="card" href="#manual"><div class="icon"><span class="material-symbols-outlined">menu_book</span></div><span class="status live">Disponível</span><h3>Manual de uso</h3><p>Passo a passo de cada tela, como ler os resultados, o que são premissas e dúvidas frequentes. Para quem vai usar o SIS sem apresentação prévia.</p></a>'+
   '</div><div class="section-title">Como o portal vai crescer</div><div class="roadmap"><h3>Próximos módulos, na ordem que faz mais sentido construir</h3><ol>'+
   (p.textos.roadmap||[]).map(function(r){return '<li>'+esc(r[0])+' <span>'+esc(r[1])+'</span></li>';}).join('')+'</ol></div></main>'+
   '<footer>Portal interno de apoio — não substitui orientação da consultoria tributária terceirizada nem a leitura da LC 214/2025 e normas complementares.</footer></div>';
@@ -949,7 +972,78 @@ function cstHtml(p){
 }
 
 /* ===== Montagem e eventos ===== */
-var ROTAS={portal:portalHtml,plano:planoHtml,cst:cstHtml,setor:setorHtml,diagnostico:diagHtml,carga:cargaHtml,caixa:caixaHtml,preco:precoHtml};
+function mdLite(s){return esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');}
+var MANUAL_BASE=[
+ {g:'Antes de começar',itens:[
+  {t:'Para que serve o SIS e o que ele não é',aberto:true,p:[
+   'O SIS reúne, em uma página só, as ferramentas de **trabalho** sobre a Reforma Tributária do consumo (EC 132/2023, LC 214/2025 e LC 227/2026): plano de ação, consulta à tabela de CST, ficha setorial, diagnóstico, simuladores de carga, de caixa e de preço.',
+   'Ele é um **material de apoio e de estudo**. Não substitui a leitura da norma, nem a orientação da consultoria tributária. Os simuladores trabalham com **premissas** (que aparecem em cada tela e podem ser alteradas) e servem para comparar cenários e ordem de grandeza, não para apurar imposto.',
+   'Tudo roda **no navegador**, a partir de um arquivo HTML. A página não consulta a internet para calcular e não envia o que você digita a lugar nenhum. Suas respostas e alterações ficam guardadas **no seu próprio navegador**, neste computador.']},
+  {t:'Como abrir e se orientar',p:[
+   'Abra o arquivo HTML no navegador (duplo clique). O menu no alto leva a cada tela; o item destacado em amarelo é a tela em que você está. O **Portal** é a página inicial, com um cartão para cada ferramenta.',
+   'Se houver mais de um perfil de empresa no arquivo, o seletor de perfil fica à direita do menu. Cada perfil guarda as suas próprias respostas e simulações.'],
+   nota:'Dica: use sempre o mesmo navegador e o mesmo computador. As respostas ficam guardadas por navegador; trocar de navegador ou limpar os dados do site apaga o que foi digitado.'},
+  {t:'Como ler os status: confirmado, pendente e hipótese',p:[
+   '**Confirmado**: o dado tem base em documento ou relatório da própria empresa, ou na norma.',
+   '**Pendente**: ainda falta conferir com a área responsável ou com a consultoria.',
+   '**Hipótese**: premissa adotada para o cálculo enquanto não há dado. Sempre que um resultado depender de hipótese, ele precisa ser lido com essa ressalva.']}
+ ]},
+ {g:'Tela por tela',itens:[
+  {t:'Plano de Ação',ir:'plano',p:[
+   'Lista as frentes de trabalho da adaptação à reforma, cada uma com suas tarefas, responsáveis e situação. No alto aparece o progresso geral.',
+   'A tabela **Perfil da empresa** mostra o que se sabe sobre a empresa e se está confirmado ou pendente.'],
+   passos:['Clique no título de uma frente para abrir e fechar as tarefas.','Leia a tabela de perfil antes dos simuladores: ela diz de onde vêm os números.','Use as pendências como pauta de reunião com a contabilidade e a consultoria.']},
+  {t:'Consulta CST',ir:'cst',p:[
+   'Consulta à tabela oficial de Códigos de Situação Tributária do IBS e da CBS. Mostra o código, a descrição e os indicadores que ele aciona (redução, diferimento, monofásica e outros).',
+   'O selo no alto informa **a versão da tabela** e a data de publicação. Antes de usar, confira se é a versão mais recente no portal da NF-e, pelos links da própria tela.'],
+   passos:['Digite o código ou parte da descrição no campo de busca.','Use os filtros para restringir por indicador.','Em caso de dúvida sobre qual CST usar numa operação, a decisão é da área fiscal com a consultoria; a tela apenas mostra o que a tabela diz.']},
+  {t:'Ficha setorial',ir:'setor',p:[
+   'Resume o regime do setor da empresa: regime geral, reduções de alíquota, regimes específicos, crédito, benefícios e obrigações. Os parâmetros vêm dos perfis setoriais do material de estudo (PÓS).',
+   'O setor mostrado é o do perfil. É possível consultar os outros setores para comparar.'],
+   nota:'A ficha é uma síntese de estudo. Enquadramento de produto ou serviço em redução ou regime específico depende do texto da lei e de classificação (NCM/NBS) e deve ser confirmado.'},
+  {t:'Diagnóstico por checklist',ir:'diagnostico',p:[
+   'Sete blocos de perguntas (perfil, créditos, benefícios, documentos, preço e caixa, planejamento e maturidade) medem a exposição da empresa à reforma. Cada resposta soma pontos e o resultado vem com uma **classificação sugerida**.',
+   'Algumas respostas já vêm sugeridas a partir do perfil. Elas podem ser trocadas.'],
+   passos:['Responda bloco a bloco; o que ficou sem resposta não entra na conta.','Veja a classificação e os pontos de atenção.','Use **Baixar relatório de cenário (HTML)** ou **Abrir para imprimir** para levar o resultado para reunião.','**Limpar respostas deste perfil** apaga o que foi respondido e volta ao começo.']},
+  {t:'Carga efetiva (IBS e CBS de 2026 a 2033)',ir:'carga',p:[
+   'Simula, ano a ano, o débito de IBS/CBS sobre a receita, o crédito das compras, o saldo credor, o efeito da exportação (imune) e da reoneração gradual da folha (para quem tem desoneração), comparando com a carga atual.',
+   'Os campos vêm preenchidos com os **valores iniciais do perfil** (receita, compras, folha e outros). Você pode alterar qualquer um para testar cenários.'],
+   passos:['Confira os valores iniciais e as premissas (alíquotas, crédito das compras, regime dos fornecedores).','Altere um campo por vez e veja o efeito na tabela de 2026 a 2033.','Use **Restaurar os valores iniciais do perfil** para voltar ao ponto de partida.','Leia as notas da tela: elas dizem o que é dado e o que é hipótese.'],
+   nota:'O resultado depende fortemente de dois pontos: quanto das compras gera crédito (fornecedores no regime regular) e quanto dos clientes toma crédito. Teste os dois.'},
+  {t:'Fluxo de caixa (competência contra caixa)',ir:'caixa',p:[
+   'Mostra o capital de giro que o imposto passa a exigir quando o IBS/CBS é devido na venda e o crédito só é aproveitado depois, com e sem **split payment**, e como isso muda com o prazo de recebimento e de pagamento.',
+   'Os prazos médios de recebimento e de pagamento e o caixa aplicado vêm do perfil. O prazo de pagamento é o ponto mais sensível: pequenas mudanças alteram bastante o resultado.'],
+   passos:['Confira os prazos do perfil.','Altere o prazo de recebimento e veja o gráfico de sensibilidade.','Compare o cenário com e sem split payment.','Use **Restaurar os valores iniciais do perfil** para desfazer.']},
+  {t:'Calendário de preço',ir:'preco',p:[
+   'Indica **quando refazer o preço** entre 2026 e 2033: o índice que mantém a receita líquida de tributos, para o cliente que toma crédito e para o que não toma, e a pressão de custo da folha na reoneração.',
+   'É útil para preparar renegociação de contratos de longa duração e reajustes.'],
+   nota:'O índice é uma referência de cálculo. A decisão de preço depende de mercado, contrato e concorrência.'}
+ ]},
+ {g:'Perguntas frequentes',itens:[
+  {t:'Perdi o que tinha digitado. O que houve?',p:['As respostas ficam guardadas no navegador. Elas somem se os dados do site forem limpos, se outro navegador ou computador for usado, ou se o arquivo for aberto em outro local. Para preservar um resultado, use **Baixar relatório de cenário (HTML)**.']},
+  {t:'Os números não batem com o que eu esperava.',p:['Confira, nesta ordem: (1) os valores iniciais do perfil e a data da última atualização; (2) as premissas da tela (alíquotas, regime dos fornecedores, crédito dos clientes); (3) se algum campo foi alterado e não restaurado. Se ainda divergir, anote a tela, o campo e o valor e leve à pessoa responsável pela ferramenta.']},
+  {t:'Posso mandar o resultado para outra pessoa?',p:['Pode enviar o relatório de cenário baixado ou impresso, ciente de que contém valores da empresa. O arquivo do SIS em si deve ficar na pasta indicada pela área.']},
+  {t:'A ferramenta substitui a consultoria?',p:['Não. Ela organiza a informação e permite comparar cenários. Interpretação de norma, enquadramento e apuração continuam com a área fiscal e com a consultoria.']}
+ ]}
+];
+function manualItem(it){
+  var h='<details class="mn-sec"'+(it.aberto?' open':'')+'><summary>'+esc(it.t)+'</summary><div class="mn-body">';
+  (it.p||[]).forEach(function(x){h+='<p>'+mdLite(x)+'</p>';});
+  if(it.passos&&it.passos.length)h+='<h4>Como usar</h4><ol>'+it.passos.map(function(x){return '<li>'+mdLite(x)+'</li>';}).join('')+'</ol>';
+  if(it.lista&&it.lista.length)h+='<ul>'+it.lista.map(function(x){return '<li>'+mdLite(x)+'</li>';}).join('')+'</ul>';
+  if(it.nota)h+='<div class="mn-note">'+mdLite(it.nota)+'</div>';
+  if(it.ir)h+='<a class="mn-ir" href="#'+esc(it.ir)+'">Abrir esta tela →</a>';
+  return h+'</div></details>';
+}
+function manualHtml(p){
+  var m=p.manual||{},h='<div data-v="manual"><header><div class="brand">'+brand(p,36)+'</div><h1>Manual de uso do SIS</h1><p>'+esc(m.intro||'Passo a passo para usar cada tela sem apresentação prévia: o que ela faz, como usar, como ler o resultado e o que ainda é hipótese.')+'</p></header><main>';
+  (m.secoes||[]).forEach(function(g){
+    h+='<div class="mn-grupo">'+esc(g.g)+'</div>'+g.itens.map(manualItem).join('');
+  });
+  MANUAL_BASE.forEach(function(g){h+='<div class="mn-grupo">'+esc(g.g)+'</div>'+g.itens.map(manualItem).join('');});
+  return h+'</main><footer>Manual de apoio — não substitui orientação da consultoria tributária terceirizada nem a leitura da LC 214/2025 e normas complementares.</footer></div>';
+}
+var ROTAS={portal:portalHtml,plano:planoHtml,cst:cstHtml,setor:setorHtml,diagnostico:diagHtml,carga:cargaHtml,caixa:caixaHtml,preco:precoHtml,manual:manualHtml};
 function rotaAtual(){var r=((location.hash||'#portal').slice(1)).split('/')[0];return ROTAS[r]?r:'portal';}
 function bindPlano(view){
   var fr=view.querySelector('#frentes');if(!fr)return;
@@ -1036,7 +1130,7 @@ function init(){
   window.addEventListener('hashchange',function(){mount();window.scrollTo(0,0);});
   mount();
 }
-window.__SIS__={cstRows:cstRows,cstFilter:cstFilter,cstResultsHtml:cstResultsHtml,planoResumo:planoResumo,frentesHtml:frentesHtml,portalHtml:portalHtml,planoHtml:planoHtml,cstHtml:cstHtml,setorHtml:setorHtml,setorDe:setorDe,estudoHtml:estudoHtml,SETORES:SETORES,diagHtml:diagHtml,cargaHtml:cargaHtml,cargaCalc:cargaCalc,cargaPar:cargaPar,caixaHtml:caixaHtml,caixaCalc:caixaCalc,caixaPar:caixaPar,precoHtml:precoHtml,precoCalc:precoCalc,precoLinhas:precoLinhas,diagCalc:diagCalc,relatorioHtml:relatorioHtml,CHK:CHK,diagResp:diagResp,perfis:PERFIS,CST:CST};
+window.__SIS__={cstRows:cstRows,cstFilter:cstFilter,cstResultsHtml:cstResultsHtml,planoResumo:planoResumo,frentesHtml:frentesHtml,portalHtml:portalHtml,planoHtml:planoHtml,cstHtml:cstHtml,setorHtml:setorHtml,setorDe:setorDe,estudoHtml:estudoHtml,SETORES:SETORES,diagHtml:diagHtml,cargaHtml:cargaHtml,cargaCalc:cargaCalc,cargaPar:cargaPar,caixaHtml:caixaHtml,caixaCalc:caixaCalc,caixaPar:caixaPar,precoHtml:precoHtml,manualHtml:manualHtml,precoCalc:precoCalc,precoLinhas:precoLinhas,diagCalc:diagCalc,relatorioHtml:relatorioHtml,CHK:CHK,diagResp:diagResp,perfis:PERFIS,CST:CST};
 init();
 })();
 
