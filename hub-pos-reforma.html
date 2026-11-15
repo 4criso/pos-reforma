@@ -472,6 +472,9 @@ footer.site-aviso a.site-sis:hover{text-decoration:underline;}
 #aula-view .ferr-sis b{color:var(--charcoal);}
 #aula-view .ferr-sis a{color:var(--lav3);font-weight:700;text-decoration:none;white-space:nowrap;}
 #aula-view .ferr-sis a:hover{text-decoration:underline;}
+.voltar-portal{display:none;position:fixed;left:16px;bottom:16px;z-index:60;align-items:center;gap:6px;padding:9px 16px;border:0;border-radius:999px;background:var(--charcoal);color:#fff;font:700 13px/1 inherit;font-family:inherit;box-shadow:0 4px 14px rgba(0,0,0,.28);cursor:pointer;}
+.voltar-portal:hover{background:var(--lav3);}
+.origem-interno .voltar-portal{display:inline-flex;}
 .origem-interno .site-sis,.origem-interno .head-sis,.origem-interno .ferr-sis{display:none!important;}
 </style>
 </head>
@@ -18645,6 +18648,25 @@ window.addEventListener('resize', syncTopbarH);
 const FERR_NOMES = {"portal": "Portal", "plano": "Plano de Ação", "cst": "Consulta CST", "setor": "Ficha setorial", "diagnostico": "Diagnóstico", "carga": "Carga efetiva", "caixa": "Fluxo de caixa", "preco": "Calendário de preço"};
 const FERR_AULAS = {"aula-mapa-dos-tributos": ["carga"], "aula-cenario-4-analisando-empresa": ["plano", "diagnostico"], "aula-cenario-5-aplicacao-pratica": ["plano", "diagnostico"], "aula-virada-estoques-creditos": ["plano", "preco"], "aula-lc-obrigacoes-acessorias": ["cst"], "aula5-aliquotas": ["cst", "setor"], "aula-cenario-3-quem-sente-mais": ["setor", "diagnostico", "carga"], "aula-nao-cumulatividade": ["carga"], "aula-lc-regime-compensacao": ["caixa"], "aula-lc-ressarcimento-creditos": ["caixa"], "aula-contabilizacao-ibs-cbs": ["caixa"], "aula-preco-na-transicao": ["preco"], "aula-perfil-agronegocio": ["setor"], "aula-perfil-saude": ["setor"], "aula-perfil-logistica-ecommerce": ["setor"], "aula-perfil-servicos-financeiros": ["setor"], "aula-perfil-construcao-imobiliario": ["setor"], "aula-perfil-energia-combustiveis-mineracao": ["setor"], "aula-perfil-servicos-profissionais-contabilidade": ["setor"], "aula-perfil-comercio-varejo": ["setor"], "aula-perfil-industria-zona-franca": ["setor"], "aula-perfil-educacao": ["setor"], "aula-perfil-turismo-alimentacao": ["setor"], "aula-perfil-software-servicos-digitais": ["setor"]};
 if(/[?&]origem=interno\b/.test(location.search)) document.documentElement.classList.add('origem-interno');
+/* ===== Volta ao portal de origem (aberto no mesmo tab) ===== */
+(function(){
+  if(!document.documentElement.classList.contains('origem-interno')) return;
+  var q=new URLSearchParams(location.search), nome=(q.get('voltar')||'Portal interno').slice(0,40);
+  var i0=null;
+  try{
+    var nav=window.navigation, cur=nav&&nav.currentEntry?nav.currentEntry.index:null;
+    var rec=performance.getEntriesByType('navigation')[0], reload=rec&&rec.type==='reload', sv=sessionStorage.getItem('hubI0');
+    i0=(reload&&sv!==null)?parseInt(sv,10):cur; if(cur!==null) sessionStorage.setItem('hubI0',String(i0));
+  }catch(e){}
+  var btn=document.createElement('button');
+  btn.type='button'; btn.className='voltar-portal'; btn.textContent='← Voltar ao '+nome;
+  btn.addEventListener('click',function(){
+    var n=1;
+    try{ if(window.navigation&&i0!==null) n=window.navigation.currentEntry.index-i0+1; }catch(e){}
+    history.go(-Math.max(1,n));
+  });
+  if(history.length>1) document.body.appendChild(btn);
+})();
 function addFerramentas(stem){
   const rotas = FERR_AULAS[stem], wrap = aulaView.querySelector('.wrap');
   if(!rotas || !wrap || wrap.querySelector('.ferr-sis')) return;
