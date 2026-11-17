@@ -27,14 +27,14 @@
 :root{
   --charcoal:#324155; --yellow:#D0FF25; --platinum:#E7E7E7; --white:#FFFFFF;
   --slate:#58636E; --lav:#A9A0EB; --lav1:#8377D1; --lav2:#6656D0; --lav3:#5436CC;
-  --nav-h:40px; --legend-h:34px;
+  --nav-h:52px; --legend-h:34px;
 }
 *{box-sizing:border-box;}
 body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:var(--platinum);color:var(--charcoal);}
 .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 500,'GRAD' 0,'opsz' 24;font-size:20px;line-height:1;}
 .topnav{background:var(--charcoal);border-bottom:1px solid rgba(255,255,255,0.1);position:sticky;top:0;z-index:40;height:var(--nav-h);}
-.topnav .inner{max-width:1260px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:4px;height:100%;}
-.topnav a{color:var(--platinum);text-decoration:none;font-size:12.5px;font-weight:700;padding:0 14px;height:100%;display:flex;align-items:center;border-bottom:3px solid transparent;}
+.topnav .inner{max-width:1400px;margin:0 auto;padding:0 20px;display:flex;align-items:center;gap:2px;height:100%;}
+.topnav a{color:var(--platinum);text-decoration:none;font-size:13px;font-weight:700;padding:0 11px;height:100%;display:flex;align-items:center;white-space:nowrap;border-bottom:3px solid transparent;}
 .topnav a:hover{color:var(--white);}
 .topnav a.active{color:var(--yellow);border-bottom-color:var(--yellow);}
 .topnav .spacer{flex:1;}
@@ -45,17 +45,18 @@ body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans
 .nav-toggle .nav-seta{font-size:14px;transition:transform .15s;margin-left:2px;}
 .topnav.open .nav-toggle .nav-seta{transform:rotate(180deg);}
 .nav-links{display:contents;}
-@media (max-width:860px){
+@media (max-width:1240px){
   .topnav .inner{padding:0 14px;}
   .nav-toggle{display:flex;}
   .nav-links{display:none;position:absolute;top:var(--nav-h);left:0;right:0;flex-direction:column;background:var(--charcoal);border-bottom:3px solid var(--yellow);box-shadow:0 10px 24px rgba(0,0,0,.28);padding:4px 0 8px;}
   .topnav.open .nav-links{display:flex;}
   .nav-links a{height:46px;padding:0 20px;border-bottom:1px solid rgba(255,255,255,.08);border-left:4px solid transparent;font-size:14px;}
   .nav-links a.nav-pos{padding:0 20px;}
+  #topnav a.nav-util{height:46px;margin:0;padding:0 20px;border:0;border-radius:0;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px;}
   .nav-links a.active{border-bottom-color:rgba(255,255,255,.08);border-left-color:var(--yellow);}
   .topnav .perfil{font-size:11px;}
   .sis-brand small{display:block;margin:2px 0 0;}
-  [data-v="portal"] .brand,[data-v="plano"] .brand,[data-v="carga"] .brand,[data-v="setor"] .brand,[data-v="diag"] .brand,[data-v="manual"] .brand{flex-wrap:wrap;}
+  [data-v="portal"] .brand,[data-v="plano"] .brand,[data-v="carga"] .brand,[data-v="setor"] .brand,[data-v="diag"] .brand,[data-v="manual"] .brand,[data-v="cadastro"] .brand{flex-wrap:wrap;}
   [data-v="portal"] header{padding:30px 18px 28px;}
 }
 .sis-brand{font-size:26px;font-weight:800;letter-spacing:-0.5px;color:var(--white);}
@@ -125,6 +126,20 @@ body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans
 [data-v="plano"] .profile-table td{padding:10px 16px;font-size:13px;border-bottom:1px solid var(--platinum);vertical-align:top;}
 [data-v="plano"] .profile-table tr:last-child td{border-bottom:none;}
 [data-v="plano"] .profile-table td.item{font-weight:700;width:220px;color:var(--charcoal);}
+[data-v="portal"] .prazos{margin:26px 0 30px;}
+[data-v="portal"] .pz-box{background:var(--white);border-left:4px solid var(--lav);border-radius:8px;padding:14px 18px;font-size:12.5px;color:var(--slate);}
+[data-v="portal"] .pz-box h2{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--charcoal);margin:0 0 8px;}
+[data-v="portal"] .pz-box table{width:100%;border-collapse:collapse;}
+[data-v="portal"] .pz-box td{padding:8px 10px 8px 0;border-top:1px solid #e6e9ee;vertical-align:top;line-height:1.5;}
+[data-v="portal"] .pz-box tr:first-child td{border-top:0;}
+[data-v="portal"] .pz-d{white-space:nowrap;width:118px;color:var(--charcoal);}
+[data-v="portal"] .pz-d span{display:block;font-size:11px;color:var(--slate);font-weight:600;}
+[data-v="portal"] .pz-f{display:block;font-size:11.5px;color:#6b7686;margin-top:2px;}
+[data-v="portal"] .pz-s{font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap;display:inline-block;}
+[data-v="portal"] .pz-s.confirmado{background:#e3f6d8;color:#3f6b1a;}
+[data-v="portal"] .pz-s.pendente{background:#fff1cf;color:#8a5a00;}
+[data-v="portal"] .pz-n{margin:8px 0 0;font-size:11.5px;color:#6b7686;}
+@media (max-width:640px){[data-v="portal"] .pz-d{width:auto;white-space:normal;}[data-v="portal"] .pz-box td{display:block;padding:4px 0;border-top:0;}[data-v="portal"] .pz-box tr{display:block;border-top:1px solid #e6e9ee;padding:8px 0;}}
 [data-v="plano"] .status-pill{font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap;display:inline-block;}
 [data-v="plano"] .status-pill.confirmado{background:#e3f6d8;color:#3f6b1a;}
 [data-v="plano"] .status-pill.pendente{background:#fff1cf;color:#8a5a00;}
@@ -460,6 +475,29 @@ body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans
   }
 
 
+[data-v="cadastro"] header{background:var(--charcoal);color:var(--white);padding:26px 32px 22px;border-bottom:4px solid var(--yellow);}
+[data-v="cadastro"] header h1{margin:6px 0 2px;font-size:19px;font-weight:700;}
+[data-v="cadastro"] header p{margin:0;font-size:12.5px;color:var(--platinum);max-width:820px;line-height:1.5;}
+[data-v="cadastro"] main{max-width:980px;margin:0 auto;padding:24px 24px 50px;}
+[data-v="cadastro"] .cd-aviso{background:#fff7d6;border:1px solid #ecd98a;border-radius:10px;padding:10px 14px;margin-bottom:18px;font-size:12px;color:#6b4300;line-height:1.55;}
+[data-v="cadastro"] .cd-box{background:var(--white);border:1px solid var(--platinum);border-radius:10px;padding:16px 18px;margin-bottom:16px;}
+[data-v="cadastro"] .cd-box h2{margin:0 0 4px;font-size:14px;color:var(--charcoal);}
+[data-v="cadastro"] .cd-box>p{margin:0 0 12px;font-size:12px;color:var(--slate);line-height:1.5;}
+[data-v="cadastro"] .cd-lin{display:grid;grid-template-columns:200px 1fr 130px;gap:10px;align-items:start;margin-bottom:10px;}
+[data-v="cadastro"] .cd-lin label{font-size:12px;font-weight:700;color:var(--charcoal);padding-top:8px;}
+[data-v="cadastro"] textarea,[data-v="cadastro"] input[type=text],[data-v="cadastro"] select{font-family:inherit;font-size:13px;padding:7px 9px;border:1.5px solid var(--platinum);border-radius:8px;color:var(--charcoal);background:var(--white);width:100%;box-sizing:border-box;}
+[data-v="cadastro"] textarea{min-height:38px;resize:vertical;line-height:1.4;}
+[data-v="cadastro"] textarea:focus,[data-v="cadastro"] input:focus,[data-v="cadastro"] select:focus{outline:none;border-color:var(--lav2);}
+[data-v="cadastro"] .cd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
+[data-v="cadastro"] .cd-campo{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:var(--slate);}
+[data-v="cadastro"] .cd-acoes{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:6px;}
+[data-v="cadastro"] .btn{font-family:inherit;font-size:12.5px;font-weight:800;border-radius:8px;padding:9px 16px;cursor:pointer;background:var(--lav2);color:#fff;border:1.5px solid var(--lav2);transition:filter .15s,transform .05s;}
+[data-v="cadastro"] .btn:hover{filter:brightness(1.1);}
+[data-v="cadastro"] .btn:active{transform:translateY(1px);}
+[data-v="cadastro"] .btn.sec{background:var(--white);color:var(--charcoal);border-color:var(--charcoal);}
+[data-v="cadastro"] .cd-msg{font-size:12.5px;font-weight:700;color:#14683a;}
+[data-v="cadastro"] .cd-msg.err{color:#a3261e;}
+@media (max-width:720px){[data-v="cadastro"] .cd-lin{grid-template-columns:1fr;gap:4px;}[data-v="cadastro"] .cd-lin label{padding-top:0;}[data-v="cadastro"] header{padding:20px 18px 16px;}[data-v="cadastro"] main{padding:18px 16px 40px;}}
 [data-v="manual"] header{background:var(--charcoal);color:var(--white);padding:26px 32px 22px;border-bottom:4px solid var(--yellow);}
 [data-v="manual"] header h1{margin:6px 0 2px;font-size:19px;font-weight:700;}
 [data-v="manual"] header p{margin:0;font-size:12.5px;color:var(--platinum);max-width:820px;line-height:1.5;}
@@ -486,7 +524,13 @@ body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans
 .estudo-box b{display:block;color:var(--charcoal);margin-bottom:2px;}
 .estudo-box a{display:inline-block;margin:0 16px 0 0;color:var(--lav3);font-weight:700;text-decoration:none;}
 .estudo-box a:hover{text-decoration:underline;}
-#topnav a.nav-pos{margin-left:8px;}
+.zerar-box{max-width:1260px;margin:8px auto 28px;padding:16px 24px 0;font-size:12.5px;line-height:1.6;color:var(--slate);}
+.zerar-box .btn{font-family:inherit;font-size:12.5px;font-weight:800;border-radius:8px;padding:9px 16px;cursor:pointer;background:var(--white);color:var(--charcoal);border:1.5px solid var(--charcoal);margin-right:8px;}
+.zerar-box .btn:hover{background:var(--charcoal);color:#fff;}
+#topnav a.nav-pos{margin-left:4px;}
+#topnav a.nav-util{margin:auto 0 auto 6px;height:32px;padding:0 12px;border:1px solid rgba(255,255,255,.35);border-radius:16px;font-size:12px;}
+#topnav a.nav-util:hover{background:rgba(255,255,255,.1);border-color:#fff;}
+.nav-links{align-items:center;}
 </style>
 </head>
 <body>
@@ -495,6 +539,7 @@ body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans
   <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks"><span class="nav-ic" aria-hidden="true">&#9776;</span><span id="navAtual">Menu</span><span class="nav-seta" aria-hidden="true">&#9662;</span></button>
   <div class="nav-links" id="navLinks">
   <a href="#portal" data-r="portal">Portal</a>
+  <a href="#cadastro" data-r="cadastro">Cadastro</a>
   <a href="#plano" data-r="plano">Plano de Ação</a>
   <a href="#cst" data-r="cst">Consulta CST</a>
   <a href="#setor" data-r="setor">Ficha setorial</a>
@@ -503,7 +548,8 @@ body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans
   <a href="#caixa" data-r="caixa">Fluxo de caixa</a>
   <a href="#preco" data-r="preco">Calendário de preço</a>
   <a href="#manual" data-r="manual">Manual</a>
-  <a href="#" id="navPos" class="nav-pos" style="display:none">Hub de Estudos ↗</a>
+  <a href="#" id="navPos" class="nav-pos nav-util" style="display:none">Hub de Estudos ↗</a>
+  <a href="#" id="navAtu" class="nav-pos nav-util" style="display:none"></a>
   </div>
   <span class="spacer"></span>
   <label class="perfil">Perfil <select id="perfilSel" aria-label="Perfil de empresa"></select></label>
@@ -528,6 +574,40 @@ var PERFIS=Array.prototype.slice.call(document.querySelectorAll('script[data-per
 var STORE='sis-perfil';
 var perfil=PERFIS[0];
 try{var sid=localStorage.getItem(STORE);var sp=PERFIS.filter(function(x){return x.id===sid;})[0];if(sp)perfil=sp;}catch(e){}
+/* ===== Começar do zero: esvazia os dados do perfil (no arquivo, pela página Atualizar dados; ou só neste computador, pelo botão do Portal) ===== */
+var ZKEY='sis-zerado-';
+var ZERAR_C=['recServ','recBens','exp','icmsBens','ipiBens','comprasReg','comprasSimples','simplesCred','comprasBensCred','imports','folha','benef','benefCred'];
+var ZERAR_X=['meses','caixaAplicado','pmp','pmr'];
+function zeroArquivo(p){return p.zerado===true;}
+function zeroLocal(p){try{return localStorage.getItem(ZKEY+p.id)==='1';}catch(e){return false;}}
+function efetivoBase(p){
+  if(!zeroArquivo(p)&&!zeroLocal(p))return p;
+  var q={};Object.keys(p).forEach(function(k){q[k]=p[k];});
+  q.empresa=(p.empresa||[]).map(function(e){return {item:e.item,valor:'Sem dados.',status:'pendente'};});
+  q.diagSugestoes={};q.setor='';
+  function z(o,ks){var r={};Object.keys(o||{}).forEach(function(k){r[k]=ks.indexOf(k)>=0?0:o[k];});return r;}
+  q.carga={periodo:'sem dados',valores:z(p.carga&&p.carga.valores,ZERAR_C),notas:['Dados zerados. Os valores ficam em zero até serem carregados de novo.']};
+  q.caixa={valores:z(p.caixa&&p.caixa.valores,ZERAR_X),notas:['Dados zerados. Os valores ficam em zero até serem carregados de novo.']};
+  return q;
+}
+/* ===== Cadastro da empresa: dados informados pelo usuário (começar do zero) ===== */
+var CKEY='sis-cadastro-';
+var CAD_C=[['recServ','Receita nacional de serviços (R$)'],['recBens','Receita nacional de bens (R$)'],['exp','Receita de exportação (R$)'],['icmsBens','ICMS destacado nas vendas de bens (R$)'],['ipiBens','IPI destacado nas vendas de bens (R$)'],['comprasReg','Compras no Brasil de fornecedores no regime regular (R$)'],['comprasSimples','Compras de fornecedores do Simples Nacional (R$)'],['imports','Importações de serviços e bens (R$)'],['comprasBensCred','Compras de mercadorias com crédito de PIS e COFINS hoje (R$)'],['benef','Benefícios a empregados e planos de saúde (R$)'],['folha','Folha de contribuição previdenciária (R$)'],['credClientes','Receita nacional com clientes que tomam crédito (%)']];
+var CAD_X=[['pmr','Prazo médio de recebimento das vendas (dias)'],['pmp','Prazo médio de pagamento aos fornecedores (dias)'],['meses','Meses do período dos valores acima'],['caixaAplicado','Caixa aplicado hoje (R$, só para comparação)']];
+function numBR(s){s=String(s==null?'':s).replace(/R\$|\s/g,'');if(!s)return 0;if(s.indexOf(',')>=0)s=s.replace(/\./g,'').replace(',','.');else if(/^\d{1,3}(\.\d{3})+$/.test(s))s=s.replace(/\./g,'');var n=Number(s);return isFinite(n)?n:0;}
+function numIn(v){return v?String(v).replace('.',','):'';}
+function cadLer(p){try{var t=localStorage.getItem(CKEY+p.id);return t?JSON.parse(t):null;}catch(e){return null;}}
+function cadAplicar(q,c){
+  var r={};Object.keys(q).forEach(function(k){r[k]=q[k];});
+  if(c.empresa&&c.empresa.length)r.empresa=c.empresa.filter(function(e){return e&&e.item;}).map(function(e){var v=String(e.valor||'').trim();return {item:e.item,valor:v||'Não informado.',status:(v&&e.status==='confirmado')?'confirmado':'pendente'};});
+  var dt=c.salvoEm?' em '+c.salvoEm:'';
+  function mescla(base,novo,nome){var o={};Object.keys(base||{}).forEach(function(k){o[k]=base[k];});Object.keys(novo||{}).forEach(function(k){o[k]=novo[k];});return o;}
+  if(c.carga)r.carga={periodo:c.periodo||('informado no Cadastro'+dt),valores:mescla(q.carga&&q.carga.valores,c.carga),notas:['Valores informados no Cadastro da empresa'+dt+'. Confira com a apuração do período antes de usar em decisão.']};
+  if(c.caixa)r.caixa={valores:mescla(q.caixa&&q.caixa.valores,c.caixa),notas:['Valores informados no Cadastro da empresa'+dt+'. Confira com o histórico de recebimentos e pagamentos.']};
+  return r;
+}
+function efetivo(p){var q=efetivoBase(p),c=cadLer(p);return c?cadAplicar(q,c):q;}
+perfil=efetivo(perfil);
 var planoOpen={};
 var cstOpen={};
 var cstUI={q:'',cst:'',onlyRel:false,hideEnc:false};
@@ -762,7 +842,7 @@ var CARGA_CAMPOS=[
  {g:'Receitas do período (R$, sem imposto)',c:[['recServ','Receita nacional de serviços'],['recBens','Receita nacional de bens'],['exp','Receita de exportação (imune)'],['icmsBens','ICMS destacado nas vendas de bens (hoje)'],['ipiBens','IPI destacado nas vendas de bens (hoje)']]},
  {g:'Compras do período (R$, sem imposto)',c:[['comprasReg','Compras no Brasil de fornecedores no regime regular'],['comprasSimples','Compras de fornecedores do Simples Nacional'],['simplesCred','Crédito aproveitado nas compras do Simples (% da alíquota)'],['imports','Importações de serviços e bens (pagas e creditadas)'],['benef','Benefícios a empregados e planos de saúde (R$)'],['benefCred','Parcela dos benefícios que gera crédito (%, regra de uso e consumo pessoal)'],['comprasBensCred','Compras de mercadorias com crédito de PIS e COFINS hoje']]},
  {g:'Folha e clientes',c:[['folha','Folha de contribuição previdenciária (R$)'],['credClientes','Receita nacional com clientes que tomam crédito (%)']]},
- {g:'Alíquotas e premissas (%)',c:[['cbs','CBS plena (estimativa do TCU para 2027: 11,3%)'],['total','Alíquota de referência total, IBS + CBS (teto de 26,5% da LC 214)'],['reducao','Redução de alíquota da atividade (0, 30, 40, 50 ou 60)'],['rPCserv','PIS e COFINS cumulativos sobre serviços hoje'],['rPCbens','PIS e COFINS não cumulativos sobre bens hoje'],['rISS','ISS hoje'],['cprbBase','CPRB, alíquota-base (a conferir)']]}
+ {g:'Alíquotas e premissas (%)',c:[['cbs','CBS plena (cálculo do TCU para 2027, Acórdão 2933/2026: 11,3%)'],['total','Alíquota de referência total, IBS + CBS (teto de 26,5% da LC 214)'],['reducao','Redução de alíquota da atividade (0, 30, 40, 50 ou 60)'],['rPCserv','PIS e COFINS cumulativos sobre serviços hoje'],['rPCbens','PIS e COFINS não cumulativos sobre bens hoje'],['rISS','ISS hoje'],['cprbBase','CPRB, alíquota-base (a conferir)']]}
 ];
 var CARGA_PADRAO={recServ:10000000,recBens:0,exp:0,icmsBens:0,ipiBens:0,comprasReg:2000000,comprasSimples:500000,simplesCred:0,imports:0,benef:0,benefCred:0,comprasBensCred:0,folha:5000000,credClientes:70,cbs:11.3,total:26.5,reducao:0,rPCserv:3.65,rPCbens:9.25,rISS:2,cprbBase:4.5};
 function cargaTabelaAno(ano,P){
@@ -812,7 +892,7 @@ function cargaHtml(p){
   var grupos=CARGA_CAMPOS.map(function(g){return '<div class="c-grp"><h3>'+esc(g.g)+'</h3>'+g.c.map(function(c){return '<label class="c-campo">'+esc(c[1])+'<input type="number" step="any" data-k="'+c[0]+'" value="'+P[c[0]]+'"></label>';}).join('')+'</div>';}).join('');
   return '<div data-v="carga">'+
   '<header><h1>Estimativa de carga efetiva — IBS e CBS</h1><p>Simulador com os valores do perfil como ponto de partida. Todos os campos são editáveis, e o resultado é recalculado a cada alteração. Período dos valores: '+esc(per)+'.</p></header>'+
-  '<main><div class="c-aviso"><b>Leia antes:</b> é uma estimativa de estudo, e não uma apuração. Usa alíquotas hipotéticas (a CBS de 11,3% é a estimativa do TCU para 2027, e a alíquota de referência total tem o teto de 26,5% da LC 214, ambas a confirmar pela resolução do Senado). Considera o imposto por fora, fornecedores no regime regular com documento idôneo e a extinção do tributo no mesmo período, e ignora o prazo do crédito e o split payment. A transição do IBS de 2029 a 2032 é aproximada (10% a 40% da alíquota plena, com ISS e ICMS a 90%, 80%, 70% e 60%).</div>'+
+  '<main><div class="c-aviso"><b>Leia antes:</b> é uma estimativa de estudo, e não uma apuração. Usa alíquotas hipotéticas (a CBS de 11,3% é o cálculo do TCU para 2027 (Acórdão 2933/2026), e a alíquota de referência total tem o teto de 26,5% da LC 214; ambas dependem da resolução do Senado, prevista para até 15/12/2026). Considera o imposto por fora, fornecedores no regime regular com documento idôneo e a extinção do tributo no mesmo período, e ignora o prazo do crédito e o split payment. A transição do IBS de 2029 a 2032 é aproximada (10% a 40% da alíquota plena, com ISS e ICMS a 90%, 80%, 70% e 60%).</div>'+
   '<div class="c-grid" id="cargaCampos">'+grupos+'</div><button type="button" class="btn" id="cargaRestaurar">Restaurar os valores iniciais do perfil</button>'+
   '<div id="cargaRes">'+cargaResHtml(P)+'</div>'+
   (notas.length?'<div class="section-title">Origem dos valores iniciais</div><ul class="c-notas">'+notas.map(function(n){return '<li>'+esc(n)+'</li>';}).join('')+'</ul>':'')+'</main>'+
@@ -946,6 +1026,17 @@ function bindPreco(view){
     res.innerHTML=precoResHtml(cargaPar(perfil),precoPar(perfil));
   });
 }
+function prazosHtml(p){
+  var L=p.prazos||[];if(!L.length)return '';
+  var hoje=new Date();hoje=new Date(hoje.getFullYear(),hoje.getMonth(),hoje.getDate());
+  var rows=L.map(function(x){
+    var m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(x.data||''),quando='';
+    if(m){var d=new Date(+m[3],+m[2]-1,+m[1]),n=Math.round((d-hoje)/86400000);quando=n<0?'já passou':(n===0?'hoje':'em '+n+' dia'+(n===1?'':'s'));}
+    var st=x.status==='confirmado'?'Confirmado':'Pendente';
+    return '<tr><td class="pz-d"><b>'+esc(x.data)+'</b>'+(quando?'<span>'+esc(quando)+'</span>':'')+'</td><td>'+esc(x.texto)+'<span class="pz-f">Fonte: '+esc(x.fonte||'')+'</span></td><td><span class="pz-s '+esc(x.status||'pendente')+'">'+st+'</span></td></tr>';
+  }).join('');
+  return '<div class="prazos"><div class="pz-box"><h2>Próximos prazos e datas</h2><table>'+rows+'</table>'+(p.prazosNota?'<p class="pz-n">'+esc(p.prazosNota)+'</p>':'')+'</div></div>';
+}
 function portalHtml(p){
   var c=p.textos.cards;
   return '<div data-v="portal">'+
@@ -953,6 +1044,7 @@ function portalHtml(p){
   '<div style="max-width:1100px;margin:22px auto 0;padding:0 24px;"><div style="background:var(--white);border-left:4px solid var(--yellow);border-radius:8px;padding:14px 18px;display:flex;align-items:center;gap:12px;font-size:12.5px;color:var(--slate);">'+
   '<span class="material-symbols-outlined" style="color:var(--lav2);">notifications</span><div><strong style="color:var(--charcoal);">Lembrete mensal:</strong>'+CST.lembrete+'</div></div></div>'+
   '<main><div class="section-title">Ferramentas</div><div class="grid">'+
+  '<a class="card" href="#cadastro"><div class="icon"><span class="material-symbols-outlined">edit_note</span></div><span class="status live">Disponível</span><h3>Cadastro da empresa</h3><p>Formulário para começar do zero: dados da empresa, valores de receita e compras, prazos e setor. Também lê e grava um arquivo, para levar o cadastro a outro computador.</p></a>'+
   '<a class="card" href="#cst"><div class="icon"><span class="material-symbols-outlined">rule_settings</span></div><span class="status live">Disponível</span><h3>'+esc(c.cst.titulo)+'</h3><p>'+esc(c.cst.desc)+'</p></a>'+
   '<a class="card" href="#plano"><div class="icon"><span class="material-symbols-outlined">checklist</span></div><span class="status live">Disponível</span><h3>'+esc(c.plano.titulo)+'</h3><p>'+esc(c.plano.desc)+'</p></a>'+
   '<a class="card" href="#setor"><div class="icon"><span class="material-symbols-outlined">domain</span></div><span class="status live">Disponível</span><h3>Ficha setorial</h3><p>Parâmetros do regime tributário de 12 setores (regime, reduções, crédito, benefícios e obrigações), gerados a partir dos perfis setoriais do Hub de Estudos.</p></a>'+
@@ -961,7 +1053,7 @@ function portalHtml(p){
   '<a class="card" href="#caixa"><div class="icon"><span class="material-symbols-outlined">payments</span></div><span class="status live">Disponível</span><h3>Fluxo de caixa</h3><p>Competência contra caixa: capital de giro que o imposto passa a exigir, com e sem split payment, e sensibilidade ao prazo de recebimento.</p></a>'+
   '<a class="card" href="#preco"><div class="icon"><span class="material-symbols-outlined">timeline</span></div><span class="status live">Disponível</span><h3>Calendário de preço</h3><p>Quando refazer o preço de 2026 a 2033: o índice que mantém a receita líquida de tributos, para o cliente que toma crédito e para o que não toma, e a pressão de custo da folha.</p></a>'+
   '<a class="card" href="#manual"><div class="icon"><span class="material-symbols-outlined">menu_book</span></div><span class="status live">Disponível</span><h3>Manual de uso</h3><p>Passo a passo de cada tela, como ler os resultados, o que são premissas e dúvidas frequentes. Para quem vai usar o '+esc(prod())+' sem apresentação prévia.</p></a>'+
-  '</div><div class="section-title">Como o portal vai crescer</div><div class="roadmap"><h3>Próximos módulos, na ordem que faz mais sentido construir</h3><ol>'+
+  '</div>'+prazosHtml(p)+'<div class="section-title">Como o portal vai crescer</div><div class="roadmap"><h3>Próximos módulos, na ordem que faz mais sentido construir</h3><ol>'+
   (p.textos.roadmap||[]).map(function(r){return '<li>'+esc(r[0])+' <span>'+esc(r[1])+'</span></li>';}).join('')+'</ol></div></main>'+
   '<footer>Material de apoio — não substitui orientação da consultoria tributária terceirizada nem a leitura da LC 214/2025 e normas complementares.</footer></div>';
 }
@@ -1011,6 +1103,11 @@ var MANUAL_BASE=[
    '**Hipótese**: premissa adotada para o cálculo enquanto não há dado. Sempre que um resultado depender de hipótese, ele precisa ser lido com essa ressalva.']}
  ]},
  {g:'Tela por tela',itens:[
+  {t:'Cadastro da empresa (começar do zero)',ir:'cadastro',p:[
+   'É o ponto de partida quando o {{produto}} está em branco. Reúne em um formulário os dados da empresa, o setor, os valores de receita e de compras do período e os prazos de recebimento e de pagamento.',
+   'O que for salvo passa a alimentar o Plano de Ação, a ficha setorial, a **Carga efetiva** e o **Fluxo de caixa**.'],
+   passos:['Preencha só o que tiver base em documento, relatório ou apuração, e marque **Confirmado** apenas quando houver comprovação.','Informe o **período** dos valores e os **meses** dele (bloco 4).','Clique em **Salvar cadastro**. A mensagem confirma a data.','Para levar a outro computador, use **Baixar cadastro (.json)** e, no outro, **Carregar cadastro**. Também dá para baixar o **modelo em branco (.csv)**, preencher no Excel e carregar de volta.'],
+   nota:'O cadastro fica no navegador e no arquivo que você baixar. O botão Limpar tudo, do Portal, apaga também o cadastro deste computador.'},
   {t:'Plano de Ação',ir:'plano',p:[
    'Lista as frentes de trabalho da adaptação à reforma, cada uma com suas tarefas, responsáveis e situação. No alto aparece o progresso geral.',
    'A tabela **Perfil da empresa** mostra o que se sabe sobre a empresa e se está confirmado ou pendente.'],
@@ -1065,8 +1162,122 @@ function manualHtml(p){
   MANUAL_BASE.forEach(function(g){h+='<div class="mn-grupo">'+esc(g.g)+'</div>'+g.itens.map(manualItem).join('');});
   return h+'</main><footer>Manual de apoio — não substitui orientação da consultoria tributária terceirizada nem a leitura da LC 214/2025 e normas complementares.</footer></div>';
 }
-var ROTAS={portal:portalHtml,plano:planoHtml,cst:cstHtml,setor:setorHtml,diagnostico:diagHtml,carga:cargaHtml,caixa:caixaHtml,preco:precoHtml,manual:manualHtml};
+var ROTAS={portal:portalHtml,cadastro:cadastroHtml,plano:planoHtml,cst:cstHtml,setor:setorHtml,diagnostico:diagHtml,carga:cargaHtml,caixa:caixaHtml,preco:precoHtml,manual:manualHtml};
 function rotaAtual(){var r=((location.hash||'#portal').slice(1)).split('/')[0];return ROTAS[r]?r:'portal';}
+function cadastroHtml(p){
+  var c=cadLer(p)||{};
+  var emp=(p.empresa||[]).map(function(e,i){var v=(e.valor==='Sem dados.'||e.valor==='Não informado.')?'':e.valor;return '<div class="cd-lin" data-i="'+i+'"><label>'+esc(e.item)+'</label><textarea data-cd="emp" rows="1" placeholder="A preencher">'+esc(v)+'</textarea><select data-cd="st"><option value="pendente"'+(e.status!=='confirmado'?' selected':'')+'>Pendente</option><option value="confirmado"'+(e.status==='confirmado'?' selected':'')+'>Confirmado</option></select></div>';}).join('');
+  var vc=(p.carga&&p.carga.valores)||{},vx=(p.caixa&&p.caixa.valores)||{};
+  function campo(k,rot,v,pre){return '<label class="cd-campo">'+esc(rot)+'<input type="text" inputmode="decimal" data-cd="'+pre+'" data-k="'+k+'" value="'+esc(numIn(v[k]))+'" placeholder="0"></label>';}
+  var sId=setorId(p);
+  var opts='<option value="-">— Escolha um setor —</option>'+SETORES.setores.map(function(x){return '<option value="'+esc(x.id)+'"'+(x.id===sId?' selected':'')+'>'+esc(x.nome)+'</option>';}).join('');
+  return '<div data-v="cadastro"><header><h1>Cadastro da empresa</h1><p>Preencha do zero: dados da empresa, valores do período, prazos e setor. As demais telas passam a usar o que for informado aqui.</p></header><main>'+
+  '<div class="cd-aviso"><b>Como funciona:</b> o que você digita fica salvo <b>neste navegador</b>. Para levar para outro computador, use <b>Baixar cadastro (.json)</b> e depois <b>Carregar cadastro</b>. Para preencher em planilha, baixe o <b>modelo (.csv)</b>, preencha no Excel, salve e carregue de volta. Escreva só o que tiver base (documento, relatório ou apuração); o que ficar em branco continua como <b>pendente</b>. Os valores alimentam estimativas de estudo, e não uma apuração.</div>'+
+  '<div class="cd-box"><h2>1. Dados da empresa</h2><p>Escreva o que for conhecido e marque <b>Confirmado</b> só quando houver documento ou relatório que comprove.</p>'+emp+'<div class="cd-acoes"><button type="button" class="btn sec" id="cdMais">Adicionar linha</button></div></div>'+
+  '<div class="cd-box"><h2>2. Setor</h2><p>Define a ficha setorial e os pontos do setor no diagnóstico.</p><select id="cdSetor">'+opts+'</select></div>'+
+  '<div class="cd-box"><h2>3. Valores para a Carga efetiva</h2><p>Valores do período, sem imposto, em reais. Informe o período abaixo (por exemplo, janeiro a outubro de 2026) e os meses dele no bloco 4.</p><label class="cd-campo" style="margin-bottom:12px">Período dos valores<input type="text" id="cdPeriodo" value="'+esc(c.periodo||'')+'" placeholder="ex.: janeiro a outubro de 2026"></label><div class="cd-grid">'+CAD_C.map(function(x){return campo(x[0],x[1],vc,'c');}).join('')+'</div></div>'+
+  '<div class="cd-box"><h2>4. Valores para o Fluxo de caixa</h2><p>Prazos médios em dias, calculados de preferência por valor ponderado.</p><div class="cd-grid">'+CAD_X.map(function(x){return campo(x[0],x[1],vx,'x');}).join('')+'</div></div>'+
+  '<div class="cd-box"><h2>Salvar e arquivos</h2><div class="cd-acoes"><button type="button" class="btn" id="cdSalvar">Salvar cadastro</button><button type="button" class="btn sec" id="cdBaixar">Baixar cadastro (.json)</button><button type="button" class="btn sec" id="cdCarregar">Carregar cadastro (.json ou .csv)</button><button type="button" class="btn sec" id="cdModelo">Baixar modelo em branco (.csv)</button><input type="file" id="cdArq" accept=".json,.csv,text/csv,application/json" style="display:none"></div><p class="cd-msg" id="cdMsg" role="status" style="margin:12px 0 0"></p></div>'+
+  '</main></div>';
+}
+function cadColetar(view){
+  var emp=[];
+  Array.prototype.forEach.call(view.querySelectorAll('.cd-lin'),function(l){
+    var it=l.querySelector('input[data-cd="item"]'),nome=it?it.value.trim():(l.querySelector('label')||{}).textContent;
+    var v=l.querySelector('textarea').value.trim(),st=l.querySelector('select').value;
+    if(nome)emp.push({item:nome,valor:v,status:v?st:'pendente'});
+  });
+  var c={v:1,salvoEm:new Date().toLocaleDateString('pt-BR'),empresa:emp,setor:view.querySelector('#cdSetor').value,periodo:view.querySelector('#cdPeriodo').value.trim(),carga:{},caixa:{}};
+  Array.prototype.forEach.call(view.querySelectorAll('input[data-cd="c"]'),function(i){c.carga[i.getAttribute('data-k')]=numBR(i.value);});
+  Array.prototype.forEach.call(view.querySelectorAll('input[data-cd="x"]'),function(i){c.caixa[i.getAttribute('data-k')]=numBR(i.value);});
+  return c;
+}
+function cadGravar(c){
+  try{localStorage.setItem(CKEY+perfil.id,JSON.stringify(c));
+    if(c.setor)localStorage.setItem('sis-setor-'+perfil.id,c.setor);
+    localStorage.removeItem('sis-carga-'+perfil.id);localStorage.removeItem('sis-caixa-'+perfil.id);return true;}catch(e){return false;}
+}
+function csvCampo(s){s=String(s==null?'':s);return /[;"\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
+function cadParaCsv(c,p){
+  var L=[['chave','campo','valor','status']];
+  (c.empresa||[]).forEach(function(e){L.push(['empresa',e.item,e.valor||'',e.status||'pendente']);});
+  L.push(['setor','Setor (código da ficha setorial)',c.setor&&c.setor!=='-'?c.setor:'','']);
+  L.push(['periodo','Período dos valores',c.periodo||'','']);
+  CAD_C.forEach(function(x){L.push(['carga.'+x[0],x[1],c.carga&&c.carga[x[0]]?numIn(c.carga[x[0]]):'','']);});
+  CAD_X.forEach(function(x){L.push(['caixa.'+x[0],x[1],c.caixa&&c.caixa[x[0]]?numIn(c.caixa[x[0]]):'','']);});
+  return '﻿'+L.map(function(r){return r.map(csvCampo).join(';');}).join('\r\n')+'\r\n';
+}
+function csvLinhas(t){
+  var rows=[],r=[],c='',q=false,i;t=t.replace(/^﻿/,'');
+  var sep=(t.split('\n')[0].split(';').length>=t.split('\n')[0].split(',').length)?';':',';
+  for(i=0;i<t.length;i++){var ch=t[i];
+    if(q){if(ch==='"'){if(t[i+1]==='"'){c+='"';i++;}else q=false;}else c+=ch;}
+    else if(ch==='"')q=true;
+    else if(ch===sep){r.push(c);c='';}
+    else if(ch==='\n'||ch==='\r'){if(ch==='\r'&&t[i+1]==='\n')i++;r.push(c);c='';rows.push(r);r=[];}
+    else c+=ch;}
+  if(c!==''||r.length){r.push(c);rows.push(r);}
+  return rows;
+}
+function cadDeCsv(t){
+  var c={v:1,salvoEm:new Date().toLocaleDateString('pt-BR'),empresa:[],setor:'',periodo:'',carga:{},caixa:{}},cs=CAD_C.map(function(x){return x[0];}),xs=CAD_X.map(function(x){return x[0];});
+  csvLinhas(t).forEach(function(r,i){
+    var k=(r[0]||'').trim(),v=(r[2]||'').trim(),st=(r[3]||'').trim().toLowerCase();if(!k||(i===0&&k==='chave'))return;
+    if(k==='empresa')c.empresa.push({item:(r[1]||'').trim(),valor:v,status:st==='confirmado'?'confirmado':'pendente'});
+    else if(k==='setor')c.setor=v;
+    else if(k==='periodo')c.periodo=v;
+    else if(k.indexOf('carga.')===0&&cs.indexOf(k.slice(6))>=0)c.carga[k.slice(6)]=numBR(v);
+    else if(k.indexOf('caixa.')===0&&xs.indexOf(k.slice(6))>=0)c.caixa[k.slice(6)]=numBR(v);
+  });
+  return c;
+}
+function cadBaixar(nome,mime,txt){
+  var b=new Blob([txt],{type:mime+';charset=utf-8'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download=nome;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+}
+function bindCadastro(view){
+  var msg=view.querySelector('#cdMsg');
+  function dizer(t,e){msg.textContent=t;msg.className='cd-msg'+(e?' err':'');}
+  function recarregar(){var raw=PERFIS.filter(function(x){return x.id===perfil.id;})[0]||perfil;perfil=efetivo(raw);mount();}
+  view.querySelector('#cdMais').addEventListener('click',function(){
+    var d=document.createElement('div');d.className='cd-lin';
+    d.innerHTML='<input type="text" data-cd="item" placeholder="Nome do item"><textarea data-cd="emp" rows="1" placeholder="A preencher"></textarea><select data-cd="st"><option value="pendente">Pendente</option><option value="confirmado">Confirmado</option></select>';
+    view.querySelector('#cdMais').parentNode.parentNode.insertBefore(d,view.querySelector('#cdMais').parentNode);
+  });
+  view.querySelector('#cdSalvar').addEventListener('click',function(){
+    var c=cadColetar(view);
+    if(!cadGravar(c)){dizer('Não foi possível salvar neste navegador. Use Baixar cadastro (.json) para guardar o arquivo.',true);return;}
+    var raw=PERFIS.filter(function(x){return x.id===perfil.id;})[0]||perfil;perfil=efetivo(raw);
+    dizer('Cadastro salvo neste navegador em '+c.salvoEm+'. As demais telas já usam estes dados.');
+  });
+  view.querySelector('#cdBaixar').addEventListener('click',function(){
+    var c=cadColetar(view);cadBaixar('cadastro-'+perfil.id+'.json','application/json',JSON.stringify(c,null,1));
+    dizer('Arquivo gerado. Guarde na pasta indicada pela área e carregue em outro computador com Carregar cadastro.');
+  });
+  view.querySelector('#cdModelo').addEventListener('click',function(){
+    var raw=PERFIS.filter(function(x){return x.id===perfil.id;})[0]||perfil,base=efetivoBase(raw);
+    var vazio={empresa:(base.empresa||[]).map(function(e){return {item:e.item,valor:'',status:'pendente'};}),setor:'',periodo:'',carga:{},caixa:{}};
+    cadBaixar('modelo-cadastro-'+perfil.id+'.csv','text/csv',cadParaCsv(vazio,base));
+    dizer('Modelo gerado. Abra no Excel, preencha a coluna "valor" (e "status", com confirmado ou pendente), salve como CSV e use Carregar cadastro.');
+  });
+  var arq=view.querySelector('#cdArq');
+  view.querySelector('#cdCarregar').addEventListener('click',function(){arq.value='';arq.click();});
+  arq.addEventListener('change',function(){
+    var f=arq.files&&arq.files[0];if(!f)return;
+    var rd=new FileReader();
+    rd.onload=function(){
+      var c;
+      try{c=/\.csv$/i.test(f.name)?cadDeCsv(String(rd.result)):JSON.parse(String(rd.result));}catch(e){dizer('Não consegui ler o arquivo: '+e.message,true);return;}
+      if(!c||typeof c!=='object'||(!c.empresa&&!c.carga&&!c.caixa)){dizer('O arquivo não parece um cadastro deste sistema.',true);return;}
+      c.empresa=(c.empresa||[]).filter(function(e){return e&&e.item;});
+      if(!cadGravar(c)){dizer('Não foi possível salvar neste navegador.',true);return;}
+      recarregar();
+      var m=document.getElementById('cdMsg');if(m){m.textContent='Cadastro carregado do arquivo "'+f.name+'" e salvo neste navegador.';m.className='cd-msg';}
+    };
+    rd.onerror=function(){dizer('Não consegui ler o arquivo.',true);};
+    rd.readAsText(f,'utf-8');
+  });
+}
 function bindPlano(view){
   var fr=view.querySelector('#frentes');if(!fr)return;
   fr.addEventListener('click',function(e){
@@ -1117,6 +1328,7 @@ function chrome(){
   if(perfil.tituloPagina)document.title=perfil.tituloPagina;
   var np=$('navPos'),pb=(SETORES.meta&&SETORES.meta.posBase)||'';
   if(np&&pb){np.href=pb;np.style.display='';if(perfil.posAbaNova){np.target='_blank';np.rel='noopener';}}
+  var na=$('navAtu');if(na&&perfil.linkAtualizar&&perfil.linkAtualizar.href){na.textContent=perfil.linkAtualizar.texto||'Atualizar dados';na.href=perfil.linkAtualizar.href;na.style.display='';}
 }
 function estudoHtml(rota){
   var pb=(SETORES.meta&&SETORES.meta.posBase)||'',est=(SETORES.meta&&SETORES.meta.estudo&&SETORES.meta.estudo[rota])||[];
@@ -1128,6 +1340,7 @@ function mount(){
   view.innerHTML=ROTAS[rota](perfil)+estudoHtml(rota);chrome();
   Array.prototype.forEach.call(document.querySelectorAll('#topnav a[data-r]'),function(a){a.classList.toggle('active',a.getAttribute('data-r')===rota);});
   (function(){var at=document.querySelector('#topnav a.active'),l=$('navAtual');if(l)l.textContent=at?at.textContent:'Menu';var bar=$('topnavBar');if(bar){bar.classList.remove('open');var tg=$('navToggle');if(tg)tg.setAttribute('aria-expanded','false');}})();
+  if(rota==='cadastro')bindCadastro(view);
   if(rota==='plano')bindPlano(view);
   if(rota==='cst')bindCst(view);
   if(rota==='setor')bindSetor(view);
@@ -1135,6 +1348,27 @@ function mount(){
   if(rota==='carga')bindCarga(view);
   if(rota==='caixa')bindCaixa(view);
   if(rota==='preco')bindPreco(view);
+  if(rota==='portal'||rota==='manual')zerarBox(view);
+}
+function zerarBox(view){
+  var raw=PERFIS.filter(function(x){return x.id===perfil.id;})[0]||perfil;
+  var arq=zeroArquivo(raw),loc=zeroLocal(raw);
+  var txt='<b>Limpar tudo e começar do zero neste computador.</b> Apaga as respostas do diagnóstico, as simulações, a ficha setorial escolhida e o cadastro digitado neste computador, e esvazia os dados do perfil da empresa (cadastro, sugestões do diagnóstico e valores da carga efetiva e do caixa).';
+  var btn='<button type="button" class="btn sec" id="zerarTudo">Limpar tudo (começar do zero)</button><button type="button" class="btn sec" id="zerarNao" style="display:none">Cancelar</button>';
+  if(loc){txt='<b>Os dados do perfil estão esvaziados neste computador.</b> As respostas, as simulações e o cadastro também foram apagados.';btn='<button type="button" class="btn sec" id="zerarVolta">Mostrar os dados do perfil de novo</button>';}
+  else if(arq){txt='<b>Os dados do perfil estão zerados.</b> Para carregar os valores de novo, use <b>Atualizar dados</b> com os relatórios na pasta.';btn='<button type="button" class="btn sec" id="zerarTudo">Apagar também respostas, simulações e cadastro deste computador</button><button type="button" class="btn sec" id="zerarNao" style="display:none">Cancelar</button>';}
+  view.insertAdjacentHTML('beforeend','<div class="zerar-box"><div id="zerarMsg">'+txt+'</div><div style="margin-top:8px">'+btn+'</div></div>');
+  var bt=view.querySelector('#zerarTudo'),no=view.querySelector('#zerarNao'),vo=view.querySelector('#zerarVolta'),pronto=false;
+  var rotulo=bt?bt.textContent:'';
+  function volta(){if(!bt)return;bt.textContent=rotulo;no.style.display='none';pronto=false;}
+  if(no)no.addEventListener('click',volta);
+  if(bt)bt.addEventListener('click',function(){
+    if(!pronto){bt.textContent='Confirmar: apagar agora';no.style.display='';pronto=true;return;}
+    ['diag','carga','caixa','preco','setor','cadastro'].forEach(function(k){try{localStorage.removeItem('sis-'+k+'-'+perfil.id);}catch(e){}});
+    if(!arq){try{localStorage.setItem(ZKEY+perfil.id,'1');}catch(e){}}
+    perfil=efetivo(raw);mount();
+  });
+  if(vo)vo.addEventListener('click',function(){try{localStorage.removeItem(ZKEY+perfil.id);}catch(e){}perfil=efetivo(raw);mount();});
 }
 function preencherPerfis(){
   var sel=$('perfilSel');if(!sel)return;
@@ -1142,7 +1376,7 @@ function preencherPerfis(){
   sel.innerHTML=PERFIS.map(function(p){return '<option value="'+esc(p.id)+'"'+(p.id===perfil.id?' selected':'')+'>'+esc(p.nome)+(p.privado?' (privado)':'')+'</option>';}).join('');
   sel.addEventListener('change',function(){
     var p=PERFIS.filter(function(x){return x.id===sel.value;})[0];if(!p)return;
-    perfil=p;try{localStorage.setItem(STORE,p.id);}catch(e){}
+    perfil=efetivo(p);try{localStorage.setItem(STORE,p.id);}catch(e){}
     if(!(perfil.cstRelevantes||[]).length)cstUI.onlyRel=false;
     mount();
   });
