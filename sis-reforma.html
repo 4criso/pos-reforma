@@ -52,7 +52,7 @@ body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans
   .topnav.open .nav-links{display:flex;}
   .nav-links a{height:46px;padding:0 20px;border-bottom:1px solid rgba(255,255,255,.08);border-left:4px solid transparent;font-size:14px;}
   .nav-links a.nav-pos{padding:0 20px;}
-  #topnav a.nav-util{height:46px;margin:0;padding:0 20px;border:0;border-radius:0;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px;}
+  #topnav a.nav-util{height:44px;margin:8px 16px 0;padding:0 16px;border-radius:10px;font-size:14px;justify-content:center;}
   .nav-links a.active{border-bottom-color:rgba(255,255,255,.08);border-left-color:var(--yellow);}
   .topnav .perfil{font-size:11px;}
   .sis-brand small{display:block;margin:2px 0 0;}
@@ -528,9 +528,13 @@ body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans
 .zerar-box .btn{font-family:inherit;font-size:12.5px;font-weight:800;border-radius:8px;padding:9px 16px;cursor:pointer;background:var(--white);color:var(--charcoal);border:1.5px solid var(--charcoal);margin-right:8px;}
 .zerar-box .btn:hover{background:var(--charcoal);color:#fff;}
 #topnav a.nav-pos{margin-left:4px;}
-#topnav a.nav-util{margin:auto 0 auto 6px;height:32px;padding:0 12px;border:1px solid rgba(255,255,255,.35);border-radius:16px;font-size:12px;}
-#topnav a.nav-util:hover{background:rgba(255,255,255,.1);border-color:#fff;}
+#topnav a.nav-util{margin:auto 0 auto 6px;height:32px;padding:0 14px;border:1px solid rgba(208,255,37,.5);border-radius:16px;font-size:12px;font-weight:700;background:rgba(208,255,37,.12);color:#E6F7A3;transition:background .15s,border-color .15s,color .15s,transform .06s;}
+#topnav a.nav-util:hover{background:rgba(208,255,37,.26);border-color:var(--yellow);color:#fff;}
+#topnav a.nav-util:active{background:rgba(208,255,37,.4);border-color:var(--yellow);color:#fff;transform:translateY(1px);}
+#topnav a.nav-util:focus-visible{outline:2px solid var(--yellow);outline-offset:2px;}
+@media (max-width:1240px){#topnav a.nav-util{height:44px;margin:8px 16px 0;padding:0 16px;border-radius:10px;font-size:14px;justify-content:center;}.nav-links{padding-bottom:12px;}}
 .nav-links{align-items:center;}
+@media (max-width:1240px){.nav-links{align-items:stretch;}}
 </style>
 </head>
 <body>
