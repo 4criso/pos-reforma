@@ -725,7 +725,7 @@ function setorHtml(p){
   return '<div data-v="setor">'+
   '<header><h1>Ficha setorial — Reforma Tributária</h1><p>Parâmetros do regime tributário de cada setor, gerados a partir dos perfis setoriais do Hub de Estudos (LC 214/2025). Servem de modelo inicial para o perfil de empresa. Os dados reais da empresa vêm do perfil, e não desta ficha.</p></header>'+
   '<main><div class="setor-sel"><label for="setorSel">Setor do perfil '+esc(p.nome)+'</label><select id="setorSel">'+opts+'</select><span class="nota">A escolha fica salva neste navegador, para o perfil selecionado no topo.</span></div>'+corpo+'</main>'+
-  '<footer><div>Material de estudo, que não substitui a leitura da norma nem a orientação de um profissional habilitado. Confira as fontes oficiais antes de aplicar, e veja no Hub de Estudos o que ainda não foi conferido em cada setor.</div></footer></div>';
+  '<footer><div>Material de estudo, que não substitui a leitura da norma nem a orientação de profissional habilitado. O que ainda não foi conferido em cada setor está indicado no Hub de Estudos.</div></footer></div>';
 }
 function setorBox(p){
   var s=setorDe(p);if(!s)return '';
@@ -812,7 +812,7 @@ function diagHtml(p){
   '<div id="diagResumo">'+diagResumoHtml(c)+'</div>'+
   '<div class="acoes"><button type="button" class="btn" id="diagBaixar">Baixar relatório de cenário (HTML)</button><button type="button" class="btn sec" id="diagAbrir">Abrir para imprimir</button><button type="button" class="btn sec" id="diagLimpar">Limpar respostas deste perfil</button></div>'+
   '<div id="diagBox">'+blocos+'</div></main>'+
-  '<footer><div>Material de apoio, que não substitui a leitura da norma nem a orientação de um profissional habilitado. Os itens são de redação própria e a classificação usa limites de trabalho, que o contador deve rever.</div></footer></div>';
+  '<footer><div>Os itens são de redação própria e a classificação usa limites de trabalho, que o contador deve rever. Não substitui a leitura da norma nem a orientação de profissional habilitado.</div></footer></div>';
 }
 function relatorioHtml(p){
   var R=diagResp(p),c=diagCalc(R.resp),s=setorDe(p),hoje=new Date().toLocaleDateString('pt-BR');
@@ -900,7 +900,7 @@ function cargaHtml(p){
   '<div class="c-grid" id="cargaCampos">'+grupos+'</div><button type="button" class="btn" id="cargaRestaurar">Restaurar os valores iniciais do perfil</button>'+
   '<div id="cargaRes">'+cargaResHtml(P)+'</div>'+
   (notas.length?'<div class="section-title">Origem dos valores iniciais</div><ul class="c-notas">'+notas.map(function(n){return '<li>'+esc(n)+'</li>';}).join('')+'</ul>':'')+'</main>'+
-  '<footer><div>Estimativa de apoio, que não substitui a apuração nem a orientação de um profissional habilitado. Confira alíquotas, prazos e regras nas fontes oficiais antes de decidir.</div></footer></div>';
+  '<footer><div>Estimativa de apoio, com premissas editáveis. Não substitui a apuração nem a orientação de profissional habilitado; confira as fontes oficiais antes de decidir.</div></footer></div>';
 }
 function bindCarga(view){
   var box=view.querySelector('#cargaCampos'),res=view.querySelector('#cargaRes');if(!box)return;
@@ -956,7 +956,7 @@ function caixaHtml(p){
   '<div class="c-grid" id="caixaCampos">'+sel+grupos+'</div><button type="button" class="btn" id="caixaRestaurar">Restaurar os valores iniciais do perfil</button>'+
   '<div id="caixaRes">'+caixaResHtml(C,K)+'</div>'+
   (notas.length?'<div class="section-title">Origem dos valores iniciais</div><ul class="c-notas">'+notas.map(function(n){return '<li>'+esc(n)+'</li>';}).join('')+'</ul>':'')+'</main>'+
-  '<footer><div>Estimativa de apoio, que não substitui a apuração nem a orientação de um profissional habilitado. Confira prazos e regras nas fontes oficiais antes de decidir.</div></footer></div>';
+  '<footer><div>Estimativa de apoio, com premissas editáveis. Não substitui a apuração nem a orientação de profissional habilitado; confira as fontes oficiais antes de decidir.</div></footer></div>';
 }
 function bindCaixa(view){
   var box=view.querySelector('#caixaCampos'),res=view.querySelector('#caixaRes');if(!box)return;
@@ -1020,7 +1020,7 @@ function precoHtml(p){
   '<main><div class="c-aviso"><b>Leia antes:</b> é uma estimativa de estudo, e a decisão de preço é comercial. O índice supõe que a empresa mantenha a receita líquida de PIS, COFINS, ISS, ICMS e IPI de hoje (o ISS e o ICMS ficam por dentro do preço, e o IBS e a CBS vão por fora), com alíquotas hipotéticas e o cliente que toma crédito recuperando todo o IBS e a CBS. Não inclui o custo de pessoal, mostrado à parte, nem a reação do mercado. A transição do IBS de 2029 a 2032 é aproximada (veja a <a href="#carga">carga efetiva</a>)'+(pos?'. A conta de preço na transição está explicada no <a href="'+esc(pos)+'#aula-preco-na-transicao" target="_blank" rel="noopener">Hub de Estudos ↗</a>':'')+'.</div>'+
   '<div class="c-grid" id="precoCampos"><div class="c-grp"><h3>Critério de revisão</h3><label class="c-campo">Variação mínima do preço para pedir revisão (pontos do índice)<input type="number" step="any" data-k="limiar" value="'+K.limiar+'"></label></div></div>'+
   '<div id="precoRes">'+precoResHtml(P,K)+'</div><div class="section-title">Marcos da transição</div><div class="c-res">'+marcos+'</div></main>'+
-  '<footer><div>Estimativa de apoio, que não substitui a análise comercial nem a orientação de um profissional habilitado. Confira alíquotas e prazos nas fontes oficiais antes de decidir.</div></footer></div>';
+  '<footer><div>Estimativa de apoio, com premissas editáveis. Não substitui a análise comercial nem a orientação de profissional habilitado; confira as fontes oficiais antes de decidir.</div></footer></div>';
 }
 function bindPreco(view){
   var box=view.querySelector('#precoCampos'),res=view.querySelector('#precoRes');if(!box)return;
@@ -1059,7 +1059,7 @@ function portalHtml(p){
   '<a class="card" href="#manual"><div class="icon"><span class="material-symbols-outlined">menu_book</span></div><span class="status live">Disponível</span><h3>Manual de uso</h3><p>Passo a passo de cada tela, como ler os resultados, o que são premissas e dúvidas frequentes. Para quem vai usar o '+esc(prod())+' sem apresentação prévia.</p></a>'+
   '</div>'+prazosHtml(p)+'<div class="section-title">Como o portal vai crescer</div><div class="roadmap"><h3>Próximos módulos, na ordem que faz mais sentido construir</h3><ol>'+
   (p.textos.roadmap||[]).map(function(r){return '<li>'+esc(r[0])+' <span>'+esc(r[1])+'</span></li>';}).join('')+'</ol></div></main>'+
-  '<footer>Material de apoio — não substitui orientação da consultoria tributária terceirizada nem a leitura da LC 214/2025 e normas complementares.</footer></div>';
+  '<footer>Material de apoio: não substitui a leitura da LC 214/2025 e das normas complementares nem a orientação de profissional habilitado.</footer></div>';
 }
 function planoHtml(p){
   var r=planoResumo(p.frentes);
@@ -1094,7 +1094,7 @@ function mdLite(s){return esc(s).replace(/\{\{produto\}\}/g,esc(prod())).replace
 var MANUAL_BASE=[
  {g:'Antes de começar',itens:[
   {t:'Para que serve o {{produto}} e o que ele não é',aberto:true,p:[
-   'O {{produto}} reúne, em uma página só, as ferramentas de **trabalho** sobre a Reforma Tributária do consumo (EC 132/2023, LC 214/2025 e LC 227/2026): plano de ação, consulta à tabela de CST, ficha setorial, diagnóstico, simuladores de carga, de caixa e de preço.',
+   'O {{produto}} reúne, em uma página só, as ferramentas de **trabalho** sobre a Reforma Tributária (EC 132/2023, LC 214/2025 e LC 227/2026): plano de ação, consulta à tabela de CST, ficha setorial, diagnóstico, simuladores de carga, de caixa e de preço.',
    'Ele é um **material de apoio e de estudo**. Não substitui a leitura da norma, nem a orientação da consultoria tributária. Os simuladores trabalham com **premissas** (que aparecem em cada tela e podem ser alteradas) e servem para comparar cenários e ordem de grandeza, não para apurar imposto.',
    'Tudo roda **no navegador**, a partir de um arquivo HTML. A página não consulta a internet para calcular e não envia o que você digita a lugar nenhum. Suas respostas e alterações ficam guardadas **no seu próprio navegador**, neste computador.']},
   {t:'Como abrir e se orientar',p:[
@@ -1164,7 +1164,7 @@ function manualHtml(p){
     h+='<div class="mn-grupo">'+esc(g.g)+'</div>'+g.itens.map(manualItem).join('');
   });
   MANUAL_BASE.forEach(function(g){h+='<div class="mn-grupo">'+esc(g.g)+'</div>'+g.itens.map(manualItem).join('');});
-  return h+'</main><footer>Manual de apoio — não substitui orientação da consultoria tributária terceirizada nem a leitura da LC 214/2025 e normas complementares.</footer></div>';
+  return h+'</main><footer>Manual de apoio: não substitui a leitura da LC 214/2025 e das normas complementares nem a orientação de profissional habilitado.</footer></div>';
 }
 var ROTAS={portal:portalHtml,cadastro:cadastroHtml,plano:planoHtml,cst:cstHtml,setor:setorHtml,diagnostico:diagHtml,carga:cargaHtml,caixa:caixaHtml,preco:precoHtml,manual:manualHtml};
 function rotaAtual(){var r=((location.hash||'#portal').slice(1)).split('/')[0];return ROTAS[r]?r:'portal';}
