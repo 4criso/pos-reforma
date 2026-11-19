@@ -59,7 +59,7 @@ body{margin:0;font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans
   .topnav.open{z-index:300;}
   .nav-backdrop{display:block;position:fixed;inset:0;background:rgba(20,28,40,.58);opacity:0;visibility:hidden;transition:opacity .28s ease,visibility 0s .28s;z-index:301;}
   .topnav.open .nav-backdrop{opacity:1;visibility:visible;transition:opacity .28s ease;}
-  .nav-links{display:flex;flex-direction:column;align-items:stretch;position:fixed;top:0;left:0;bottom:0;width:min(330px,88vw);background:var(--white);box-shadow:8px 0 32px rgba(0,0,0,.35);transform:translateX(-104%);visibility:hidden;transition:transform .3s cubic-bezier(.22,.8,.3,1),visibility 0s .3s;z-index:302;overflow-y:auto;overscroll-behavior:contain;padding:0 0 20px;scrollbar-width:thin;scrollbar-color:var(--lav) transparent;}
+  .nav-links{display:flex;flex-direction:column;align-items:stretch;position:fixed;top:0;left:0;bottom:0;width:max-content;min-width:min(250px,80vw);max-width:min(330px,82vw);background:var(--white);box-shadow:8px 0 32px rgba(0,0,0,.35);transform:translateX(-104%);visibility:hidden;transition:transform .3s cubic-bezier(.22,.8,.3,1),visibility 0s .3s;z-index:302;overflow-y:auto;overscroll-behavior:contain;padding:0 0 20px;scrollbar-width:thin;scrollbar-color:var(--lav) transparent;}
   .topnav.open .nav-links{transform:translateX(0);visibility:visible;transition:transform .3s cubic-bezier(.22,.8,.3,1);}
   body:has(.topnav.open){overflow:hidden;}
   .sem-icones .nav-links a[data-r] .ni{display:none;}
