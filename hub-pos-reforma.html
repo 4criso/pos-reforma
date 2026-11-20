@@ -479,6 +479,14 @@ footer.site-aviso a.site-sis:hover{text-decoration:underline;}
 .voltar-portal:active{background:linear-gradient(rgba(208,255,37,.4),rgba(208,255,37,.4)),var(--charcoal);border-color:#D0FF25;color:#fff;transform:translateY(1px);box-shadow:0 2px 8px rgba(0,0,0,.28);}
 .voltar-portal:focus-visible{outline:2px solid #D0FF25;outline-offset:2px;}
 .highlight.proxima{margin-top:26px;}
+
+/* Lista "Para rever nesta unidade": cada linha tem duas colunas e passa a uma só quando o espaço do bloco é estreito (sem depender da largura da tela) */
+.rever-list{background:#fff;border-radius:12px;margin-top:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.rever-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:4px 18px;padding:11px 14px;border-bottom:1px solid rgba(0,0,0,.08);align-items:start}
+.rever-row:last-child{border-bottom:0}
+.rever-row .rever-aula{font-weight:700}
+.rever-row a{text-decoration:none}
+.rever-row .rever-desc{font-weight:400}
 </style>
 </head>
 <body>
@@ -24050,11 +24058,10 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
   <div class="highlight lav">
     <span class="material-symbols-outlined">library_books</span>
     <div><b>Para rever nesta unidade:</b> a matriz da Unidade II trata de temas que o Hub já tinha em aulas anteriores, e que receberam o ponto de vista desta unidade.
-      <table class="data" style="margin-top:10px">
-        <tr><th>Aula</th><th>O que a aula traz</th></tr>
-        <tr><td style="white-space:nowrap"><a href="#aula-lc-cashback" style="color:var(--lav3);font-weight:700;">Cashback: a devolução personalizada de IBS e CBS</a></td><td style="font-weight:400">Quem tem direito, percentuais, teto, calendário, adesão, controle e papel do varejo (seção 10).</td></tr>
-        <tr><td style="white-space:nowrap"><a href="#aula-m3u1-reducoes-aliquotas" style="color:var(--lav3);font-weight:700;">Reduções de alíquota de 60% e de 30%</a></td><td style="font-weight:400">A escada das alíquotas, a conta das reduções, a parametrização no ERP e os erros do material (seção 8).</td></tr>
-      </table>
+      <div class="rever-list">
+        <div class="rever-row"><div class="rever-aula"><a href="#aula-lc-cashback" style="color:var(--lav3);font-weight:700;">Cashback: a devolução personalizada de IBS e CBS</a></div><div class="rever-desc">Quem tem direito, percentuais, teto, calendário, adesão, controle e papel do varejo (seção 10).</div></div>
+        <div class="rever-row"><div class="rever-aula"><a href="#aula-m3u1-reducoes-aliquotas" style="color:var(--lav3);font-weight:700;">Reduções de alíquota de 60% e de 30%</a></div><div class="rever-desc">A escada das alíquotas, a conta das reduções, a parametrização no ERP e os erros do material (seção 8).</div></div>
+      </div>
     </div>
   </div>
 
@@ -25941,11 +25948,10 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
   <div class="highlight lav">
     <span class="material-symbols-outlined">library_books</span>
     <div><b>Para rever nesta unidade:</b> a matriz da Unidade III trata de temas que o Hub já tinha em aulas anteriores, e que receberam o ponto de vista desta unidade.
-      <table class="data" style="margin-top:10px">
-        <tr><th>Aula</th><th>O que a aula traz</th></tr>
-        <tr><td style="white-space:nowrap"><a href="#aula-m3u2-combustiveis-comuns" style="color:var(--lav3);font-weight:700;">Combustíveis e as regras comuns dos regimes específicos</a></td><td style="font-weight:400">A incidência única, o art. 180, a cadeia em números, o art. 225 da CF e os erros do material (seção 7).</td></tr>
-        <tr><td style="white-space:nowrap"><a href="#aula-m3u1-zfm-ipi" style="color:var(--lav3);font-weight:700;">Zona Franca de Manaus, Áreas de Livre Comércio e IPI</a></td><td style="font-weight:400">O IPI depois de 2027, a habilitação, a suspensão na importação, os arts. 442 a 453 e o exemplo do livro contra a lei (seção 8).</td></tr>
-      </table>
+      <div class="rever-list">
+        <div class="rever-row"><div class="rever-aula"><a href="#aula-m3u2-combustiveis-comuns" style="color:var(--lav3);font-weight:700;">Combustíveis e as regras comuns dos regimes específicos</a></div><div class="rever-desc">A incidência única, o art. 180, a cadeia em números, o art. 225 da CF e os erros do material (seção 7).</div></div>
+        <div class="rever-row"><div class="rever-aula"><a href="#aula-m3u1-zfm-ipi" style="color:var(--lav3);font-weight:700;">Zona Franca de Manaus, Áreas de Livre Comércio e IPI</a></div><div class="rever-desc">O IPI depois de 2027, a habilitação, a suspensão na importação, os arts. 442 a 453 e o exemplo do livro contra a lei (seção 8).</div></div>
+      </div>
     </div>
   </div>
 
@@ -27899,14 +27905,13 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
   <div class="highlight lav">
     <span class="material-symbols-outlined">library_books</span>
     <div><b>Para rever nesta unidade:</b> a matriz da Unidade IV trata de temas que o Hub já tinha em aulas anteriores, e que receberam o ponto de vista desta unidade.
-      <table class="data" style="margin-top:10px">
-        <tr><th>Aula</th><th>O que a aula traz</th></tr>
-        <tr><td style="white-space:nowrap"><a href="#aula3-transicao" style="color:var(--lav3);font-weight:700;">Calendário da transição 2023 a 2033</a></td><td style="font-weight:400">O teste de 2026, os dois prazos de 60 dias e quem fixa as alíquotas de referência (seção 6).</td></tr>
-        <tr><td style="white-space:nowrap"><a href="#aula-m2u2-creditos-acumulados-rtc" style="color:var(--lav3);font-weight:700;">Créditos acumulados e a transição</a></td><td style="font-weight:400">A escrituração do PIS e da Cofins, o art. 134 do ADCT parágrafo a parágrafo e os erros do material sobre o art. 378 (seção 7).</td></tr>
-        <tr><td style="white-space:nowrap"><a href="#aula-virada-estoques-creditos" style="color:var(--lav3);font-weight:700;">A virada de 2027</a></td><td style="font-weight:400">O estoque ao lado dos saldos credores legados.</td></tr>
-        <tr><td style="white-space:nowrap"><a href="#aula-m3u1-simples-nacional" style="color:var(--lav3);font-weight:700;">Simples Nacional diante do IBS e da CBS</a></td><td style="font-weight:400">O crédito do comprador e a simulação do DAS.</td></tr>
-        <tr><td style="white-space:nowrap"><a href="#aula-preco-na-transicao" style="color:var(--lav3);font-weight:700;">Preço na transição</a></td><td style="font-weight:400">O cálculo por dentro e por fora e a cadeia a 25%.</td></tr>
-      </table>
+      <div class="rever-list">
+        <div class="rever-row"><div class="rever-aula"><a href="#aula3-transicao" style="color:var(--lav3);font-weight:700;">Calendário da transição 2023 a 2033</a></div><div class="rever-desc">O teste de 2026, os dois prazos de 60 dias e quem fixa as alíquotas de referência (seção 6).</div></div>
+        <div class="rever-row"><div class="rever-aula"><a href="#aula-m2u2-creditos-acumulados-rtc" style="color:var(--lav3);font-weight:700;">Créditos acumulados e a transição</a></div><div class="rever-desc">A escrituração do PIS e da Cofins, o art. 134 do ADCT parágrafo a parágrafo e os erros do material sobre o art. 378 (seção 7).</div></div>
+        <div class="rever-row"><div class="rever-aula"><a href="#aula-virada-estoques-creditos" style="color:var(--lav3);font-weight:700;">A virada de 2027</a></div><div class="rever-desc">O estoque ao lado dos saldos credores legados.</div></div>
+        <div class="rever-row"><div class="rever-aula"><a href="#aula-m3u1-simples-nacional" style="color:var(--lav3);font-weight:700;">Simples Nacional diante do IBS e da CBS</a></div><div class="rever-desc">O crédito do comprador e a simulação do DAS.</div></div>
+        <div class="rever-row"><div class="rever-aula"><a href="#aula-preco-na-transicao" style="color:var(--lav3);font-weight:700;">Preço na transição</a></div><div class="rever-desc">O cálculo por dentro e por fora e a cadeia a 25%.</div></div>
+      </div>
     </div>
   </div>
 
@@ -29913,12 +29918,11 @@ AULA_INIT['aula-nao-cumulatividade'] = function(){
   <div class="highlight lav">
     <span class="material-symbols-outlined">library_books</span>
     <div><b>Para rever nesta unidade:</b> o Imposto Seletivo toca em temas que o Hub já tinha, e que receberam o ponto de vista desta unidade.
-      <table class="data" style="margin-top:10px">
-        <tr><th>Aula</th><th>O que a aula traz</th></tr>
-        <tr><td style="white-space:nowrap"><a href="#aula-m3u1-imposto-seletivo" style="color:var(--lav3);font-weight:700;">Imposto Seletivo: finalidade, incidência, base e transição</a></td><td style="font-weight:400">O panorama do Livro II, agora com a MP 1.399/2026.</td></tr>
-        <tr><td style="white-space:nowrap"><a href="#aula5-aliquotas" style="color:var(--lav3);font-weight:700;">Quanto cada um paga: alíquotas, reduções e Imposto Seletivo</a></td><td style="font-weight:400">Os cenários de alíquota e o IS em visão geral.</td></tr>
-        <tr><td style="white-space:nowrap"><a href="#aula-m3u1-zfm-ipi" style="color:var(--lav3);font-weight:700;">Zona Franca de Manaus, Áreas de Livre Comércio e IPI</a></td><td style="font-weight:400">O IPI depois de 2027 e a convivência com o IS.</td></tr>
-      </table>
+      <div class="rever-list">
+        <div class="rever-row"><div class="rever-aula"><a href="#aula-m3u1-imposto-seletivo" style="color:var(--lav3);font-weight:700;">Imposto Seletivo: finalidade, incidência, base e transição</a></div><div class="rever-desc">O panorama do Livro II, agora com a MP 1.399/2026.</div></div>
+        <div class="rever-row"><div class="rever-aula"><a href="#aula5-aliquotas" style="color:var(--lav3);font-weight:700;">Quanto cada um paga: alíquotas, reduções e Imposto Seletivo</a></div><div class="rever-desc">Os cenários de alíquota e o IS em visão geral.</div></div>
+        <div class="rever-row"><div class="rever-aula"><a href="#aula-m3u1-zfm-ipi" style="color:var(--lav3);font-weight:700;">Zona Franca de Manaus, Áreas de Livre Comércio e IPI</a></div><div class="rever-desc">O IPI depois de 2027 e a convivência com o IS.</div></div>
+      </div>
     </div>
   </div>
 
